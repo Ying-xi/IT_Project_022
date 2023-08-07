@@ -1,5 +1,5 @@
 # IT_Project_022
-
+```
 IT_Project_022/
   ├── client/              # 前端 React 代码
   │   ├── public/          # 静态资源（HTML、图片等）
@@ -23,3 +23,4 @@ IT_Project_022/
   ├── .gitignore           # Git忽略文件列表
   ├── README.md            # 项目说明文档
   └── ...                  # 其他项目相关文件
+```
