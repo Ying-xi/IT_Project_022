@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Blank Website</title>
+    <style>
+    body {
+        background-image: url('file:///Y:/图片/it/mainpage/background.jpg');
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-position: center;
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+
+    .window {
+        width: 300px;
+        height: 325px;
+        border: none;
+        text-align: center;
+        padding: 0;
+        margin: 70px 20px 30px;
+        transition: transform 0.3s;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 20px;
+    }
+
+    .window:hover {
+        transform: scale(1.1);
+    }
+
+    .window img {
+        max-width: 100%;
+        max-height: 100%;
+        object-fit: cover;
+    }
+
+    /* Set specific background colors with transparency for each window */
+    .window.c1 {
+        background-color: rgba(200, 203, 109, 0.9); /* Set the alpha (opacity) value as needed */
+    }
+
+    .window.c2 {
+        background-color: rgba(204, 159, 98, 0.9); /* Set the alpha (opacity) value as needed */
+    }
+
+    .window.c3 {
+        background-color: rgba(200, 203, 109, 0.9); /* Set the alpha (opacity) value as needed */
+    }
+    </style>
+</head>
+<body>
+    <a href="page1.html">
+        <div class="window c1">
+            <img src="file:///Y:/图片/it/mainpage/111.png" alt="Image 1">
+        </div>
+    </a>
+    
+    <a href="page2.html">
+        <div class="window c2">
+            <img src="file:///Y:/图片/it/mainpage/111.png" alt="Image 2">
+        </div>
+    </a>
+    
+    <a href="page3.html">
+        <div class="window c3">
+            <img src="file:///Y:/图片/it/mainpage/111.png" alt="Image 3">
+        </div>
+    </a>
+</body>
+</html>
