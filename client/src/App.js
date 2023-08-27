@@ -1,22 +1,27 @@
-import './App.css';
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'; // 注意多了一个 Routes 的导入
 import Navbar from './navbar';
 import Homepage from './homepage';
-import Dock from './dock';
 import MusicPlayer from './musicPlayer';
-
-
-// 先导入homepage，navbar和dock
-// 然后用if判定，切换homepage和listen to music page
+import Dock from './dock';
 
 function App() {
-  return (
-    <div className="App">
-      <Navbar />
-      <Homepage />
-      <Dock />
-    </div>
-  );
+    return (
+        <Router>
+            <div className="App">
+                <Navbar />
+                <Routes>
+                    <Route path="/" element={<Homepage />} />
+                    <Route path="/music" element={<MusicPlayer />} />
+                </Routes>
+                <Dock />
+            </div>
+        </Router>
+    );
 }
+
+export default App;
+
 
 
 // function App() {
@@ -45,6 +50,3 @@ function App() {
 //   );
 // }
 
-
-
-export default App;

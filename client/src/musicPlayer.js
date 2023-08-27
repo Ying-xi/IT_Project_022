@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import './musicPlayer.css';
 
 function MusicPlayer() {
@@ -37,8 +38,7 @@ function MusicPlayer() {
   return (
     <div>
 
-      <div className="navbar-placeholder" style={{ height: '8vh' }}></div>
-
+      <div className="navbar-placeholder" style={{ height: '5vh' }}></div>
       <audio id="myAudio">
         <source id="audioSource" src="" type="audio/mpeg" />
       </audio>
@@ -50,10 +50,11 @@ function MusicPlayer() {
 
         <form className="search-container" action="/url" method="get">
           <input className="search-inp" type="text" placeholder="Search..." />
-          <button type="submit" className="search-btn">Search</button>
+          <Link to="/" className="search-btn">
+            返回
+          </Link>
         </form>
       </div>
-
       <div className="button-container">
         <div className="button">
           <img src="rain.jpg" alt="音乐按钮" onClick={() => playSong('mona.mp3')} />
