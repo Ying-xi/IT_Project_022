@@ -5,9 +5,9 @@ const db = require('../Database/db')
 exports.register = (req, res) =>{
     const userInfo = req.body
     // check if user types in nothing
-    if(!userInfo.username || !userInfo.password || !userInfo.email){
-        return res.send({message: 'invalid'})
-    }
+    //if(!userInfo.username || !userInfo.password || !userInfo.email){
+    //    return res.send({message: 'invalid'})
+    //}
 
     // encrypt users' password using bcryptjs
     userInfo.password = bcryptjs.hashSync(userInfo.password, 10)
