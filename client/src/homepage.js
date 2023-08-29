@@ -1,25 +1,24 @@
 import React from "react";
+import { Link } from 'react-router-dom';
 import "./homepage.css";
+
+
 
 function Homepage() {
     return (
         <div className="homepage">
-            <a href="test.html">
-                <div className="window c1">
-                    <img src="listen_music.jpeg" alt="Image 1" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
-                </div>
-            </a>
-            <a href="page2.html">
-                <div className="window c2">
-                    <img src="play_music.jpg" alt="Image 2" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
-                </div>
-            </a>
-
-            <a href="page3.html">
-                <div className="window c3">
-                    <img src="admin.jpg" alt="Image 3" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
-                </div>
-            </a>
+            <Link to="/music" className="window c1">
+                <img src={'../public/musicPlayer/rain.jpg'} alt="Rain" />
+                <div>Music</div>
+            </Link>
+            <Link to="/page2" className="window c2">
+                <img src={'/rain.jpg'} alt="Rain" />
+                <div>Page 2</div>
+            </Link>
+            <Link to="/page3" className="window c3">
+                <img src={'/rain.jpg'} alt="Rain" />
+                <div>Page 3</div>
+            </Link>
         </div>
     );
 }

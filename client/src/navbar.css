@@ -1,6 +1,16 @@
-body {
-    /* fix the navbar left margin */
-    margin: 0;
+
+.navbar {
+    background: none;
+    height: 10vh;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    position: fixed;
+    top: 0;
+    z-index: 100;
+    width: 100%;
 }
 
 .nav-link {
@@ -8,45 +18,22 @@ body {
     color: white;
     margin-left: 2vh;
     padding: 2vh 4vh;
-    background-color: green;
+    background-color: transparent;
     border-radius: 1vh;
-    box-shadow: 0 1vh 2vh rgba(54, 54, 54, 0.6);
+    border: none;
     text-align: center;
-    transition: background-color 0.3s ease;
+    font-family: 'Arial', sans-serif;
+    font-size: 20px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    transition: border 0.3s ease, transform 0.3s ease, color 0.3s ease;
 }
+
+
 
 .nav-link:hover {
-    background-color: rgb(93, 242, 93);
+    border: 2px solid transparent;
+    transform: scale(1.25);
+    color: rgb(93, 242, 93);
 }
 
-
-
-.navbar {
-    background-image: url('../public/navbar-bg.jpg');
-    background-size: cover;
-    height: 10vh;
-    color: white;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    padding: 0 2vh;
-    /* extra */
-    position: fixed;
-    top: 0;
-    z-index: 100;
-    width: 100%;
-}
-
-
-
-.navbar a {
-    text-decoration: none;
-    color: white;
-    margin-left: 2vh;
-    padding: 2vh 4vh;
-    background-color: rgb(41, 128, 0);
-    border-radius: 1vh;
-    box-shadow: 0 1vh 2vh rgba(54, 54, 54, 0.6);
-    /* extra */
-    text-align: center;
-}

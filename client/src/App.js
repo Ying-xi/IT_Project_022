@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'; // æ³
 import Navbar from './navbar';
 import Homepage from './homepage';
 import MusicPlayer from './musicPlayer';
-import Dock from './dock';
+
 
 function App() {
     return (
@@ -14,7 +14,7 @@ function App() {
                     <Route path="/" element={<Homepage />} />
                     <Route path="/music" element={<MusicPlayer />} />
                 </Routes>
-                <Dock />
+                {/* <Dock /> */}
             </div>
         </Router>
     );

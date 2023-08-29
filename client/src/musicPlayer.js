@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './musicPlayer.css';
+import Dock from './dock';
 
 function MusicPlayer() {
   const [modalContent, setModalContent] = useState('');
@@ -70,7 +71,7 @@ function MusicPlayer() {
         </div>
       </div>
 
-
+      <Dock />
     </div>
   );
 }
