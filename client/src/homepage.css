@@ -1,0 +1,37 @@
+/* homepage.css */
+body {
+    background-image: url('./images/background.jpg');
+    background-size: cover;
+    margin: 0;
+    padding: 0;
+}
+
+.homepage {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: transparent;
+}
+
+.window {
+    width: 300px;
+    height: 325px;
+    border: none;
+    text-align: center;
+    padding: 0;
+    margin: 0 20px 0;
+    transition: transform 0.3s;
+    display: flex;
+    flex-direction: column; /* 将窗口内部内容纵向排列 */
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+    background-color: red;
+    color: white;
+    text-decoration: none;
+}
+
+.window:hover {
+    transform: scale(1.1);
+}

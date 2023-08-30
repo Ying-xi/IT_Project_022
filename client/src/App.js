@@ -1,25 +1,52 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'; // 注意多了一个 Routes 的导入
+import Navbar from './navbar';
+import Homepage from './homepage';
+import MusicPlayer from './musicPlayer';
+
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    return (
+        <Router>
+            <div className="App">
+                <Navbar />
+                <Routes>
+                    <Route path="/" element={<Homepage />} />
+                    <Route path="/music" element={<MusicPlayer />} />
+                </Routes>
+                {/* <Dock /> */}
+            </div>
+        </Router>
+    );
 }
 
 export default App;
+
+
+
+// function App() {
+//   const [currentPage, setCurrentPage] = useState('homepage'); // 默认显示主页
+
+//   const switchToHomepage = () => {
+//     setCurrentPage('homepage');
+//   };
+
+//   const switchToMusicPlayer = () => {
+//     setCurrentPage('musicPlayer');
+//   };
+
+//   return (
+//     <div className="App">
+//       <Navbar />
+//       {currentPage === 'homepage' && <Homepage />}
+//       {currentPage === 'musicPlayer' && <MusicPlayer />}
+//       <Dock />
+
+//       <div className="page-switch-buttons">
+//         <button onClick={switchToHomepage}>Switch to Homepage</button>
+//         <button onClick={switchToMusicPlayer}>Switch to Music Player</button>
+//       </div>
+//     </div>
+//   );
+// }
+
