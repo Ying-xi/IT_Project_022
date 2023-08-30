@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'; // 注意多了一个 Routes 的导入
 import Navbar from './navbar';
 import Homepage from './homepage';
-import MusicPlayer from './musicPlayer';
+import MusicPlayer from './musicplayer';
 
 
 function App() {
@@ -32,14 +32,14 @@ export default App;
 //   };
 
 //   const switchToMusicPlayer = () => {
-//     setCurrentPage('musicPlayer');
+//     setCurrentPage('musicplayer');
 //   };
 
 //   return (
 //     <div className="App">
 //       <Navbar />
 //       {currentPage === 'homepage' && <Homepage />}
-//       {currentPage === 'musicPlayer' && <MusicPlayer />}
+//       {currentPage === 'musicplayer' && <MusicPlayer />}
 //       <Dock />
 
 //       <div className="page-switch-buttons">

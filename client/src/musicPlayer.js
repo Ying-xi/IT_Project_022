@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import './musicPlayer.css';
+import './musicplayer.css';
 import Dock from './dock';
 
 function MusicPlayer() {

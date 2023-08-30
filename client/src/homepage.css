@@ -1,10 +1,11 @@
 /* homepage.css */
 body {
-    background-image: url('./images/background.jpg');
+    background-image: url('../public/background.jpg');
     background-size: cover;
     margin: 0;
     padding: 0;
 }
+
 
 .homepage {
     display: flex;
@@ -15,21 +16,22 @@ body {
 }
 
 .window {
-    width: 300px;
-    height: 325px;
+    width: 33vh;
+    height: 43vh;
     border: none;
     text-align: center;
-    padding: 0;
-    margin: 0 20px 0;
+    margin: 0 2vh 0;
     transition: transform 0.3s;
     display: flex;
-    flex-direction: column; /* 将窗口内部内容纵向排列 */
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    border-radius: 20px;
-    background-color: red;
+    border-radius: 5vh;
     color: white;
     text-decoration: none;
+    background-size: cover;
+    position: relative;
+    overflow: hidden;
 }
 
 .window:hover {

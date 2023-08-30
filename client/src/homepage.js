@@ -2,22 +2,17 @@ import React from "react";
 import { Link } from 'react-router-dom';
 import "./homepage.css";
 
-
-
 function Homepage() {
     return (
         <div className="homepage">
-            <Link to="/music" className="window c1">
-                <img src={'../public/musicPlayer/rain.jpg'} alt="Rain" />
-                <div>Music</div>
+            <Link to="/music" className="window">
+                <img src={'/homepage/listen_music1.jpg'} alt="#"/>
             </Link>
-            <Link to="/page2" className="window c2">
-                <img src={'/rain.jpg'} alt="Rain" />
-                <div>Page 2</div>
+            <Link to="/page2" className="window">
+                <img src={'/homepage/play_music1.jpg'} alt="#"/>
             </Link>
-            <Link to="/page3" className="window c3">
-                <img src={'/rain.jpg'} alt="Rain" />
-                <div>Page 3</div>
+            <Link to="/" className="window">
+                <img src={'/homepage/admin1.jpg'} alt="#"/>
             </Link>
         </div>
     );
