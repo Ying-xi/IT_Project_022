@@ -3,6 +3,12 @@ const router = express.Router()
 
 const home = require('../Router_handler/homePage')
 
-router.post('./home', home.homePage)
+const path = require('path');
+router.get('/home', (req, res) => {
+    const filePath = path.join(__dirname, '../Files/staticPage/combination.html')
+    res.sendFile(filePath)
+})
+
+router.post('/home', home.homePage)
 
 module.exports = router

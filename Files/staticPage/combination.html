@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Combined Example</title>
+    <style>
+        body {
+            background-image: url('88.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-position: center;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .window {
+            width: 300px;
+            height: 325px;
+            border: none;
+            text-align: center;
+            padding: 0;
+            margin: 70px 20px 30px;
+            transition: transform 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 20px;
+        }
+
+        .window:hover {
+            transform: scale(1.1);
+        }
+
+        .window img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: cover;
+        }
+
+        /* Set specific background colors with transparency for each window */
+        .window.c1 {
+            background-color: rgba(200, 203, 109, 0.9);
+            /* Set the alpha (opacity) value as needed */
+        }
+
+        .window.c2 {
+            background-color: rgba(204, 159, 98, 0.9);
+            /* Set the alpha (opacity) value as needed */
+        }
+
+        .window.c3 {
+            background-color: rgba(200, 203, 109, 0.9);
+            /* Set the alpha (opacity) value as needed */
+        }
+
+
+        .navbar {
+            background-image: url('navbar-bg.jpg');
+            background-size: cover;
+            height: 10vh;
+            color: white;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            padding: 0 2vh;
+            /* extra */
+            position: fixed;
+            top: 0;
+            z-index: 100;
+            width: 100%;
+        }
+
+
+
+
+        .navbar a {
+            text-decoration: none;
+            color: white;
+            margin-left: 2vh;
+            padding: 2vh 4vh;
+            background-color: rgb(41, 128, 0);
+            border-radius: 1vh;
+            box-shadow: 0 1vh 2vh rgba(54, 54, 54, 0.6);
+            /* extra */
+            text-align: center;
+        }
+
+        /* .dock-background {
+            position: fixed;
+            bottom: 4vh;
+            left: 30%;
+            width: 40%;
+            height: 8vh;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.4) 100%);
+            backdrop-filter: blur(1vh);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1vh;
+            border-radius: 3vh;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        } */
+        .dock-background {
+            position: fixed;
+            bottom: 2vh;
+            left: 30%;
+            width: 40%;
+            height: 8vh;
+            background: linear-gradient(135deg, rgba(205, 203, 203, 0.74) 0%, rgba(202, 202, 202, 0.472) 100%);
+            backdrop-filter: blur(1vh);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1vh;
+            border-radius: 3vh;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            z-index: 100;
+        }
+
+        .dock-buttons {
+            display: flex;
+            flex-grow: 1;
+            gap: 2vh;
+        }
+
+        .dock-button {
+            width: 6vh;
+            height: 6vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: green;
+            color: white;
+            font-size: 3vh;
+            border-radius: 3vh;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .dock-button:hover {
+            background-color: rgb(93, 242, 93);
+        }
+
+        .dock-text {
+            flex-grow: 1;
+            height: 6vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: green;
+            color: white;
+            font-weight: bold;
+            border-radius: 1vh;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: white;
+            margin-left: 2vh;
+            padding: 2vh 4vh;
+            background-color: green;
+            border-radius: 1vh;
+            box-shadow: 0 1vh 2vh rgba(54, 54, 54, 0.6);
+            text-align: center;
+            transition: background-color 0.3s ease;
+        }
+
+        .nav-link:hover {
+            background-color: rgb(93, 242, 93);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="navbar">
+        <a href="combination.html" class="nav-link"> &nbsp;&nbsp;Home&nbsp;&nbsp; </a>
+        <a href="#" class="nav-link">⚙ Setting</a>
+        <a href="#" class="nav-link" style="margin-right: 5vh;">👤 Log In</a>
+    </div>
+
+    <a href="test.html">
+        <div class="window c1" style="width: 270px; height: 320px; overflow: hidden;">
+            <img src="listen_music.jpeg" alt="Image 1"style="width: 100%; height: 100%; object-fit: cover;">
+        </div>
+    </a>
+    <a href="page2.html">
+        <div class="window c2" style="width: 270px; height: 320px; overflow: hidden;">
+            <img src="play_music.jpg" alt="Image 2" style="width: 100%; height: 100%; object-fit: cover;">
+        </div>
+    </a>
+
+    <a href="page3.html">
+        <div class="window c3" style="width: 270px; height: 320px; overflow: hidden;">
+            <img src="admin.jpg" alt="Image 3" style="width: 100%; height: 100%; object-fit: cover;">
+        </div>
+    </a>
+
+
+    <div class="dock-background">
+        <div class="dock-buttons">
+            <div class="dock-text">🎵 Raining</div>
+            <div class="dock-button toggle-play">▶️</div>
+            <div class="dock-button toggle-volume">🔊</div>
+        </div>
+    </div>
+
+    <script>
+        const togglePlayButton = document.querySelector('.toggle-play');
+        const toggleVolumeButton = document.querySelector('.toggle-volume');
+        const dockText = document.querySelector('.dock-text');
+        let isPlaying = false;
+        let isMuted = false;
+
+        togglePlayButton.addEventListener('click', () => {
+            isPlaying = !isPlaying;
+            togglePlayButton.textContent = isPlaying ? '⏸️' : '▶️';
+            togglePlayButton.classList.toggle('active', isPlaying);
+        });
+
+        toggleVolumeButton.addEventListener('click', () => {
+            isMuted = !isMuted;
+            toggleVolumeButton.textContent = isMuted ? '🔇' : '🔊';
+            toggleVolumeButton.classList.toggle('active', isMuted);
+        });
+    </script>
+
+
+</body>
+
+
+</html>

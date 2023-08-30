@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>音乐按钮和弹窗</title>
+  <link rel="stylesheet" href="./index.css" />
+  <link rel="stylesheet" href="./reset.css" />
+  <style>
+    body {
+      background-image: url('nologo.jpg');
+      background-size: cover;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* 弹窗样式 */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.7);
+    }
+
+    .modal-content {
+      background-color: #fff;
+      margin: 20% auto;
+      padding: 20px;
+      width: 50%;
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+      text-align: center;
+    }
+
+    .text-container {
+      font-family: Arial, sans-serif;
+      font-size: 1.6em;
+      color: rgba(204, 159, 98, 0.9);
+      line-height: 0.5;
+    }
+
+
+
+    /* navbar & dock */
+
+    .navbar {
+      background-image: url('navbar-bg.jpg');
+      background-size: cover;
+      height: 10vh;
+      color: white;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      padding: 0 2vh;
+      /* extra */
+      position: fixed;
+      top: 0;
+      z-index: 100;
+      width: 100%;
+    }
+
+    .navbar a {
+      text-decoration: none;
+      color: white;
+      margin-left: 2vh;
+      padding: 2vh 4vh;
+      background-color: green;
+      border-radius: 1vh;
+      box-shadow: 0 1vh 2vh rgba(54, 54, 54, 0.6);
+      /* extra */
+      text-align: center;
+    }
+
+    /* .dock-background {
+            position: fixed;
+            bottom: 4vh;
+            left: 30%;
+            width: 40%;
+            height: 8vh;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.4) 100%);
+            backdrop-filter: blur(1vh);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1vh;
+            border-radius: 3vh;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        } */
+    .dock-background {
+      position: fixed;
+      bottom: 4vh;
+      left: 30%;
+      width: 40%;
+      height: 8vh;
+      background: linear-gradient(135deg, rgba(205, 203, 203, 0.74) 0%, rgba(202, 202, 202, 0.472) 100%);
+      backdrop-filter: blur(1vh);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1vh;
+      border-radius: 3vh;
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+      z-index: 100;
+    }
+
+    .dock-buttons {
+      display: flex;
+      flex-grow: 1;
+      gap: 2vh;
+    }
+
+    .dock-button {
+      width: 6vh;
+      height: 6vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: green;
+      color: white;
+      font-size: 3vh;
+      border-radius: 3vh;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .dock-button:hover {
+      background-color: rgb(93, 242, 93);
+    }
+
+    .dock-text {
+      flex-grow: 1;
+      height: 6vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: green;
+      color: white;
+      font-weight: bold;
+      border-radius: 1vh;
+    }
+
+    .nav-link {
+      text-decoration: none;
+      color: white;
+      margin-left: 2vh;
+      padding: 2vh 4vh;
+      background-color: green;
+      border-radius: 1vh;
+      box-shadow: 0 1vh 2vh rgba(54, 54, 54, 0.6);
+      text-align: center;
+      transition: background-color 0.3s ease;
+    }
+
+    .nav-link:hover {
+      background-color: rgb(93, 242, 93);
+    }
+
+    .search-container {
+      background-color: #fff;
+      border-radius: 8px;
+      padding: 10px;
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); /* 添加阴影效果 */
+      display: flex;
+      align-items: center;
+    }
+
+    .search-inp {
+      border: none;
+      padding: 8px;
+      border-radius: 5px;
+      flex-grow: 1;
+      box-shadow: none;
+    }
+
+    .search-btn {
+      background-color: green;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      padding: 8px 15px;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+
+    .search-btn:hover {
+      background-color: rgb(93, 242, 93);
+      transform: scale(1.05);
+    }
+
+  </style>
+</head>
+
+<body>
+  <div class="navbar">
+    <a href="combination.html" class="nav-link"> &nbsp;&nbsp;Home&nbsp;&nbsp; </a>
+    <a href="#" class="nav-link">⚙ Setting</a>
+    <a href="#" class="nav-link" style="margin-right: 5vh;">👤 Log In</a>
+  </div>
+  
+   <div class="navbar-placeholder" style="height: 8vh;"></div>
+
+
+  <audio id="myAudio">
+    <source id="audioSource" src="" type="audio/mpeg" />
+  </audio>
+
+
+  <div class="size-container">
+    <!-- 居中 choose your music -->
+    <p class="text-container flex-center" style="display: flex; justify-content: center; align-items: center; margin-left: 45%;">
+      Choose your music
+    </p>
+
+    <form class="search-container" action="/url" method="get">
+      <input class="search-inp" type="text" placeholder="Search..." />
+      <button type="submit" class="search-btn">Search</button>
+    </form>
+  </div>
+
+  <!-- 第一行按钮 -->
+  <div class="button-container">
+    <div class="button">
+      <img src="rain.jpg" onclick="playSong('mona.mp3')" alt="音乐按钮" />
+      <p class="music-item-text" onclick="openModal('弹窗内容1')">name1</p>
+    </div>
+    <div class="button">
+      <img src="rain.jpg" onclick="playSong('mona.mp3')" alt="音乐按钮" />
+      <p class="music-item-text" onclick="openModal('弹窗内容2')">name2</p>
+    </div>
+    <div class="button">
+      <img src="rain.jpg" onclick="playSong('mona.mp3')" alt="音乐按钮" />
+      <p class="music-item-text" onclick="openModal('弹窗内容3')">name3</p>
+    </div>
+    <div class="button">
+      <img src="rain.jpg" onclick="playSong('mona.mp3')" alt="音乐按钮" />
+      <p class="music-item-text" onclick="openModal('弹窗内容4')">name4</p>
+    </div>
+
+    <!-- 第二行按钮 -->
+    <div class="button">
+      <img src="rain.jpg" onclick="playSong('mona.mp3')" alt="音乐按钮" />
+      <p class="music-item-text" onclick="openModal('弹窗内容5')">name5</p>
+    </div>
+    <div class="button">
+      <img src="rain.jpg" onclick="playSong('mona.mp3')" alt="音乐按钮" />
+      <p class="music-item-text" onclick="openModal('弹窗内容6')">name6</p>
+    </div>
+    <div class="button">
+      <img src="rain.jpg" onclick="playSong('mona.mp3')" alt="音乐按钮" />
+      <p class="music-item-text" onclick="openModal('弹窗内容7')">name7</p>
+    </div>
+    <div class="button">
+      <img src="rain.jpg" onclick="playSong('mona.mp3')" alt="音乐按钮" />
+      <p class="music-item-text" onclick="openModal('弹窗内容8')">name8</p>
+    </div>
+  </div>
+
+  <!-- 弹窗 -->
+  <div id="myModal" class="modal">
+    <div class="modal-content">
+      <span id="modalText"></span>
+      <button onclick="closeModal()">关闭</button>
+    </div>
+  </div>
+
+  <script>
+    // 播放音乐
+    function playSong(songPath) {
+      var audio = document.getElementById('myAudio');
+      var source = document.getElementById('audioSource');
+      source.src = songPath;
+      audio.load();
+      audio.play();
+    }
+
+    // 打开弹窗
+    function openModal(content) {
+      var modal = document.getElementById('myModal');
+      var modalText = document.getElementById('modalText');
+      modal.style.display = 'block';
+      modalText.innerHTML = content;
+    }
+
+    // 关闭弹窗
+    function closeModal() {
+      var modal = document.getElementById('myModal');
+      modal.style.display = 'none';
+    }
+  </script>
+
+
+  <div class="dock-background">
+    <div class="dock-buttons">
+        <div class="dock-text">🎵 Raining</div>
+        <div class="dock-button toggle-play">▶️</div>
+        <div class="dock-button toggle-volume">🔊</div>
+    </div>
+  </div>
+</body>
+
+</html>
