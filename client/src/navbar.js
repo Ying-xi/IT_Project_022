@@ -7,7 +7,7 @@ function Navbar(){
         <div className="navbar">
             <Link to="/" className="nav-link">🎵 Home</Link>
             <a href="#" className="nav-link">⚙ Setting</a>
-            <a href="#" className="nav-link" style={{ marginRight: '5vh' }}>👤 Log In</a>
+            <a href="#" className="nav-link" style={{ marginRight: '5vh' }}>👤 Contact us</a>
         </div>
     )
 }
