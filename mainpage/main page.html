@@ -54,24 +54,62 @@
     .window.c3 {
         background-color: rgba(200, 203, 109, 0.9); /* Set the alpha (opacity) value as needed */
     }
+
+    /* CSS for the overlay */
+    .overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(255, 255, 255, 0); /* 初始状态下透明 */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        opacity: 0; /* 初始状态下不可见 */   
+        transition: opacity 0.3s, background 0.3s;
+    }
+
+    /* CSS for the text inside the overlay */
+    .overlay p {
+    color: white;
+    font-size: 24px;
+    }
+
+    /* CSS for the image container */
+    .image-container {
+        position: relative;
+    }
+
+    /* CSS for the image blur effect on hover */
+    .window:hover .image-container img {
+        filter: blur(5px); /* 毛玻璃效果 */
+    }
+
+    /* CSS for displaying the overlay on hover */
+    .window:hover .overlay {
+        background: rgba(0, 0, 0, 0.5); /* 背景变暗 */
+        opacity: 1; /* 显示文字 */
+    }
+
     </style>
 </head>
 <body>
     <a href="page1.html">
         <div class="window c1">
-            <img src="file:///Y:/图片/it/mainpage/111.png" alt="Image 1">
+            <img src="111.png" alt="Image 1">
         </div>
     </a>
     
     <a href="page2.html">
         <div class="window c2">
-            <img src="file:///Y:/图片/it/mainpage/111.png" alt="Image 2">
+            <img src="111.png" alt="Image 2">
         </div>
     </a>
     
     <a href="page3.html">
         <div class="window c3">
-            <img src="file:///Y:/图片/it/mainpage/111.png" alt="Image 3">
+            <img src="111.png" alt="Image 3">
         </div>
     </a>
 </body>
