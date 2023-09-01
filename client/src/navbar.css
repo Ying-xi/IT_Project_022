@@ -11,10 +11,33 @@
     z-index: 100;
 }
 
+.nav-link {
+    margin-right: 20px;
+    text-decoration: none;
+    color: white;
+}
+.navbar {
+    height: 10vh;
+    color: white;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    z-index: 100;
+    width: 100%;
+}
+
+.nav-links {
+    display: flex;
+    justify-content: flex-end; /* 从右向左排列按钮 */
+    align-items: center;
+    width: 100%;
+}
+
 .navbar a {
     text-decoration: none;
     color: white;
-    margin-left: 4vh;
     padding: 2vh 5vh;
     background-color: rgba(41, 128, 0, 0);
     border-radius: 1vh;

@@ -28,3 +28,4 @@ yarn.lock
 components.d.ts
 auto-import.d.ts
 dist.zip
+node_modules
