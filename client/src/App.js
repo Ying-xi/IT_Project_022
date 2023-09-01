@@ -1,25 +1,28 @@
-import React from 'react'
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom' // 注意多了一个 Routes 的导入
-import Navbar from './navbar'
-import Homepage from './homepage'
-import MusicPlayer from './musicplayer'
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'; // 注意多了一个 Routes 的导入
+import Navbar from './navbar';
+import Homepage from './homepage';
+import MusicPlayer from './musicplayer';
 
-function App () {
-  return (
-    <Router>
-      <div className='App'>
-        <Navbar />
-        <Routes>
-          <Route path='/' element={<Homepage />} />
-          <Route path='/music' element={<MusicPlayer />} />
-        </Routes>
-        {/* <Dock /> */}
-      </div>
-    </Router>
-  )
+
+function App() {
+    return (
+        <Router>
+            <div className="App">
+                <Navbar />
+                <Routes>
+                    <Route path="/" element={<Homepage />} />
+                    <Route path="/music" element={<MusicPlayer />} />
+                </Routes>
+                {/* <Dock /> */}
+            </div>
+        </Router>
+    );
 }
 
-export default App
+export default App;
+
+
 
 // function App() {
 //   const [currentPage, setCurrentPage] = useState('homepage'); // 默认显示主页
@@ -46,3 +49,4 @@ export default App
 //     </div>
 //   );
 // }
+
