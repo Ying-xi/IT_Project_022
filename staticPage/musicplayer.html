@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>音乐按钮和弹窗</title>
+    <title>musicplayer</title>
     <link rel="stylesheet" href="./index.css" />
     <link rel="stylesheet" href="./reset.css" />
     <style>
@@ -12,9 +12,9 @@
         background-size: cover;
         margin: 0;
         padding: 0;
+        height: 120vh;
       }
 
-      /* 弹窗样式 */
       .modal {
         display: none;
         position: fixed;
@@ -23,7 +23,7 @@
         top: 0;
         width: 100%;
         height: 100%;
-        background-color: rgba(0, 0, 0, 0.7);
+        background-color: rgba(255, 255, 255, 0);
       }
 
       .modal-content {
@@ -164,7 +164,7 @@
         background-color: #fff;
         border-radius: 8px;
         padding: 10px;
-        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); /* 添加阴影效果 */
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
         display: flex;
         align-items: center;
       }
@@ -199,7 +199,7 @@
 
   <body>
     <div class="navbar">
-      <a href="combination.html" class="nav-link"> &nbsp;&nbsp;Home&nbsp;&nbsp; </a>
+      <a href="home.html" class="nav-link"> &nbsp;&nbsp;Home&nbsp;&nbsp; </a>
       <a href="#" class="nav-link">⚙ Setting</a>
       <a href="#" class="nav-link" style="margin-right: 5vh">👤 Log In</a>
     </div>
@@ -211,7 +211,6 @@
     </audio>
 
     <div class="size-container">
-      <!-- 居中 choose your music -->
       <p
         class="text-container flex-center"
         style="display: flex; justify-content: center; align-items: center; margin-left: 45%"
@@ -226,54 +225,54 @@
       </form>
     </div>
 
-    <!-- 第一行按钮 -->
+
     <div class="button-container">
       <div class="button">
-        <img src="rain.jpg" onclick="playSong('mona.mp3')" alt="音乐按钮" />
-        <p class="music-item-text" onclick="openModal('弹窗内容1')">name1</p>
+        <img src="rain.jpg" onclick="playSong('mona.mp3')" alt="MusicButton" />
+        <p class="music-item-text" onclick="openModal('ModalContent1')">name1</p>
       </div>
       <div class="button">
-        <img src="rain.jpg" onclick="playSong('mona.mp3')" alt="音乐按钮" />
-        <p class="music-item-text" onclick="openModal('弹窗内容2')">name2</p>
+        <img src="rain.jpg" onclick="playSong('mona.mp3')" alt="MusicButton" />
+        <p class="music-item-text" onclick="openModal('ModalContent2')">name2</p>
       </div>
       <div class="button">
-        <img src="rain.jpg" onclick="playSong('mona.mp3')" alt="音乐按钮" />
-        <p class="music-item-text" onclick="openModal('弹窗内容3')">name3</p>
+        <img src="rain.jpg" onclick="playSong('mona.mp3')" alt="MusicButton" />
+        <p class="music-item-text" onclick="openModal('ModalContent3')">name3</p>
       </div>
       <div class="button">
-        <img src="rain.jpg" onclick="playSong('mona.mp3')" alt="音乐按钮" />
-        <p class="music-item-text" onclick="openModal('弹窗内容4')">name4</p>
+        <img src="rain.jpg" onclick="playSong('mona.mp3')" alt="MusicButton" />
+        <p class="music-item-text" onclick="openModal('ModalContent4')">name4</p>
       </div>
 
-      <!-- 第二行按钮 -->
+
       <div class="button">
-        <img src="rain.jpg" onclick="playSong('mona.mp3')" alt="音乐按钮" />
-        <p class="music-item-text" onclick="openModal('弹窗内容5')">name5</p>
+        <img src="rain.jpg" onclick="playSong('mona.mp3')" alt="MusicButton" />
+        <p class="music-item-text" onclick="openModal('ModalContent5')">name5</p>
       </div>
       <div class="button">
-        <img src="rain.jpg" onclick="playSong('mona.mp3')" alt="音乐按钮" />
-        <p class="music-item-text" onclick="openModal('弹窗内容6')">name6</p>
+        <img src="rain.jpg" onclick="playSong('mona.mp3')" alt="MusicButton" />
+        <p class="music-item-text" onclick="openModal('ModalContent6')">name6</p>
       </div>
       <div class="button">
-        <img src="rain.jpg" onclick="playSong('mona.mp3')" alt="音乐按钮" />
-        <p class="music-item-text" onclick="openModal('弹窗内容7')">name7</p>
+        <img src="rain.jpg" onclick="playSong('mona.mp3')" alt="MusicButton" />
+        <p class="music-item-text" onclick="openModal('ModalContent7')">name7</p>
       </div>
       <div class="button">
-        <img src="rain.jpg" onclick="playSong('mona.mp3')" alt="音乐按钮" />
-        <p class="music-item-text" onclick="openModal('弹窗内容8')">name8</p>
+        <img src="rain.jpg" onclick="playSong('mona.mp3')" alt="MusicButton" />
+        <p class="music-item-text" onclick="openModal('ModalContent8')">name8</p>
       </div>
     </div>
 
-    <!-- 弹窗 -->
+
     <div id="myModal" class="modal">
       <div class="modal-content">
         <span id="modalText"></span>
-        <button onclick="closeModal()">关闭</button>
+        <button onclick="closeModal()">Close</button>
       </div>
     </div>
 
     <script>
-      // 播放音乐
+
       function playSong(songPath) {
         var audio = document.getElementById('myAudio');
         var source = document.getElementById('audioSource');
@@ -282,7 +281,6 @@
         audio.play();
       }
 
-      // 打开弹窗
       function openModal(content) {
         var modal = document.getElementById('myModal');
         var modalText = document.getElementById('modalText');
@@ -290,7 +288,7 @@
         modalText.innerHTML = content;
       }
 
-      // 关闭弹窗
+
       function closeModal() {
         var modal = document.getElementById('myModal');
         modal.style.display = 'none';
