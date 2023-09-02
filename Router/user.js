@@ -7,9 +7,10 @@ const express_joi = require('@escook/express-joi')
 
 const {userSchema} = require('../Schema/user')
 
-const path = require('path');
+const path = require('path')
+
 router.get('/login', (req, res) => {
-    const filePath = path.join(__dirname, '../Files/login/index.html')
+    const filePath = path.join(__dirname, '../Files/login/login.html')
     res.sendFile(filePath)
 })
 // register router

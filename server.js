@@ -13,6 +13,7 @@ web.use(express.static('Files/musicPlayer'))
 const userRouter = require('./Router/user')
 const musicRouter = require('./Router/musicPlayer')
 const homeRouter = require('./Router/homePage')
+
 web.use(userRouter)
 web.use(musicRouter)
 web.use(homeRouter)
