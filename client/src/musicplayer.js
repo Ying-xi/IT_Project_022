@@ -16,6 +16,7 @@ function MusicPlayer() {
       song: 'songs/AuldLangSyne.mp3',
       name: 'Auld Lang Syne',
       active: false,
+      tags: ['All', 'Classical'],
     },
     {
       id: 2,
@@ -23,6 +24,7 @@ function MusicPlayer() {
       song: 'songs/Bleu.mp3',
       name: 'Bleu',
       active: false,
+      tags: ['Classical', 'All'],
     },
     {
       id: 3,
@@ -30,6 +32,7 @@ function MusicPlayer() {
       song: 'songs/CanonInD.mp3',
       name: 'Canon In D',
       active: false,
+      tags: ['Vocal', 'All'],
     },
     {
       id: 4,
@@ -37,6 +40,7 @@ function MusicPlayer() {
       song: 'songs/RelaxingRain.mp3',
       name: 'Relaxing Rain',
       active: false,
+      tags: ['Vocal', 'All'],
     },
     {
       id: 5,
@@ -44,6 +48,7 @@ function MusicPlayer() {
       song: 'songs/VocaliseOp34No14.mp3',
       name: 'Vocalise, Op34, No.14',
       active: false,
+      tags: ['Vocal', 'All'],
     },
     {
       id: 6,
@@ -51,6 +56,7 @@ function MusicPlayer() {
       song: 'songs/WhatMakesYouBeautiful.mp3',
       name: 'What Makes You Beautiful',
       active: false,
+      tags: ['Vocal', 'All'],
     },
     {
       id: 7,
@@ -58,6 +64,7 @@ function MusicPlayer() {
       song: 'songs/WinterBokeh.mp3',
       name: 'Winter Bokeh',
       active: false,
+      tags: ['Pop', 'All'],
     },
   ]);
 
@@ -102,6 +109,13 @@ function MusicPlayer() {
     setIsPlaying(true);
   };
 
+  const allTags = [...new Set(musicList.flatMap((musicItem) => musicItem.tags))];
+  const [activeCategory, setActiveCategory] = useState(null); // 1. 创建筛选条件状态
+  // 3. 处理筛选条件变化的函数
+  const handleCategoryChange = (category) => {
+    setActiveCategory(category);
+  };
+
   return (
     <div className="music-player-wrap">
       <div className="navbar-placeholder" />
@@ -110,7 +124,13 @@ function MusicPlayer() {
       </audio>
 
       <div className="size-container relative">
-        <NavList></NavList>
+        {/* <NavList></NavList> */}
+        <NavList
+          activeCategory={activeCategory}
+          onCategoryClick={handleCategoryChange}
+          allTags={allTags}
+        />
+
 
         <form className="search-container" action="/url" method="get">
           {/* <img src={"../public/navbar-bg.jpg"} alt="" className="w-25px" /> */}
@@ -122,18 +142,18 @@ function MusicPlayer() {
       </div>
 
       <div className="button-container music-btns-list">
-        {/* Add a music button component here, with each button corresponding to a song */}
-        {musicList.map((musicItem) => {
-          return (
+        {musicList
+          .filter((musicItem) => !activeCategory || musicItem.tags.includes(activeCategory))
+          .map((musicItem) => (
             <MusicBtn
               onClick={() => playSong(musicItem.id)}
               key={musicItem.id}
               face={musicItem.face}
               name={musicItem.name}
             />
-          );
-        })}
+          ))}
       </div>
+
 
       <div className="dock-background">
         <div className="dock-buttons">
