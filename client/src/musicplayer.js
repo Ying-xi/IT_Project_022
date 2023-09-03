@@ -16,7 +16,7 @@ function MusicPlayer() {
       song: 'songs/AuldLangSyne.mp3',
       name: 'Auld Lang Syne',
       active: false,
-      tags: ['All', 'Classical'],
+      tags: ['All', 'Ensembles'],
     },
     {
       id: 2,
@@ -24,7 +24,7 @@ function MusicPlayer() {
       song: 'songs/Bleu.mp3',
       name: 'Bleu',
       active: false,
-      tags: ['Classical', 'All'],
+      tags: ['All', 'Rhythmic'],
     },
     {
       id: 3,
@@ -32,7 +32,7 @@ function MusicPlayer() {
       song: 'songs/CanonInD.mp3',
       name: 'Canon In D',
       active: false,
-      tags: ['Vocal', 'All'],
+      tags: ['All', 'Classical'],
     },
     {
       id: 4,
@@ -40,7 +40,7 @@ function MusicPlayer() {
       song: 'songs/RelaxingRain.mp3',
       name: 'Relaxing Rain',
       active: false,
-      tags: ['Vocal', 'All'],
+      tags: ['All', 'Natural Sound'],
     },
     {
       id: 5,
@@ -48,7 +48,7 @@ function MusicPlayer() {
       song: 'songs/VocaliseOp34No14.mp3',
       name: 'Vocalise, Op34, No.14',
       active: false,
-      tags: ['Vocal', 'All'],
+      tags: ['All', 'Vocal'],
     },
     {
       id: 6,
@@ -56,7 +56,7 @@ function MusicPlayer() {
       song: 'songs/WhatMakesYouBeautiful.mp3',
       name: 'What Makes You Beautiful',
       active: false,
-      tags: ['Vocal', 'All'],
+      tags: ['All', 'Pop'],
     },
     {
       id: 7,
@@ -64,7 +64,7 @@ function MusicPlayer() {
       song: 'songs/WinterBokeh.mp3',
       name: 'Winter Bokeh',
       active: false,
-      tags: ['Pop', 'All'],
+      tags: ['All', 'Slow Smoothing'],
     },
   ]);
 
