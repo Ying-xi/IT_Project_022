@@ -4,35 +4,35 @@ import './navList.css';
 const NavList = () => {
   const [nav, setNav] = useState([
     {
-      text: '分类1',
+      text: 'Class1',
       active: false,
     },
     {
-      text: '分类2',
+      text: 'Class2',
       active: false,
     },
     {
-      text: '分类3',
+      text: 'Class3',
       active: false,
     },
     {
-      text: '分类4',
+      text: 'Class4',
       active: false,
     },
     {
-      text: '分类5',
+      text: 'Class5',
       active: false,
     },
     {
-      text: '分类6',
+      text: 'Class6',
       active: false,
     },
     {
-      text: '分类7',
+      text: 'Class7',
       active: false,
     },
     {
-      text: '分类8',
+      text: 'Class8',
       active: false,
     },
   ]);

@@ -1,13 +1,13 @@
 import { Link } from 'react-router-dom';
-import './musicplayer.css';
 import Dock from './dock';
+import './musicplayer.css';
 import React, { useMemo, useRef, useState } from 'react';
 import MusicBtn from './components/MusicBtn';
 import NavList from './components/NavList';
 
 function MusicPlayer() {
-  const myAudio = useRef(null); // 音乐DOM
-  const audioSource = useRef(null); // 音频来源DOM
+  const myAudio = useRef(null);
+  const audioSource = useRef(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [musicList, setMusicList] = useState([
     {
@@ -64,8 +64,8 @@ function MusicPlayer() {
   const activeMusic = useMemo(() => musicList.find((item) => item.active) ?? '', [musicList]);
 
   /**
-   * 播放音乐
-   * @param songPath 音乐路径
+   * play song
+   * @param songPath 
    */
   const playSong = (id) => {
     const activeMusic = musicList.find((item) => item.id === id) ?? '';
@@ -87,7 +87,7 @@ function MusicPlayer() {
   };
 
   /**
-   * 停止音乐
+   * Stop song
    */
   const stopSong = () => {
     myAudio.current.pause();
@@ -95,7 +95,7 @@ function MusicPlayer() {
   };
 
   /**
-   * 开始音乐
+   * Start song
    */
   const startSong = () => {
     myAudio.current.play();
@@ -122,7 +122,7 @@ function MusicPlayer() {
       </div>
 
       <div className="button-container music-btns-list">
-        {/* 此处添加音乐按钮组件，每个按钮对应一个歌曲 */}
+        {/* Add a music button component here, with each button corresponding to a song */}
         {musicList.map((musicItem) => {
           return (
             <MusicBtn
@@ -147,7 +147,7 @@ function MusicPlayer() {
               ▶️
             </div>
           )}
-          <div className="dock-button toggle-volume">🔊</div>
+          {/* <div className="dock-button toggle-volume">🔊</div> */}
         </div>
       </div>
 

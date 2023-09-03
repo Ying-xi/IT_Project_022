@@ -6,7 +6,7 @@
   padding: 100px 0;
 }
 
-/* 弹窗样式 */
+
 .modal {
   display: none;
   position: fixed;
@@ -88,9 +88,11 @@
   /* background-color: pink; */
 }
 
+
 .size-container {
-  margin: 20px auto;
-  padding: 5px 3.2vw;
+  margin-top: 6vh;
+  margin-bottom: 4vh;
+  margin-left: 40vh;
   display: flex;
   justify-content: space-between;
   align-items: flex-end;

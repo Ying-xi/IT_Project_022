@@ -1,7 +1,7 @@
 .nav-list-wrap {
   display: grid;
   grid-template-columns: repeat(4, auto);
-  grid-gap: 20px;
+  grid-gap: 2vh;
 }
 
 .nav-list-wrap .nav-item {
