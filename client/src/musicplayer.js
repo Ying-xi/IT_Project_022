@@ -1,79 +1,159 @@
-import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
-import './musicplayer.css'
-import Dock from './dock'
+import { Link } from 'react-router-dom';
+import './musicplayer.css';
+import Dock from './dock';
+import React, { useMemo, useRef, useState } from 'react';
+import MusicBtn from './components/MusicBtn';
+import NavList from './components/NavList';
 
-function MusicPlayer () {
-  const [modalContent, setModalContent] = useState('')
-  const [isModalOpen, setIsModalOpen] = useState(false)
-  const [isPlaying, setIsPlaying] = useState(false)
+function MusicPlayer() {
+  const myAudio = useRef(null); // 音乐DOM
+  const audioSource = useRef(null); // 音频来源DOM
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [musicList, setMusicList] = useState([
+    {
+      id: 1,
+      face: '/musicFace/AuldLangSyne.jpg',
+      song: 'songs/AuldLangSyne.mp3',
+      name: 'Auld Lang Syne',
+      active: false,
+    },
+    {
+      id: 2,
+      face: '/musicFace/Bleu.jpg',
+      song: 'songs/Bleu.mp3',
+      name: 'Bleu',
+      active: false,
+    },
+    {
+      id: 3,
+      face: '/musicFace/CanonInD.jpg',
+      song: 'songs/CanonInD.mp3',
+      name: 'Canon In D',
+      active: false,
+    },
+    {
+      id: 4,
+      face: '/musicFace/RelaxingRain.jpg',
+      song: 'songs/RelaxingRain.mp3',
+      name: 'Relaxing Rain',
+      active: false,
+    },
+    {
+      id: 5,
+      face: '/musicFace/VocaliseOp34No14.jpg',
+      song: 'songs/VocaliseOp34No14.mp3',
+      name: 'Vocalise, Op34, No.14',
+      active: false,
+    },
+    {
+      id: 6,
+      face: '/musicFace/WhatMakesYouBeautiful.jpg',
+      song: 'songs/WhatMakesYouBeautiful.mp3',
+      name: 'What Makes You Beautiful',
+      active: false,
+    },
+    {
+      id: 7,
+      face: '/musicFace/WinterBokeh.jpg',
+      song: 'songs/WinterBokeh.mp3',
+      name: 'Winter Bokeh',
+      active: false,
+    },
+  ]);
 
-  const playSong = (songPath) => {
-    const audio = document.getElementById('myAudio')
-    const source = document.getElementById('audioSource')
-    source.src = songPath
-    audio.load()
-    audio.play()
-    setIsPlaying(true)
-  }
+  const activeMusic = useMemo(() => musicList.find((item) => item.active) ?? '', [musicList]);
 
-  const openModal = (content) => {
-    setModalContent(content)
-    setIsModalOpen(true)
-  }
+  /**
+   * 播放音乐
+   * @param songPath 音乐路径
+   */
+  const playSong = (id) => {
+    const activeMusic = musicList.find((item) => item.id === id) ?? '';
 
-  const closeModal = () => {
-    setIsModalOpen(false)
-  }
+    const publicPath = process.env.PUBLIC_URL;
+    const audioSourcePath = `${publicPath}/${activeMusic.song}`;
 
-  const togglePlay = () => {
-    const audio = document.getElementById('myAudio')
-    if (isPlaying) {
-      audio.pause()
-    } else {
-      audio.play()
-    }
-    setIsPlaying(!isPlaying)
-  }
+    audioSource.current.src = audioSourcePath;
+    myAudio.current.load();
+    myAudio.current.play();
+    setIsPlaying(true);
+
+    const newList = musicList.map((item) => {
+      item.active = item.id === id;
+      return item;
+    });
+    setMusicList(newList);
+    return;
+  };
+
+  /**
+   * 停止音乐
+   */
+  const stopSong = () => {
+    myAudio.current.pause();
+    setIsPlaying(false);
+  };
+
+  /**
+   * 开始音乐
+   */
+  const startSong = () => {
+    myAudio.current.play();
+    setIsPlaying(true);
+  };
 
   return (
-    <div>
-
-      <div className='navbar-placeholder' style={{ height: '5vh' }} />
-      <audio id='myAudio'>
-        <source id='audioSource' src='' type='audio/mpeg' />
+    <div className="music-player-wrap">
+      <div className="navbar-placeholder" />
+      <audio id="myAudio" ref={myAudio}>
+        <source id="audioSource" ref={audioSource} src="" type="audio/mpeg" />
       </audio>
 
-      <div className='size-container'>
-        <p className='text-container flex-center' style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginLeft: '45%' }}>
-          Choose your music
-        </p>
+      <div className="size-container relative">
+        <NavList></NavList>
 
-        <form className='search-container' action='/url' method='get'>
-          <input className='search-inp' type='text' placeholder='Search...' />
-          <Link to='/' className='search-btn'>
-            返回
-          </Link>
+        <form className="search-container" action="/url" method="get">
+          {/* <img src={"../public/navbar-bg.jpg"} alt="" className="w-25px" /> */}
+          <input className="search-inp" type="text" placeholder="Search your music" />
+          <button type="submit" className="search-btn">
+            Search
+          </button>
         </form>
       </div>
-      <div className='button-container'>
-        <div className='button'>
-          <img src='rain.jpg' alt='音乐按钮' onClick={() => playSong('mona.mp3')} />
-          <p className='music-item-text' onClick={() => openModal('弹窗内容1')}>name1</p>
-        </div>
-        {/* 其他按钮类似 */}
+
+      <div className="button-container music-btns-list">
+        {/* 此处添加音乐按钮组件，每个按钮对应一个歌曲 */}
+        {musicList.map((musicItem) => {
+          return (
+            <MusicBtn
+              onClick={() => playSong(musicItem.id)}
+              key={musicItem.id}
+              face={musicItem.face}
+              name={musicItem.name}
+            />
+          );
+        })}
       </div>
 
-      <div id='myModal' className={`modal ${isModalOpen ? 'show' : ''}`}>
-        <div className='modal-content'>
-          <span id='modalText'>{modalContent}</span>
-          <button onClick={closeModal}>关闭</button>
+      <div className="dock-background">
+        <div className="dock-buttons">
+          <div className="dock-text">🎵 {activeMusic?.name ?? 'music'}</div>
+          {isPlaying ? (
+            <div className="dock-button toggle-play" onClick={stopSong}>
+              ⏸️
+            </div>
+          ) : (
+            <div className="dock-button toggle-play" onClick={() => startSong(activeMusic.song)}>
+              ▶️
+            </div>
+          )}
+          <div className="dock-button toggle-volume">🔊</div>
         </div>
       </div>
 
-      <Dock />
+      {/* <Dock /> */}
     </div>
-  )
+  );
 }
 
-export default MusicPlayer
+export default MusicPlayer;

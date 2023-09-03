@@ -1,0 +1,20 @@
+.nav-list-wrap {
+  display: grid;
+  grid-template-columns: repeat(4, auto);
+  grid-gap: 20px;
+}
+
+.nav-list-wrap .nav-item {
+  background-color: #acbd7f;
+  color: #fff;
+  border-radius: 40px;
+  font-size: 1.8vw;
+  width: 8vw;
+  height: 3.2vw;
+}
+
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
