@@ -1,17 +1,24 @@
 const joi = require('@hapi/joi')
 const mongoose = require('mongoose')
+const jwt = require('jsonwebtoken')
 
-const username = joi.string().alphanum().min(1).max(16).required()
-const password = joi.string().pattern(/^[\S]{6,12}$/).required()
-const email = joi.string().email().required()
+const collectionName = 'admin'
+
+const privateKey = 'IT-Project-022'
 
 const user_schema = new mongoose.Schema({
-    body:{
-        username,
-        password,
-        email,
-    },
-})
+    username: String,
+    password: String,
+}, { collection: collectionName })
+
+user_Schema.methods.generateAuthToken = function () {
+	const token = jwt.sign(
+		{ _id: this._id, name: this.username},
+		privateKey,
+		{ expiresIn: "7d" }
+	)
+	return token
+}
 
 const User = mongoose.model('User', user_schema);
 module.exports = {

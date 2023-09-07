@@ -14,7 +14,7 @@ router.get('/login', (req, res) => {
     res.sendFile(filePath)
 })
 // register router
-router.post('/register', express_joi(userSchema), user_handler.register)
+// router.post('/register', express_joi(userSchema), user_handler.register)
 //login router
 router.post('/login', user_handler.login)
 
