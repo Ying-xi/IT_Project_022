@@ -24,10 +24,12 @@ async function uploadMusic(){
     for (var data of jsonData) {
         const mp3Data = fs.readFileSync(data.file)
         const mp3Base64 = base64.fromByteArray(mp3Data)
+        const jpgData = fs.readFileSync(data.picture)
+        const jpgBase64 = base64.fromByteArray(jpgData)
 
         var music = new Music({
             name: data.name,
-            picture: data.picture,
+            picture: jpgBase64,
             file: mp3Base64,
         })
         
