@@ -1,6 +1,6 @@
 const {Music} = require('../Schema/music')
 
-const path = require('path');
+const path = require('path')
 
 exports.renderPage = (req, res) => {
     const filePath = path.join(__dirname, '../Files/staticPage/test.html')

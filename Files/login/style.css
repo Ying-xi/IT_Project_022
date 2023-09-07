@@ -1,8 +1,7 @@
-/* Font size */
 *{
     padding: 0;
     margin: 0;
-    font-family: 'Kirang Haerang';
+    
 }
 
 /* Background setting*/
@@ -14,7 +13,7 @@
 }
 
 /* Login setting*/
-.content .login-wrapper{
+.login-wrapper{
     width: 70vw;
     height: 80vh;
     background-color: rgb(255, 250, 250);
@@ -27,7 +26,7 @@
     overflow: hidden;
 }
 
-.content .login-wrapper .left-wrapper{
+.left-wrapper{
     border-radius: 40px;
     flex: 1;
     background: url(./pp.jpg) no-repeat;
@@ -35,7 +34,7 @@
     position: relative;
 }
 
-.content .login-wrapper .left-wrapper .glass{
+.glass{
     width: 60%;
     padding: 20px;
     color: #fff;
@@ -51,51 +50,37 @@
     border: 1px solid rgba(255, 255, 255, 0.48);
 }
 
-.content .login-wrapper .left-wrapper .glass .titles .skoog{
+.skoog{
     margin: 15px 0 ;
 }
 
-.content .login-wrapper .left-wrapper .glass .titles .banner{
+.banner{
    margin: 5px 0;
    display: block;
    font-family: 100;
 }
 
-.content .login-wrapper .right-wrapper{
+.right-wrapper{
     flex: 1;
     position: relative;
 }
 
-.content .login-wrapper .right-wrapper .form-wrapper{
+.form-wrapper{
     position: absolute;
     left: 50%;
     top: 50%;
     transform: translate(-50%,-50%);
 }
 
-.content .login-wrapper .right-wrapper .form-wrapper .login{
+.login{
     font-size: 30px;
     text-align: center;
 }
 
 
-.content .login-wrapper .right-wrapper .form-wrapper .input-elems{
+.input-elems{
     margin: 20px 0;
 }
-
-
-.content .login-wrapper .right-wrapper .register-w{
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%,-50%);
-}
-
-.content .login-wrapper .right-wrapper .register-w .login{
-    font-size: 30px;
-    text-align: center;
-}
-
 
 
 .name{
@@ -144,16 +129,6 @@
 
 .button:hover{
     background-color: rgb(136, 106, 196);
-}
-
-
-.line{
-    display: inline-block;
-    max-width: 100%;
-    width: 100%;
-    flex: 1;
-    height: 1px;
-    background-color: rgb(162, 172, 185);
 }
 
 @media (max-width:1024px){

@@ -1,11 +1,12 @@
 const mongoose = require('mongoose')
-const fs = require('fs');
+const fs = require('fs')
+const base64 = require('base64-js')
 const {Music} = require("../Schema/music")
 const mongodb = 'mongodb+srv://admin:sVAV1RGC6xqrBEL2@cluster0.kkodvpg.mongodb.net/music_therapy?retryWrites=true&w=majority'
 mongoose.connect(mongodb, { useNewUrlParser: true, useUnifiedTopology: true })
 
 const db = mongoose.connection
-const collectionName = 'music_info'
+
 
 db.on('open', ()=>{
     console.log('successful')
@@ -21,14 +22,17 @@ async function uploadMusic(){
     const jsonData = JSON.parse(musicData)
     
     for (var data of jsonData) {
+        const mp3Data = fs.readFileSync(data.file)
+        const mp3Base64 = base64.fromByteArray(mp3Data)
+
         var music = new Music({
             name: data.name,
             picture: data.picture,
-            file: data.file
+            file: mp3Base64,
         })
         
         try {
-            await music.save({ db, collection: collectionName })
+            await music.save()
             console.log(`Uploaded: ${data.name}`)
         } catch (error) {
             console.error(`Error uploading ${data.name}: ${error}`);
