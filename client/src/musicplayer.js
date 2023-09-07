@@ -1,14 +1,27 @@
 import { Link } from 'react-router-dom';
 import Dock from './dock';
 import './musicplayer.css';
-import React, { useMemo, useRef, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import MusicBtn from './components/MusicBtn';
 import NavList from './components/NavList';
+import axios from 'axios';
 
 function MusicPlayer() {
   const myAudio = useRef(null);
   const audioSource = useRef(null);
   const [isPlaying, setIsPlaying] = useState(false);
+
+  // Connect FE & BE Server
+  useEffect(() => {
+    axios.get('http://localhost:3300/musicPlayer')
+      .then(response => {
+        console.log('Received from backend:', response.data);
+      })
+      .catch(error => {
+        console.error('Error fetching data from backend:', error);
+      });
+  }, []);
+
   const [musicList, setMusicList] = useState([
     {
       id: 1,
