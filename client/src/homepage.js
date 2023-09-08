@@ -11,7 +11,7 @@ function Homepage () {
       <Link to='/page2' className='window'>
         <img src='/homepage/play_music1.jpg' alt='#' />
       </Link>
-      <Link to='/' className='window'>
+      <Link to='/login' className='window'>
         <img src='/homepage/admin1.jpg' alt='#' />
       </Link>
     </div>
