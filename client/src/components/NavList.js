@@ -1,9 +1,9 @@
-import React from 'react';
-import './navList.css';
+import React from 'react'
+import './navList.css'
 
 const NavList = ({ allTags, onCategoryClick, activeCategory }) => {
   return (
-    <div className="nav-list-wrap">
+    <div className='nav-list-wrap'>
       {allTags.map((tag) => (
         <button
           key={tag}
@@ -14,7 +14,7 @@ const NavList = ({ allTags, onCategoryClick, activeCategory }) => {
         </button>
       ))}
     </div>
-  );
-};
+  )
+}
 
-export default NavList;
+export default NavList
