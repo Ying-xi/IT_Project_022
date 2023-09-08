@@ -2,16 +2,10 @@ const {Music} = require('../Schema/music')
 
 const path = require('path')
 
-exports.renderPage = (req, res) => {
-    const filePath = path.join(__dirname, '../Files/staticPage/test.html')
-    res.sendFile(filePath, async (err) => {
-        if (err) {
-            console.error(err)
-        } else {
-            const musics = await Music.find()
-            res.status(200).send({ data: musics })
-        }
-    })
+exports.renderPage = async (res) => {
+    const musics = await Music.find()
+    if(!musics) return res.status(404).send("no music available")
+    res.status(200).send({ data: musics })
 }
 
 exports.player = async (req, res)=>{
