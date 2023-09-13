@@ -4,7 +4,7 @@ const bcryptjs = require('bcryptjs')
 const {Music} = require("../Schema/music")
 const {User} = require('../Schema/user')
 
-const musicData = fs.readFileSync('../Default_music/data.json', 'utf-8')
+const musicData = fs.readFileSync(__dirname+'/../Default_music/data.json', 'utf-8')
 
 exports.uploadMusic = async () => {
     const jsonData = JSON.parse(musicData)
