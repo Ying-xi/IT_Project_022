@@ -1,9 +1,12 @@
-import React, { useState } from 'react'
+import React, {useState} from 'react'
 import './login.css'
+import axios from 'axios'; // 导入 Axios
 
-function Login () {
-  const [username, setUsername] = useState('')
-  const [password, setPassword] = useState('')
+function Login() {
+  const [username,
+    setUsername] = useState('')
+  const [password,
+    setPassword] = useState('')
 
   const handleUsernameChange = (event) => {
     setUsername(event.target.value)
@@ -14,9 +17,21 @@ function Login () {
   }
 
   const handleLogin = () => {
-    console.log('Username:', username)
-    console.log('Password:', password)
-  }
+    const userData = {
+      username: username,
+      password: password
+    };
+
+    axios
+      .post('http://localhost:3300/login', userData)
+      .then(response => {
+        console.log('Login successful:', response.data);
+        // session
+      })
+      .catch(error => {
+        console.error('Login failed:', error);
+      });
+  };
 
   return (
     <div className='login'>
@@ -39,8 +54,7 @@ function Login () {
                   type='text'
                   className='input'
                   value={username}
-                  onChange={handleUsernameChange}
-                />
+                  onChange={handleUsernameChange}/>
               </div>
               <div className='input-elems'>
                 <span className='name'>Password</span>
@@ -48,8 +62,7 @@ function Login () {
                   type='password'
                   className='input'
                   value={password}
-                  onChange={handlePasswordChange}
-                />
+                  onChange={handlePasswordChange}/>
               </div>
               <button className='button' onClick={handleLogin}>
                 LOGIN
