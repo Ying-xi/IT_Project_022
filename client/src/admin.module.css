@@ -1,0 +1,27 @@
+.admin {
+    background-image: url('../public/background.jpg');
+    height: 100vh;
+}
+
+.container {
+    display: flex;
+    height: 100vh;
+    width: 100%;
+}
+
+.leftColumn {
+    width: 50%;
+    background-color: rgba(191, 232, 129, 0.5);
+    border: 2px solid green;
+    box-sizing: border-box;
+    height: 100vh;
+}
+
+.rightColumn {
+    width: 50%;
+    background-color: rgba(212, 38, 38, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid red;
+}

@@ -4,6 +4,7 @@ import Navbar from './navbar'
 import Homepage from './homepage'
 import MusicPlayer from './musicplayer'
 import Login from './login'
+import Admin from './admin'
 
 function App () {
   return (
@@ -14,6 +15,7 @@ function App () {
           <Route path='/' element={<Homepage />} />
           <Route path='/music' element={<MusicPlayer />} />
           <Route path='/login' element={<Login />} />
+          <Route path='/admin' element={<Admin />} />
         </Routes>
         {/* <Dock /> */}
       </div>

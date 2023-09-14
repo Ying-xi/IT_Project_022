@@ -1,4 +1,5 @@
-body {
+
+.homepage {
     background-image: url('../public/background.jpg');
     background-size: cover;
     background-repeat: no-repeat;
@@ -9,12 +10,6 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
-}
-
-.homepage {
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }
 
 .window {
