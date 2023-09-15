@@ -106,7 +106,7 @@ function Admin() {
                   {/* 下部分，占据1 */}
                   <h1 style={{
                     textAlign: 'center'
-                  }}>Playlist</h1>
+                  }}>Play Music!</h1>
                 </div>
               </div>
             </div>
