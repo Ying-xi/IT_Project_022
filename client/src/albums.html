@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skoog</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        .shell {
+            width: 100%;
+            position: relative;
+            padding: 80px 0;
+            background-attachment: fixed;
+            background-size: cover;
+        }
+
+        .shell:before {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(99, 99, 99, 0.8);
+            content: "";
+        }
+
+        .header {
+            width: 100%;
+            text-align: center;
+            margin-bottom: 80px;
+            position: relative;
+        }
+
+        .title {
+            color: #fff;
+            font-size: 520%;
+            font-weight: normal;
+            margin: 0;
+            caret-color: rgba(0, 0, 0, 0);
+            user-select: none;
+        }
+
+        .timeline {
+            display: flex;
+            margin: 0 auto;
+            flex-wrap: wrap;
+            flex-direction: column;
+            max-width: 58%;
+            position: relative;
+        }
+
+        .content-title {
+            font-weight: normal;
+            font-size: 420%;
+            margin: -10px 0 0 0;
+            transition: 0.4s;
+            padding: 0 10px;
+            box-sizing: border-box;
+            color: #ffffff;
+            caret-color: rgba(0, 0, 0, 0);
+            user-select: none;
+        }
+
+        .content-desc {
+            margin: 0;
+            font-size: 90%;
+            box-sizing: border-box;
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 25px;
+            caret-color: rgba(0, 0, 0, 0);
+            user-select: none;
+        }
+
+        .timeline:before {
+            position: absolute;
+            left: 50%;
+            width: 2px;
+            height: 100%;
+            margin-left: -1px;
+            content: "";
+            background: rgba(255, 255, 255, 0.07);
+        }
+
+        .item {
+            padding: 40px 0;
+            opacity: 0.55;
+            filter: blur(2px);
+            transition: 0.5s;
+            box-sizing: border-box;
+            width: calc(50% - 40px);
+            display: flex;
+            position: relative;
+            transform: translateY(-80px);
+        }
+
+        .item:before {
+
+            content: attr(data-text);
+            letter-spacing: 3px;
+            width: 100%;
+            position: absolute;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 250px;
+            border-left: 2px solid rgba(255, 255, 255, 0.5);
+            top: 70%;
+            margin-top: -13%;
+            padding-left: 15px;
+            opacity: 0;
+            right: calc(-100% - 56px);
+            font: 900 20px '';
+            letter-spacing: 5px;
+        }
+
+        .item:nth-child(even) {
+            align-self: flex-end;
+        }
+
+        .item:nth-child(even):before {
+            right: auto;
+            text-align: right;
+            left: calc(-100% - 56px);
+            padding-left: 0;
+            border-left: none;
+            border-right: 2px solid rgba(255, 255, 255, 0.5);
+            padding-right: 15px;
+        }
+
+        .item--active {
+            opacity: 1;
+            transform: translateY(0);
+            filter: blur(0px);
+        }
+
+        .item--active:before {
+            top: 50%;
+            transition: 0.3s all 0.2s;
+            opacity: 1;
+        }
+
+        .item--active .content-title {
+            margin: -50px 0 20px 0;
+        }
+
+        .img {
+            max-width: 100%;
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.4);
+            border-radius: 10px;
+            user-select: none;
+            caret-color: rgba(0, 0, 0, 0);
+        }
+
+        .subtitle {
+            color: rgba(255, 255, 255, 0.65);
+            font-size: 90%;
+            letter-spacing: 5px;
+            margin: 0.5%;
+            font-weight: normal;
+            caret-color: rgba(0, 0, 0, 0);
+            user-select: none;
+        }
+
+
+
+        @media only screen and (max-width: 767px) {
+            .item {
+                align-self: baseline !important;
+                width: 100%;
+                padding: 0 30px 150px 80px;
+            }
+
+            .item:before {
+                left: 10px !important;
+                padding: 0 !important;
+                top: 50px;
+                text-align: center !important;
+                width: 60px;
+                border: none !important;
+            }
+
+            .item:last-child {
+                padding-bottom: 40px;
+            }
+        }
+
+        @media only screen and (max-width: 767px) {
+            .timeline:before {
+                left: 40px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="shell" id="shell">
+        <div class="header">
+            <h2 class="title">Albums</h2>
+            <h3 class="subtitle">
+                <h3 class="subtitle">click album cover <br> to continue</h3>
+            </h3>
+        </div>
+        <div class="timeline">
+
+
+            <div class="item" data-text="Realxing Music">
+                <div class="content">
+
+                    <a href="https://example.com"> <!-- 跳转到目标页面-->
+                        <img class="img" src="../public/albums/album1.jpg" />
+                    </a>
+                    <h2 class="content-title">Name</h2>
+                    <p class="content-desc">
+                        "Relaxing music often incorporates natural sounds like flowing water, birdsong, or ocean waves,
+                        enhancing the overall calming effect."
+                    </p>
+                </div>
+            </div>
+
+            <div class="item" data-text="White noise">
+                <div class="content">
+                    <a href="https://example.com"> <!-- 跳转到目标页面-->
+                        <img class="img" src="../public/albums/album2.jpg" />
+                    </a>
+                    <h2 class="content-title">Name</h2>
+                    <p class="content-desc">
+                        "White noise is often used for its ability to mask other sounds, aiding in concentration,
+                        relaxation, or sleep by creating a consistent background noise."
+                    </p>
+                </div>
+            </div>
+
+            <div class="item" data-text="Jazz Muisc">
+                <div class="content">
+                    <a href="https://example.com"> <!-- 跳转到目标页面-->
+                        <img class="img" src="../public/albums/album3.jpg" />
+                    </a>
+                    <h2 class="content-title">Name</h2>
+                    <p class="content-desc">
+                        "Jazz music's ability to blend diverse influences from different cultures and styles creates a
+                        rich tapestry of sound."
+                    </p>
+                </div>
+            </div>
+
+            <div class="item" data-text="Classic Muisc">
+                <div class="content">
+                    <a href="https://example.com"> <!-- 跳转到目标页面-->
+                        <img class="img" src="../public/albums/album4.jpg" />
+                    </a>
+                    <h2 class="content-title">Name</h2>
+                    <p class="content-desc">
+                        "Classical music is a timeless genre known for its complexity, emotional depth, and intricate
+                        compositions, often performed by orchestras and chamber ensembles."
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script>
+        (function ($) {
+            $.fn.timeline = function () {
+                var selectors = {
+                    id: $(this),
+                    item: $(this).find(".item"),
+                    activeClass: "item--active",
+                    img: ".img"
+                };
+
+                selectors.item.eq(0).addClass(selectors.activeClass);
+                selectors.id.css(
+                    "background-image",
+                    "url(" +
+                    selectors.item
+                        .first()
+                        .find(selectors.img)
+                        .attr("src") +
+                    ")"
+                );
+                // num of items:
+                var itemLength = selectors.item.length;
+                // when is scrolling
+                $(window).scroll(function () {
+                    var max, min;
+
+                    var pos = $(this).scrollTop();
+                    selectors.item.each(function (i) {
+
+                        min = $(this).offset().top;
+                        max = $(this).height() + $(this).offset().top;
+                        var that = $(this);
+
+                        if (i == itemLength - 2 && pos > min + $(this).height() / 2) {
+                            selectors.item.removeClass(selectors.activeClass);
+                            selectors.id.css(
+                                "background-image",
+                                "url(" +
+                                selectors.item
+                                    .last()
+                                    .find(selectors.img)
+                                    .attr("src") +
+                                ")"
+                            );
+                            selectors.item.last().addClass(selectors.activeClass);
+                        }
+
+                        else if (pos <= max - 150 && pos >= min - 70) {
+                            selectors.id.css(
+                                "background-image",
+                                "url(" +
+                                $(this)
+                                    .find(selectors.img)
+                                    .attr("src") +
+                                ")"
+                            );
+                            selectors.item.removeClass(selectors.activeClass);
+                            $(this).addClass(selectors.activeClass);
+                        }
+                    });
+                });
+            };
+        })(jQuery)
+
+        $("#shell").timeline();
+    </script>
+</body>
+
+</html>
