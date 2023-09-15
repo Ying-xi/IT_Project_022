@@ -19,9 +19,131 @@
 
 .rightColumn {
     width: 50%;
-    background-color: rgba(212, 38, 38, 0.8);
     display: flex;
     justify-content: center;
     align-items: center;
+    /* border: 2px solid red; */
+}
+
+
+.rightContentContainer {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+}
+
+.topContent {
+    flex: 3;
+    border: 2px solid red;
+}
+
+.topContentInner {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.topContentTop {
+    flex: 3;
+}
+
+.topContentbottom {
+    flex: 2;
+}
+
+
+.mainContent {
+    display: flex;
+    flex-direction: column;
+    flex: 12;
+    border: 2px solid red;
+}
+
+.mainContentInner {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.7);
+    margin-left: 4vh;
+    margin-right: 4vh;
+    margin-top: 2vh;
+    margin-bottom: 4vh;
+    border-radius: 20px;
+}
+
+.mainContentTop {
+    flex: 3;
+    border: 2px solid red;
+}
+
+
+.mainContentTopInner {
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+}
+
+.mainContentTopPic {
+    /* 音乐图片 */
+    flex: 1;
+    border: 2px solid red;
+    padding: 2vh;
+}
+
+.mainContentTopRight {
+    /* 音乐内容 */
+    flex: 1;
+    border: 2px solid red;
+    height: 100%;
+}
+
+.mainContentTopRightInner {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.mainContentTopRightAdd {
+    flex: 1;
+    border: 2px solid red;
+}
+
+.mainContentTopRightName {
+    flex: 1;
+    border: 2px solid red;
+}
+
+.mainContentTopRightType {
+    flex: 3;
+    border: 2px solid red;
+}
+
+.mainContentTopRightTypeInner {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    margin-left: 2vh;
+    margin-right: 2vh;
+}
+.mainContentTopRightTypeHeader {
+    flex: 1;
+    border: 2px solid red;
+}
+.mainContentTopRightTypeRow {
+    flex: 1;
+    border: 2px solid red;
+}
+
+.mainContentMiddle {
+    /* Upload music row */
+    flex: 1;
+    border: 2px solid red;
+}
+
+
+.mainContentBottom {
+    /* PlayList row */
+    flex: 1;
     border: 2px solid red;
 }
