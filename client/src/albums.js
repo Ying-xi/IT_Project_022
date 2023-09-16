@@ -26,7 +26,8 @@ class Albums extends Component {
 
         itemElements.forEach((item, index) => {
             const rect = item.getBoundingClientRect();
-            const itemCenter = rect.top + rect.height / 2;
+
+            const itemCenter = rect.top + (rect.height * 0.5);
 
             if (itemCenter > windowHeight * 0.4 && itemCenter < windowHeight * 0.5) {
                 this.setState({ activeItemIndex: index });
