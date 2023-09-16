@@ -46,7 +46,7 @@
             user-select: none;
         }
 
-        .timeline {
+        .musiclist {
             display: flex;
             margin: 0 auto;
             flex-wrap: wrap;
@@ -77,7 +77,7 @@
             user-select: none;
         }
 
-        .timeline:before {
+        .musiclist:before {
             position: absolute;
             left: 50%;
             width: 2px;
@@ -189,7 +189,7 @@
         }
 
         @media only screen and (max-width: 767px) {
-            .timeline:before {
+            .musiclist:before {
                 left: 40px;
             }
         }
@@ -205,7 +205,7 @@
                 <h3 class="subtitle">click album cover <br> to continue</h3>
             </h3>
         </div>
-        <div class="timeline">
+        <div class="musiclist">
 
 
             <div class="item" data-text="Realxing Music">
@@ -268,7 +268,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     <script>
         (function ($) {
-            $.fn.timeline = function () {
+            $.fn.musiclist = function () {
                 var selectors = {
                     id: $(this),
                     item: $(this).find(".item"),
@@ -330,7 +330,7 @@
             };
         })(jQuery)
 
-        $("#shell").timeline();
+        $("#shell").musiclist();
     </script>
 </body>
 
