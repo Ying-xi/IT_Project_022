@@ -30,7 +30,7 @@
 
 .title {
   color: #fff;
-  font-size: 4.5vw;
+  font-size: 5.2vw;
   font-weight: normal;
   margin: 0;
   caret-color: rgba(0, 0, 0, 0);
@@ -48,7 +48,7 @@
 
 .content-title {
   font-weight: normal;
-  font-size: 3vw;
+  font-size: 4.2vw;
   margin: -2% 0 0 0;
   transition: 0.4s;
   padding: 0 2.5%;
@@ -100,7 +100,7 @@
   font-size: 5vw;
   border-left: 0.18vw solid rgba(255, 255, 255, 0.5);
   top: 22vh;
-  margin-top: -5vh;
+  margin-top: -8vh;
   padding-left: 0.7vw;
   opacity: 0;
   right: calc(-30.8vw);
@@ -148,9 +148,9 @@
 
 .subtitle {
   color: rgba(255, 255, 255, 0.65);
-  font-size: 1.5vw;
+  font-size: 1.3vw;
   letter-spacing: 100%;
-  margin: 1%;
+  margin: 0.75vh;
   font-weight: normal;
   caret-color: rgba(0, 0, 0, 0);
   user-select: none;
