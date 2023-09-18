@@ -7,10 +7,9 @@ const NavList = ({allTags, onCategoryClick, activeCategory}) => {
       {allTags.map((tag) => (
         <button
           key={tag}
-          className={`nav-item flex-center ${tag === activeCategory
-          ? 'active'
-          : ''}`}
-          onClick={() => onCategoryClick(tag)}>
+          className={`nav-item flex-center ${tag === activeCategory ? 'active' : ''}`}
+          onClick={() => onCategoryClick(tag)}
+        >
           {tag}
         </button>
       ))}

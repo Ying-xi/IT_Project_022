@@ -12,99 +12,72 @@ function MusicPlayer() {
   const [isPlaying,
     setIsPlaying] = useState(false)
 
+  const [backendData, setBackendData] = useState({
+    data: [], // backend data
+    activeId: null, // Actived music id
+  });
+
   // Connect FE & BE Server
   useEffect(() => {
     axios
       .get('http://localhost:3300/musicPlayer')
       .then(response => {
-        console.log('Received from backend:', response.data)
+        console.log('Received from backend:', response.data);
+        setBackendData(response.data);
       })
       .catch(error => {
-        console.error('Error fetching data from backend:', error)
-      })
-  }, [])
+        console.error('Error fetching data from backend:', error);
+      });
+  }, []);
 
-  const [musicList,
-    setMusicList] = useState([
-    {
-      id: 1,
-      face: '/musicFace/AuldLangSyne.jpg',
-      song: 'songs/AuldLangSyne.mp3',
-      name: 'Auld Lang Syne',
-      active: false,
-      tags: ['All', 'Ensembles']
-    }, {
-      id: 2,
-      face: '/musicFace/Bleu.jpg',
-      song: 'songs/Bleu.mp3',
-      name: 'Bleu',
-      active: false,
-      tags: ['All', 'Rhythmic']
-    }, {
-      id: 3,
-      face: '/musicFace/CanonInD.jpg',
-      song: 'songs/CanonInD.mp3',
-      name: 'Canon In D',
-      active: false,
-      tags: ['All', 'Classical']
-    }, {
-      id: 4,
-      face: '/musicFace/RelaxingRain.jpg',
-      song: 'songs/RelaxingRain.mp3',
-      name: 'Relaxing Rain',
-      active: false,
-      tags: ['All', 'Natural Sound']
-    }, {
-      id: 5,
-      face: '/musicFace/VocaliseOp34No14.jpg',
-      song: 'songs/VocaliseOp34No14.mp3',
-      name: 'Vocalise, Op34, No.14',
-      active: false,
-      tags: ['All', 'Vocal']
-    }, {
-      id: 6,
-      face: '/musicFace/WhatMakesYouBeautiful.jpg',
-      song: 'songs/WhatMakesYouBeautiful.mp3',
-      name: 'What Makes You Beautiful',
-      active: false,
-      tags: ['All', 'Pop']
-    }, {
-      id: 7,
-      face: '/musicFace/WinterBokeh.jpg',
-      song: 'songs/WinterBokeh.mp3',
-      name: 'Winter Bokeh',
-      active: false,
-      tags: ['All', 'Slow Smoothing']
-    }
-  ])
 
-  const activeMusic = useMemo(() => musicList.find((item) => item.active) ?? '', [musicList])
+
 
   /**
    * play song
    * @param songPath
    */
+
   const playSong = (id) => {
-    const activeMusic = musicList.find((item) => item.id === id) ?? ''
+    const activeMusic = backendData?.data.find((item) => item._id === id);
+  
+    if (activeMusic) {
+      // pause the current music
+      myAudio.current.pause();
+  
+      const audioSourcePath = `data:audio/mpeg;base64,${activeMusic.file}`;
+  
+      audioSource.current.src = audioSourcePath;
+      myAudio.current.load();
+      myAudio.current.play();
+      setIsPlaying(true);
+  
+      setBackendData((prevData) => ({
+        ...prevData,
+        activeId: id,
+      }));
+    }
+  
+    // Update musicList state
+    const newList = backendData?.data.map((item) => {
+      item.active = item._id === id;
+      return item;
+    });
+  
+    // Update backendData
+    if (backendData) {
+      setBackendData({
+        ...backendData,
+        data: newList,
+      });
+    }
+  };
 
-    const publicPath = process.env.PUBLIC_URL
-    const audioSourcePath = `${publicPath}/${activeMusic.song}`
+  const activeMusic = useMemo(
+    () => backendData?.data.find((item) => item._id === backendData.activeId) ?? '',
+    [backendData]
+  );
 
-    audioSource.current.src = audioSourcePath
-    myAudio
-      .current
-      .load()
-    myAudio
-      .current
-      .play()
-    setIsPlaying(true)
-
-    const newList = musicList.map((item) => {
-      item.active = item.id === id
-      return item
-    })
-    setMusicList(newList)
-  }
 
   /**
    * Stop song
@@ -126,10 +99,14 @@ function MusicPlayer() {
     setIsPlaying(true)
   }
 
-  const allTags = [...new Set(musicList.flatMap((musicItem) => musicItem.tags))]
+
+  const allTags = useMemo(() => {
+    const tagsArray = backendData?.data.flatMap((musicItem) => musicItem.tags) || [];
+    return [...new Set(tagsArray)];
+  }, [backendData]);
+
   const [activeCategory,
-    setActiveCategory] = useState(null) // 1. 创建筛选条件状态
-  // 3. 处理筛选条件变化的函数
+    setActiveCategory] = useState(null)
   const handleCategoryChange = (category) => {
     setActiveCategory(category)
   }
@@ -147,7 +124,8 @@ function MusicPlayer() {
           <NavList
             activeCategory={activeCategory}
             onCategoryClick={handleCategoryChange}
-            allTags={allTags}/>
+            allTags={allTags}
+          />
 
           <form className='search-container' action='/url' method='get'>
             {/* <img src={"../public/navbar-bg.jpg"} alt="" className="w-25px" /> */}
@@ -159,17 +137,25 @@ function MusicPlayer() {
         </div>
 
         <div className='button-container music-btns-list'>
-          {musicList.filter((musicItem) => !activeCategory || musicItem.tags.includes(activeCategory)).map((musicItem) => (<MusicBtn
-            onClick={() => playSong(musicItem.id)}
-            key={musicItem.id}
-            face={musicItem.face}
-            name={musicItem.name}/>))}
+          {backendData && backendData.data ? (
+            backendData.data
+              .filter((item) => !activeCategory || item.tags.includes(activeCategory))
+              .map((item) => (
+                <MusicBtn
+                  onClick={() => playSong(item._id)}
+                  key={item._id}
+                  face={`data:image/jpeg;base64,${item.picture}`}
+                  name={item.name}
+                />
+              ))
+          ) : (
+            <div>Loading...</div>
+          )}
         </div>
 
         <div className='dock-background'>
           <div className='dock-buttons'>
-            <div className='dock-text'>🎵 {activeMusic
-                ?.name ?? 'music'}</div>
+            <div className='dock-text'>🎵 {activeMusic?.name ?? 'music'}</div>
             {isPlaying
               ? (
                 <div className='dock-button toggle-play' onClick={stopSong}>
@@ -186,8 +172,6 @@ function MusicPlayer() {
             {/* <div className="dock-button toggle-volume">🔊</div> */}
           </div>
         </div>
-
-        {/* <Dock /> */}
       </div>
     </div>
   )
