@@ -1,36 +1,40 @@
-import React, {useState} from 'react'
-import './login.css'
-import axios from 'axios'; // 导入 Axios
+import React, { useState } from 'react';
+import './login.css';
+import axios from 'axios';
+import { Link, useNavigate } from 'react-router-dom'; // 导入 Link 和 useNavigate
 
 function Login() {
-  const [username,
-    setUsername] = useState('')
-  const [password,
-    setPassword] = useState('')
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const navigate = useNavigate();
 
   const handleUsernameChange = (event) => {
-    setUsername(event.target.value)
-  }
+    setUsername(event.target.value);
+  };
 
   const handlePasswordChange = (event) => {
-    setPassword(event.target.value)
-  }
+    setPassword(event.target.value);
+  };
 
-  const handleLogin = () => {
-    const userData = {
-      username: username,
-      password: password
-    };
-
-    axios
-      .post('http://localhost:3300/login', userData)
-      .then(response => {
-        console.log('Login successful:', response.data);
-        // session
-      })
-      .catch(error => {
-        console.error('Login failed:', error);
-      });
+  const handleLogin = async () => {
+    try {
+      const userData = {
+        username: username,
+        password: password,
+      };
+      console.log('Sending login request with data:', userData);
+      const response = await axios.post('http://localhost:3300/login', userData);
+      console.log('Received response:', response);
+      const jwtToken = response.data.data;
+      console.log('JWT token received:', jwtToken);
+      // 将 JWT 存储在本地存储中
+      localStorage.setItem('token', jwtToken);
+      console.log('Login successful. Navigating to admin page...');
+      // 登录成功后，使用导航函数跳转到 admin 页面
+      navigate('/admin');
+    } catch (error) {
+      console.error('Login failed:', error);
+    }
   };
 
   return (
@@ -54,7 +58,8 @@ function Login() {
                   type='text'
                   className='input'
                   value={username}
-                  onChange={handleUsernameChange}/>
+                  onChange={handleUsernameChange}
+                />
               </div>
               <div className='input-elems'>
                 <span className='name'>Password</span>
@@ -62,9 +67,10 @@ function Login() {
                   type='password'
                   className='input'
                   value={password}
-                  onChange={handlePasswordChange}/>
+                  onChange={handlePasswordChange}
+                />
               </div>
-              <button className='button' onClick={handleLogin}>
+              <button className="button" onClick={handleLogin}>
                 LOGIN
               </button>
             </div>
@@ -72,7 +78,7 @@ function Login() {
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default Login
+export default Login;

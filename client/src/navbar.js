@@ -8,7 +8,7 @@ function Navbar () {
       <div className='nav-links'>
         <Link to='/' className='nav-link'>🎵 Home</Link>
         <a href='#' className='nav-link'>⚙ Setting</a>
-        <a href='#' className='nav-link'>👤 Contact us</a>
+        <Link to='/login' className='nav-link'>👤 Log in</Link>
       </div>
     </div>
   )

@@ -1,5 +1,6 @@
 .music-btn-wrap {
   transition: all 0.2s;
+  border-radius: 0.1vw;
 }
 
 .music-btn-wrap:hover {
