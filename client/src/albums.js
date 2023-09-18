@@ -29,7 +29,7 @@ class Albums extends Component {
 
             const itemCenter = rect.top + (rect.height * 0.5);
 
-            if (itemCenter > windowHeight * 0.4 && itemCenter < windowHeight * 0.5) {
+            if (itemCenter > windowHeight * 0.4 && itemCenter < windowHeight * 0.75) {
                 this.setState({ activeItemIndex: index });
 
                 // set the image of the item now to be the background
