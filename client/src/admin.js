@@ -1,12 +1,13 @@
 import React from 'react';
 import styles from './admin.module.css';
+import MusicList from './components/MusicList';
 
 function Admin() {
   return (
     <div className={styles.admin}>
       <div className={styles.container}>
         <div className={styles.leftColumn}>
-          <p>This is the left column content.</p>
+          <MusicList />
         </div>
         {/* rightColumn */}
         <div className={styles.rightColumn}>
