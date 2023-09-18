@@ -1,20 +1,50 @@
 .nav-list-wrap {
   display: grid;
-  grid-template-columns: repeat(4, auto);
-  grid-gap: 2vh;
+  grid-template-columns: repeat(8, auto);
+  grid-gap: 1vh;
+  padding-left: 20vw;
 }
 
 .nav-list-wrap .nav-item {
-  background-color: #acbd7f;
-  color: #fff;
+  color: #000;
   border-radius: 40px;
   font-size: 1vw;
+  font-weight: bold;
   width: 8vw;
   height: 3vw;
+  margin-top: 3vw;
+}
+
+.nav-list-wrap .nav-item:hover {
+  transform: scale(1.1);
 }
 
 .flex-center {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.nav-list-wrap .nav-item.Classical {
+  background-color: rgb(253,152,152);
+}
+
+.nav-list-wrap .nav-item.Ensembles {
+  background-color: orange;
+}
+
+.nav-list-wrap .nav-item.Natural {
+  background-color: yellow;
+}
+
+.nav-list-wrap .nav-item.Rhythmic {
+  background-color: cyan;
+}
+
+.nav-list-wrap .nav-item.Smoothing {
+  background-color: rgb(0,255,127);
+}
+
+.nav-list-wrap .nav-item.Vocal {
+  background-color: rgb(238,130,238);
 }
