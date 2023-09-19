@@ -79,7 +79,7 @@
 }
 
 .item {
-  padding: -2vh 0;
+  padding: -10cvh 0;
   opacity: 0.55;
   filter: blur(0.25vh);
   transition: 0.5s;
