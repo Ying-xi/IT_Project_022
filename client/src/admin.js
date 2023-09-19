@@ -1,8 +1,65 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styles from './admin.module.css';
+import Dropzone from 'react-dropzone';
 import MusicList from './components/MusicList';
 
+
 function Admin() {
+  const [uploadedFile, setUploadedFile] = useState(null);
+  const [uploadedImage, setUploadedImage] = useState(null);
+  const [musicName, setMusicName] = useState(''); // State for the music name input
+
+  const handleFileDrop = (acceptedFiles) => {
+    if (acceptedFiles.length > 0) {
+      // Set the uploaded file to the first accepted file.
+      setUploadedFile(acceptedFiles[0]);
+    }
+  };
+
+  const handleFileDelete = () => {
+    // Clear the uploaded file when the delete button is clicked.
+    setUploadedFile(null);
+  };
+
+  const handleImageUpload = (acceptedFiles) => {
+    if (acceptedFiles.length > 0) {
+      setUploadedImage(acceptedFiles[0]);
+    }
+  };
+
+  // State for toggle buttons
+  const [type1Active, setType1Active] = useState(false);
+  const [type2Active, setType2Active] = useState(false);
+  const [type3Active, setType3Active] = useState(false);
+  const [type4Active, setType4Active] = useState(false);
+  const [type5Active, setType5Active] = useState(false);
+  const [type6Active, setType6Active] = useState(false);
+
+  // Toggle button handlers
+  const toggleType1 = () => {
+    setType1Active(!type1Active);
+  };
+
+  const toggleType2 = () => {
+    setType2Active(!type2Active);
+  };
+
+  const toggleType3 = () => {
+    setType3Active(!type3Active);
+  };
+
+  const toggleType4 = () => {
+    setType4Active(!type4Active);
+  };
+
+  const toggleType5 = () => {
+    setType5Active(!type5Active);
+  };
+
+  const toggleType6 = () => {
+    setType6Active(!type6Active);
+  };
+
   return (
     <div className={styles.admin}>
       <div className={styles.container}>
@@ -35,6 +92,22 @@ function Admin() {
                   <div className={styles.mainContentTopInner}>
                     <div className={styles.mainContentTopPic}>
                       {/* <img src="/musicFace/CanonInD.jpg" alt="#"/> */}
+                      <Dropzone onDrop={handleImageUpload} accept="image/*">
+                        {({ getRootProps, getInputProps }) => (
+                          <div {...getRootProps()} className={styles.imageDropzone}>
+                            <input {...getInputProps()} />
+                            {uploadedImage ? (
+                              <img
+                                src={URL.createObjectURL(uploadedImage)}
+                                alt="Uploaded"
+                                className={styles.uploadedImage}
+                              />
+                            ) : (
+                              <p>+UPLOAD IMAGE+</p>
+                            )}
+                          </div>
+                        )}
+                      </Dropzone>
                     </div>
 
                     <div className={styles.mainContentTopRight}>
@@ -42,9 +115,16 @@ function Admin() {
                       <div className={styles.mainContentTopRightInner}>
                         <div className={styles.mainContentTopRightAdd}>
                           {/* Add Button */}
+                          <button className={styles.addButton}>Add</button>
                         </div>
                         <div className={styles.mainContentTopRightName}>
                           {/* Music Name */}
+                          <input
+                            type="text"
+                            placeholder="Enter Music Name"
+                            value={musicName}
+                            onChange={(e) => setMusicName(e.target.value)}
+                          />
                         </div>
                         <div className={styles.mainContentTopRightType}>
                           <div className={styles.mainContentTopRightTypeInner}>
@@ -52,44 +132,86 @@ function Admin() {
                               <p>Type:</p>
                             </div>
                             <div className={styles.mainContentTopRightTypeRow}>
-                              <span
+                              <button
+                                onClick={toggleType1}
                                 style={{
-                                marginLeft: '3vh',
-                                marginRight: '2vh',
-                                color: 'yellow'
-                              }}>Type1</span>
-                              <span
+                                  marginLeft: '3vh',
+                                  marginRight: '2vh',
+                                  color: 'yellow',
+                                  backgroundColor: type1Active ? 'blue' : 'transparent',
+                                  border: 'none',
+                                  cursor: 'pointer',
+                                }}
+                              >
+                                Type1
+                              </button>
+                              <button
+                                onClick={toggleType2}
                                 style={{
-                                marginLeft: '3vh',
-                                marginRight: '2vh',
-                                color: 'yellow'
-                              }}>Type2</span>
-                              <span
+                                  marginLeft: '3vh',
+                                  marginRight: '2vh',
+                                  color: 'yellow',
+                                  backgroundColor: type2Active ? 'blue' : 'transparent',
+                                  border: 'none',
+                                  cursor: 'pointer',
+                                }}
+                              >
+                                Type2
+                              </button>
+                              <button
+                                onClick={toggleType3}
                                 style={{
-                                marginLeft: '3vh',
-                                marginRight: '2vh',
-                                color: 'yellow'
-                              }}>Type3</span>
+                                  marginLeft: '3vh',
+                                  marginRight: '2vh',
+                                  color: 'yellow',
+                                  backgroundColor: type3Active ? 'blue' : 'transparent',
+                                  border: 'none',
+                                  cursor: 'pointer',
+                                }}
+                              >
+                                Type3
+                              </button>
                             </div>
                             <div className={styles.mainContentTopRightTypeRow}>
-                              <span
+                              <button
+                                onClick={toggleType4}
                                 style={{
-                                marginLeft: '3vh',
-                                marginRight: '2vh',
-                                color: 'yellow'
-                              }}>Type4</span>
-                              <span
+                                  marginLeft: '3vh',
+                                  marginRight: '2vh',
+                                  color: 'yellow',
+                                  backgroundColor: type4Active ? 'blue' : 'transparent',
+                                  border: 'none',
+                                  cursor: 'pointer',
+                                }}
+                              >
+                                Type4
+                              </button>
+                              <button
+                                onClick={toggleType5}
                                 style={{
-                                marginLeft: '3vh',
-                                marginRight: '2vh',
-                                color: 'yellow'
-                              }}>Type5</span>
-                              <span
+                                  marginLeft: '3vh',
+                                  marginRight: '2vh',
+                                  color: 'yellow',
+                                  backgroundColor: type5Active ? 'blue' : 'transparent',
+                                  border: 'none',
+                                  cursor: 'pointer',
+                                }}
+                              >
+                                Type5
+                              </button>
+                              <button
+                                onClick={toggleType6}
                                 style={{
-                                marginLeft: '3vh',
-                                marginRight: '2vh',
-                                color: 'yellow'
-                              }}>Type6</span>
+                                  marginLeft: '3vh',
+                                  marginRight: '2vh',
+                                  color: 'yellow',
+                                  backgroundColor: type6Active ? 'blue' : 'transparent',
+                                  border: 'none',
+                                  cursor: 'pointer',
+                                }}
+                              >
+                                Type6
+                              </button>
                             </div>
                           </div>
                         </div>
@@ -99,22 +221,62 @@ function Admin() {
                 </div>
                 <div className={styles.mainContentMiddle}>
                   {/* 中间部分，占据1 */}
-                  <h1 style={{
-                    textAlign: 'center'
-                  }}>Upload music</h1>
+                  <div className={styles.dropzoneWrapper}> {/* 新增的包装 <div> */}
+                    {/* 上面的 division */}
+                    <div className={styles.topDivision}></div>
+                    
+                    {/* Dropzone */}
+                    <Dropzone onDrop={handleFileDrop} accept="audio/*">
+                      {({ getRootProps, getInputProps }) => (
+                        <div {...getRootProps()} className={styles.dropzone}>
+                          <input {...getInputProps()} />
+                          {uploadedFile ? (
+                            <div className={styles.uploadedFile}>
+                              {uploadedFile.name}
+                              <button
+                                className={styles.deleteButton}
+                                onClick={handleFileDelete}
+                              >
+                                Delete
+                              </button>
+                            </div>
+                          ) : (
+                            <p>+UPLOAD MUSIC+</p>
+                          )}
+                        </div>
+                      )}
+                    </Dropzone>
+
+                    {/* 下面的 division */}
+                    <div className={styles.bottomDivision}></div>
+                  </div>
                 </div>
                 <div className={styles.mainContentBottom}>
-                  {/* 下部分，占据1 */}
-                  <h1 style={{
-                    textAlign: 'center'
-                  }}>Play Music!</h1>
+                  {/* 上面的 division */}
+                  <div className={styles.topDivisionBottom}></div>
+
+                  {/* 包装 <div className={styles.audioContainer}> */}
+                  <div className={styles.audioContainerWrapper}>
+                    <div className={styles.audioContainer}>
+                      <h1 style={{ textAlign: 'center' }}>Audio Play</h1>
+                      {uploadedFile && (
+                        <audio controls>
+                          <source src={URL.createObjectURL(uploadedFile)} type="audio/mpeg" />
+                          Your browser does not support the audio element.
+                        </audio>
+                      )}
+                    </div>
+                  </div>
+
+                  {/* 下面的 division */}
+                  <div className={styles.bottomDivisionBottom}></div>
                 </div>
-              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
+  </div>
   );
 }
 
