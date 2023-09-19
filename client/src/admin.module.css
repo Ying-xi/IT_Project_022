@@ -22,7 +22,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    /* border: 2px solid red; */
+    border: 2px solid red;
 }
 
 
@@ -89,6 +89,17 @@
     flex: 1;
     border: 2px solid red;
     padding: 2vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Center vertically */
+    align-items: center; /* Center horizontally */
+}
+
+.mainContentTopPic p {
+    margin: 0;
+    font-size: 16px;
+    color: #333;
+    text-align: center; /* Center text horizontally */
 }
 
 .mainContentTopRight {
@@ -144,11 +155,105 @@
     /* Upload music row */
     flex: 1;
     border: 2px solid red;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
+.mainContentMiddle p {
+    margin: 0;
+    font-size: 16px;
+    color: #333;
+    text-align: center;
+}
 
 .mainContentBottom {
     /* PlayList row */
     flex: 1;
     border: 2px solid red;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
+
+.mainContentBottom p {
+    margin: 0;
+    font-size: 16px;
+    color: #333;
+    text-align: center;
+}
+
+.audioContainer {
+    text-align: center; /* Center text horizontally */
+    border: 2px solid red;
+    background-color: rgba(191, 232, 129, 0.5);
+    height: 13vh;
+    width: 60vh;
+}
+
+/* In admin.module.css */
+.imageDropzone {
+    /* 你已有的样式 */
+    padding: 20px;
+    text-align: center;
+    cursor: pointer;
+    max-width: 300px;
+    margin: 0 auto;
+}
+  
+  .imageDropzone p {
+    margin: 0;
+    font-size: 16px;
+    color: #333;
+}
+  
+  .uploadedImage {
+    max-width: 100%;
+    height: auto;
+    margin-top: 10px;
+}
+  
+  .uploadedImage:hover {
+    cursor: pointer;
+}
+
+.dropzoneWrapper {
+    background-color: rgba(191, 232, 129, 0.5);
+    border: 2px solid red;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 13vh;
+    width: 60vh;
+}
+  
+.topDivision {
+    flex: 1;
+    /* 可以根据需要设置上方 division 的样式 */
+}
+  
+.bottomDivision {
+    flex: 1;
+    /* 可以根据需要设置下方 division 的样式 */
+}
+
+.audioContainerWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+  }
+  
+  .topDivisionBottom {
+    flex: 1;
+    /* 可以根据需要设置上方 division 的样式 */
+  }
+  
+  .bottomDivisionBottom {
+    flex: 1;
+    /* 可以根据需要设置下方 division 的样式 */
+  }
