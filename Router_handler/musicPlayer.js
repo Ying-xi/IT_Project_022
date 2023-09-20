@@ -4,7 +4,6 @@ const path = require('path')
 
 exports.renderPage = async (req, res) => {
     const musics = await Music.find()
-    //if(!musics) return res.status(404).send("no music available")
     res.status(200).send({ data: musics })
 }
 

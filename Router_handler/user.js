@@ -6,7 +6,7 @@ const {User} = require('../Schema/user')
 exports.login = async (req, res) =>{
     const { username, password } = req.body
     const user = await User.findOne({ username })
-    console.log(req.body)
+    
     if (!user || !bcryptjs.compareSync(password, user.password)) {
         res.status(401).json({ error: 'Wrong Username or Password' })
     } else {
