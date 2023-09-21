@@ -8,7 +8,7 @@ function Homepage() {
       <Link to='/music' className='window'>
         <img src='/homepage/listen_music1.jpg' alt='#'/>
       </Link>
-      <Link to='/albums' className='window'>
+      <Link to='/admin' className='window'>
         <img src='/homepage/play_music1.jpg' alt='#'/>
       </Link>
       <Link to='/albums' className='window'>

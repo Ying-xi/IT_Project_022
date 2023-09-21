@@ -6,6 +6,7 @@ import MusicPlayer from './musicplayer'
 import Login from './login'
 import Admin from './admin'
 import Albums from './albums'
+import Musiclist from './musiclist'
 function App () {
   return (
     <Router>
@@ -17,6 +18,7 @@ function App () {
           <Route path='/login' element={<Login />} />
           <Route path='/admin' element={<Admin />} />
           <Route path='/albums' element={<Albums />} />
+          <Route path='/musiclist' element={<Musiclist />} />
         </Routes>
         {/* <Dock /> */}
       </div>

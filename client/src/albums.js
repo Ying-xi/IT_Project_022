@@ -27,9 +27,12 @@ class Albums extends Component {
         itemElements.forEach((item, index) => {
             const rect = item.getBoundingClientRect();
 
-            const itemCenter = rect.top + (rect.height * 0.5);
+            const itemTop = rect.top;
 
-            if (itemCenter > windowHeight * 0.4 && itemCenter < windowHeight * 0.75) {
+
+
+            if (
+                itemTop > windowHeight * 0.2 && itemTop < windowHeight * 0.4){
                 this.setState({ activeItemIndex: index });
 
                 // set the image of the item now to be the background
@@ -37,6 +40,21 @@ class Albums extends Component {
                 if (imgElement) {
                     const imageUrl = imgElement.getAttribute('src');
                     this.setState({ backgroundImage: `url(${imageUrl})` });
+                }
+            }
+
+            // check if we are near the bottom of the page
+            const isNearBottom = (window.innerHeight + window.scrollY) >= document.body.offsetHeight *0.985;
+            // if near the bottom, activate the last item
+            if (isNearBottom) {
+                const lastIndex = itemElements.length - 1;
+                this.setState({ activeItemIndex: lastIndex });
+
+                // set the background image of the last item
+                const lastImgElement = itemElements[lastIndex].querySelector('.img');
+                if (lastImgElement) {
+                    const lastImageUrl = lastImgElement.getAttribute('src');
+                    this.setState({ backgroundImage: `url(${lastImageUrl})` });
                 }
             }
         });

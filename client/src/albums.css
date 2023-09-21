@@ -21,10 +21,12 @@
   content: "";
 }
 
+
+/* margin-bottom have to be larger than 8vh to avoid that the logo be covered by the image of the item: */
 .header {
   width: 100vw;
   text-align: center;
-  margin-bottom: 1vh;
+  margin-bottom: 14vh;
   position: relative;
 }
 
@@ -72,14 +74,14 @@
   position: absolute;
   left: 30vw;
   width: 0.12vw;
-  height: 100%;
+  height: 100vh;
   margin-left: -0.1vh;
   content: "";
   background: rgba(255, 255, 255, 0.07);
 }
 
 .item {
-  padding: -10cvh 0;
+  padding: -10vh 0;
   opacity: 0.55;
   filter: blur(0.25vh);
   transition: 0.5s;
@@ -87,7 +89,7 @@
   width: calc(46.50%);
   display: flex;
   position: relative;
-  transform: translateY(8vh);
+  transform: translateY(0vh);
 }
 
 .item:before {
@@ -124,7 +126,7 @@
 
 .item--active {
   opacity: 1;
-  transform: translateY(0);
+  transform: translateY(-8vh);
   filter: blur(0vw);
 }
 
