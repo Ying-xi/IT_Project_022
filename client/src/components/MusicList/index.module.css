@@ -8,12 +8,6 @@
   width: 500px;
 }
 
-.music-wrap .music-header {
-  font-size: 52px;
-  font-weight: bold;
-  color: #fff;
-  margin-bottom: 20px;
-}
 
 .music-wrap .music-main-head {
   display: flex;
@@ -53,4 +47,33 @@
   background-color: #fac554;
   border-radius: 6px;
   padding: 0 6px;
+}
+
+
+
+
+
+/* adjust left hand side list */
+.music-info {
+  flex-grow: 1;
+}
+
+.music-name {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.tag {
+  margin-right: 10px;
+  margin-bottom: 5px;
+  background-color: #fac554;
+  border-radius: 6px;
+  padding: 4px 8px;
+  font-size: 16px;
+  font-weight: bold;
 }

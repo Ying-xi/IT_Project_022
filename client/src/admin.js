@@ -1,10 +1,35 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState } from 'react';
 import styles from './admin.module.css';
 import Dropzone from 'react-dropzone';
 import MusicList from './components/MusicList';
+import axios from 'axios'
 
 
 function Admin() {
+
+  // 添加 isLoading 状态
+  const [isLoading, setIsLoading] = useState(true); 
+  const [backendData, setBackendData] = useState({
+    data: [],
+    activeId: null,
+  });
+
+  useEffect(() => {
+    axios
+      .get('http://localhost:3300/musicPlayer')
+      .then(response => {
+        console.log('Received data from backend:', response.data);
+        setBackendData(response.data);
+        setIsLoading(false); // 数据加载完成后设置isLoading为false
+      })
+      .catch(error => {
+        console.error('Error fetching data from backend:', error);
+        setIsLoading(false); // 发生错误时也要设置isLoading为false
+      });
+  }, []);
+  
+
+
   const [uploadedFile, setUploadedFile] = useState(null);
   const [uploadedImage, setUploadedImage] = useState(null);
   const [musicName, setMusicName] = useState(''); // State for the music name input
@@ -62,11 +87,33 @@ function Admin() {
 
   return (
     <div className={styles.admin}>
+      {/* left hand side */}
       <div className={styles.container}>
         <div className={styles.leftColumn}>
-          <MusicList />
+          <div className={styles.leftContentContainer}>
+            <div className={styles.topContent}>
+              <div className={styles.topContentInner}>
+                {/* 3:2 拆分 */}
+                <div className={styles.topContentTop}>
+                  {/* 上半空白空间 */}
+                </div>
+                <div className={styles.topContentBottom}>
+                  <h1 className={styles.musicHeader}>
+                    Admin page
+                  </h1>
+                </div>
+              </div>
+            </div>
+            <div className={styles.leftMainContent}>
+              {isLoading ? (
+                  <div>Loading...</div>
+                ) : (
+                  <MusicList musicData={backendData.data}/>
+              )}
+            </div>
+          </div>
         </div>
-        {/* rightColumn */}
+        {/* right hand side */}
         <div className={styles.rightColumn}>
           <div className={styles.rightContentContainer}>
             <div className={styles.topContent}>
@@ -78,13 +125,14 @@ function Admin() {
                 <div className={styles.topContentBottom}>
                   <h1
                     style={{
-                    marginLeft: '4vh',
+                    // marginLeft: '4vh',
+                    textAlign: 'center',
                     color: 'gray'
                   }}>Music Information</h1>
                 </div>
               </div>
             </div>
-            <div className={styles.mainContent}>
+            <div className={styles.rightMainContent}>
               <div className={styles.mainContentInner}>
                 {/* 3:1:1 拆分 */}
                 <div className={styles.mainContentTop}>
@@ -92,7 +140,7 @@ function Admin() {
                   <div className={styles.mainContentTopInner}>
                     <div className={styles.mainContentTopPic}>
                       {/* <img src="/musicFace/CanonInD.jpg" alt="#"/> */}
-                      <Dropzone onDrop={handleImageUpload} accept="image/*">
+                      <Dropzone onDrop={handleImageUpload}>
                         {({ getRootProps, getInputProps }) => (
                           <div {...getRootProps()} className={styles.imageDropzone}>
                             <input {...getInputProps()} />
@@ -226,7 +274,7 @@ function Admin() {
                     <div className={styles.topDivision}></div>
                     
                     {/* Dropzone */}
-                    <Dropzone onDrop={handleFileDrop} accept="audio/*">
+                    <Dropzone onDrop={handleFileDrop}>
                       {({ getRootProps, getInputProps }) => (
                         <div {...getRootProps()} className={styles.dropzone}>
                           <input {...getInputProps()} />
