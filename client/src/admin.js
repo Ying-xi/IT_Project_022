@@ -127,7 +127,7 @@ function Admin() {
         {/* right hand side */}
         <div className={styles.rightColumn}>
           <div className={styles.rightContentContainer}>
-            <div className={styles.topContent}>
+            <div className={styles.rightTopContent}>
               <div className={styles.topContentInner}>
                 {/* 3:2 拆分 */}
                 <div className={styles.topContentTop}>
@@ -136,21 +136,21 @@ function Admin() {
                 <div className={styles.topContentBottom}>
                   <h1
                     style={{
-                    // marginLeft: '4vh',
-                    textAlign: 'center',
+                    marginLeft: '4vh',
                     color: 'gray'
                   }}>Music Information</h1>
                 </div>
               </div>
             </div>
-            <div className={styles.rightMainContent}>
+            <div className={styles.mainContent}>
               <div className={styles.mainContentInner}>
-                {/* 3:1:1 Split */}
+                {/* 3:1:1 拆分 */}
                 <div className={styles.mainContentTop}>
+                  {/* 上部分，占据3 */}
                   <div className={styles.mainContentTopInner}>
                     <div className={styles.mainContentTopPic}>
                       {/* <img src="/musicFace/CanonInD.jpg" alt="#"/> */}
-                      <Dropzone onDrop={handleImageUpload}>
+                      <Dropzone onDrop={handleImageUpload} /*accept="image/*"*/>
                         {({ getRootProps, getInputProps }) => (
                           <div {...getRootProps()} className={styles.imageDropzone}>
                             <input {...getInputProps()} />
@@ -169,7 +169,7 @@ function Admin() {
                     </div>
 
                     <div className={styles.mainContentTopRight}>
-                      {/* Music main info */}
+                      {/* 歌曲主要信息 */}
                       <div className={styles.mainContentTopRightInner}>
                         <div className={styles.mainContentTopRightAdd}>
                           {/* Add Button */}
@@ -177,12 +177,20 @@ function Admin() {
                         </div>
                         <div className={styles.mainContentTopRightName}>
                           {/* Music Name */}
-                          <input
-                            type="text"
-                            placeholder="Enter Music Name"
-                            value={musicName}
-                            onChange={(e) => setMusicName(e.target.value)}
-                          />
+                          <div style={{ display: 'flex', alignItems: 'center' }}>
+                          <span style={{ marginLeft: '2vh', marginRight: '2vh' }}>Name:</span>
+                            <input
+                              type="text"
+                              placeholder="Enter Music Name"
+                              value={musicName}
+                              onChange={(e) => setMusicName(e.target.value)}
+                              style={{ 
+                                border: 'none', 
+                                backgroundColor: '#F0F3F4', 
+                                width: '35vh', height: '7vh',
+                              }}
+                            />
+                          </div>
                         </div>
                         <div className={styles.mainContentTopRightType}>
                           <div className={styles.mainContentTopRightTypeInner}>
@@ -192,83 +200,41 @@ function Admin() {
                             <div className={styles.mainContentTopRightTypeRow}>
                               <button
                                 onClick={toggleType1}
-                                style={{
-                                  marginLeft: '3vh',
-                                  marginRight: '2vh',
-                                  color: 'yellow',
-                                  backgroundColor: type1Active ? 'blue' : 'transparent',
-                                  border: 'none',
-                                  cursor: 'pointer',
-                                }}
+                                className={`${styles.typeButton1} ${type1Active ? styles.activeType1 : ''}`}
                               >
-                                Type1
+                                Vocal
                               </button>
                               <button
                                 onClick={toggleType2}
-                                style={{
-                                  marginLeft: '3vh',
-                                  marginRight: '2vh',
-                                  color: 'yellow',
-                                  backgroundColor: type2Active ? 'blue' : 'transparent',
-                                  border: 'none',
-                                  cursor: 'pointer',
-                                }}
+                                className={`${styles.typeButton2} ${type2Active ? styles.activeType2 : ''}`}
                               >
-                                Type2
+                                Ensembles
                               </button>
                               <button
                                 onClick={toggleType3}
-                                style={{
-                                  marginLeft: '3vh',
-                                  marginRight: '2vh',
-                                  color: 'yellow',
-                                  backgroundColor: type3Active ? 'blue' : 'transparent',
-                                  border: 'none',
-                                  cursor: 'pointer',
-                                }}
+                                className={`${styles.typeButton3} ${type3Active ? styles.activeType3 : ''}`}
                               >
-                                Type3
+                                Slow Soothing
                               </button>
                             </div>
                             <div className={styles.mainContentTopRightTypeRow}>
-                              <button
+                            <button
                                 onClick={toggleType4}
-                                style={{
-                                  marginLeft: '3vh',
-                                  marginRight: '2vh',
-                                  color: 'yellow',
-                                  backgroundColor: type4Active ? 'blue' : 'transparent',
-                                  border: 'none',
-                                  cursor: 'pointer',
-                                }}
+                                className={`${styles.typeButton4} ${type4Active ? styles.activeType4 : ''}`}
                               >
-                                Type4
+                                Classical
                               </button>
                               <button
                                 onClick={toggleType5}
-                                style={{
-                                  marginLeft: '3vh',
-                                  marginRight: '2vh',
-                                  color: 'yellow',
-                                  backgroundColor: type5Active ? 'blue' : 'transparent',
-                                  border: 'none',
-                                  cursor: 'pointer',
-                                }}
+                                className={`${styles.typeButton5} ${type5Active ? styles.activeType5 : ''}`}
                               >
-                                Type5
+                                Rhythmic
                               </button>
                               <button
                                 onClick={toggleType6}
-                                style={{
-                                  marginLeft: '3vh',
-                                  marginRight: '2vh',
-                                  color: 'yellow',
-                                  backgroundColor: type6Active ? 'blue' : 'transparent',
-                                  border: 'none',
-                                  cursor: 'pointer',
-                                }}
+                                className={`${styles.typeButton6} ${type6Active ? styles.activeType6 : ''}`}
                               >
-                                Type6
+                                Natural Sound
                               </button>
                             </div>
                           </div>
@@ -284,7 +250,7 @@ function Admin() {
                     <div className={styles.topDivision}></div>
                     
                     {/* Dropzone */}
-                    <Dropzone onDrop={handleFileDrop}>
+                    <Dropzone onDrop={handleFileDrop} /*accept="audio/*"*/>
                       {({ getRootProps, getInputProps }) => (
                         <div {...getRootProps()} className={styles.dropzone}>
                           <input {...getInputProps()} />

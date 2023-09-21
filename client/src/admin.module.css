@@ -50,14 +50,19 @@
     flex: 3;
 }
 
+.rightTopContent {
+    flex: 0.7;
+}
+
 .topContentInner {
     display: flex;
     flex-direction: column;
     height: 100%;
+    flex: 0.5;
 }
 
 .topContentTop {
-    flex: 3;
+    flex: 2;
 }
 
 .topContentbottom {
@@ -69,24 +74,25 @@
     display: flex;
     flex-direction: column;
     flex: 12;
-    border: 2px solid red;
+    /* border: 2px solid red; */
 }
 
 .mainContentInner {
     display: flex;
     flex-direction: column;
     height: 100%;
-    background: rgba(255, 255, 255, 0.7);
+    background: rgba(255, 255, 255, 0.3);
     margin-left: 4vh;
     margin-right: 4vh;
     margin-top: 2vh;
     margin-bottom: 4vh;
     border-radius: 20px;
+    backdrop-filter: blur(1px);
 }
 
 .mainContentTop {
     flex: 3;
-    border: 2px solid red;
+    /* border: 2px solid red; */
 }
 
 
@@ -99,7 +105,7 @@
 .mainContentTopPic {
     /* 音乐图片 */
     flex: 1;
-    border: 2px solid red;
+    /* border: 2px solid red; */
     padding: 2vh;
     display: flex;
     flex-direction: column;
@@ -120,7 +126,7 @@
 .mainContentTopRight {
     /* 音乐内容 */
     flex: 1;
-    border: 2px solid red;
+    /* border: 2px solid red; */
     height: 100%;
 }
 
@@ -131,23 +137,36 @@
 }
 
 .mainContentTopRightAdd {
+    margin-top: 1vh;
+    margin-left: 2vh;
+    margin-right: 2vh;
     flex: 1;
-    border: 2px solid red;
+    display: flex;
+    justify-content: left; /* 水平居中 */
+    align-items: center;
 }
 
 .mainContentTopRightName {
+    margin-top: 2vh;
+    margin-left: 2vh;
+    margin-right: 2vh;
     flex: 1;
-    border: 2px solid red;
+    display: flex;
+    justify-content: center; /* 水平居中 */
+    align-items: center;
+    background: #F0F3F4;
+    border-radius: 10px;
+    /* border: 2px solid red; */
 }
 
 .mainContentTopRightType {
     flex: 3;
-    border: 2px solid red;
+    /* border: 2px solid red; */
     margin-top: 2vh;
-    margin-bottom: 2vh;
     margin-left: 2vh;
     margin-right: 2vh;
-    background: rgba(255, 255, 255, 0.7);
+    background: #F0F3F4;
+    border-radius: 10px;
 }
 
 .mainContentTopRightTypeInner {
@@ -160,18 +179,19 @@
 
 .mainContentTopRightTypeHeader {
     flex: 1;
-    border: 2px solid red;
+    /* border: 2px solid red; */
 }
 
 .mainContentTopRightTypeRow {
     flex: 1;
-    border: 2px solid red;
+    /* border: 2px solid red; */
 }
 
 .mainContentMiddle {
+    margin-top: 2vh;
     /* Upload music row */
     flex: 1;
-    border: 2px solid red;
+    /* border: 2px solid red; */
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -187,8 +207,10 @@
 
 .mainContentBottom {
     /* PlayList row */
+    margin-top: 2vh;
+    margin-bottom: 2vh;
     flex: 1;
-    border: 2px solid red;
+    /* border: 2px solid red; */
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -203,10 +225,10 @@
 }
 
 .audioContainer {
-    text-align: center;
-    /* Center text horizontally */
-    border: 2px solid red;
-    background-color: rgba(191, 232, 129, 0.5);
+    border-radius: 10px;
+    text-align: center; /* Center text horizontally */
+    /* border: 2px solid red; */
+    background-color: #F0F3F4;
     height: 13vh;
     width: 60vh;
 }
@@ -222,8 +244,7 @@
 
 .imageDropzone p {
     margin: 0;
-    font-size: 16px;
-    color: #333;
+    font-size: 20px;
 }
 
 .uploadedImage {
@@ -237,8 +258,9 @@
 }
 
 .dropzoneWrapper {
-    background-color: rgba(191, 232, 129, 0.5);
-    border: 2px solid red;
+    border-radius: 10px;
+    background-color: #F0F3F4;
+    /* border: 2px solid red; */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -326,4 +348,152 @@ margin-right: 10px;
 background-color: #fac554;
 border-radius: 6px;
 padding: 0 6px;
+}
+
+.addButton {
+    border-radius: 10px;
+    background-color: rgba(153, 222, 131, 1);
+    width: 10vh;
+    height: 5vh;
+    font-size: 20px;
+    border: none;
+    cursor: pointer;
+}
+
+.addButton:hover {
+    color: white;
+}
+
+.deleteButton {
+    border-radius: 10px;
+    background-color: rgba(153, 222, 131, 1);
+    width: 9vh;
+    height: 4vh;
+    font-size: 15px;
+    border: none;
+    cursor: pointer;
+}
+
+.deleteButton:hover {
+    color: white;
+}
+
+.typeButton1 {
+    border-radius: 10px;
+    margin: 2vh;
+    background-color: transparent; /* 初始背景颜色 */
+    /*color: blue;*/ /* 初始文本颜色 */
+    padding: 5px 10px; /* 按钮内边距 */
+    cursor: pointer; /* 鼠标指针样式 */
+    transition: background-color 0.3s ease, color 0.3s ease; /* 过渡效果 */
+    border: none;
+}
+  
+.typeButton1:hover {
+    background-color: rgb(238,130,238); /* 鼠标悬停时的背景颜色 */
+    color: white; /* 鼠标悬停时的文本颜色 */
+}
+
+.activeType1 {
+    background-color: rgb(238,130,238);
+}
+
+.typeButton2 {
+    border-radius: 10px;
+    margin: 2vh;
+    background-color: transparent; /* 初始背景颜色 */
+    /*color: blue;*/ /* 初始文本颜色 */
+    padding: 5px 10px; /* 按钮内边距 */
+    cursor: pointer; /* 鼠标指针样式 */
+    transition: background-color 0.3s ease, color 0.3s ease; /* 过渡效果 */
+    border: none;
+}
+  
+.typeButton2:hover {
+    background-color: orange; /* 鼠标悬停时的背景颜色 */
+    color: white; /* 鼠标悬停时的文本颜色 */
+}
+
+.activeType2 {
+    background-color: orange;
+}
+
+.typeButton3 {
+    border-radius: 10px;
+    margin: 2vh;
+    background-color: transparent; /* 初始背景颜色 */
+    /*color: blue;*/ /* 初始文本颜色 */
+    padding: 5px 10px; /* 按钮内边距 */
+    cursor: pointer; /* 鼠标指针样式 */
+    transition: background-color 0.3s ease, color 0.3s ease; /* 过渡效果 */
+    border: none;
+}
+  
+.typeButton3:hover {
+    background-color: rgb(0,255,127); /* 鼠标悬停时的背景颜色 */
+    color: white; /* 鼠标悬停时的文本颜色 */
+}
+
+.activeType3 {
+    background-color: rgb(0,255,127);
+}
+
+.typeButton4 {
+    border-radius: 10px;
+    margin: 2vh;
+    background-color: transparent; /* 初始背景颜色 */
+    /*color: blue;*/ /* 初始文本颜色 */
+    padding: 5px 10px; /* 按钮内边距 */
+    cursor: pointer; /* 鼠标指针样式 */
+    transition: background-color 0.3s ease, color 0.3s ease; /* 过渡效果 */
+    border: none;
+}
+  
+.typeButton4:hover {
+    background-color: rgb(253,152,152); /* 鼠标悬停时的背景颜色 */
+    color: white; /* 鼠标悬停时的文本颜色 */
+}
+
+.activeType4 {
+    background-color: rgb(253,152,152);
+}
+
+.typeButton5 {
+    border-radius: 10px;
+    margin: 2vh;
+    background-color: transparent; /* 初始背景颜色 */
+    /*color: blue;*/ /* 初始文本颜色 */
+    padding: 5px 10px; /* 按钮内边距 */
+    cursor: pointer; /* 鼠标指针样式 */
+    transition: background-color 0.3s ease, color 0.3s ease; /* 过渡效果 */
+    border: none;
+}
+  
+.typeButton5:hover {
+    background-color: cyan; /* 鼠标悬停时的背景颜色 */
+    color: white; /* 鼠标悬停时的文本颜色 */
+}
+
+.activeType5 {
+    background-color: cyan;
+}
+
+.typeButton6 {
+    border-radius: 10px;
+    margin: 2vh;
+    background-color: transparent; /* 初始背景颜色 */
+    /*color: blue;*/ /* 初始文本颜色 */
+    padding: 5px 10px; /* 按钮内边距 */
+    cursor: pointer; /* 鼠标指针样式 */
+    transition: background-color 0.3s ease, color 0.3s ease; /* 过渡效果 */
+    border: none;
+}
+  
+.typeButton6:hover {
+    background-color: yellow; /* 鼠标悬停时的背景颜色 */
+    color: white; /* 鼠标悬停时的文本颜色 */
+}
+
+.activeType6 {
+    background-color: yellow;
 }
