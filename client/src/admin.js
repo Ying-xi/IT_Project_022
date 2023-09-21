@@ -105,11 +105,22 @@ function Admin() {
               </div>
             </div>
             <div className={styles.leftMainContent}>
-              {isLoading ? (
-                  <div>Loading...</div>
-                ) : (
-                  <MusicList musicData={backendData.data}/>
-              )}
+              <div className={styles.musicWrap}>
+                <main>
+                  {/* 标头 */}
+                  <div className={styles.musicMainHead}>
+                    <div>Music Management</div>
+                    <div>Type</div>
+                    <div>Add+</div>
+                  </div>
+
+                  {isLoading ? (
+                    <h3 style={{ textAlign: 'center', color: 'white', fontWeight: 'bold', marginTop: '2vh' }}>Loading...</h3>
+                  ) : (
+                    <MusicList musicData={backendData.data}/>
+                  )}
+                </main>
+              </div>
             </div>
           </div>
         </div>
@@ -134,9 +145,8 @@ function Admin() {
             </div>
             <div className={styles.rightMainContent}>
               <div className={styles.mainContentInner}>
-                {/* 3:1:1 拆分 */}
+                {/* 3:1:1 Split */}
                 <div className={styles.mainContentTop}>
-                  {/* 上部分，占据3 */}
                   <div className={styles.mainContentTopInner}>
                     <div className={styles.mainContentTopPic}>
                       {/* <img src="/musicFace/CanonInD.jpg" alt="#"/> */}
@@ -159,7 +169,7 @@ function Admin() {
                     </div>
 
                     <div className={styles.mainContentTopRight}>
-                      {/* 歌曲主要信息 */}
+                      {/* Music main info */}
                       <div className={styles.mainContentTopRightInner}>
                         <div className={styles.mainContentTopRightAdd}>
                           {/* Add Button */}

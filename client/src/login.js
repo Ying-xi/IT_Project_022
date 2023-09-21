@@ -27,10 +27,10 @@ function Login() {
       console.log('Received response:', response);
       const jwtToken = response.data.data;
       console.log('JWT token received:', jwtToken);
-      // 将 JWT 存储在本地存储中
+      // save in browser local storage
       localStorage.setItem('token', jwtToken);
       console.log('Login successful. Navigating to admin page...');
-      // 登录成功后，使用导航函数跳转到 admin 页面
+      // switch to admin webpage
       navigate('/admin');
     } catch (error) {
       console.error('Login failed:', error);
