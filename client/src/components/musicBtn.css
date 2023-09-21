@@ -10,7 +10,8 @@
 .music-btn-wrap > .img-face {
   cursor: pointer;
   border-radius: 10px 10px 0 0;
-  height: 15vw;
+  height: 11vw;
+  width: 15vw;
   display: block;
 }
 
@@ -32,4 +33,28 @@
   border-bottom-right-radius: 10px;
   border-bottom-left-radius: 10px;
   color: #fff;
+}
+
+.music-btn-wrap.Classical {
+  border: solid 0.4vw rgb(253, 152, 152);
+}
+
+.music-btn-wrap.Ensembles {
+  border: solid 0.4vw orange;
+}
+
+.music-btn-wrap.Natural {
+  border: solid 0.4vw yellow;
+}
+
+.music-btn-wrap.Rhythmic {
+  border: solid 0.4vw cyan;
+}
+
+.music-btn-wrap.Smoothing {
+  border: solid 0.4vw rgb(0, 255, 127);
+}
+
+.music-btn-wrap.Vocal {
+  border: solid 0.4vw rgb(238, 130, 238);
 }
