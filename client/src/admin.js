@@ -6,8 +6,35 @@ import axios from 'axios'
 
 
 function Admin() {
+  // Select the song on the left list. Activation means selected
+  const [selectedMusicId, setSelectedMusicId] = useState(null);
+  const [selectedMusicFile, setSelectedMusicFile] = useState(null);
 
-  // 添加 isLoading 状态
+  const handleMusicClick = (musicId) => {
+    console.log("Selected Music ID:", musicId);
+  
+    // 清除先前选中歌曲的状态
+    setSelectedMusicId(null);
+    setSelectedMusicFile(null);
+  
+    // 设置新的选中歌曲的状态
+    setSelectedMusicId(musicId);
+  
+    // 从 backendData 中查找选中音乐的信息
+    const selectedMusic = backendData.data.find((music) => music._id === musicId);
+  
+    // 检查数据是否加载完成
+    if (selectedMusic && selectedMusic.file) {
+      setSelectedMusicFile(selectedMusic.file);
+    } else {
+      // 未找到文件
+      setSelectedMusicFile(null);
+    }
+  };
+  
+  
+
+  // isLoading state
   const [isLoading, setIsLoading] = useState(true); 
   const [backendData, setBackendData] = useState({
     data: [],
@@ -32,7 +59,8 @@ function Admin() {
 
   const [uploadedFile, setUploadedFile] = useState(null);
   const [uploadedImage, setUploadedImage] = useState(null);
-  const [musicName, setMusicName] = useState(''); // State for the music name input
+  // State for the music name input
+  const [musicName, setMusicName] = useState('');
 
   const handleFileDrop = (acceptedFiles) => {
     if (acceptedFiles.length > 0) {
@@ -93,9 +121,9 @@ function Admin() {
           <div className={styles.leftContentContainer}>
             <div className={styles.topContent}>
               <div className={styles.topContentInner}>
-                {/* 3:2 拆分 */}
+                {/* 3:2 split */}
                 <div className={styles.topContentTop}>
-                  {/* 上半空白空间 */}
+                  {/* blank space */}
                 </div>
                 <div className={styles.topContentBottom}>
                   <h1 className={styles.musicHeader}>
@@ -107,7 +135,6 @@ function Admin() {
             <div className={styles.leftMainContent}>
               <div className={styles.musicWrap}>
                 <main>
-                  {/* 标头 */}
                   <div className={styles.musicMainHead}>
                     <div>Music Management</div>
                     <div>Type</div>
@@ -117,7 +144,7 @@ function Admin() {
                   {isLoading ? (
                     <h3 style={{ textAlign: 'center', color: 'white', fontWeight: 'bold', marginTop: '2vh' }}>Loading...</h3>
                   ) : (
-                    <MusicList musicData={backendData.data}/>
+                    <MusicList musicData={backendData.data} onMusicClick={handleMusicClick} />
                   )}
                 </main>
               </div>
@@ -129,9 +156,9 @@ function Admin() {
           <div className={styles.rightContentContainer}>
             <div className={styles.topContent}>
               <div className={styles.topContentInner}>
-                {/* 3:2 拆分 */}
+                {/* 3:2 Split */}
                 <div className={styles.topContentTop}>
-                  {/* 上半空白空间 */}
+                  {/* blank space */}
                 </div>
                 <div className={styles.topContentBottom}>
                   <h1
@@ -277,6 +304,8 @@ function Admin() {
                     </div>
                   </div>
                 </div>
+
+
                 <div className={styles.mainContentMiddle}>
                   {/* 中间部分，占据1 */}
                   <div className={styles.dropzoneWrapper}> {/* 新增的包装 <div> */}
@@ -309,12 +338,10 @@ function Admin() {
                     <div className={styles.bottomDivision}></div>
                   </div>
                 </div>
-                <div className={styles.mainContentBottom}>
-                  {/* 上面的 division */}
-                  <div className={styles.topDivisionBottom}></div>
 
-                  {/* 包装 <div className={styles.audioContainer}> */}
-                  <div className={styles.audioContainerWrapper}>
+                <div className={styles.mainContentBottom}>
+
+                  {/* <div className={styles.audioContainerWrapper}>
                     <div className={styles.audioContainer}>
                       <h1 style={{ textAlign: 'center' }}>Audio Play</h1>
                       {uploadedFile && (
@@ -324,7 +351,40 @@ function Admin() {
                         </audio>
                       )}
                     </div>
+                  </div> */}
+
+
+                  {/* <div className={styles.audioContainerWrapper}>
+                    <div className={styles.audioContainer}>
+                      <h1 style={{ textAlign: 'center' }}>Audio Play</h1>
+                      {selectedMusicFile ? (
+                        <audio controls>
+                          <source src={URL.createObjectURL(selectedMusicFile)} type="audio/mpeg" />
+                          Your browser does not support the audio element.
+                        </audio>
+                      ) : (
+                        <p>No audio selected.</p>
+                      )}
+                    </div>
+                  </div> */}
+                  <div key={selectedMusicFile} className={styles.audioContainerWrapper}>
+                    <div className={styles.audioContainer}>
+                      <h1 style={{ textAlign: 'center' }}>Audio Play</h1>
+                      {selectedMusicFile ? (
+                        <audio controls>
+                          <source src={`data:audio/mpeg;base64,${selectedMusicFile}`} type="audio/mpeg" />
+                          Your browser does not support the audio element.
+                        </audio>
+                      ) : (
+                        <p>No audio selected.</p>
+                      )}
+                    </div>
                   </div>
+
+
+
+
+
 
                   {/* 下面的 division */}
                   <div className={styles.bottomDivisionBottom}></div>
