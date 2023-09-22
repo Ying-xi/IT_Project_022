@@ -21,7 +21,7 @@ function Admin() {
 
     setSelectedMusicId(musicId);
 
-    const selectedMusic = backendData.data.find((music) => music._id === musicId);
+    const selectedMusic = backendData.find((music) => music._id === musicId);
 
     if (selectedMusic) {
       setSelectedMusicFile(selectedMusic.file);
@@ -37,19 +37,47 @@ function Admin() {
     activeId: null,
   });
 
+  // useEffect(() => {
+  //   axios
+  //     .get('http://localhost:3300/musicPlayer')
+  //     .then((response) => {
+  //       console.log('Received data from backend:', response.data);
+  //       setBackendData(response.data);
+  //       setIsLoading(false);
+  //     })
+  //     .catch((error) => {
+  //       console.error('Error fetching data from backend:', error);
+  //       setIsLoading(false);
+  //     });
+  // }, []);
+
+
+
+
   useEffect(() => {
-    axios
-      .get('http://localhost:3300/musicPlayer')
-      .then((response) => {
-        console.log('Received data from backend:', response.data);
-        setBackendData(response.data);
+    // 读取本地 JSON 文件
+    fetch('/music_therapy.music_info.json')
+      .then((response) => response.json())
+      .then((data) => {
+        console.log('Received data from JSON file:', data);
+  
+        // 输出 _id
+        if (Array.isArray(data) && data.length > 0) {
+          console.log('First item _id:', data[0]._id);
+        } else {
+          console.log('No data or _id available.');
+        }
+  
+        setBackendData(data);
         setIsLoading(false);
       })
       .catch((error) => {
-        console.error('Error fetching data from backend:', error);
+        console.error('Error fetching data from JSON file:', error);
         setIsLoading(false);
       });
   }, []);
+
+
 
 
 
@@ -140,7 +168,7 @@ function Admin() {
                   {isLoading ? (
                     <h3 style={{ textAlign: 'center', color: 'white', fontWeight: 'bold', marginTop: '2vh' }}>Loading...</h3>
                   ) : (
-                    <MusicList musicData={backendData.data} onMusicClick={handleMusicClick} />
+                    <MusicList musicData={backendData} onMusicClick={handleMusicClick} />
                   )}
                 </main>
               </div>
@@ -173,14 +201,13 @@ function Admin() {
                   <div className={styles.mainContentTopInner}>
 
 
-                    <div key={selectedMusicPicture} className={styles.mainContentTopPic}>
+                    <div className={styles.mainContentTopPic}>
                       {selectedMusicPicture ? (
                         // 异步加载图片
                         <img
                             src={selectedMusicPicture}
                             alt="Music Picture"
                             className={styles.uploadedImage}
-                            loading="lazy"
                           />
                       ) : (
                         // 显示上传图片的功能
@@ -244,6 +271,80 @@ function Admin() {
                           )}
                         </div>
 
+
+
+
+                        <div className={styles.mainContentTopRightType}>
+                          <div className={styles.mainContentTopRightTypeInner}>
+                            <div className={styles.mainContentTopRightTypeHeader}>
+                              <p>Type:</p>
+                            </div>
+                            <div className={styles.mainContentTopRightTypeRow}>
+                              {selectedMusicTag !== 'All' && (
+                                <button
+                                  onClick={toggleType1}
+                                  className={`${styles.typeButton1} ${type1Active ? styles.activeType1 : ''}`}
+                                  style={{ backgroundColor: selectedMusicTag === 'Vocal' ? 'green' : 'transparent' }}
+                                >
+                                  Vocal
+                                </button>
+                              )}
+                              {selectedMusicTag !== 'All' && (
+                                <button
+                                  onClick={toggleType2}
+                                  className={`${styles.typeButton2} ${type2Active ? styles.activeType2 : ''}`}
+                                  style={{ backgroundColor: selectedMusicTag === 'Ensembles' ? 'blue' : 'transparent' }}
+                                >
+                                  Ensembles
+                                </button>
+                              )}
+                              {selectedMusicTag !== 'All' && (
+                                <button
+                                  onClick={toggleType3}
+                                  className={`${styles.typeButton3} ${type3Active ? styles.activeType3 : ''}`}
+                                  style={{ backgroundColor: selectedMusicTag === 'Slow Soothing' ? 'blue' : 'transparent' }}
+                                >
+                                  Slow Soothing
+                                </button>
+                              )}
+                            </div>
+                            <div className={styles.mainContentTopRightTypeRow}>
+                              {selectedMusicTag !== 'All' && (
+                                <button
+                                  onClick={toggleType4}
+                                  className={`${styles.typeButton4} ${type4Active ? styles.activeType4 : ''}`}
+                                  style={{ backgroundColor: selectedMusicTag === 'Classical' ? 'blue' : 'transparent' }}
+                                >
+                                  Classical
+                                </button>
+                              )}
+                              {selectedMusicTag !== 'All' && (
+                                <button
+                                  onClick={toggleType5}
+                                  className={`${styles.typeButton5} ${type5Active ? styles.activeType5 : ''}`}
+                                  style={{ backgroundColor: selectedMusicTag === 'Rhythmic' ? 'blue' : 'transparent' }}
+                                >
+                                  Rhythmic
+                                </button>
+                              )}
+                              {selectedMusicTag !== 'All' && (
+                                <button
+                                  onClick={toggleType6}
+                                  className={`${styles.typeButton6} ${type6Active ? styles.activeType6 : ''}`}
+                                  style={{ backgroundColor: selectedMusicTag === 'Natural Sound' ? 'blue' : 'transparent' }}
+                                >
+                                  Natural Sound
+                                </button>
+                              )}
+                            </div>
+                          </div>
+                        </div>
+
+
+
+
+
+{/* 
                         <div className={styles.mainContentTopRightType}>
                           <div className={styles.mainContentTopRightTypeInner}>
                             <div className={styles.mainContentTopRightTypeHeader}>
@@ -291,6 +392,20 @@ function Admin() {
                             </div>
                           </div>
                         </div>
+ */}
+
+
+
+
+
+
+
+
+
+
+
+
+
                       </div>
                     </div>
                   </div>

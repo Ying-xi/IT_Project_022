@@ -19,8 +19,8 @@ function Navbar() {
         <a href="#" className="nav-link">
           ⚙ Setting
         </a>
-        <a href="#" className="nav-link">
-          👤 Contact us
+        <a href="/login" className="nav-link">
+          👤 Log in
         </a>
       </div>
     </div>
