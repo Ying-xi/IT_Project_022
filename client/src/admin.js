@@ -6,36 +6,32 @@ import axios from 'axios'
 
 
 function Admin() {
-  // Select the song on the left list. Activation means selected
-  const [selectedMusicId, setSelectedMusicId] = useState(null);
-  const [selectedMusicFile, setSelectedMusicFile] = useState(null);
+  const [selectedMusicId, setSelectedMusicId] = useState(null); 
+  const [selectedMusicFile, setSelectedMusicFile] = useState(null); 
+  const [selectedMusicName, setSelectedMusicName] = useState('');
+  const [selectedMusicTag, setSelectedMusicTag] = useState('');
+  const [selectedMusicPicture, setSelectedMusicPicture] = useState('');
 
   const handleMusicClick = (musicId) => {
-    console.log("Selected Music ID:", musicId);
-  
-    // 清除先前选中歌曲的状态
     setSelectedMusicId(null);
     setSelectedMusicFile(null);
-  
-    // 设置新的选中歌曲的状态
+    setSelectedMusicName('');
+    setSelectedMusicTag('');
+    setSelectedMusicPicture('');
+
     setSelectedMusicId(musicId);
-  
-    // 从 backendData 中查找选中音乐的信息
+
     const selectedMusic = backendData.data.find((music) => music._id === musicId);
-  
-    // 检查数据是否加载完成
-    if (selectedMusic && selectedMusic.file) {
+
+    if (selectedMusic) {
       setSelectedMusicFile(selectedMusic.file);
-    } else {
-      // 未找到文件
-      setSelectedMusicFile(null);
+      setSelectedMusicName(selectedMusic.name || '');
+      setSelectedMusicTag(selectedMusic.tag || '');
+      setSelectedMusicPicture(selectedMusic.picture || '');
     }
   };
-  
-  
 
-  // isLoading state
-  const [isLoading, setIsLoading] = useState(true); 
+  const [isLoading, setIsLoading] = useState(true);
   const [backendData, setBackendData] = useState({
     data: [],
     activeId: null,
@@ -44,17 +40,17 @@ function Admin() {
   useEffect(() => {
     axios
       .get('http://localhost:3300/musicPlayer')
-      .then(response => {
+      .then((response) => {
         console.log('Received data from backend:', response.data);
         setBackendData(response.data);
-        setIsLoading(false); // 数据加载完成后设置isLoading为false
+        setIsLoading(false);
       })
-      .catch(error => {
+      .catch((error) => {
         console.error('Error fetching data from backend:', error);
-        setIsLoading(false); // 发生错误时也要设置isLoading为false
+        setIsLoading(false);
       });
   }, []);
-  
+
 
 
   const [uploadedFile, setUploadedFile] = useState(null);
@@ -175,24 +171,31 @@ function Admin() {
                 <div className={styles.mainContentTop}>
                   {/* 上部分，占据3 */}
                   <div className={styles.mainContentTopInner}>
-                    <div className={styles.mainContentTopPic}>
-                      {/* <img src="/musicFace/CanonInD.jpg" alt="#"/> */}
-                      <Dropzone onDrop={handleImageUpload} /*accept="image/*"*/>
-                        {({ getRootProps, getInputProps }) => (
-                          <div {...getRootProps()} className={styles.imageDropzone}>
-                            <input {...getInputProps()} />
-                            {uploadedImage ? (
-                              <img
-                                src={URL.createObjectURL(uploadedImage)}
-                                alt="Uploaded"
-                                className={styles.uploadedImage}
-                              />
-                            ) : (
-                              <p>+UPLOAD IMAGE+</p>
-                            )}
-                          </div>
-                        )}
-                      </Dropzone>
+
+
+                    <div key={selectedMusicPicture} className={styles.mainContentTopPic}>
+                      {selectedMusicPicture ? (
+                        // 显示音乐图片
+                        <img src={selectedMusicPicture} alt="Music Picture" className={styles.uploadedImage} />
+                      ) : (
+                        // 显示上传图片的功能
+                        <Dropzone onDrop={handleImageUpload}>
+                          {({ getRootProps, getInputProps }) => (
+                            <div {...getRootProps()} className={styles.imageDropzone}>
+                              <input {...getInputProps()} />
+                              {uploadedImage ? (
+                                <img
+                                  src={URL.createObjectURL(uploadedImage)}
+                                  alt="Uploaded"
+                                  className={styles.uploadedImage}
+                                />
+                              ) : (
+                                <p>+UPLOAD IMAGE+</p>
+                              )}
+                            </div>
+                          )}
+                        </Dropzone>
+                      )}
                     </div>
 
                     <div className={styles.mainContentTopRight}>
@@ -202,10 +205,26 @@ function Admin() {
                           {/* Add Button */}
                           <button className={styles.addButton}>Add</button>
                         </div>
+                        
+
                         <div className={styles.mainContentTopRightName}>
-                          {/* Music Name */}
-                          <div style={{ display: 'flex', alignItems: 'center' }}>
-                          <span style={{ marginLeft: '2vh', marginRight: '2vh' }}>Name:</span>
+                          {selectedMusicFile ? (
+                            <div 
+                              style={{
+                                marginLeft: '2vh',
+                                marginRight: '2vh',
+                                marginTop: '2vh',
+                                marginBottom: '2vh',
+                                background: 'rgba(255, 255, 255, 0.8)',
+                                backdropFilter: 'blur(5px)',
+                                borderRadius: '5px',
+                                textAlign: 'center',
+                              }}>
+                              <h3 style={{ textAlign: 'center' }}>Music Name: </h3>
+                              <h4 style={{ textAlign: 'center' }}>{selectedMusicName}</h4>
+                            </div>
+                          ) : (
+                            // display uploaded music
                             <input
                               type="text"
                               placeholder="Enter Music Name"
@@ -217,8 +236,9 @@ function Admin() {
                                 width: '35vh', height: '7vh',
                               }}
                             />
-                          </div>
+                          )}
                         </div>
+
                         <div className={styles.mainContentTopRightType}>
                           <div className={styles.mainContentTopRightTypeInner}>
                             <div className={styles.mainContentTopRightTypeHeader}>
@@ -307,32 +327,6 @@ function Admin() {
 
                 <div className={styles.mainContentBottom}>
 
-                  {/* <div className={styles.audioContainerWrapper}>
-                    <div className={styles.audioContainer}>
-                      <h1 style={{ textAlign: 'center' }}>Audio Play</h1>
-                      {uploadedFile && (
-                        <audio controls>
-                          <source src={URL.createObjectURL(uploadedFile)} type="audio/mpeg" />
-                          Your browser does not support the audio element.
-                        </audio>
-                      )}
-                    </div>
-                  </div> */}
-
-
-                  {/* <div className={styles.audioContainerWrapper}>
-                    <div className={styles.audioContainer}>
-                      <h1 style={{ textAlign: 'center' }}>Audio Play</h1>
-                      {selectedMusicFile ? (
-                        <audio controls>
-                          <source src={URL.createObjectURL(selectedMusicFile)} type="audio/mpeg" />
-                          Your browser does not support the audio element.
-                        </audio>
-                      ) : (
-                        <p>No audio selected.</p>
-                      )}
-                    </div>
-                  </div> */}
                   <div key={selectedMusicFile} className={styles.audioContainerWrapper}>
                     <div className={styles.audioContainer}>
                       <h1 style={{ textAlign: 'center' }}>Audio Play</h1>
@@ -346,10 +340,6 @@ function Admin() {
                       )}
                     </div>
                   </div>
-
-
-
-
 
 
                   {/* 下面的 division */}
