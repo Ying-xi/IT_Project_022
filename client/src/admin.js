@@ -175,8 +175,13 @@ function Admin() {
 
                     <div key={selectedMusicPicture} className={styles.mainContentTopPic}>
                       {selectedMusicPicture ? (
-                        // 显示音乐图片
-                        <img src={selectedMusicPicture} alt="Music Picture" className={styles.uploadedImage} />
+                        // 异步加载图片
+                        <img
+                            src={selectedMusicPicture}
+                            alt="Music Picture"
+                            className={styles.uploadedImage}
+                            loading="lazy"
+                          />
                       ) : (
                         // 显示上传图片的功能
                         <Dropzone onDrop={handleImageUpload}>
@@ -220,8 +225,8 @@ function Admin() {
                                 borderRadius: '5px',
                                 textAlign: 'center',
                               }}>
-                              <h3 style={{ textAlign: 'center' }}>Music Name: </h3>
-                              <h4 style={{ textAlign: 'center' }}>{selectedMusicName}</h4>
+                              <h3 style={{ textAlign: 'center' }}>Music Name: {selectedMusicName}</h3>
+                              {/* <h4 style={{ textAlign: 'center' }}>{selectedMusicName}</h4> */}
                             </div>
                           ) : (
                             // display uploaded music
