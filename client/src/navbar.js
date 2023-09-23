@@ -16,12 +16,9 @@ function Navbar() {
         <Link to="/" className="nav-link">
           🎵 Home
         </Link>
-        <a href="#" className="nav-link">
-          ⚙ Setting
-        </a>
-        <a href="/login" className="nav-link">
+        <Link to="/login" className="nav-link">
           👤 Log in
-        </a>
+          </Link>
       </div>
     </div>
   );

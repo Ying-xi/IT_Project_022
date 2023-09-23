@@ -61,7 +61,6 @@ function Admin() {
       .then((data) => {
         console.log('Received data from JSON file:', data);
   
-        // 输出 _id
         if (Array.isArray(data) && data.length > 0) {
           console.log('First item _id:', data[0]._id);
         } else {

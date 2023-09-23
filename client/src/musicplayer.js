@@ -17,17 +17,25 @@ function MusicPlayer() {
   });
 
   // Connect FE & BE Server
+  // 异步加载数据
+  const loadData = async () => {
+    try {
+      const response = await axios.get('http://localhost:3300/musicPlayer');
+      console.log('Received from backend:', response.data);
+      setBackendData(response.data);
+    } catch (error) {
+      console.error('Error fetching data from backend:', error);
+    }
+  };
+
   useEffect(() => {
-    axios
-      .get('http://localhost:3300/musicPlayer')
-      .then((response) => {
-        console.log('Received from backend:', response.data);
-        setBackendData(response.data);
-      })
-      .catch((error) => {
-        console.error('Error fetching data from backend:', error);
-      });
+    loadData(); // 在组件加载时异步加载数据
   }, []);
+
+
+
+
+  
 
   /**
    * play song
