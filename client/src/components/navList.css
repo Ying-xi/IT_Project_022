@@ -1,8 +1,8 @@
+/* set the layout and color for filter tags */
 .nav-list-wrap {
   display: grid;
   grid-template-columns: repeat(8, auto);
   grid-gap: 1vh;
-  /* padding-left: 20vw; */
 }
 
 .nav-list-wrap .nav-item {
