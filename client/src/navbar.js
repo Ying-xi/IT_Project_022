@@ -5,6 +5,17 @@ import './navbar.css';
 function Navbar() {
   return (
     <div className="navbar">
+      <div className="nav-links">
+        <Link to="/" className="nav-link">
+          🎵 Home
+        </Link>
+        <a href="#" className="nav-link">
+          ⚙ Setting
+        </a>
+        <a href="#" className="nav-link">
+          👤 Contact us
+        </a>
+      </div>
       <form className="search-container" action="/url" method="get">
         {/* <img src={"../public/navbar-bg.jpg"} alt="" className="w-25px" /> */}
         <input className="search-inp" type="text" placeholder="Search your music" />
@@ -12,14 +23,6 @@ function Navbar() {
           Search
         </button>
       </form>
-      <div className="nav-links">
-        <Link to="/" className="nav-link">
-          🎵 Home
-        </Link>
-        <Link to="/login" className="nav-link">
-          👤 Log in
-          </Link>
-      </div>
     </div>
   );
 }
