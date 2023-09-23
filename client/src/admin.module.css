@@ -54,35 +54,38 @@
     height: 100%;
 }
 
-.topContent {
-    flex: 3;
-}
 
-.rightTopContent {
-    flex: 0.7;
+
+.leftTopContent {
+    flex: 4;
 }
 
 .topContentInner {
     display: flex;
     flex-direction: column;
     height: 100%;
-    flex: 0.5;
+    display: flex;
 }
 
 .topContentTop {
-    flex: 2;
+    flex: 3;
 }
 
-.topContentbottom {
-    flex: 2;
+.topContentBottom {
+    flex: 1;
 }
+
 
 
 .rightMainContent {
     display: flex;
     flex-direction: column;
-    flex: 12;
-    /* border: 2px solid red; */
+    flex: 6;
+}
+
+
+.rightTopContent {
+    flex: 2;
 }
 
 .mainContentInner {

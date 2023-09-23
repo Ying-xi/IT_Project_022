@@ -142,7 +142,7 @@ function Admin() {
       <div className={styles.container}>
         <div className={styles.leftColumn}>
           <div className={styles.leftContentContainer}>
-            <div className={styles.topContent}>
+            <div className={styles.leftTopContent}>
               <div className={styles.topContentInner}>
                 {/* 3:2 split */}
                 <div className={styles.topContentTop}>
@@ -192,7 +192,7 @@ function Admin() {
                 </div>
               </div>
             </div>
-            <div className={styles.mainContent}>
+            <div className={styles.rightMainContent}>
               <div className={styles.mainContentInner}>
                 {/* 3:1:1 split */}
                 <div className={styles.mainContentTop}>
