@@ -95,7 +95,7 @@ class Albums extends Component {
         return (
             <div className="shell" id="shell" style={{ backgroundImage: this.state.backgroundImage }}>
                 <div className="header">
-                    <h2 className="title">Albums</h2>
+                    <h2 className="title">Playlist</h2>
                     <h3 className="subtitle">click album cover <br /> to continue</h3>
                 </div>
                 <div className="musiclist">

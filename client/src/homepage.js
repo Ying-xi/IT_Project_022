@@ -12,7 +12,7 @@ function Homepage() {
         <img src='/homepage/play_music1.jpg' alt='#'/>
       </Link>
       <Link to='/albums' className='window'>
-        <img src='/homepage/albums.jpg' alt='#'/>
+        <img src='/homepage/playlist1.jpg' alt='#'/>
       </Link>
     </div>
   )
