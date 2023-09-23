@@ -26,7 +26,7 @@ function Admin() {
     if (selectedMusic) {
       setSelectedMusicFile(selectedMusic.file);
       setSelectedMusicName(selectedMusic.name || '');
-      setSelectedMusicTag(selectedMusic.tag || '');
+      setSelectedMusicTag(selectedMusic.tags || '');
       setSelectedMusicPicture(selectedMusic.picture || '');
     }
   };
@@ -202,7 +202,6 @@ function Admin() {
 
                     <div className={styles.mainContentTopPic}>
                       {selectedMusicPicture ? (
-                        // 异步加载图片
                         <img
                             src={selectedMusicPicture}
                             alt="Music Picture"

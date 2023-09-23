@@ -1,12 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import MusicItem from './MusicItem';
 
 const MusicList = ({ musicData, onMusicClick }) => {
-  const [musicInfo, setMusicInfo] = useState(musicData);
+  // Initialize musicInfo as an empty array, and update it when musicData changes.
+  const [musicInfo, setMusicInfo] = useState([]);
+
+  useEffect(() => {
+    if (Array.isArray(musicData)) {
+      // If musicData is an array, update musicInfo with it.
+      setMusicInfo(musicData);
+    } else {
+      // Handle the case where musicData is not an array (e.g., null or undefined).
+      // You can log an error or take appropriate action here.
+      console.error('musicData is not an array');
+    }
+  }, [musicData]);
 
   return (
     <div>
-      {/* 列表项 */}
+      {/* map list: */}
       {musicInfo.map((musicInfoItem) => {
         return (
           <div key={musicInfoItem._id} onClick={() => onMusicClick(musicInfoItem._id)}>
