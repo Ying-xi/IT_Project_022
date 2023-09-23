@@ -263,7 +263,7 @@ function Admin() {
                               style={{ 
                                 border: 'none', 
                                 backgroundColor: '#F0F3F4', 
-                                width: '35vh', height: '7vh',
+                                width: '25vh', height: '7vh',
                               }}
                             />
                           )}
@@ -282,7 +282,7 @@ function Admin() {
                                 <button
                                   onClick={toggleType1}
                                   className={`${styles.typeButton1} ${type1Active ? styles.activeType1 : ''}`}
-                                  style={{ backgroundColor: selectedMusicTag === 'Vocal' ? 'green' : 'transparent' }}
+                                  /*style={{ backgroundColor: selectedMusicTag === 'Vocal' ? 'green' : 'transparent' }}*/
                                 >
                                   Vocal
                                 </button>
@@ -291,7 +291,7 @@ function Admin() {
                                 <button
                                   onClick={toggleType2}
                                   className={`${styles.typeButton2} ${type2Active ? styles.activeType2 : ''}`}
-                                  style={{ backgroundColor: selectedMusicTag === 'Ensembles' ? 'blue' : 'transparent' }}
+                                  /*style={{ backgroundColor: selectedMusicTag === 'Ensembles' ? 'blue' : 'transparent' }}*/
                                 >
                                   Ensembles
                                 </button>
@@ -300,7 +300,7 @@ function Admin() {
                                 <button
                                   onClick={toggleType3}
                                   className={`${styles.typeButton3} ${type3Active ? styles.activeType3 : ''}`}
-                                  style={{ backgroundColor: selectedMusicTag === 'Slow Soothing' ? 'blue' : 'transparent' }}
+                                  /*style={{ backgroundColor: selectedMusicTag === 'Slow Soothing' ? 'blue' : 'transparent' }}*/
                                 >
                                   Slow Soothing
                                 </button>
@@ -311,7 +311,7 @@ function Admin() {
                                 <button
                                   onClick={toggleType4}
                                   className={`${styles.typeButton4} ${type4Active ? styles.activeType4 : ''}`}
-                                  style={{ backgroundColor: selectedMusicTag === 'Classical' ? 'blue' : 'transparent' }}
+                                  /*style={{ backgroundColor: selectedMusicTag === 'Classical' ? 'blue' : 'transparent' }}*/
                                 >
                                   Classical
                                 </button>
@@ -320,7 +320,7 @@ function Admin() {
                                 <button
                                   onClick={toggleType5}
                                   className={`${styles.typeButton5} ${type5Active ? styles.activeType5 : ''}`}
-                                  style={{ backgroundColor: selectedMusicTag === 'Rhythmic' ? 'blue' : 'transparent' }}
+                                  /*style={{ backgroundColor: selectedMusicTag === 'Rhythmic' ? 'blue' : 'transparent' }}*/
                                 >
                                   Rhythmic
                                 </button>
@@ -329,7 +329,7 @@ function Admin() {
                                 <button
                                   onClick={toggleType6}
                                   className={`${styles.typeButton6} ${type6Active ? styles.activeType6 : ''}`}
-                                  style={{ backgroundColor: selectedMusicTag === 'Natural Sound' ? 'blue' : 'transparent' }}
+                                  /*style={{ backgroundColor: selectedMusicTag === 'Natural Sound' ? 'blue' : 'transparent' }}*/
                                 >
                                   Natural Sound
                                 </button>

@@ -238,7 +238,7 @@
     /* border: 2px solid red; */
     background-color: #F0F3F4;
     height: 13vh;
-    width: 60vh;
+    width: 73vh;
 }
 
 
@@ -274,7 +274,7 @@
     align-items: center;
     justify-content: center;
     height: 13vh;
-    width: 60vh;
+    width: 73vh;
 }
 
 .topDivision {
@@ -388,7 +388,7 @@ padding: 0 6px;
 
 .typeButton1 {
     border-radius: 10px;
-    margin: 2vh;
+    margin: 0.5vh;
     background-color: transparent; /* 初始背景颜色 */
     /*color: blue;*/ /* 初始文本颜色 */
     padding: 5px 10px; /* 按钮内边距 */
@@ -408,7 +408,7 @@ padding: 0 6px;
 
 .typeButton2 {
     border-radius: 10px;
-    margin: 2vh;
+    margin: 0.5vh;
     background-color: transparent; /* 初始背景颜色 */
     /*color: blue;*/ /* 初始文本颜色 */
     padding: 5px 10px; /* 按钮内边距 */
@@ -428,7 +428,7 @@ padding: 0 6px;
 
 .typeButton3 {
     border-radius: 10px;
-    margin: 2vh;
+    margin: 0.5vh;
     background-color: transparent; /* 初始背景颜色 */
     /*color: blue;*/ /* 初始文本颜色 */
     padding: 5px 10px; /* 按钮内边距 */
@@ -448,7 +448,7 @@ padding: 0 6px;
 
 .typeButton4 {
     border-radius: 10px;
-    margin: 2vh;
+    margin: 0.5vh;
     background-color: transparent; /* 初始背景颜色 */
     /*color: blue;*/ /* 初始文本颜色 */
     padding: 5px 10px; /* 按钮内边距 */
@@ -468,7 +468,7 @@ padding: 0 6px;
 
 .typeButton5 {
     border-radius: 10px;
-    margin: 2vh;
+    margin: 0.5vh;
     background-color: transparent; /* 初始背景颜色 */
     /*color: blue;*/ /* 初始文本颜色 */
     padding: 5px 10px; /* 按钮内边距 */
@@ -488,7 +488,7 @@ padding: 0 6px;
 
 .typeButton6 {
     border-radius: 10px;
-    margin: 2vh;
+    margin: 0.5vh;
     background-color: transparent; /* 初始背景颜色 */
     /*color: blue;*/ /* 初始文本颜色 */
     padding: 5px 10px; /* 按钮内边距 */
