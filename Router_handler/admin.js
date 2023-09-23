@@ -1,4 +1,5 @@
 const {Music} = require('../Schema/music')
+const {Album} = require('../Schema/album')
 
 exports.renderPage = async (req, res) => {
 	const musics = await Music.find()

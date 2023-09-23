@@ -4,16 +4,16 @@ const mongoose = require('mongoose')
 
 const collectionName = 'music_info'
 
-const musicSchema = new mongoose.Schema({
+const albumSchema = new mongoose.Schema({
     name: { type: String, required: true },
 	picture: { type: String, required: true },
-	file: { type: String, required: true },
-	tags: { type: Array, default: ['All']},
+    description: { type: String, required: true },
+	songs: { type: Array, default: [] },
 }, { collection: collectionName })
 
-const Music = mongoose.model('Music', musicSchema)
+const Album = mongoose.model('Album', albumSchema)
 
 module.exports = {
-	musicSchema,
-	Music,
+	albumSchema,
+	Album,
 }

@@ -1,12 +1,13 @@
 const express = require('express')
 const web = express()
 const expressJWT = require('express-jwt')
+web.use('/admin', expressJWT({secret: 'IT-Project-022', algorithms: ['HS256']}))
 const cors = require('cors')
 const bodyParser = require('body-parser')
 
 web.use(cors())
 web.use(express.urlencoded({extended: false}))
-web.use(expressJWT({secret: 'IT-Project-022', algorithms: ['HS256']}))
+
 web.use(bodyParser.json())
 web.use(express.static('Files/staticPage'))
 web.use(express.static('Files/login'))
