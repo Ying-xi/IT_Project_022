@@ -21,7 +21,7 @@ function Admin() {
 
     setSelectedMusicId(musicId);
 
-    const selectedMusic = backendData.find((music) => music._id === musicId);
+    const selectedMusic = backendData.data.find((music) => music._id === musicId);
 
     if (selectedMusic) {
       setSelectedMusicFile(selectedMusic.file);
@@ -37,44 +37,43 @@ function Admin() {
     activeId: null,
   });
 
-  // useEffect(() => {
-  //   axios
-  //     .get('http://localhost:3300/musicPlayer')
-  //     .then((response) => {
-  //       console.log('Received data from backend:', response.data);
-  //       setBackendData(response.data);
-  //       setIsLoading(false);
-  //     })
-  //     .catch((error) => {
-  //       console.error('Error fetching data from backend:', error);
-  //       setIsLoading(false);
-  //     });
-  // }, []);
-
-
-
-
   useEffect(() => {
-    // 读取本地 JSON 文件
-    fetch('/music_therapy.music_info.json')
-      .then((response) => response.json())
-      .then((data) => {
-        console.log('Received data from JSON file:', data);
-  
-        if (Array.isArray(data) && data.length > 0) {
-          console.log('First item _id:', data[0]._id);
-        } else {
-          console.log('No data or _id available.');
-        }
-  
-        setBackendData(data);
+    axios
+      .get('http://localhost:3300/musicPlayer')
+      .then((response) => {
+        console.log('Received data from backend:', response.data);
+        setBackendData(response.data);
         setIsLoading(false);
       })
       .catch((error) => {
-        console.error('Error fetching data from JSON file:', error);
+        console.error('Error fetching data from backend:', error);
         setIsLoading(false);
       });
   }, []);
+
+
+
+
+  // useEffect(() => {
+  //   fetch('/music_therapy.music_info.json')
+  //     .then((response) => response.json())
+  //     .then((data) => {
+  //       console.log('Received data from JSON file:', data);
+  
+  //       if (Array.isArray(data) && data.length > 0) {
+  //         console.log('First item _id:', data[0]._id);
+  //       } else {
+  //         console.log('No data or _id available.');
+  //       }
+  
+  //       setBackendData(data);
+  //       setIsLoading(false);
+  //     })
+  //     .catch((error) => {
+  //       console.error('Error fetching data from JSON file:', error);
+  //       setIsLoading(false);
+  //     });
+  // }, []);
 
 
 
@@ -167,7 +166,7 @@ function Admin() {
                   {isLoading ? (
                     <h3 style={{ textAlign: 'center', color: 'white', fontWeight: 'bold', marginTop: '2vh' }}>Loading...</h3>
                   ) : (
-                    <MusicList musicData={backendData} onMusicClick={handleMusicClick} />
+                    <MusicList musicData={backendData.data} onMusicClick={handleMusicClick} />
                   )}
                 </main>
               </div>
@@ -381,7 +380,7 @@ function Admin() {
                       <h1 style={{ marginTop: '2vh', textAlign: 'center' }}>Audio Play</h1>
                       {selectedMusicFile ? (
                         <audio controls>
-                          <source src={`data:audio/mpeg;base64,${selectedMusicFile}`} type="audio/mpeg" />
+                          <source src={`/${selectedMusicFile}`} type="audio/mpeg" />
                           Your browser does not support the audio element.
                         </audio>
                       ) : (
