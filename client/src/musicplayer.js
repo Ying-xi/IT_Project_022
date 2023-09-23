@@ -35,7 +35,7 @@ function MusicPlayer() {
 
 
 
-  
+
 
   /**
    * play song
@@ -125,6 +125,9 @@ function MusicPlayer() {
           />
         </div>
 
+
+
+
         <div className="button-container music-btns-list">
           {backendData && backendData.data ? (
             backendData.data
@@ -133,7 +136,7 @@ function MusicPlayer() {
                 <MusicBtn
                   onClick={() => playSong(item._id)}
                   key={item._id}
-                  face={`data:image/jpeg;base64,${item.picture}`}
+                  face={item.picture} // 设置图片文件路径
                   name={item.name}
                   color={item?.tags?.[1]}
                 />
@@ -142,6 +145,7 @@ function MusicPlayer() {
             <div>Loading...</div>
           )}
         </div>
+
 
         <div className="dock-background">
           <div className="dock-buttons">
