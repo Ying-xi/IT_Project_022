@@ -1,4 +1,4 @@
-
+/* set the background */
 .homepage {
     background-image: url('../public/background.jpg');
     background-size: cover;
@@ -17,6 +17,7 @@ body {
     margin: 0vh;
 }
 
+/* several functional windows on the page: */
 .window {
     width: 44vh;
     height: 48vh;
@@ -48,6 +49,7 @@ body {
 }
 
 
+/* Specific window settings(for testing and adjustment): */
 .window.c1 {
     background-color: none;
     border: none;
