@@ -2,6 +2,8 @@ import React from 'react'
 import {Link} from 'react-router-dom'
 import './homepage.css'
 
+
+//the buttons for the page redirection:
 function Homepage() {
   return (
     <div className='homepage'>

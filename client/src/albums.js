@@ -10,6 +10,7 @@ class Albums extends Component {
         };
     }
 
+    // when the user scolling on the screen:
     componentDidMount() {
         this.handleScroll();
         window.addEventListener('scroll', this.handleScroll);
@@ -20,6 +21,7 @@ class Albums extends Component {
     }
 
     handleScroll = () => {
+        // Get the total number of timeline items
         const itemElements = document.querySelectorAll('.item');
         const windowHeight = window.innerHeight;
         const scrollPosition = window.scrollY;
@@ -30,9 +32,8 @@ class Albums extends Component {
             const itemTop = rect.top;
 
 
-
-            if (
-                itemTop > windowHeight * 0.2 && itemTop < windowHeight * 0.4){
+            // when the top of the item goes in to this range of of the viewport:
+            if (itemTop > windowHeight * 0.2 && itemTop < windowHeight * 0.4){
                 this.setState({ activeItemIndex: index });
 
                 // set the image of the item now to be the background
@@ -60,6 +61,8 @@ class Albums extends Component {
         });
     };
 
+    // the list items on the page:
+    // move to backend later:
     render() {
         const musicItems = [
             {
@@ -92,6 +95,7 @@ class Albums extends Component {
             },
         ];
 
+        // print them on the page:
         return (
             <div className="shell" id="shell" style={{ backgroundImage: this.state.backgroundImage }}>
                 <div className="header">

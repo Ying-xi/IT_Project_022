@@ -30,6 +30,7 @@
   position: relative;
 }
 
+/* The title of the page:" */
 .title {
   color: #fff;
   font-size: 4.7vw;
@@ -70,6 +71,7 @@
   user-select: none;
 }
 
+
 .musiclist:before {
   position: absolute;
   left: 30vw;
@@ -92,6 +94,8 @@
   transform: translateY(0vh);
 }
 
+
+/* Set the content in the pseudo-element "before": */
 .item:before {
 
   content: attr(data-text);
@@ -140,6 +144,7 @@
   margin: -5vh 0 2vh 0;
 }
 
+/* the size of the items: */
 .img {
   max-width: 100%;
   box-shadow: 0 1vh 1.5vh rgba(0, 0, 0, 0.4);
@@ -147,6 +152,8 @@
   user-select: none;
   caret-color: rgba(0, 0, 0, 0);
 }
+
+
 
 .subtitle {
   color: rgba(255, 255, 255, 0.65);
