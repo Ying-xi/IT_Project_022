@@ -44,38 +44,33 @@ function MusicPlayer() {
 
   const playSong = (id) => {
     const activeMusic = backendData?.data.find((item) => item._id === id);
-
+  
     if (activeMusic) {
+      // Update musicList state
+      const newList = backendData?.data.map((item) => {
+        item.active = item._id === id;
+        return item;
+      });
+  
+      // Update backendData
+      setBackendData({
+        ...backendData,
+        data: newList,
+        activeId: id,
+      });
+  
       // pause the current music
       myAudio.current.pause();
-
-      const audioSourcePath = `data:audio/mpeg;base64,${activeMusic.file}`;
-
+  
+      const audioSourcePath = `${process.env.PUBLIC_URL}/${activeMusic.file}`;
+  
       audioSource.current.src = audioSourcePath;
       myAudio.current.load();
       myAudio.current.play();
       setIsPlaying(true);
-
-      setBackendData((prevData) => ({
-        ...prevData,
-        activeId: id,
-      }));
-    }
-
-    // Update musicList state
-    const newList = backendData?.data.map((item) => {
-      item.active = item._id === id;
-      return item;
-    });
-
-    // Update backendData
-    if (backendData) {
-      setBackendData({
-        ...backendData,
-        data: newList,
-      });
     }
   };
+  
 
   const activeMusic = useMemo(
     () => backendData?.data.find((item) => item._id === backendData.activeId) ?? '',
@@ -136,7 +131,7 @@ function MusicPlayer() {
                 <MusicBtn
                   onClick={() => playSong(item._id)}
                   key={item._id}
-                  face={item.picture} // 设置图片文件路径
+                  face={item.picture}
                   name={item.name}
                   color={item?.tags?.[1]}
                 />

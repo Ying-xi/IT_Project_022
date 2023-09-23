@@ -160,7 +160,6 @@
     margin-right: 2vh;
     flex: 1;
     display: flex;
-    justify-content: center; /* 水平居中 */
     align-items: center;
     background: #F0F3F4;
     border-radius: 10px;

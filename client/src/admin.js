@@ -194,9 +194,8 @@ function Admin() {
             </div>
             <div className={styles.mainContent}>
               <div className={styles.mainContentInner}>
-                {/* 3:1:1 拆分 */}
+                {/* 3:1:1 split */}
                 <div className={styles.mainContentTop}>
-                  {/* 上部分，占据3 */}
                   <div className={styles.mainContentTopInner}>
 
 
@@ -208,7 +207,7 @@ function Admin() {
                             className={styles.uploadedImage}
                           />
                       ) : (
-                        // 显示上传图片的功能
+                        // display upload picture
                         <Dropzone onDrop={handleImageUpload}>
                           {({ getRootProps, getInputProps }) => (
                             <div {...getRootProps()} className={styles.imageDropzone}>
@@ -229,7 +228,7 @@ function Admin() {
                     </div>
 
                     <div className={styles.mainContentTopRight}>
-                      {/* 歌曲主要信息 */}
+                      {/* Main information for music */}
                       <div className={styles.mainContentTopRightInner}>
                         <div className={styles.mainContentTopRightAdd}>
                           {/* Add Button */}
@@ -248,9 +247,9 @@ function Admin() {
                                 background: 'rgba(255, 255, 255, 0.8)',
                                 backdropFilter: 'blur(5px)',
                                 borderRadius: '5px',
-                                textAlign: 'center',
+                                // textAlign: 'center',
                               }}>
-                              <h3 style={{ textAlign: 'center' }}>Music Name: {selectedMusicName}</h3>
+                              <h3>Music Name: {selectedMusicName}</h3>
                               {/* <h4 style={{ textAlign: 'center' }}>{selectedMusicName}</h4> */}
                             </div>
                           ) : (
@@ -268,7 +267,6 @@ function Admin() {
                             />
                           )}
                         </div>
-
 
 
 
@@ -337,73 +335,6 @@ function Admin() {
                             </div>
                           </div>
                         </div>
-
-
-
-
-
-{/* 
-                        <div className={styles.mainContentTopRightType}>
-                          <div className={styles.mainContentTopRightTypeInner}>
-                            <div className={styles.mainContentTopRightTypeHeader}>
-                              <p>Type:</p>
-                            </div>
-                            <div className={styles.mainContentTopRightTypeRow}>
-                              <button
-                                onClick={toggleType1}
-                                className={`${styles.typeButton1} ${type1Active ? styles.activeType1 : ''}`}
-                              >
-                                Vocal
-                              </button>
-                              <button
-                                onClick={toggleType2}
-                                className={`${styles.typeButton2} ${type2Active ? styles.activeType2 : ''}`}
-                              >
-                                Ensembles
-                              </button>
-                              <button
-                                onClick={toggleType3}
-                                className={`${styles.typeButton3} ${type3Active ? styles.activeType3 : ''}`}
-                              >
-                                Slow Soothing
-                              </button>
-                            </div>
-                            <div className={styles.mainContentTopRightTypeRow}>
-                            <button
-                                onClick={toggleType4}
-                                className={`${styles.typeButton4} ${type4Active ? styles.activeType4 : ''}`}
-                              >
-                                Classical
-                              </button>
-                              <button
-                                onClick={toggleType5}
-                                className={`${styles.typeButton5} ${type5Active ? styles.activeType5 : ''}`}
-                              >
-                                Rhythmic
-                              </button>
-                              <button
-                                onClick={toggleType6}
-                                className={`${styles.typeButton6} ${type6Active ? styles.activeType6 : ''}`}
-                              >
-                                Natural Sound
-                              </button>
-                            </div>
-                          </div>
-                        </div>
- */}
-
-
-
-
-
-
-
-
-
-
-
-
-
                       </div>
                     </div>
                   </div>
@@ -447,7 +378,7 @@ function Admin() {
 
                   <div key={selectedMusicFile} className={styles.audioContainerWrapper}>
                     <div className={styles.audioContainer}>
-                      <h1 style={{ textAlign: 'center' }}>Audio Play</h1>
+                      <h1 style={{ marginTop: '2vh', textAlign: 'center' }}>Audio Play</h1>
                       {selectedMusicFile ? (
                         <audio controls>
                           <source src={`data:audio/mpeg;base64,${selectedMusicFile}`} type="audio/mpeg" />
