@@ -26,7 +26,7 @@ function Admin() {
     setSelectedMusicId(musicId);
 
     // Fetch details for the selected music
-    const selectedMusic = backendData.find((music) => music._id === musicId);
+    const selectedMusic = backendData.data.find((music) => music._id === musicId);
 
     if (selectedMusic) {
       setSelectedMusicFile(selectedMusic.file);
@@ -46,19 +46,11 @@ function Admin() {
   });
 
   useEffect(() => {
-    // Fetch data from a local JSON file
-    fetch('/music_therapy.music_info.json')
-      .then((response) => response.json())
-      .then((data) => {
-        console.log('Received data from JSON file:', data);
-  
-        if (Array.isArray(data) && data.length > 0) {
-          console.log('First item _id:', data[0]._id);
-        } else {
-          console.log('No data or _id available.');
-        }
-  
-        setBackendData(data);
+    axios
+      .get('http://localhost:3300/musicPlayer')
+      .then((response) => {
+        console.log('Received data from backend:', response.data);
+        setBackendData(response.data);
         setIsLoading(false);
       })
       .catch((error) => {
@@ -66,7 +58,6 @@ function Admin() {
         setIsLoading(false);
       });
   }, []);
-
 
 
 

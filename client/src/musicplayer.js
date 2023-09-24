@@ -115,10 +115,7 @@ function MusicPlayer() {
             allTags={allTags}
           />
         </div>
-
-
-
-
+        {/* Music Card */}
         <div className="button-container music-btns-list">
           {backendData && backendData.data ? (
             backendData.data
@@ -137,7 +134,7 @@ function MusicPlayer() {
           )}
         </div>
 
-
+        {/* dock component */}
         <div className="dock-background">
           <div className="dock-buttons">
             <div className="dock-text">🎵 {activeMusic?.name ?? 'music'}</div>
