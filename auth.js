@@ -8,6 +8,7 @@ module.exports = (req, res, next) => {
 			.status(400)
 			.send({ message: "No token provided" })
 
+	// verify token
 	jwt.verify(token, 'IT-Project-022', (err, validToken) => {
 		if (err) {
 			console.log(token)

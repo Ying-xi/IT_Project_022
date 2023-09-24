@@ -7,6 +7,7 @@ exports.login = async (req, res) =>{
     const { username, password } = req.body
     const user = await User.findOne({ username })
     
+    // check if username and password are correct
     if (!user || !bcryptjs.compareSync(password, user.password)) {
         res.status(401).json({ error: 'Wrong Username or Password' })
     } else {
