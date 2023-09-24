@@ -3,18 +3,18 @@ import MusicItem from './MusicItem';
 
 const MusicList = ({ musicData, onMusicClick }) => {
   // Initialize musicInfo as an empty array, and update it when musicData changes.
-  const [musicInfo, setMusicInfo] = useState([]);
+  const [musicInfo, setMusicInfo] = useState(musicData);
 
-  useEffect(() => {
-    if (Array.isArray(musicData)) {
-      // If musicData is an array, update musicInfo with it.
-      setMusicInfo(musicData);
-    } else {
-      // Handle the case where musicData is not an array (e.g., null or undefined).
-      // You can log an error or take appropriate action here.
-      console.error('musicData is not an array');
-    }
-  }, [musicData]);
+  // useEffect(() => {
+  //   if (Array.isArray(musicData)) {
+  //     // If musicData is an array, update musicInfo with it.
+  //     setMusicInfo(musicData);
+  //   } else {
+  //     // Handle the case where musicData is not an array (e.g., null or undefined).
+  //     // You can log an error or take appropriate action here.
+  //     console.error('musicData is not an array');
+  //   }
+  // }, [musicData]);
 
   return (
     <div>

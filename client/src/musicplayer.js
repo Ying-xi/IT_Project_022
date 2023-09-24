@@ -17,7 +17,6 @@ function MusicPlayer() {
   });
 
   // Connect FE & BE Server
-  // 异步加载数据
   const loadData = async () => {
     try {
       const response = await axios.get('http://localhost:3300/musicPlayer');
@@ -29,11 +28,8 @@ function MusicPlayer() {
   };
 
   useEffect(() => {
-    loadData(); // 在组件加载时异步加载数据
+    loadData();
   }, []);
-
-
-
 
 
 
@@ -154,7 +150,6 @@ function MusicPlayer() {
                 ▶️
               </div>
             )}
-            {/* <div className="dock-button toggle-volume">🔊</div> */}
           </div>
         </div>
       </div>

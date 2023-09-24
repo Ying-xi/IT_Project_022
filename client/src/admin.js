@@ -62,7 +62,7 @@ function Admin() {
         setIsLoading(false);
       })
       .catch((error) => {
-        console.error('Error fetching data from JSON file:', error);
+        console.error('Error fetching data from backend:', error);
         setIsLoading(false);
       });
   }, []);
@@ -163,7 +163,7 @@ function Admin() {
                   {isLoading ? (
                     <h3 style={{ textAlign: 'center', color: 'white', fontWeight: 'bold', marginTop: '2vh' }}>Loading...</h3>
                   ) : (
-                    <MusicList musicData={backendData} onMusicClick={handleMusicClick} />
+                    <MusicList musicData={backendData.data} onMusicClick={handleMusicClick} />
                   )}
                 </main>
               </div>
@@ -365,7 +365,7 @@ function Admin() {
                       <h1 style={{ marginTop: '2vh', textAlign: 'center' }}>Audio Play</h1>
                       {selectedMusicFile ? (
                         <audio controls>
-                          <source src={`data:audio/mpeg;base64,${selectedMusicFile}`} type="audio/mpeg" />
+                          <source src={`/${selectedMusicFile}`} type="audio/mpeg" />
                           Your browser does not support the audio element.
                         </audio>
                       ) : (
