@@ -6,21 +6,26 @@ import axios from 'axios'
 
 
 function Admin() {
+  //file state
   const [selectedMusicId, setSelectedMusicId] = useState(null); 
   const [selectedMusicFile, setSelectedMusicFile] = useState(null); 
   const [selectedMusicName, setSelectedMusicName] = useState('');
   const [selectedMusicTag, setSelectedMusicTag] = useState('');
   const [selectedMusicPicture, setSelectedMusicPicture] = useState('');
 
+  // Handle music click event
   const handleMusicClick = (musicId) => {
+    // Reset state when a new music item is selected
     setSelectedMusicId(null);
     setSelectedMusicFile(null);
     setSelectedMusicName('');
     setSelectedMusicTag('');
     setSelectedMusicPicture('');
 
+    // Set the selected music based on the clicked item
     setSelectedMusicId(musicId);
 
+    // Fetch details for the selected music
     const selectedMusic = backendData.find((music) => music._id === musicId);
 
     if (selectedMusic) {
@@ -31,31 +36,17 @@ function Admin() {
     }
   };
 
+  // State for loading data
   const [isLoading, setIsLoading] = useState(true);
+
+  // State for backend data
   const [backendData, setBackendData] = useState({
     data: [],
     activeId: null,
   });
 
-  // useEffect(() => {
-  //   axios
-  //     .get('http://localhost:3300/musicPlayer')
-  //     .then((response) => {
-  //       console.log('Received data from backend:', response.data);
-  //       setBackendData(response.data);
-  //       setIsLoading(false);
-  //     })
-  //     .catch((error) => {
-  //       console.error('Error fetching data from backend:', error);
-  //       setIsLoading(false);
-  //     });
-  // }, []);
-
-
-
-
   useEffect(() => {
-    // 读取本地 JSON 文件
+    // Fetch data from a local JSON file
     fetch('/music_therapy.music_info.json')
       .then((response) => response.json())
       .then((data) => {
@@ -79,12 +70,14 @@ function Admin() {
 
 
 
-
+  // State for the uploaded file
   const [uploadedFile, setUploadedFile] = useState(null);
+  // State for the uploaded image
   const [uploadedImage, setUploadedImage] = useState(null);
   // State for the music name input
   const [musicName, setMusicName] = useState('');
 
+  // Handle file drop event
   const handleFileDrop = (acceptedFiles) => {
     if (acceptedFiles.length > 0) {
       // Set the uploaded file to the first accepted file.
@@ -92,12 +85,15 @@ function Admin() {
     }
   };
 
+  // Handle file delete event
   const handleFileDelete = () => {
     // Clear the uploaded file when the delete button is clicked.
     setUploadedFile(null);
   };
 
+  // Handle image upload event
   const handleImageUpload = (acceptedFiles) => {
+    //upload image from local to backend
     if (acceptedFiles.length > 0) {
       setUploadedImage(acceptedFiles[0]);
     }
@@ -247,10 +243,8 @@ function Admin() {
                                 background: 'rgba(255, 255, 255, 0.8)',
                                 backdropFilter: 'blur(5px)',
                                 borderRadius: '5px',
-                                // textAlign: 'center',
                               }}>
                               <h3>Music Name: {selectedMusicName}</h3>
-                              {/* <h4 style={{ textAlign: 'center' }}>{selectedMusicName}</h4> */}
                             </div>
                           ) : (
                             // display uploaded music
@@ -267,10 +261,8 @@ function Admin() {
                             />
                           )}
                         </div>
-
-
-
                         <div className={styles.mainContentTopRightType}>
+                          {/*the division of type button*/}
                           <div className={styles.mainContentTopRightTypeInner}>
                             <div className={styles.mainContentTopRightTypeHeader}>
                               <p>Type:</p>
@@ -280,7 +272,6 @@ function Admin() {
                                 <button
                                   onClick={toggleType1}
                                   className={`${styles.typeButton1} ${type1Active ? styles.activeType1 : ''}`}
-                                  /*style={{ backgroundColor: selectedMusicTag === 'Vocal' ? 'green' : 'transparent' }}*/
                                 >
                                   Vocal
                                 </button>
@@ -289,7 +280,6 @@ function Admin() {
                                 <button
                                   onClick={toggleType2}
                                   className={`${styles.typeButton2} ${type2Active ? styles.activeType2 : ''}`}
-                                  /*style={{ backgroundColor: selectedMusicTag === 'Ensembles' ? 'blue' : 'transparent' }}*/
                                 >
                                   Ensembles
                                 </button>
@@ -298,7 +288,6 @@ function Admin() {
                                 <button
                                   onClick={toggleType3}
                                   className={`${styles.typeButton3} ${type3Active ? styles.activeType3 : ''}`}
-                                  /*style={{ backgroundColor: selectedMusicTag === 'Slow Soothing' ? 'blue' : 'transparent' }}*/
                                 >
                                   Slow Soothing
                                 </button>
@@ -309,7 +298,6 @@ function Admin() {
                                 <button
                                   onClick={toggleType4}
                                   className={`${styles.typeButton4} ${type4Active ? styles.activeType4 : ''}`}
-                                  /*style={{ backgroundColor: selectedMusicTag === 'Classical' ? 'blue' : 'transparent' }}*/
                                 >
                                   Classical
                                 </button>
@@ -318,7 +306,6 @@ function Admin() {
                                 <button
                                   onClick={toggleType5}
                                   className={`${styles.typeButton5} ${type5Active ? styles.activeType5 : ''}`}
-                                  /*style={{ backgroundColor: selectedMusicTag === 'Rhythmic' ? 'blue' : 'transparent' }}*/
                                 >
                                   Rhythmic
                                 </button>
@@ -327,7 +314,6 @@ function Admin() {
                                 <button
                                   onClick={toggleType6}
                                   className={`${styles.typeButton6} ${type6Active ? styles.activeType6 : ''}`}
-                                  /*style={{ backgroundColor: selectedMusicTag === 'Natural Sound' ? 'blue' : 'transparent' }}*/
                                 >
                                   Natural Sound
                                 </button>
@@ -342,13 +328,11 @@ function Admin() {
 
 
                 <div className={styles.mainContentMiddle}>
-                  {/* 中间部分，占据1 */}
-                  <div className={styles.dropzoneWrapper}> {/* 新增的包装 <div> */}
-                    {/* 上面的 division */}
+                  {/* mid content part */}
+                  <div className={styles.dropzoneWrapper}>
                     <div className={styles.topDivision}></div>
-                    
                     {/* Dropzone */}
-                    <Dropzone onDrop={handleFileDrop} /*accept="audio/*"*/>
+                    <Dropzone onDrop={handleFileDrop}>
                       {({ getRootProps, getInputProps }) => (
                         <div {...getRootProps()} className={styles.dropzone}>
                           <input {...getInputProps()} />
@@ -369,7 +353,7 @@ function Admin() {
                       )}
                     </Dropzone>
 
-                    {/* 下面的 division */}
+                    {/* lower division */}
                     <div className={styles.bottomDivision}></div>
                   </div>
                 </div>
@@ -391,7 +375,7 @@ function Admin() {
                   </div>
 
 
-                  {/* 下面的 division */}
+                  {/* lower division */}
                   <div className={styles.bottomDivisionBottom}></div>
                 </div>
             </div>
