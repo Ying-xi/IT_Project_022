@@ -60,7 +60,6 @@ function Admin() {
   }, []);
 
 
-
   // State for the uploaded file
   const [uploadedFile, setUploadedFile] = useState(null);
   // State for the uploaded image

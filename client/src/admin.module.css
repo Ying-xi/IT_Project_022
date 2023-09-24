@@ -247,7 +247,7 @@
     text-align: center;
     background-color: #F0F3F4;
     height: 13vh;
-    width: 73vh;
+    width: 77vh;
 }
 
 /* Styling for the image dropzone */
@@ -286,7 +286,7 @@
     align-items: center;
     justify-content: center;
     height: 13vh;
-    width: 73vh;
+    width: 77vh;
 }
 
 /* Styling for the top division */
@@ -344,6 +344,7 @@
     font-weight: bold;
     padding: 5px 21px;
     font-size: 1.5vw;
+    background-color: #fac554
 }
 
 /* Styling for the music item wrap container */
