@@ -79,31 +79,44 @@ class Albums extends Component {
         const { musicItems } = this.state;
         const updatedMusicItems = [...musicItems]; // 创建音乐项的副本
 
+        // 获取当前音频元素
+        const audio = this.audioRef;
+
+        // 如果正在播放的音乐与当前点击的音乐相同
         if (this.state.currentMusicIndex === musicIndex) {
-            const audio = this.audioRef;
+            // 如果音频已暂停，则播放它
             if (audio.paused) {
                 audio.play();
-                updatedMusicItems[musicIndex].lists[songIndex].isPlaying = true; // 更新歌曲的播放状态
             } else {
+                // 否则，暂停它
                 audio.pause();
-                updatedMusicItems[musicIndex].lists[songIndex].isPlaying = false; // 更新歌曲的播放状态
             }
+
+            // 更新歌曲的播放状态
+            updatedMusicItems[musicIndex].lists[songIndex].isPlaying = !audio.paused;
         } else {
+            // 如果有其他音乐在播放，首先暂停它
             if (this.audioRef) {
                 this.audioRef.pause();
             }
 
-            const audio = new Audio(musicItems[musicIndex].lists[songIndex].musicUrl);
+            // 设置新的音频源并播放
+            audio.src = musicItems[musicIndex].lists[songIndex].musicUrl;
             audio.play();
 
+            // 添加音频结束事件监听器
             audio.addEventListener('ended', () => {
                 this.setState({ currentMusicIndex: null });
-                updatedMusicItems[musicIndex].lists[songIndex].isPlaying = false; // 更新歌曲的播放状态
+
+                // 更新歌曲的播放状态
+                updatedMusicItems[musicIndex].lists[songIndex].isPlaying = false;
             });
 
+            // 更新当前播放的音乐索引
             this.setState({ currentMusicIndex: musicIndex });
-            updatedMusicItems[musicIndex].lists[songIndex].isPlaying = true; // 更新歌曲的播放状态
-            this.audioRef = audio;
+
+            // 更新歌曲的播放状态
+            updatedMusicItems[musicIndex].lists[songIndex].isPlaying = true;
         }
 
         // 更新状态中的音乐项列表
