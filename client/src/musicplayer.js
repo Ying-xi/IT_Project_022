@@ -17,7 +17,6 @@ function MusicPlayer() {
   });
 
   // Connect FE & BE Server
-  // 异步加载数据
   const loadData = async () => {
     try {
       const response = await axios.get('http://localhost:3300/musicPlayer');
@@ -29,13 +28,10 @@ function MusicPlayer() {
   };
 
   useEffect(() => {
-    loadData(); // 在组件加载时异步加载数据
+    loadData();
   }, []);
 
 
-
-
-  
 
   /**
    * play song
@@ -44,38 +40,33 @@ function MusicPlayer() {
 
   const playSong = (id) => {
     const activeMusic = backendData?.data.find((item) => item._id === id);
-
+  
     if (activeMusic) {
+      // Update musicList state
+      const newList = backendData?.data.map((item) => {
+        item.active = item._id === id;
+        return item;
+      });
+  
+      // Update backendData
+      setBackendData({
+        ...backendData,
+        data: newList,
+        activeId: id,
+      });
+  
       // pause the current music
       myAudio.current.pause();
-
-      const audioSourcePath = `data:audio/mpeg;base64,${activeMusic.file}`;
-
+  
+      const audioSourcePath = `${process.env.PUBLIC_URL}/${activeMusic.file}`;
+  
       audioSource.current.src = audioSourcePath;
       myAudio.current.load();
       myAudio.current.play();
       setIsPlaying(true);
-
-      setBackendData((prevData) => ({
-        ...prevData,
-        activeId: id,
-      }));
-    }
-
-    // Update musicList state
-    const newList = backendData?.data.map((item) => {
-      item.active = item._id === id;
-      return item;
-    });
-
-    // Update backendData
-    if (backendData) {
-      setBackendData({
-        ...backendData,
-        data: newList,
-      });
     }
   };
+  
 
   const activeMusic = useMemo(
     () => backendData?.data.find((item) => item._id === backendData.activeId) ?? '',
@@ -124,7 +115,7 @@ function MusicPlayer() {
             allTags={allTags}
           />
         </div>
-
+        {/* Music Card */}
         <div className="button-container music-btns-list">
           {backendData && backendData.data ? (
             backendData.data
@@ -133,7 +124,7 @@ function MusicPlayer() {
                 <MusicBtn
                   onClick={() => playSong(item._id)}
                   key={item._id}
-                  face={`data:image/jpeg;base64,${item.picture}`}
+                  face={item.picture}
                   name={item.name}
                   color={item?.tags?.[1]}
                 />
@@ -143,6 +134,7 @@ function MusicPlayer() {
           )}
         </div>
 
+        {/* dock component */}
         <div className="dock-background">
           <div className="dock-buttons">
             <div className="dock-text">🎵 {activeMusic?.name ?? 'music'}</div>
@@ -155,7 +147,6 @@ function MusicPlayer() {
                 ▶️
               </div>
             )}
-            {/* <div className="dock-button toggle-volume">🔊</div> */}
           </div>
         </div>
       </div>

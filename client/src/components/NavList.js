@@ -1,6 +1,7 @@
 import React from 'react';
 import './navList.css';
 
+/* combine filter tags with color frames*/
 const NavList = ({ allTags, onCategoryClick, activeCategory }) => {
   return (
     <div className="nav-list-wrap">
@@ -8,7 +9,7 @@ const NavList = ({ allTags, onCategoryClick, activeCategory }) => {
         <button
           key={tag}
           className={`nav-item flex-center ${tag === activeCategory ? 'active' : ''} ${tag}`}
-          onClick={() => onCategoryClick(tag)} // 点击时调用处理函数，传递选定的标签
+          onClick={() => onCategoryClick(tag)}
         >
           {tag}
         </button>

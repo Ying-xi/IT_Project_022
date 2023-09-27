@@ -9,11 +9,8 @@ function Navbar() {
         <Link to="/" className="nav-link">
           🎵 Home
         </Link>
-        <a href="#" className="nav-link">
-          ⚙ Setting
-        </a>
-        <a href="#" className="nav-link">
-          👤 Contact us
+        <a href="/login" className="nav-link">
+          👤 Log in
         </a>
       </div>
       <form className="search-container" action="/url" method="get">

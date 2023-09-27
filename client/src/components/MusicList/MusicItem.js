@@ -4,7 +4,7 @@ import style from './index.module.css';
 const MusicItem = (props) => {
   const tags = props.info?.tags;
 
-  // filter "All" tag
+  /* filter "All" tag */
   const filteredTags = tags ? tags.filter(tag => tag !== "All") : [];
 
   return (
