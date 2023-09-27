@@ -1,17 +1,114 @@
 import React, { Component } from 'react';
 import './albums.css';
-
 class Albums extends Component {
     constructor(props) {
         super(props);
         this.state = {
             activeItemIndex: 0,
             backgroundImage: '',
-            musicList: [], // 新增音乐列表
-            currentTrackIndex: -1, // 当前播放的音乐索引
+            currentMusicIndex: null,
+            musicItems: [
+                {
+                    type: 'Realxing Music',
+                    title: 'Name',
+                    imageUrl: '/albums/album1.jpg',
+                    lists: [
+                        {
+                            musicName: 'Song 1',
+                            musicUrl: '/songs/AuldLangSyne.mp3'
+                        },
+                        {
+                            musicName: 'Song 2',
+                            musicUrl: '/songs/Bleu.mp3'
+                        }
+                    ],
+                },
+                {
+                    type: 'White noise',
+                    title: 'Name',
+                    imageUrl: '/albums/album2.jpg',
+                    lists: [
+                        {
+                            musicName: 'Song 1',
+                            musicUrl: '/songs/AuldLangSyne.mp3'
+                        },
+                        {
+                            musicName: 'Song 2',
+                            musicUrl: '/songs/Bleu.mp3'
+                        }
+                    ],
+                },
+                {
+                    type: 'Jazz Music',
+                    title: 'Name',
+                    imageUrl: '/albums/album3.jpg',
+                    lists: [
+                        {
+                            musicName: 'Song 1',
+                            musicUrl: '/songs/AuldLangSyne.mp3'
+                        },
+                        {
+                            musicName: 'Song 2',
+                            musicUrl: '/songs/Bleu.mp3'
+                        }
+                    ]
+                },
+                {
+                    type: 'Classic Music',
+                    title: 'Name',
+                    imageUrl: '/albums/album4.jpg',
+                    lists: [
+                        {
+                            musicName: 'Song 1',
+                            musicUrl: '/songs/AuldLangSyne.mp3'
+                        },
+                        {
+                            musicName: 'Song 2',
+                            musicUrl: '/admin'
+                        }
+                    ]
+                },
+            ],
         };
+
     }
 
+    //music play
+    //music play
+    playMusic = (musicIndex, songIndex) => {
+        const { musicItems } = this.state;
+        const updatedMusicItems = [...musicItems]; // 创建音乐项的副本
+
+        if (this.state.currentMusicIndex === musicIndex) {
+            const audio = this.audioRef;
+            if (audio.paused) {
+                audio.play();
+                updatedMusicItems[musicIndex].lists[songIndex].isPlaying = true; // 更新歌曲的播放状态
+            } else {
+                audio.pause();
+                updatedMusicItems[musicIndex].lists[songIndex].isPlaying = false; // 更新歌曲的播放状态
+            }
+        } else {
+            if (this.audioRef) {
+                this.audioRef.pause();
+            }
+
+            const audio = new Audio(musicItems[musicIndex].lists[songIndex].musicUrl);
+            audio.play();
+
+            audio.addEventListener('ended', () => {
+                this.setState({ currentMusicIndex: null });
+                updatedMusicItems[musicIndex].lists[songIndex].isPlaying = false; // 更新歌曲的播放状态
+            });
+
+            this.setState({ currentMusicIndex: musicIndex });
+            updatedMusicItems[musicIndex].lists[songIndex].isPlaying = true; // 更新歌曲的播放状态
+            this.audioRef = audio;
+        }
+
+        // 更新状态中的音乐项列表
+        this.setState({ musicItems: updatedMusicItems });
+    };
 
     // when the user scolling on the screen:
     componentDidMount() {
@@ -63,89 +160,14 @@ class Albums extends Component {
             }
         });
     };
-    handleMusicClick = (index) => {
-        // 设置当前播放的音乐索引
-        this.setState({ currentTrackIndex: index });
-    };
+
     // the list items on the page:
     // move to backend later:
-    render() {
-        const musicItems = [
-            {
-                type: 'Realxing Music',
-                title: 'Name',
-                imageUrl: '/albums/album1.jpg',
-                lists: [
-                    {
-                        musicName: 'Song 1',
-                        musicUrl: 'https://example.com/song1.mp3'
-                    },
-                    {
-                        musicName: 'Song 2',
-                        musicUrl: 'https://example.com/song2.mp3'
-                    },
-                    {
-                        musicName: 'Song 2',
-                        musicUrl: 'https://example.com/song2.mp3'
-                    },
-                    {
-                        musicName: 'Song 2',
-                        musicUrl: 'https://example.com/song2.mp3'
-                    },
-                    {
-                        musicName: 'Song 2',
-                        musicUrl: 'https://example.com/song2.mp3'
-                    }
-                ],
-            },
-            {
-                type: 'White noise',
-                title: 'Name',
-                imageUrl: '/albums/album2.jpg',
-                lists: [
-                    {
-                        musicName: 'Song 1',
-                        musicUrl: 'https://example.com/song1.mp3'
-                    },
-                    {
-                        musicName: 'Song 2',
-                        musicUrl: 'https://example.com/song2.mp3'
-                    }
-                ],
-            },
-            {
-                type: 'Jazz Music',
-                title: 'Name',
-                imageUrl: '/albums/album3.jpg',
-                lists: [
-                    {
-                        musicName: 'Song 1',
-                        musicUrl: 'https://example.com/song1.mp3'
-                    },
-                    {
-                        musicName: 'Song 2',
-                        musicUrl: 'https://example.com/song2.mp3'
-                    }
-                ]
-            },
-            {
-                type: 'Classic Music',
-                title: 'Name',
-                imageUrl: '/albums/album4.jpg',
-                lists: [
-                    {
-                        musicName: 'Song 1',
-                        musicUrl: 'https://example.com/song1.mp3'
-                    },
-                    {
-                        musicName: 'Song 2',
-                        musicUrl: 'https://example.com/song2.mp3'
-                    }
-                ]
-            },
-        ];
 
-        // print them on the page:
+    // print them on the page:
+    render() {
+        const { musicItems } = this.state;
+
         return (
             <div className="shell" id="shell" style={{ backgroundImage: this.state.backgroundImage }}>
                 <div className="header">
@@ -153,23 +175,27 @@ class Albums extends Component {
                     <h3 className="subtitle">click album cover <br /> to continue</h3>
                 </div>
                 <div className="musiclist">
-                    {musicItems.map((item, index) => (
+                    {musicItems.map((item, musicIndex) => (
                         <div
-                            key={index}
-                            className={`item ${this.state.activeItemIndex === index ? 'item--active' : ''
-                                }`}
+                            key={musicIndex}
+                            className={`item ${this.state.activeItemIndex === musicIndex ? 'item--active' : ''}`}
                             data-text={item.type}
                         >
                             <div className="content">
                                 <img className="img" src={item.imageUrl} alt={item.type} />
                                 <h2 className="content-title">{item.title}</h2>
-                                <p className="content-desc">
+                                <p className="content-songs">
                                     {item.lists.map((song, songIndex) => (
                                         <span key={songIndex}>
-                                            <a href={song.musicUrl} target="_blank" rel="noopener noreferrer">
-                                                {song.musicName}
-                                            </a>
-                                            <br /> {/* 这里插入一个 <br /> 元素 */}
+                                            <span
+                                                className={`song-icon ${song.isPlaying ? 'song-icon--active' : ''}`}
+                                                onClick={() => this.playMusic(musicIndex, songIndex)}
+                                                style={{ cursor: 'pointer' }}
+                                            >
+                                                {song.isPlaying ? '⏸️' : '▶️'}
+                                            </span>
+                                            {song.musicName}
+                                            <br />
                                         </span>
                                     ))}
                                 </p>
@@ -177,8 +203,10 @@ class Albums extends Component {
                         </div>
                     ))}
                 </div>
+                <audio ref={(ref) => (this.audioRef = ref)} controls></audio>
             </div>
         );
+
     }
 }
 
