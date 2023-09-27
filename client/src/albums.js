@@ -7,8 +7,11 @@ class Albums extends Component {
         this.state = {
             activeItemIndex: 0,
             backgroundImage: '',
+            musicList: [], // 新增音乐列表
+            currentTrackIndex: -1, // 当前播放的音乐索引
         };
     }
+
 
     // when the user scolling on the screen:
     componentDidMount() {
@@ -33,7 +36,7 @@ class Albums extends Component {
 
 
             // when the top of the item goes in to this range of of the viewport:
-            if (itemTop > windowHeight * 0.2 && itemTop < windowHeight * 0.4){
+            if (itemTop > windowHeight * 0.2 && itemTop < windowHeight * 0.4) {
                 this.setState({ activeItemIndex: index });
 
                 // set the image of the item now to be the background
@@ -45,7 +48,7 @@ class Albums extends Component {
             }
 
             // check if we are near the bottom of the page
-            const isNearBottom = (window.innerHeight + window.scrollY) >= document.body.offsetHeight *0.985;
+            const isNearBottom = (window.innerHeight + window.scrollY) >= document.body.offsetHeight * 0.985;
             // if near the bottom, activate the last item
             if (isNearBottom) {
                 const lastIndex = itemElements.length - 1;
@@ -60,7 +63,10 @@ class Albums extends Component {
             }
         });
     };
-
+    handleMusicClick = (index) => {
+        // 设置当前播放的音乐索引
+        this.setState({ currentTrackIndex: index });
+    };
     // the list items on the page:
     // move to backend later:
     render() {
@@ -69,29 +75,73 @@ class Albums extends Component {
                 type: 'Realxing Music',
                 title: 'Name',
                 imageUrl: '/albums/album1.jpg',
-                description:
-                    'Relaxing music often incorporates natural sounds like flowing water, birdsong, or ocean waves, enhancing the overall calming effect.',
+                lists: [
+                    {
+                        musicName: 'Song 1',
+                        musicUrl: 'https://example.com/song1.mp3'
+                    },
+                    {
+                        musicName: 'Song 2',
+                        musicUrl: 'https://example.com/song2.mp3'
+                    },
+                    {
+                        musicName: 'Song 2',
+                        musicUrl: 'https://example.com/song2.mp3'
+                    },
+                    {
+                        musicName: 'Song 2',
+                        musicUrl: 'https://example.com/song2.mp3'
+                    },
+                    {
+                        musicName: 'Song 2',
+                        musicUrl: 'https://example.com/song2.mp3'
+                    }
+                ],
             },
             {
                 type: 'White noise',
                 title: 'Name',
                 imageUrl: '/albums/album2.jpg',
-                description:
-                    'White noise is often used for its ability to mask other sounds, aiding in concentration, relaxation, or sleep by creating a consistent background noise.',
+                lists: [
+                    {
+                        musicName: 'Song 1',
+                        musicUrl: 'https://example.com/song1.mp3'
+                    },
+                    {
+                        musicName: 'Song 2',
+                        musicUrl: 'https://example.com/song2.mp3'
+                    }
+                ],
             },
             {
                 type: 'Jazz Music',
                 title: 'Name',
                 imageUrl: '/albums/album3.jpg',
-                description:
-                    "Jazz music's ability to blend diverse influences from different cultures and styles creates a rich tapestry of sound.",
+                lists: [
+                    {
+                        musicName: 'Song 1',
+                        musicUrl: 'https://example.com/song1.mp3'
+                    },
+                    {
+                        musicName: 'Song 2',
+                        musicUrl: 'https://example.com/song2.mp3'
+                    }
+                ]
             },
             {
                 type: 'Classic Music',
                 title: 'Name',
                 imageUrl: '/albums/album4.jpg',
-                description:
-                    'Classical music is a timeless genre known for its complexity, emotional depth, and intricate compositions, often performed by orchestras and chamber ensembles.',
+                lists: [
+                    {
+                        musicName: 'Song 1',
+                        musicUrl: 'https://example.com/song1.mp3'
+                    },
+                    {
+                        musicName: 'Song 2',
+                        musicUrl: 'https://example.com/song2.mp3'
+                    }
+                ]
             },
         ];
 
@@ -111,11 +161,18 @@ class Albums extends Component {
                             data-text={item.type}
                         >
                             <div className="content">
-                                <a href="https://example.com">
-                                    <img className="img" src={item.imageUrl} alt={item.type} />
-                                </a>
+                                <img className="img" src={item.imageUrl} alt={item.type} />
                                 <h2 className="content-title">{item.title}</h2>
-                                <p className="content-desc">{item.description}</p>
+                                <p className="content-desc">
+                                    {item.lists.map((song, songIndex) => (
+                                        <span key={songIndex}>
+                                            <a href={song.musicUrl} target="_blank" rel="noopener noreferrer">
+                                                {song.musicName}
+                                            </a>
+                                            <br /> {/* 这里插入一个 <br /> 元素 */}
+                                        </span>
+                                    ))}
+                                </p>
                             </div>
                         </div>
                     ))}
