@@ -64,7 +64,7 @@ class Albums extends Component {
                         },
                         {
                             musicName: 'Song 2',
-                            musicUrl: '/admin'
+                            musicUrl: '/songs/Bleu.mp3'
                         }
                     ]
                 },
