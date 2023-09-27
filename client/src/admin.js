@@ -6,7 +6,7 @@ import axios from 'axios'
 
 
 function Admin() {
-  //file state
+  //parameters state
   const [selectedMusicId, setSelectedMusicId] = useState(null); 
   const [selectedMusicFile, setSelectedMusicFile] = useState(null); 
   const [selectedMusicName, setSelectedMusicName] = useState('');
@@ -45,19 +45,104 @@ function Admin() {
     activeId: null,
   });
 
+
   useEffect(() => {
-    axios
-      .get('http://localhost:3300/musicPlayer')
-      .then((response) => {
-        console.log('Received data from backend:', response.data);
-        setBackendData(response.data);
-        setIsLoading(false);
-      })
-      .catch((error) => {
-        console.error('Error fetching data from backend:', error);
-        setIsLoading(false);
-      });
+    const token = localStorage.getItem('token');
+    console.log(token);
+
+    if (token) {
+      const headers = {
+        Authorization: `Bearer ${token}`,
+      };
+
+      axios
+        .get('http://localhost:3300/admin', { headers })
+        .then((response) => {
+          console.log('Received data from backend:', response.data);
+          setBackendData(response.data);
+          setIsLoading(false);
+        })
+        .catch((error) => {
+          console.error('Error fetching data from backend:', error);
+          setIsLoading(false);
+        });
+    }
   }, []);
+
+
+
+
+  // 数据库音乐更新
+  // 可以默认
+  // {
+  //   "_id": {
+  //     "$oid": "64f97ec3375a4c06e6209c6a"
+  //   },
+  //   "name": "Auld Lang Syne",
+  //   "tags": [
+  //     "All",
+  //     "Ensembles"
+  //   ],
+  //   "picture": "../Default_music/Images/Auld Lang Syne.jpg",
+  //   "file": "../Default_music/Musics/Auld Lang Syne.mp3",
+  //   "__v": 0
+  // }
+
+  // Update music from DB
+  const handleMusicUpdate = () => {
+    const updatedMusic = {
+      name: selectedMusicName,
+    };
+
+    const token = localStorage.getItem('token');
+    console.log(token)
+  
+    const headers = {
+      Authorization: `Bearer ${token}`,
+    };
+
+    // confirm dialogue
+    const isConfirmed = window.confirm('Are you sure you want to update this music?');
+
+    if (isConfirmed) {
+      axios.put(`http://localhost:3300/admin/${selectedMusicId}`, updatedMusic, { headers })
+        .then((response) => {
+          console.log('Music updated successfully:', response.data);
+          // 刷新页面
+          window.location.reload();
+        })
+        .catch((error) => {
+          console.error('Error updating music:', error);
+        });
+    }
+  };
+  
+
+  // Delete music from DB
+  const handleMusicDelete = () => {
+    const token = localStorage.getItem('token');
+    console.log(token)
+    const headers = {
+      Authorization: `Bearer ${token}`,
+    };
+    const isConfirmed = window.confirm('Are you sure you want to delete this music?');
+
+    if (isConfirmed) {
+      axios.delete(`http://localhost:3300/admin/${selectedMusicId}`, { headers })
+        .then((response) => {
+          console.log('Music deleted successfully:', response.data);
+          window.location.reload();
+        })
+        .catch((error) => {
+          console.error('Error deleting music:', error);
+        });
+    }
+  };
+
+
+  // 添加音乐
+
+
 
 
   // State for the uploaded file
@@ -122,6 +207,19 @@ function Admin() {
     setType6Active(!type6Active);
   };
 
+
+
+  // 主动刷新页面
+  const [shouldRefresh, setShouldRefresh] = useState(false);  
+  useEffect(() => {  
+    if (shouldRefresh) {  
+      window.location.reload();
+      setShouldRefresh(false);
+    }  
+  }, [shouldRefresh]);
+
+
+
   return (
     <div className={styles.admin}>
       {/* left hand side */}
@@ -147,7 +245,7 @@ function Admin() {
                   <div className={styles.musicMainHead}>
                     <div>Music Management</div>
                     <div>Type</div>
-                    <div>Add+</div>
+                    <div onClick={() => setShouldRefresh(true)}>Add+</div> 
                   </div>
 
                   {isLoading ? (
@@ -217,10 +315,16 @@ function Admin() {
                       {/* Main information for music */}
                       <div className={styles.mainContentTopRightInner}>
                         <div className={styles.mainContentTopRightAdd}>
-                          {/* Add Button */}
-                          <button className={styles.addButton}>Add</button>
+
+                          { selectedMusicId ? (
+                            <>
+                              <button className={styles.addButton} onClick={handleMusicUpdate}>Update</button>
+                              <button className={styles.deleteButton} onClick={handleMusicDelete}>Delete</button>
+                            </>
+                          ): (
+                            <button className={styles.addButton}>Add</button>
+                          )}
                         </div>
-                        
 
                         <div className={styles.mainContentTopRightName}>
                           {selectedMusicFile ? (
@@ -230,11 +334,15 @@ function Admin() {
                                 marginRight: '2vh',
                                 marginTop: '2vh',
                                 marginBottom: '2vh',
-                                background: 'rgba(255, 255, 255, 0.8)',
-                                backdropFilter: 'blur(5px)',
-                                borderRadius: '5px',
                               }}>
-                              <h3>Music Name: {selectedMusicName}</h3>
+                              <h3>Music Name:</h3>
+
+                              <input
+                                type="text"
+                                value={selectedMusicName}
+                                onChange={(e) => setSelectedMusicName(e.target.value)}
+                                className={styles.customInput}
+                              />
                             </div>
                           ) : (
                             // display uploaded music
