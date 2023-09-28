@@ -63,7 +63,7 @@
 
   .content-songs {
     margin: 0;
-    font-size: 3vh;
+    font-size: 3.5vh;
     box-sizing: border-box;
     color: rgba(255, 255, 255, 0.7);
     line-height: 165%;
@@ -78,6 +78,15 @@
     visibility: visible; 
     pointer-events: auto; 
   }
+
+
+  .playing-song {
+    font-size: 4vh;
+    font-weight: 600;
+    color: rgb(255, 255, 255);
+    text-shadow: 0 0 1vw rgba(255, 255, 255, 0.5), 0 0 2vw rgba(255, 255, 255, 0.5); 
+}
+
 
   .musiclist:before {
     position: absolute;
@@ -171,6 +180,9 @@
     caret-color: rgba(0, 0, 0, 0);
     user-select: none;
   }
+
+
+
 
 
 
