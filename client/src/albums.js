@@ -75,106 +75,114 @@ class Albums extends Component {
     }
 
     //music play
-    playMusic = (musicIndex, songIndex, isManual = true) => {
-        const { musicItems } = this.state;
-        const updatedMusicItems = [...musicItems]; // 创建音乐项的副本
+playMusic = (musicIndex, songIndex, isManual = true) => {
+    const { musicItems } = this.state;
+    const updatedMusicItems = [...musicItems]; 
 
-        // 获取当前音频元素
-        const audio = this.audioRef;
+    // Get the current audio element
+    const audio = this.audioRef;
 
-        // 如果当前有音乐正在播放
-        if (this.state.currentMusicIndex !== null) {
-            // 先暂停当前正在播放的音乐
-            audio.pause();
+    // If music is currently playing
+    if (this.state.currentMusicIndex !== null) {
+        // Pause the currently playing music first
+        audio.pause();
 
-            // 更新当前正在播放的音乐的状态为未播放
-            updatedMusicItems[this.state.currentMusicIndex].lists.forEach((song) => {
-                song.isPlaying = false;
-            });
+        // Update the status of the currently playing music to not playing
+        updatedMusicItems[this.state.currentMusicIndex].lists.forEach((song) => {
+            song.isPlaying = false;
+        });
+    }
+
+    // Set a new audio source and play it
+    audio.src = musicItems[musicIndex].lists[songIndex].musicUrl;
+
+    // Add an event listener for when audio can play
+    audio.addEventListener('canplay', () => {
+        
+        if (!audio.paused) {
+            audio.pause(); 
+        }
+        
+        audio.play();
+    });
+
+    // Add an event listener for when audio playback ends
+    audio.addEventListener('ended', () => {
+        // Automatically play the next song of the same music
+        const nextSongIndex = (songIndex + 1) % musicItems[musicIndex].lists.length;
+    
+        if (nextSongIndex === 0) {
+            // If there's no next song, play the first song of the current music
+            this.playMusic(musicIndex, 0, false);
+        } else {
+            // Otherwise, play the next song
+            if (!audio.paused) { 
+                audio.pause(); 
+            }
+            this.playMusic(musicIndex, nextSongIndex, false);
+        }
+    
+        
+        updatedMusicItems[musicIndex].lists[songIndex].isPlaying = false;
+    });
+
+    this.setState({ currentMusicIndex: musicIndex });
+
+    updatedMusicItems[musicIndex].lists[songIndex].isPlaying = true;
+
+    // Update the music items in the state
+    this.setState({ musicItems: updatedMusicItems });
+};
+
+// When the user is scrolling on the screen:
+componentDidMount() {
+    this.handleScroll();
+    window.addEventListener('scroll', this.handleScroll);
+}
+
+componentWillUnmount() {
+    window.removeEventListener('scroll', this.handleScroll);
+}
+
+handleScroll = () => {
+    // Get the total number of timeline items
+    const itemElements = document.querySelectorAll('.item');
+    const windowHeight = window.innerHeight;
+    const scrollPosition = window.scrollY;
+
+    itemElements.forEach((item, index) => {
+        const rect = item.getBoundingClientRect();
+
+        const itemTop = rect.top;
+
+        // When the top of the item enters this range of the viewport:
+        if (itemTop > windowHeight * 0.2 && itemTop < windowHeight * 0.4) {
+            this.setState({ activeItemIndex: index });
+
+            // Set the image of the item as the background now
+            const imgElement = item.querySelector('.img');
+            if (imgElement) {
+                const imageUrl = imgElement.getAttribute('src');
+                this.setState({ backgroundImage: `url(${imageUrl})` });
+            }
         }
 
-        // 设置新的音频源并播放
-        audio.src = musicItems[musicIndex].lists[songIndex].musicUrl;
-        audio.play();
+        // Check if we are near the bottom of the page
+        const isNearBottom = (window.innerHeight + window.scrollY) >= document.body.offsetHeight * 0.985;
+        // If near the bottom, activate the last item
+        if (isNearBottom) {
+            const lastIndex = itemElements.length - 1;
+            this.setState({ activeItemIndex: lastIndex });
 
-        // 添加音频结束事件监听器
-        audio.addEventListener('ended', () => {
-
-            // 自动播放同一个音乐的下一首歌曲
-            const nextSongIndex = (songIndex + 1) % musicItems[musicIndex].lists.length;
-
-            if (nextSongIndex === 0) {
-                // 如果没有下一首歌曲，播放当前音乐的第一首歌曲
-                this.playMusic(musicIndex, 0, false);
-            } else {
-                // 否则，播放下一首歌曲
-                this.playMusic(musicIndex, nextSongIndex, false);
+            // Set the background image of the last item
+            const lastImgElement = itemElements[lastIndex].querySelector('.img');
+            if (lastImgElement) {
+                const lastImageUrl = lastImgElement.getAttribute('src');
+                this.setState({ backgroundImage: `url(${lastImageUrl})` });
             }
-
-            // 更新歌曲的播放状态
-            updatedMusicItems[musicIndex].lists[songIndex].isPlaying = false;
-        });
-
-        // 更新当前播放的音乐索引和歌曲索引
-        this.setState({ currentMusicIndex: musicIndex });
-
-        // 更新新点击的音乐的播放状态为播放中
-        updatedMusicItems[musicIndex].lists[songIndex].isPlaying = true;
-
-        // 更新状态中的音乐项列表
-        this.setState({ musicItems: updatedMusicItems });
-    };
-
-    // when the user scolling on the screen:
-    componentDidMount() {
-        this.handleScroll();
-        window.addEventListener('scroll', this.handleScroll);
-    }
-
-    componentWillUnmount() {
-        window.removeEventListener('scroll', this.handleScroll);
-    }
-
-    handleScroll = () => {
-        // Get the total number of timeline items
-        const itemElements = document.querySelectorAll('.item');
-        const windowHeight = window.innerHeight;
-        const scrollPosition = window.scrollY;
-
-        itemElements.forEach((item, index) => {
-            const rect = item.getBoundingClientRect();
-
-            const itemTop = rect.top;
-
-
-            // when the top of the item goes in to this range of of the viewport:
-            if (itemTop > windowHeight * 0.2 && itemTop < windowHeight * 0.4) {
-                this.setState({ activeItemIndex: index });
-
-                // set the image of the item now to be the background
-                const imgElement = item.querySelector('.img');
-                if (imgElement) {
-                    const imageUrl = imgElement.getAttribute('src');
-                    this.setState({ backgroundImage: `url(${imageUrl})` });
-                }
-            }
-
-            // check if we are near the bottom of the page
-            const isNearBottom = (window.innerHeight + window.scrollY) >= document.body.offsetHeight * 0.985;
-            // if near the bottom, activate the last item
-            if (isNearBottom) {
-                const lastIndex = itemElements.length - 1;
-                this.setState({ activeItemIndex: lastIndex });
-
-                // set the background image of the last item
-                const lastImgElement = itemElements[lastIndex].querySelector('.img');
-                if (lastImgElement) {
-                    const lastImageUrl = lastImgElement.getAttribute('src');
-                    this.setState({ backgroundImage: `url(${lastImageUrl})` });
-                }
-            }
-        });
-    };
+        }
+    });
+};
 
     // the list items on the page:
     // move to backend later:
@@ -207,7 +215,7 @@ class Albums extends Component {
                                                 onClick={() => this.playMusic(musicIndex, songIndex)}
                                                 style={{ cursor: 'pointer' }}
                                             >
-                                                {song.isPlaying ? '⏸️' : '▶️'}
+                                                {song.isPlaying ? '🔄' : '▶️'}
                                             </span>
                                             <span className={`song-name ${song.isPlaying ? 'playing-song' : ''}`}>
                                                 {song.musicName}
