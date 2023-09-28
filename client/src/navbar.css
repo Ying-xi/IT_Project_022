@@ -9,6 +9,11 @@
     left: 0;
     width: 100%;
     z-index: 100;
+    /* background:red; */
+  }
+
+  .navbar.gap {
+    width: 75%;
   }
   
   .nav-link {
@@ -16,17 +21,6 @@
     text-decoration: none;
     color: white;
     font-weight: bold;
-  }
-  .navbar {
-    height: 10vh;
-    color: white;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    position: fixed;
-    top: 0;
-    z-index: 100;
-    width: 100%;
   }
   
   .nav-links {

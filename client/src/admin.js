@@ -31,7 +31,9 @@ function Admin() {
     if (selectedMusic) {
       setSelectedMusicFile(selectedMusic.file);
       setSelectedMusicName(selectedMusic.name || '');
-      setSelectedMusicTag(selectedMusic.tags || '');
+      
+      // 更新活动标签为音乐的标签
+      setActiveTags(selectedMusic.tags.filter(tag => tag !== 'All'));
       setSelectedMusicPicture(selectedMusic.picture || '');
     }
   };
@@ -70,24 +72,6 @@ function Admin() {
   }, []);
 
 
-
-
-  // 数据库音乐更新
-  // 可以默认
-  // {
-  //   "_id": {
-  //     "$oid": "64f97ec3375a4c06e6209c6a"
-  //   },
-  //   "name": "Auld Lang Syne",
-  //   "tags": [
-  //     "All",
-  //     "Ensembles"
-  //   ],
-  //   "picture": "../Default_music/Images/Auld Lang Syne.jpg",
-  //   "file": "../Default_music/Musics/Auld Lang Syne.mp3",
-  //   "__v": 0
-  // }
-
   // Update music from DB
   const handleMusicUpdate = () => {
     const updatedMusic = {
@@ -96,7 +80,7 @@ function Admin() {
 
     const token = localStorage.getItem('token');
     console.log(token)
-  
+
     const headers = {
       Authorization: `Bearer ${token}`,
     };
@@ -108,7 +92,6 @@ function Admin() {
       axios.put(`http://localhost:3300/admin/${selectedMusicId}`, updatedMusic, { headers })
         .then((response) => {
           console.log('Music updated successfully:', response.data);
-          // 刷新页面
           window.location.reload();
         })
         .catch((error) => {
@@ -217,6 +200,18 @@ function Admin() {
       setShouldRefresh(false);
     }  
   }, [shouldRefresh]);
+
+  // 绑定 tag状态
+  const [activeTags, setActiveTags] = useState([]);
+
+  const toggleTag = (tag) => {
+    if (activeTags.includes(tag)) {
+      setActiveTags(activeTags.filter((t) => t !== tag));
+    } else {
+      setActiveTags([...activeTags, tag]);
+    }
+  };
+
 
 
 
@@ -368,50 +363,50 @@ function Admin() {
                             <div className={styles.mainContentTopRightTypeRow}>
                               {selectedMusicTag !== 'All' && (
                                 <button
-                                  onClick={toggleType1}
-                                  className={`${styles.typeButton1} ${type1Active ? styles.activeType1 : ''}`}
+                                  onClick={() => toggleTag('Vocal')}
+                                  className={`${styles.typeButton1} ${activeTags.includes('Vocal') ? styles.activeType1 : ''}`}
                                 >
                                   Vocal
                                 </button>
                               )}
                               {selectedMusicTag !== 'All' && (
                                 <button
-                                  onClick={toggleType2}
-                                  className={`${styles.typeButton2} ${type2Active ? styles.activeType2 : ''}`}
+                                  onClick={() => toggleTag('Ensembles')}
+                                  className={`${styles.typeButton2} ${activeTags.includes('Ensembles') ? styles.activeType2 : ''}`}
                                 >
                                   Ensembles
                                 </button>
                               )}
                               {selectedMusicTag !== 'All' && (
                                 <button
-                                  onClick={toggleType3}
-                                  className={`${styles.typeButton3} ${type3Active ? styles.activeType3 : ''}`}
+                                  onClick={() => toggleTag('Slow Smoothing')}
+                                  className={`${styles.typeButton3} ${activeTags.includes('Slow Smoothing') ? styles.activeType3 : ''}`}
                                 >
-                                  Slow Soothing
+                                  Slow Smoothing
                                 </button>
                               )}
                             </div>
                             <div className={styles.mainContentTopRightTypeRow}>
                               {selectedMusicTag !== 'All' && (
                                 <button
-                                  onClick={toggleType4}
-                                  className={`${styles.typeButton4} ${type4Active ? styles.activeType4 : ''}`}
+                                  onClick={() => toggleTag('Classical')}
+                                  className={`${styles.typeButton4} ${activeTags.includes('Classical') ? styles.activeType4 : ''}`}
                                 >
                                   Classical
                                 </button>
                               )}
                               {selectedMusicTag !== 'All' && (
                                 <button
-                                  onClick={toggleType5}
-                                  className={`${styles.typeButton5} ${type5Active ? styles.activeType5 : ''}`}
+                                  onClick={() => toggleTag('Rhythmic')}
+                                  className={`${styles.typeButton5} ${activeTags.includes('Rhythmic') ? styles.activeType5 : ''}`}
                                 >
                                   Rhythmic
                                 </button>
                               )}
                               {selectedMusicTag !== 'All' && (
                                 <button
-                                  onClick={toggleType6}
-                                  className={`${styles.typeButton6} ${type6Active ? styles.activeType6 : ''}`}
+                                  onClick={() => toggleTag('Natural Sound')}
+                                  className={`${styles.typeButton6} ${activeTags.includes('Natural Sound') ? styles.activeType6 : ''}`}
                                 >
                                   Natural Sound
                                 </button>
