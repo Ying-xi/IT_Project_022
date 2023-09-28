@@ -7,6 +7,7 @@ class Albums extends Component {
             activeItemIndex: 0,
             backgroundImage: '',
             currentMusicIndex: null,
+
             musicItems: [
                 {
                     type: 'Realxing Music',
@@ -74,47 +75,55 @@ class Albums extends Component {
     }
 
     //music play
-    //music play
-    playMusic = (musicIndex, songIndex) => {
+    playMusic = (musicIndex, songIndex, isManual = true) => {
         const { musicItems } = this.state;
         const updatedMusicItems = [...musicItems]; // 创建音乐项的副本
-    
+
         // 获取当前音频元素
         const audio = this.audioRef;
-    
+
         // 如果当前有音乐正在播放
         if (this.state.currentMusicIndex !== null) {
             // 先暂停当前正在播放的音乐
             audio.pause();
-    
+
             // 更新当前正在播放的音乐的状态为未播放
             updatedMusicItems[this.state.currentMusicIndex].lists.forEach((song) => {
                 song.isPlaying = false;
             });
         }
-    
+
         // 设置新的音频源并播放
         audio.src = musicItems[musicIndex].lists[songIndex].musicUrl;
         audio.play();
-    
+
         // 添加音频结束事件监听器
         audio.addEventListener('ended', () => {
-            this.setState({ currentMusicIndex: null });
-    
+
+            // 自动播放同一个音乐的下一首歌曲
+            const nextSongIndex = (songIndex + 1) % musicItems[musicIndex].lists.length;
+
+            if (nextSongIndex === 0) {
+                // 如果没有下一首歌曲，播放当前音乐的第一首歌曲
+                this.playMusic(musicIndex, 0, false);
+            } else {
+                // 否则，播放下一首歌曲
+                this.playMusic(musicIndex, nextSongIndex, false);
+            }
+
             // 更新歌曲的播放状态
             updatedMusicItems[musicIndex].lists[songIndex].isPlaying = false;
         });
-    
-        // 更新当前播放的音乐索引
+
+        // 更新当前播放的音乐索引和歌曲索引
         this.setState({ currentMusicIndex: musicIndex });
-    
+
         // 更新新点击的音乐的播放状态为播放中
         updatedMusicItems[musicIndex].lists[songIndex].isPlaying = true;
-    
+
         // 更新状态中的音乐项列表
         this.setState({ musicItems: updatedMusicItems });
     };
-    
 
     // when the user scolling on the screen:
     componentDidMount() {
@@ -173,7 +182,7 @@ class Albums extends Component {
     // print them on the page:
     render() {
         const { musicItems } = this.state;
-    
+
         return (
             <div className="shell" id="shell" style={{ backgroundImage: this.state.backgroundImage }}>
                 <div className="header">
@@ -215,7 +224,7 @@ class Albums extends Component {
             </div>
         );
     }
-    
+
 }
 
 export default Albums;
