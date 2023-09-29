@@ -7,6 +7,7 @@ import Login from './login'
 import Admin from './admin'
 import Albums from './albums'
 import Musiclist from './musiclist'
+import Comments from './comments';
 function App () {
   return (
     <Router>
@@ -19,11 +20,14 @@ function App () {
           <Route path='/admin' element={<Admin />} />
           <Route path='/albums' element={<Albums />} />
           <Route path='/musiclist' element={<Musiclist />} />
+          <Route path='/comments/:musicIndex' element={<Comments />} />
         </Routes>
         {/* <Dock /> */}
       </div>
     </Router>
   )
 }
+
+
 
 export default App
