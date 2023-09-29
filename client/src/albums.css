@@ -20,7 +20,10 @@
     background: rgba(99, 99, 99, 0.8);
     content: "";
   }
-
+  
+  .item:not(.item--active) {
+    pointer-events: none;
+  }
 
   /* margin-bottom have to be larger than 8vh to avoid that the logo be covered by the image of the item: */
   .header {
