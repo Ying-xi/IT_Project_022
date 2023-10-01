@@ -13,6 +13,11 @@ module.exports = (req, res, next) => {
 			console.log(token)
 			return res.status(400).send({ message: "invalid token" })
 		} else {
+            if(!validToken.isAdmin){
+                return res
+					.status(403)
+					.send({ message: "You don't have access to this" });
+            }
 			req.user = validToken
 			next()
 		}

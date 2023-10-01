@@ -10,7 +10,11 @@ const homeRouter = require('./Router/homePage')
 const adminRouter = require('./Router/admin')
 
 web.use('/admin', expressJWT({secret: 'IT-Project-022', algorithms: ['HS256']}))
-web.use(cors())
+web.use(cors({
+    origin: 'http://localhost:3000',
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    credentials: true,
+}))
 web.use(express.urlencoded({extended: false}))
 web.use(bodyParser.json())
 web.use(express.static('Files/staticPage'))
