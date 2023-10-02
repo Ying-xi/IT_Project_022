@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './login.css';
 import axios from 'axios';
-import { Link, useNavigate } from 'react-router-dom'; // 导入 Link 和 useNavigate
+import { Link, useNavigate } from 'react-router-dom';
 
 function Login() {
   const [username, setUsername] = useState('');
@@ -36,6 +36,25 @@ function Login() {
       console.error('Login failed:', error);
     }
   };
+
+  const handleRegister = async () => {
+    try {
+      const userData = {
+        username: username,
+        password: password,
+      };
+      console.log('Sending Register request with data:', userData);
+      // change to register
+      const response = await axios.post('http://localhost:3300/login', userData);
+      console.log('Received response:', response);
+      // switch to admin webpage
+      navigate('/login');
+    } catch (error) {
+      console.error('Login failed:', error);
+    }
+  }
+
+
 
   return (
     <div className='login'>
@@ -72,6 +91,9 @@ function Login() {
               </div>
               <button className="button" onClick={handleLogin}>
                 LOGIN
+              </button>
+              <button className="button" onClick={handleRegister}>
+                REGISTER
               </button>
             </div>
           </div>

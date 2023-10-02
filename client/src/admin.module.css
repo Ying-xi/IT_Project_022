@@ -223,7 +223,7 @@ box-shadow: 0 0 1vh rgba(55, 202, 55, 0.7);
 
 /* Styling for the type row in music type section */
 .mainContentTopRightTypeRow {
-    flex: 1;
+    flex: 2;
 }
 
 /* Styling for the middle content section */

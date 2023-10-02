@@ -33,8 +33,9 @@ function Admin() {
       setSelectedMusicName(selectedMusic.name || '');
       
       // 更新活动标签为音乐的标签
-      setActiveTags(selectedMusic.tags.filter(tag => tag !== 'All'));
+      setSelectedMusicTag(selectedMusic.tags.filter(tag => tag !== 'All'));
       setSelectedMusicPicture(selectedMusic.picture || '');
+      // console.log(selectedMusicTag)
     }
   };
 
@@ -99,7 +100,47 @@ function Admin() {
         });
     }
   };
-  
+
+
+  // Add music to DB
+  const handleMusicAdd = () => {
+
+    const musicFile = `../Default_music/Musics/${selectedMusicName}.mp3`;
+    const musicPicture = `../Default_music/Images/${selectedMusicName}.jpg`;
+
+    console.log(selectedMusicTag)
+
+    const newMusic = {
+      // 音乐名字
+      // 音乐Tags
+      // 音乐音频
+      // 音乐图片
+      name: selectedMusicName,
+      tags: ['All', selectedMusicTag],
+      file: musicFile,
+      picture: musicPicture,
+    };
+
+    const token = localStorage.getItem('token');
+    console.log(token);
+
+    const headers = {
+      Authorization: `Bearer ${token}`,
+    };
+
+    // 发送 POST 请求将新音乐数据发送到后端
+    axios.post('http://localhost:3300/admin', newMusic, { headers })
+      .then((response) => {
+        console.log('Music added successfully:', response.data);
+        // 可以根据需要进行重定向或更新音乐列表等操作
+        window.location.reload(); // 例如刷新页面以显示新添加的音乐
+      })
+      .catch((error) => {
+        console.error('Error adding music:', error);
+      });
+  };
+
+
 
   // Delete music from DB
   const handleMusicDelete = () => {
@@ -121,10 +162,6 @@ function Admin() {
         });
     }
   };
-
-
-  // 添加音乐
-
 
 
 
@@ -157,38 +194,38 @@ function Admin() {
     }
   };
 
-  // State for toggle buttons
-  const [type1Active, setType1Active] = useState(false);
-  const [type2Active, setType2Active] = useState(false);
-  const [type3Active, setType3Active] = useState(false);
-  const [type4Active, setType4Active] = useState(false);
-  const [type5Active, setType5Active] = useState(false);
-  const [type6Active, setType6Active] = useState(false);
+  // State for toggle buttons 删除？
+  // const [type1Active, setType1Active] = useState(false);
+  // const [type2Active, setType2Active] = useState(false);
+  // const [type3Active, setType3Active] = useState(false);
+  // const [type4Active, setType4Active] = useState(false);
+  // const [type5Active, setType5Active] = useState(false);
+  // const [type6Active, setType6Active] = useState(false);
 
   // Toggle button handlers
-  const toggleType1 = () => {
-    setType1Active(!type1Active);
-  };
+  // const toggleType1 = () => {
+  //   setType1Active(!type1Active);
+  // };
 
-  const toggleType2 = () => {
-    setType2Active(!type2Active);
-  };
+  // const toggleType2 = () => {
+  //   setType2Active(!type2Active);
+  // };
 
-  const toggleType3 = () => {
-    setType3Active(!type3Active);
-  };
+  // const toggleType3 = () => {
+  //   setType3Active(!type3Active);
+  // };
 
-  const toggleType4 = () => {
-    setType4Active(!type4Active);
-  };
+  // const toggleType4 = () => {
+  //   setType4Active(!type4Active);
+  // };
 
-  const toggleType5 = () => {
-    setType5Active(!type5Active);
-  };
+  // const toggleType5 = () => {
+  //   setType5Active(!type5Active);
+  // };
 
-  const toggleType6 = () => {
-    setType6Active(!type6Active);
-  };
+  // const toggleType6 = () => {
+  //   setType6Active(!type6Active);
+  // };
 
 
 
@@ -202,13 +239,13 @@ function Admin() {
   }, [shouldRefresh]);
 
   // 绑定 tag状态
-  const [activeTags, setActiveTags] = useState([]);
+  const [activeTag, setActiveTag] = useState(null);
 
   const toggleTag = (tag) => {
-    if (activeTags.includes(tag)) {
-      setActiveTags(activeTags.filter((t) => t !== tag));
+    if (activeTag === tag) {
+      setActiveTag(null); // 如果当前选中的标签与点击的标签相同，则取消选中
     } else {
-      setActiveTags([...activeTags, tag]);
+      setActiveTag(tag); // 否则将点击的标签设为选中
     }
   };
 
@@ -317,7 +354,7 @@ function Admin() {
                               <button className={styles.deleteButton} onClick={handleMusicDelete}>Delete</button>
                             </>
                           ): (
-                            <button className={styles.addButton}>Add</button>
+                            <button className={styles.addButton} onClick={handleMusicAdd}>Add</button>
                           )}
                         </div>
 
@@ -340,16 +377,19 @@ function Admin() {
                               />
                             </div>
                           ) : (
-                            // display uploaded music
                             <input
                               type="text"
                               placeholder="Enter Music Name"
                               value={musicName}
-                              onChange={(e) => setMusicName(e.target.value)}
-                              style={{ 
-                                border: 'none', 
-                                backgroundColor: '#F0F3F4', 
-                                width: '25vh', height: '7vh',
+                              onChange={(e) => {
+                                setMusicName(e.target.value);
+                                console.log('musicName:', e.target.value); // 添加这行以进行调试
+                              }}
+                              style={{
+                                border: 'none',
+                                backgroundColor: '#F0F3F4',
+                                width: '25vh',
+                                height: '7vh',
                               }}
                             />
                           )}
@@ -360,58 +400,130 @@ function Admin() {
                             <div className={styles.mainContentTopRightTypeHeader}>
                               <p>Type:</p>
                             </div>
-                            <div className={styles.mainContentTopRightTypeRow}>
-                              {selectedMusicTag !== 'All' && (
+                            {selectedMusicTag ? (
+                              <>
+                                <div className={styles.mainContentTopRightTypeRow}>
+
+
                                 <button
-                                  onClick={() => toggleTag('Vocal')}
-                                  className={`${styles.typeButton1} ${activeTags.includes('Vocal') ? styles.activeType1 : ''}`}
+                                  onClick={() => {
+                                    toggleTag('Vocal');
+                                    console.log(selectedMusicTag);
+                                  }}
+                                  className={`${styles.typeButton1} ${selectedMusicTag == 'Vocal' ? styles.activeType1 : ''}`}
                                 >
                                   Vocal
                                 </button>
-                              )}
-                              {selectedMusicTag !== 'All' && (
                                 <button
-                                  onClick={() => toggleTag('Ensembles')}
-                                  className={`${styles.typeButton2} ${activeTags.includes('Ensembles') ? styles.activeType2 : ''}`}
+                                  onClick={() => {
+                                    toggleTag('Ensembles');
+                                    console.log(selectedMusicTag);
+                                  }}
+                                  className={`${styles.typeButton2} ${selectedMusicTag == 'Ensembles' ? styles.activeType2 : ''}`}
                                 >
                                   Ensembles
                                 </button>
-                              )}
-                              {selectedMusicTag !== 'All' && (
                                 <button
                                   onClick={() => toggleTag('Slow Smoothing')}
-                                  className={`${styles.typeButton3} ${activeTags.includes('Slow Smoothing') ? styles.activeType3 : ''}`}
+                                  className={`${styles.typeButton3} ${selectedMusicTag == 'Slow Smoothing' ? styles.activeType3 : ''}`}
                                 >
                                   Slow Smoothing
                                 </button>
-                              )}
-                            </div>
-                            <div className={styles.mainContentTopRightTypeRow}>
-                              {selectedMusicTag !== 'All' && (
                                 <button
                                   onClick={() => toggleTag('Classical')}
-                                  className={`${styles.typeButton4} ${activeTags.includes('Classical') ? styles.activeType4 : ''}`}
+                                  className={`${styles.typeButton4} ${selectedMusicTag == 'Classical' ? styles.activeType4 : ''}`}
                                 >
                                   Classical
                                 </button>
-                              )}
-                              {selectedMusicTag !== 'All' && (
                                 <button
                                   onClick={() => toggleTag('Rhythmic')}
-                                  className={`${styles.typeButton5} ${activeTags.includes('Rhythmic') ? styles.activeType5 : ''}`}
+                                  className={`${styles.typeButton5} ${selectedMusicTag === 'Rhythmic' ? styles.activeType5 : ''}`}
                                 >
                                   Rhythmic
                                 </button>
-                              )}
-                              {selectedMusicTag !== 'All' && (
                                 <button
                                   onClick={() => toggleTag('Natural Sound')}
-                                  className={`${styles.typeButton6} ${activeTags.includes('Natural Sound') ? styles.activeType6 : ''}`}
+                                  className={`${styles.typeButton6} ${selectedMusicTag == 'Natural Sound' ? styles.activeType6 : ''}`}
                                 >
                                   Natural Sound
                                 </button>
-                              )}
-                            </div>
+                                </div>
+                              </>
+                            ) : (
+
+                              <div className={styles.mainContentTopRightTypeRow}>
+                              
+                                <button
+                                  onClick={() => {
+                                    toggleTag('Vocal');
+                                    setSelectedMusicTag('Vocal');
+                                  }}
+                                  className={`${styles.typeButton1} ${selectedMusicTag === 'Vocal' ? styles.activeType1 : ''}`}
+                                >
+                                  Vocal
+                                </button>
+                                <button
+                                  onClick={() => {
+                                    toggleTag('Ensembles');
+                                    setSelectedMusicTag('Ensembles');
+                                  }}
+                                  className={`${styles.typeButton2} ${selectedMusicTag === 'Ensembles' ? styles.activeType2 : ''}`}
+                                >
+                                  Ensembles
+                                </button>
+                                <button
+                                  onClick={() => {
+                                    toggleTag('Slow Smoothing');
+                                    setSelectedMusicTag('Slow Smoothing');
+                                  }}
+                                  className={`${styles.typeButton3} ${selectedMusicTag === 'Slow Smoothing' ? styles.activeType3 : ''}`}
+                                >
+                                  Slow Smoothing
+                                </button>
+                                <button
+                                  onClick={() => {
+                                    toggleTag('Classical');
+                                    setSelectedMusicTag('Classical');
+                                  }}
+                                  className={`${styles.typeButton4} ${selectedMusicTag === 'Classical' ? styles.activeType4 : ''}`}
+                                >
+                                  Classical
+                                </button>
+                                <button
+                                  onClick={() => {
+                                    toggleTag('Rhythmic');
+                                    setSelectedMusicTag('Rhythmic');
+                                  }}
+                                  className={`${styles.typeButton5} ${selectedMusicTag === 'Rhythmic' ? styles.activeType5 : ''}`}
+                                >
+                                  Rhythmic
+                                </button>
+                                <button
+                                  onClick={() => {
+                                    toggleTag('Natural Sound');
+                                    setSelectedMusicTag('Natural Sound');
+                                  }}
+                                  className={`${styles.typeButton6} ${selectedMusicTag === 'Natural Sound' ? styles.activeType6 : ''}`}
+                                >
+                                  Natural Sound
+                                </button>
+
+                                <select
+                                  value={selectedMusicTag}
+                                  onChange={(e) => setSelectedMusicTag(e.target.value)}
+                                >
+                                  <option value="All">All</option>
+                                  <option value="Vocal">Vocal</option>
+                                  <option value="Ensembles">Ensembles</option>
+                                  <option value="Slow Smoothing">Slow Smoothing</option>
+                                  <option value="Classical">Classical</option>
+                                  <option value="Rhythmic">Rhythmic</option>
+                                  <option value="Natural Sound">Natural Sound</option>
+                                </select>
+
+                              </div>
+
+                            )}
                           </div>
                         </div>
                       </div>
