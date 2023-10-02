@@ -263,13 +263,24 @@ box-shadow: 0 0 1vh rgba(55, 202, 55, 0.7);
     text-align: center;
 }
 
+
+/* Styling for the audio container wrapper */
+.audioContainerWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 95%
+}
+
 /* Styling for the audio container */
 .audioContainer {
     border-radius: 10px;
     text-align: center;
     background-color: #F0F3F4;
-    height: 13vh;
-    width: 77vh;
+    height: 100%;
+    width: 100%;
 }
 
 /* Styling for the image dropzone */
@@ -307,8 +318,8 @@ box-shadow: 0 0 1vh rgba(55, 202, 55, 0.7);
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 13vh;
-    width: 77vh;
+    height: 75%;
+    width: 95%;
 }
 
 /* Styling for the top division */
@@ -319,15 +330,6 @@ box-shadow: 0 0 1vh rgba(55, 202, 55, 0.7);
 /* Styling for the bottom division */
 .bottomDivision {
     flex: 1;
-}
-
-/* Styling for the audio container wrapper */
-.audioContainerWrapper {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
 }
 
 /* Styling for the bottom division at the top */

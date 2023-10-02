@@ -31,11 +31,14 @@ function Admin() {
     if (selectedMusic) {
       setSelectedMusicFile(selectedMusic.file);
       setSelectedMusicName(selectedMusic.name || '');
-      
-      // 更新活动标签为音乐的标签
       setSelectedMusicTag(selectedMusic.tags.filter(tag => tag !== 'All'));
       setSelectedMusicPicture(selectedMusic.picture || '');
-      // console.log(selectedMusicTag)
+
+      console.log('123')
+      console.log(selectedMusicFile)
+      console.log(selectedMusicPicture)
+      console.log(selectedMusicTag)
+      console.log('123')
     }
   };
 
@@ -132,8 +135,7 @@ function Admin() {
     axios.post('http://localhost:3300/admin', newMusic, { headers })
       .then((response) => {
         console.log('Music added successfully:', response.data);
-        // 可以根据需要进行重定向或更新音乐列表等操作
-        window.location.reload(); // 例如刷新页面以显示新添加的音乐
+        window.location.reload();
       })
       .catch((error) => {
         console.error('Error adding music:', error);
@@ -169,8 +171,6 @@ function Admin() {
   const [uploadedFile, setUploadedFile] = useState(null);
   // State for the uploaded image
   const [uploadedImage, setUploadedImage] = useState(null);
-  // State for the music name input
-  const [musicName, setMusicName] = useState('');
 
   // Handle file drop event
   const handleFileDrop = (acceptedFiles) => {
@@ -194,41 +194,6 @@ function Admin() {
     }
   };
 
-  // State for toggle buttons 删除？
-  // const [type1Active, setType1Active] = useState(false);
-  // const [type2Active, setType2Active] = useState(false);
-  // const [type3Active, setType3Active] = useState(false);
-  // const [type4Active, setType4Active] = useState(false);
-  // const [type5Active, setType5Active] = useState(false);
-  // const [type6Active, setType6Active] = useState(false);
-
-  // Toggle button handlers
-  // const toggleType1 = () => {
-  //   setType1Active(!type1Active);
-  // };
-
-  // const toggleType2 = () => {
-  //   setType2Active(!type2Active);
-  // };
-
-  // const toggleType3 = () => {
-  //   setType3Active(!type3Active);
-  // };
-
-  // const toggleType4 = () => {
-  //   setType4Active(!type4Active);
-  // };
-
-  // const toggleType5 = () => {
-  //   setType5Active(!type5Active);
-  // };
-
-  // const toggleType6 = () => {
-  //   setType6Active(!type6Active);
-  // };
-
-
-
   // 主动刷新页面
   const [shouldRefresh, setShouldRefresh] = useState(false);  
   useEffect(() => {  
@@ -238,14 +203,14 @@ function Admin() {
     }  
   }, [shouldRefresh]);
 
-  // 绑定 tag状态
-  const [activeTag, setActiveTag] = useState(null);
 
+  // const [activeTag, setActiveTag] = useState(null);
+  // 绑定tag状态
   const toggleTag = (tag) => {
-    if (activeTag === tag) {
-      setActiveTag(null); // 如果当前选中的标签与点击的标签相同，则取消选中
+    if (selectedMusicTag == tag) {
+      setSelectedMusicTag(null);
     } else {
-      setActiveTag(tag); // 否则将点击的标签设为选中
+      setSelectedMusicTag(tag);
     }
   };
 
@@ -380,10 +345,10 @@ function Admin() {
                             <input
                               type="text"
                               placeholder="Enter Music Name"
-                              value={musicName}
+                              value={selectedMusicName}
                               onChange={(e) => {
-                                setMusicName(e.target.value);
-                                console.log('musicName:', e.target.value); // 添加这行以进行调试
+                                setSelectedMusicName(e.target.value);
+                                console.log('musicName:', e.target.value);
                               }}
                               style={{
                                 border: 'none',
@@ -437,7 +402,7 @@ function Admin() {
                                 </button>
                                 <button
                                   onClick={() => toggleTag('Rhythmic')}
-                                  className={`${styles.typeButton5} ${selectedMusicTag === 'Rhythmic' ? styles.activeType5 : ''}`}
+                                  className={`${styles.typeButton5} ${selectedMusicTag == 'Rhythmic' ? styles.activeType5 : ''}`}
                                 >
                                   Rhythmic
                                 </button>
@@ -450,24 +415,22 @@ function Admin() {
                                 </div>
                               </>
                             ) : (
-
                               <div className={styles.mainContentTopRightTypeRow}>
-                              
                                 <button
                                   onClick={() => {
                                     toggleTag('Vocal');
-                                    setSelectedMusicTag('Vocal');
+                                    // setSelectedMusicTag('Vocal');
                                   }}
-                                  className={`${styles.typeButton1} ${selectedMusicTag === 'Vocal' ? styles.activeType1 : ''}`}
+                                  className={`${styles.typeButton1} ${selectedMusicTag == 'Vocal' ? styles.activeType1 : ''}`}
                                 >
                                   Vocal
                                 </button>
                                 <button
                                   onClick={() => {
                                     toggleTag('Ensembles');
-                                    setSelectedMusicTag('Ensembles');
+                                    // setSelectedMusicTag('Ensembles');
                                   }}
-                                  className={`${styles.typeButton2} ${selectedMusicTag === 'Ensembles' ? styles.activeType2 : ''}`}
+                                  className={`${styles.typeButton2} ${selectedMusicTag == 'Ensembles' ? styles.activeType2 : ''}`}
                                 >
                                   Ensembles
                                 </button>
@@ -476,7 +439,7 @@ function Admin() {
                                     toggleTag('Slow Smoothing');
                                     setSelectedMusicTag('Slow Smoothing');
                                   }}
-                                  className={`${styles.typeButton3} ${selectedMusicTag === 'Slow Smoothing' ? styles.activeType3 : ''}`}
+                                  className={`${styles.typeButton3} ${selectedMusicTag == 'Slow Smoothing' ? styles.activeType3 : ''}`}
                                 >
                                   Slow Smoothing
                                 </button>
@@ -485,7 +448,7 @@ function Admin() {
                                     toggleTag('Classical');
                                     setSelectedMusicTag('Classical');
                                   }}
-                                  className={`${styles.typeButton4} ${selectedMusicTag === 'Classical' ? styles.activeType4 : ''}`}
+                                  className={`${styles.typeButton4} ${selectedMusicTag == 'Classical' ? styles.activeType4 : ''}`}
                                 >
                                   Classical
                                 </button>
@@ -494,7 +457,7 @@ function Admin() {
                                     toggleTag('Rhythmic');
                                     setSelectedMusicTag('Rhythmic');
                                   }}
-                                  className={`${styles.typeButton5} ${selectedMusicTag === 'Rhythmic' ? styles.activeType5 : ''}`}
+                                  className={`${styles.typeButton5} ${selectedMusicTag == 'Rhythmic' ? styles.activeType5 : ''}`}
                                 >
                                   Rhythmic
                                 </button>
@@ -503,26 +466,11 @@ function Admin() {
                                     toggleTag('Natural Sound');
                                     setSelectedMusicTag('Natural Sound');
                                   }}
-                                  className={`${styles.typeButton6} ${selectedMusicTag === 'Natural Sound' ? styles.activeType6 : ''}`}
+                                  className={`${styles.typeButton6} ${selectedMusicTag == 'Natural Sound' ? styles.activeType6 : ''}`}
                                 >
                                   Natural Sound
                                 </button>
-
-                                <select
-                                  value={selectedMusicTag}
-                                  onChange={(e) => setSelectedMusicTag(e.target.value)}
-                                >
-                                  <option value="All">All</option>
-                                  <option value="Vocal">Vocal</option>
-                                  <option value="Ensembles">Ensembles</option>
-                                  <option value="Slow Smoothing">Slow Smoothing</option>
-                                  <option value="Classical">Classical</option>
-                                  <option value="Rhythmic">Rhythmic</option>
-                                  <option value="Natural Sound">Natural Sound</option>
-                                </select>
-
                               </div>
-
                             )}
                           </div>
                         </div>
@@ -568,11 +516,14 @@ function Admin() {
                   <div key={selectedMusicFile} className={styles.audioContainerWrapper}>
                     <div className={styles.audioContainer}>
                       <h1 style={{ marginTop: '2vh', textAlign: 'center' }}>Audio Play</h1>
-                      {selectedMusicFile ? (
+                      {selectedMusicName ? (
+                        <>
                         <audio controls>
-                          <source src={`/${selectedMusicFile}`} type="audio/mpeg" />
+                          <source src={selectedMusicFile} type="audio/mpeg" />
                           Your browser does not support the audio element.
                         </audio>
+                        {/* <h1>{selectedMusicFile}</h1> */}
+                        </>
                       ) : (
                         <p>No audio selected.</p>
                       )}
