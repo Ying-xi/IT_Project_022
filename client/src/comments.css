@@ -82,7 +82,7 @@ li {
 }
 
 /* set the size of the window: */
-a {
+ac {
 
   text-decoration: none;
   color: unset;
@@ -289,8 +289,6 @@ li:nth-child(6) .comments-cards {
   left: 23vh;
   bottom: 4vh;
   right: 4vh;
-  
- 
   padding: 0vw;
   background-color: #6844f7;
   color: white;

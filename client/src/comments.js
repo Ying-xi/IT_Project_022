@@ -1,5 +1,5 @@
 // comments.js
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './comments.css';
 import { useParams } from 'react-router-dom';
 function Comments() {
@@ -8,6 +8,14 @@ function Comments() {
 
     let backgroundImage;
 
+
+    //when jump to this page, start from the top of page:
+    useEffect(() => {
+        // 在页面加载后滚动到页面顶部
+        window.scrollTo(0, 0);
+      }, []);
+
+    //change the background as the index:
     switch (musicIndex) {
         case '0':
             backgroundImage = '/albums/album1.jpg';
@@ -82,99 +90,99 @@ function Comments() {
 
                         <li>
                             <div className="comments-cards ">
-                                <a href="">
+                                <ac href="">
                                     <span className="comments-username">Username1</span>
                                     <span>A vibrant tapestry of youth, accompanied by friendship and personal growth.</span>
-                                </a>
+                                </ac>
                             </div>
                         </li>
 
 
                         <li>
                             <div className="comments-cards ">
-                                <a href="">
+                                <ac href="">
                                     <span className="comments-username">Username2</span>
                                     <span>Model for generating Freedom and responsibility intertwine, painting a magnificent canvas to shape life's blueprinaaaaaaaaaaa aaaaaaaaaaa aaaaaaaat.</span>
-                                </a>
+                                </ac>
                             </div>
                         </li>
 
 
                         <li>
                             <div className="comments-cards ">
-                                <a href="">
+                                <ac href="">
                                     <span className="comments-username">Username3</span>
                                     <span>Model for generating Freedom and responsibility intertwine, painting a magnificent canvas to shape life's blueprint.</span>
-                                </a>
+                                </ac>
                             </div>
                         </li>
 
 
                         <li>
                             <div className="comments-cards ">
-                                <a href="">
+                                <ac href="">
                                     <span className="comments-username">Username4</span>
                                     <span>Model for generating Freedom and responsibility intertwine, painting a magnificent canvas to shape life's blueprint.</span>
-                                </a>
+                                </ac>
                             </div>
                         </li>
 
                         <li>
                             <div className="comments-cards ">
-                                <a href="">
+                                <ac href="">
                                     <span className="comments-username">Username4</span>
                                     <span>Model for generating Freedom and responsibility intertwine, painting a magnificent canvas to shape life's blueprint.</span>
-                                </a>
+                                </ac>
                             </div>
                         </li>                        <li>
                             <div className="comments-cards ">
-                                <a href="">
+                                <ac href="">
                                     <span className="comments-username">Username4</span>
                                     <span>Model for generating Freedom and responsibility intertwine, painting a magnificent canvas to shape life's blueprint.</span>
-                                </a>
+                                </ac>
                             </div>
                         </li>                        <li>
                             <div className="comments-cards ">
-                                <a href="">
+                                <ac href="">
                                     <span className="comments-username">Username4</span>
                                     <span>Model for generating Freedom and responsibility intertwine, painting a magnificent canvas to shape life's blueprint.</span>
-                                </a>
+                                </ac>
                             </div>
                         </li>                        <li>
                             <div className="comments-cards ">
-                                <a href="">
+                                <ac href="">
                                     <span className="comments-username">Username4</span>
                                     <span>Model for generating Freedom and responsibility intertwine, painting a magnificent canvas to shape life's blueprint.</span>
-                                </a>
+                                </ac>
                             </div>
                         </li>                        <li>
                             <div className="comments-cards ">
-                                <a href="">
+                                <ac href="">
                                     <span className="comments-username">Username4</span>
                                     <span>Model for generating Freedom and responsibility intertwine, painting a magnificent canvas to shape life's blueprint.</span>
-                                </a>
+                                </ac>
                             </div>
                         </li>                        <li>
                             <div className="comments-cards ">
-                                <a href="">
+                                <ac href="">
                                     <span className="comments-username">Username4</span>
                                     <span>Model for generating Freedom and responsibility intertwine, painting a magnificent canvas to shape life's blueprint.</span>
-                                </a>
+                                </ac>
                             </div>
                         </li>
                         <li>
                             <div className="comments-cards ">
-                                <a href="">
+                                <ac href="">
                                     <span className="comments-username">Username4</span>
                                     <span>Model for generating Freedom and responsibility intertwine, painting a magnificent canvas to shape life's blueprint.</span>
-                                </a>
+                                </ac>
                             </div>
                         </li>                        <li>
                             <div className="comments-cards ">
-                                <a href="">
+                                <ac href="">
                                     <span className="comments-username">Username4</span>
                                     <span>Model for generating Freedom and responsibility intertwine, painting a magnificent canvas to shape life's blueprint.</span>
-                                </a>
+                                </ac>
                             </div>
                         </li>
 
