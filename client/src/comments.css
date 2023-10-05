@@ -21,7 +21,7 @@
 .comments-void {
   /* 组件特定的样式 */
   width: 100%;
-  max-width: 1024px;
+  max-width: 66vw;
   margin: auto;
   position: relative;
   aspect-ratio: 1 / 1;
@@ -57,52 +57,52 @@ li {
 /* 设置卡片样式 */
 .comments-cards {
   /* 组件特定的样式 */
-  width: 27%;
+  width: 17vw;
+
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  padding: 16px 24px;
-  gap: 8px;
-  background: #a87878;
-  box-shadow: 0px 4px 12px rgba(70, 0, 255, 0.1),
-    0px 16px 32px rgba(165, 135, 255, 0.1);
-  border-radius: 12px;
-  font: 400 14px '';
+  padding: 1.5vh 2.25vh;
+  gap: 1vh;
+  background: #FFFFFF;
+  
+
+  border-radius: 1.25vw;
+  font: 550 0.9vw '';
   color: #535062;
   animation: rotateCCW calc(var(--rotate-speed) * 1s) var(--easing) infinite;
+  pointer-events: none;
 }
 
 /* 设置图片样式 */
-.comments-card img {
+.comments-cards img {
   /* 组件特定的样式 */
   width: 100%;
 }
 
-/* 设置链接样式 */
-.comments-link {
-  /* 组件特定的样式 */
+/* set the size of the window: */
+a {
+
   text-decoration: none;
   color: unset;
   display: block;
-  height: 80px;
+  height: 100%;
   overflow: hidden;
 }
 
 /* 设置模型名称样式 */
-.comments-model-name {
+.comments-username{
   /* 组件特定的样式 */
   font-weight: 600;
-  font-size: 18px;
+  font-size: 2.5vh;
   line-height: 150%;
   color: #3B2ED0;
   display: block;
-  letter-spacing: 3px;
+  letter-spacing: 0.1vw;
   color: #6844f7;
 }
 
-/* 设置SVG样式 */
-.comments-svg {
-  /* 组件特定的样式 */
+svg {
   position: absolute;
   top: 0;
   left: 0;
@@ -110,39 +110,40 @@ li {
 }
 
 /* 设置不同列表项的动画延迟 */
-.comments-li:nth-child(2),
-.comments-li:nth-child(2) .comments-card {
-  animation-delay: calc((var(--rotate-speed) / var(--count)) * -1s);
+li:nth-child(2),
+li:nth-child(2) .comments-cards {
+  animation-delay: calc((var(--rotate-speed)/var(--count)) * -1s);
 }
 
-.comments-li:nth-child(3),
-.comments-li:nth-child(3) .comments-card {
-  animation-delay: calc((var(--rotate-speed) / var(--count)) * -2s);
+li:nth-child(3),
+li:nth-child(3) .comments-cards {
+  animation-delay: calc((var(--rotate-speed)/var(--count)) * -2s);
 }
 
-.comments-li:nth-child(4),
-.comments-li:nth-child(4) .comments-card {
-  animation-delay: calc((var(--rotate-speed) / var(--count)) * -3s);
+li:nth-child(4),
+li:nth-child(4) .comments-cards {
+  animation-delay: calc((var(--rotate-speed)/var(--count)) * -3s);
 }
 
-.comments-li:nth-child(5),
-.comments-li:nth-child(5) .comments-card {
-  animation-delay: calc((var(--rotate-speed) / var(--count)) * -4s);
+li:nth-child(5),
+li:nth-child(5) .comments-cards {
+  animation-delay: calc((var(--rotate-speed)/var(--count)) * -4s);
 }
 
-.comments-li:nth-child(6),
-.comments-li:nth-child(6) .comments-card {
-  animation-delay: calc((var(--rotate-speed) / var(--count)) * -5s);
+li:nth-child(6),
+li:nth-child(6) .comments-cards {
+  animation-delay: calc((var(--rotate-speed)/var(--count)) * -5s);
 }
+
 
 /* 定义顺时针旋转动画 */
 @keyframes rotateCW {
   from {
-    transform: translate3d(0px, -50%, -1px) rotate(-45deg);
+    transform: translate3d(0vh, -50%, -1vh) rotate(-45deg);
   }
 
   to {
-    transform: translate3d(0px, -50%, 0px) rotate(-315deg);
+    transform: translate3d(0vh, -50%, 0vh) rotate(-315deg);
   }
 }
 
@@ -165,8 +166,8 @@ li {
             top: 50%;
             transform: translate(-50%, -50%);
             background: #FFFFFF;
-            box-shadow: 0px 18px 36px -18px rgba(12, 5, 46, 0.3),
-                0px 30px 60px -12px rgba(12, 5, 46, 0.25);
+            box-shadow: 0vw 3vw 6vw -3vw rgba(12, 5, 46, 0.3),
+                0vw 5vw 10vw -2vw rgba(12, 5, 46, 0.25);
             border-radius: 50%;
             background-size: cover;
             background-position: -3vw 0;
@@ -182,8 +183,8 @@ li {
             transform: translate(-50%, -50%);
             background: #F5F4FE;
             opacity: 0.5;
-            box-shadow: 0px 18px 36px -18px rgba(12, 5, 46, 0.3),
-                0px 30px 60px -12px rgba(12, 5, 46, 0.25);
+            box-shadow: 0vw 3vw 12vw -6vw rgba(12, 5, 46, 0.3),
+                0vw 5vw 10vw -2vw rgba(12, 5, 46, 0.25);
             border-radius: 50%;
             background-image: url('../public/03.gif');
         }
@@ -191,14 +192,14 @@ li {
         /* 设置最后一个圆样式 */
         .last-circle {
             position: absolute;
-            width: 50vw;
+            width: 48vw;
             aspect-ratio: 1 / 1;
             left: 50%;
             top: 50%;
             transform: translate(-50%, -50%);
             background: #F5F4FE;
             opacity: 0.25;
-            box-shadow: 0px 18px 36px -18px rgba(12, 5, 46, 0.3), 0px 30px 60px -12px rgba(12, 5, 46, 0.25);
+            box-shadow: 0vw 3vw 12vw -6vw rgba(12, 5, 46, 0.3), 0vw 5vw 10vw -2vw rgba(12, 5, 46, 0.25);
             border-radius: 50%;
             background-image: url('../public/03.gif');
         }
@@ -206,8 +207,8 @@ li {
         /* 设置裁剪样式 */
         .crop {
             
-            -webkit-mask-image: linear-gradient(90deg, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0) 10%,
-             rgba(0, 0, 0, 1) 10%, rgba(0, 0, 0, 1));
+            -webkit-mask-image: linear-gradient(90deg, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0) 50%,
+             rgba(0, 0, 0, 1) 50%, rgba(0, 0, 0, 1));
         }
 
         /* 设置遮罩样式 */
@@ -230,7 +231,7 @@ li {
         .mask:after {
             content: "";
             position: absolute;
-            width: 1px;
+            width: 0.075vw;
             height: 100%;
             right: 0;
             display: block;

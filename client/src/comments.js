@@ -30,12 +30,12 @@ function Comments() {
 
 
 
-    
+
     return (
         //background:
 
         <div
-            className="app-container"
+            className="comments-page"
             style={{
                 backgroundImage: `url(${backgroundImage})`,
                 backgroundSize: '100% 100%',
@@ -45,62 +45,121 @@ function Comments() {
             }}
         >
 
-      <div className="comments-void" id="comments-void">
-            <div className="crop">
-                <ul id="card-list" style={{ '--count': 6 }}>
-                    <li>
-                        <div className="card">
-                            <a href="">
-                                <span className="model-name">2014-2017</span>
-                                <span>A vibrant tapestry of youth, accompanied by friendship and personal growth.</span>
-                            </a>
-                        </div>
-                    </li>
-                    <li>
-                        <div className="card">
-                            <a href="">
-                                <img src="./03.gif" alt="" />
-                            </a>
-                        </div>
-                    </li>
-                    <li>
-                        <div className="card">
-                            <a href="">
-                                <span className="model-name">2017-2020</span>
-                                <span>Model for generating Freedom and responsibility intertwine, painting a magnificent canvas to shape life's blueprint.</span>
-                            </a>
-                        </div>
-                    </li>
-                    <li>
-                        <div className="card">
-                            <a href="">
-                                <img src="./03.gif" alt="" />
-                            </a>
-                        </div>
-                    </li>
-                    <li>
-                        <div className="card">
-                            <a href="">
-                                <span className="model-name">2020-2024</span>
-                                <span>Model for generating highly dimensional, mostly numeric, tabular data</span>
-                            </a>
-                        </div>
-                    </li>
-                    <li>
-                        <div className="card">
-                            <a href="">
-                                <img src="./03.gif" alt="" />
-                            </a>
-                        </div>
-                    </li>
-                </ul>
-                <div className="last-circle"></div>
-                <div className="second-circle"></div>
+            <div className="comments-void" id="comments-void">
+                <div className="crop">
+
+                    
+                    <ul id="card-list" style={{ '--count': 6 }}>
+
+                        
+                        <li>
+                            <div className="comments-cards ">
+                                <a href="">
+                                    <span className="comments-username">Username1</span>
+                                    <span>A vibrant tapestry of youth, accompanied by friendship and personal growth.</span>
+                                </a>
+                            </div>
+                        </li>
+
+
+                        <li>
+                            <div className="comments-cards ">
+                                <a href="">
+                                    <span className="comments-username">Username2</span>
+                                    <span>Model for generating Freedom and responsibility intertwine, painting a magnificent canvas to shape life's blueprinaaaaaaaaaaa aaaaaaaaaaa aaaaaaaat.</span>
+                                </a>
+                            </div>
+                        </li>
+
+
+                        <li>
+                            <div className="comments-cards ">
+                                <a href="">
+                                    <span className="comments-username">Username3</span>
+                                    <span>Model for generating Freedom and responsibility intertwine, painting a magnificent canvas to shape life's blueprint.</span>
+                                </a>
+                            </div>
+                        </li>
+
+
+                        <li>
+                            <div className="comments-cards ">
+                                <a href="">
+                                    <span className="comments-username">Username4</span>
+                                    <span>Model for generating Freedom and responsibility intertwine, painting a magnificent canvas to shape life's blueprint.</span>
+                                </a>
+                            </div>
+                        </li>
+
+                        <li>
+                            <div className="comments-cards ">
+                                <a href="">
+                                    <span className="comments-username">Username4</span>
+                                    <span>Model for generating Freedom and responsibility intertwine, painting a magnificent canvas to shape life's blueprint.</span>
+                                </a>
+                            </div>
+                        </li>                        <li>
+                            <div className="comments-cards ">
+                                <a href="">
+                                    <span className="comments-username">Username4</span>
+                                    <span>Model for generating Freedom and responsibility intertwine, painting a magnificent canvas to shape life's blueprint.</span>
+                                </a>
+                            </div>
+                        </li>                        <li>
+                            <div className="comments-cards ">
+                                <a href="">
+                                    <span className="comments-username">Username4</span>
+                                    <span>Model for generating Freedom and responsibility intertwine, painting a magnificent canvas to shape life's blueprint.</span>
+                                </a>
+                            </div>
+                        </li>                        <li>
+                            <div className="comments-cards ">
+                                <a href="">
+                                    <span className="comments-username">Username4</span>
+                                    <span>Model for generating Freedom and responsibility intertwine, painting a magnificent canvas to shape life's blueprint.</span>
+                                </a>
+                            </div>
+                        </li>                        <li>
+                            <div className="comments-cards ">
+                                <a href="">
+                                    <span className="comments-username">Username4</span>
+                                    <span>Model for generating Freedom and responsibility intertwine, painting a magnificent canvas to shape life's blueprint.</span>
+                                </a>
+                            </div>
+                        </li>                        <li>
+                            <div className="comments-cards ">
+                                <a href="">
+                                    <span className="comments-username">Username4</span>
+                                    <span>Model for generating Freedom and responsibility intertwine, painting a magnificent canvas to shape life's blueprint.</span>
+                                </a>
+                            </div>
+                        </li>
+                        <li>
+                            <div className="comments-cards ">
+                                <a href="">
+                                    <span className="comments-username">Username4</span>
+                                    <span>Model for generating Freedom and responsibility intertwine, painting a magnificent canvas to shape life's blueprint.</span>
+                                </a>
+                            </div>
+                        </li>                        <li>
+                            <div className="comments-cards ">
+                                <a href="">
+                                    <span className="comments-username">Username4</span>
+                                    <span>Model for generating Freedom and responsibility intertwine, painting a magnificent canvas to shape life's blueprint.</span>
+                                </a>
+                            </div>
+                        </li>
+                        
+
+
+                    </ul>
+                    <div className="last-circle"></div>
+                    <div className="second-circle"></div>
+                </div>
+                <div className="mask"></div>
+                <div className="center-circle"></div>
             </div>
-            <div className="mask"></div>
-            <div className="center-circle"></div>
-            </div>
-    </div>
+        </div>
     );
 }
 
