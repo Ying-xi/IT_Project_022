@@ -72,6 +72,7 @@ li {
   color: #535062;
   animation: rotateCCW calc(var(--rotate-speed) * 1s) var(--easing) infinite;
   pointer-events: none;
+    border: 0.1vw solid #3b2ed06e; /* 添加1像素黑色边框 */
 }
 
 /* 设置图片样式 */
@@ -94,11 +95,11 @@ a {
 .comments-username{
   /* 组件特定的样式 */
   font-weight: 600;
-  font-size: 2.5vh;
+  font-size: 2.75vh;
   line-height: 150%;
   color: #3B2ED0;
   display: block;
-  letter-spacing: 0.1vw;
+  letter-spacing: 0.07vw;
   color: #6844f7;
 }
 
@@ -214,6 +215,7 @@ li:nth-child(6) .comments-cards {
         /* 设置遮罩样式 */
         .mask {
             position: absolute;
+            
             top: 0;
             left: 0;
             bottom: 0;
@@ -221,10 +223,10 @@ li:nth-child(6) .comments-cards {
             background-position: 100% 50%;
             background-repeat: no-repeat;
             background-image: radial-gradient(100% 50% at 100% 50%, rgba(60, 26, 229, 0.25) 0%,
-             rgba(59, 26, 229, 0.241896) 20%,
-                    rgba(53, 26, 229, 0.1872) 40%,
-                    rgba(41, 23, 240, 0.104) 60%,
-                    rgba(34, 26, 229, 0.0184296) 90%, rgba(32, 26, 229, 0) 100%);
+             rgba(59, 26, 229, 0.241896) 10%,
+                    rgba(53, 26, 229, 0.1872) 15%,
+                    rgba(41, 23, 240, 0.104) 25%,
+                    rgba(34, 26, 229, 0.0184296) 30%, rgba(32, 26, 229, 0) 35%);
         }
 
         /* 设置遮罩样式后的效果 */
@@ -240,3 +242,66 @@ li:nth-child(6) .comments-cards {
         }
 
 
+        .comments-window {
+          position: absolute;
+          top: 25vh;
+          left: -2vw;
+          bottom: 41vh;
+          width: 26.5vw;
+          height: 5 vw;
+          margin: 1.5vh;
+          border-radius: 3vh;
+          border: black;
+          
+          background: linear-gradient(to bottom, #6d4bf5da 13%, #ffffffe1 13%); /* 使用线性渐变设置背景色 */
+          
+        }
+.comments-window h2 {
+  position: absolute;
+  top: 4%; /* 调整标题在窗口上部的垂直位置 */
+  left: 50%;
+  transform: translateX(-50%);
+  color: #fff; 
+  font-size: 3.5vh;
+}
+
+
+
+/* 输入框样式 */
+.comments-input {
+  position: absolute;
+            
+  top: 13vh;
+  left: 4vh;
+  bottom: 13vh;
+  right: 4vh;
+  padding: 0.5vh;
+  border: 1px solid #ccc;
+  border-radius: 0.25rem;
+  margin-bottom: 0.5rem;
+}
+
+/* 发送按钮样式 */
+.comments-button {  
+  position: absolute;
+            
+  top: 62.5vh;
+  left: 23vh;
+  bottom: 4vh;
+  right: 4vh;
+  
+ 
+  padding: 0vw;
+  background-color: #6844f7;
+  color: white;
+  border: none;
+  border-radius: 0.5vw;
+  cursor: pointer;
+}
+
+.comments-button:hover {
+
+    transform: scale(1.1); /* 放大按钮 */
+    background-color: #532ee5; /* 改变背景颜色 */
+  
+}
