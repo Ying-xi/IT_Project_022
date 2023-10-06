@@ -12,9 +12,9 @@ IT_Project_022/
   │   └── ...              
   │
   ├── server/              
-  │   ├── controllers/     
+  │   ├── handlers/     
   │   ├── models/          
-  │   ├── routes/          
+  │   ├── routers/          
   │   ├── app.js           
   │   ├── server.js        
   │   └── package.json     
