@@ -1,8 +1,33 @@
-import React, { Component } from 'react';
+import React, {useEffect, useState, Component } from 'react';
 import './albums.css';
 import { Link } from 'react-router-dom';
+import axios from 'axios'
 
 class Albums extends Component {
+
+    componentDidMount() {
+        const token = localStorage.getItem('token');
+        console.log(token);
+    
+        if (token) {
+            const headers = {
+                Authorization: `Bearer ${token}`,
+            };
+
+            axios.get('http://localhost:3300/albumPlayer', { headers })
+                .then((response) => {
+                    console.log('Data from the backend:', response.data);
+                    this.setState({ musicItems: response.data.data });
+                })
+                .catch(error => console.error('Error fetching albums:', error));
+        }
+
+        // Add a rolling event listener
+        this.handleScroll();
+        window.addEventListener('scroll', this.handleScroll);
+    }
+
+
     constructor(props) {
         super(props);
         this.state = {
@@ -10,73 +35,73 @@ class Albums extends Component {
             backgroundImage: '',
             currentMusicIndex: null,
 
-            musicItems: [
-                {
-                    type: 'Realxing Music',
-                    title: 'Name',
-                    imageUrl: '/albums/album1.jpg',
-                    lists: [
-                        {
-                            musicName: 'AuldLangSyne',
-                            musicUrl: '/songs/AuldLangSyne.mp3'
-                        },
-                        {
-                            musicName: 'Song 2',
-                            musicUrl: '/songs/Bleu.mp3'
-                        }
-                    ],
-                },
-                {
-                    type: 'White noise',
-                    title: 'Name',
-                    imageUrl: '/albums/album2.jpg',
-                    lists: [
-                        {
-                            musicName: 'Song 1',
-                            musicUrl: '/songs/AuldLangSyne.mp3'
-                        },
-                        {
-                            musicName: 'Song 2',
-                            musicUrl: '/songs/Bleu.mp3'
-                        }
-                    ],
-                },
-                {
-                    type: 'Jazz Music',
-                    title: 'Name',
-                    imageUrl: '/albums/album3.jpg',
-                    lists: [
-                        {
-                            musicName: 'Song 1',
-                            musicUrl: '/songs/AuldLangSyne.mp3'
-                        },
-                        {
-                            musicName: 'Song 2',
-                            musicUrl: '/songs/Bleu.mp3'
-                        }
-                    ]
-                },
-                {
-                    type: 'Classic Music',
-                    title: 'Name',
-                    imageUrl: '/albums/album4.jpg',
-                    lists: [
-                        {
-                            musicName: 'Song 1',
-                            musicUrl: '/songs/AuldLangSyne.mp3'
-                        },
-                        {
-                            musicName: 'Song 2',
-                            musicUrl: '/songs/Bleu.mp3'
-                        }
-                    ]
-                },
-            ],
+            musicItems: [],
+            // musicItems: [
+            //     {
+            //         type: 'Realxing Music',
+            //         title: 'Name',
+            //         imageUrl: '/albums/album1.jpg',
+            //         lists: [
+            //             {
+            //                 musicName: 'AuldLangSyne',
+            //                 musicUrl: '/songs/AuldLangSyne.mp3'
+            //             },
+            //             {
+            //                 musicName: 'Song 2',
+            //                 musicUrl: '/songs/Bleu.mp3'
+            //             }
+            //         ],
+            //     },
+            //     {
+            //         type: 'White noise',
+            //         title: 'Name',
+            //         imageUrl: '/albums/album2.jpg',
+            //         lists: [
+            //             {
+            //                 musicName: 'Song 1',
+            //                 musicUrl: '/songs/AuldLangSyne.mp3'
+            //             },
+            //             {
+            //                 musicName: 'Song 2',
+            //                 musicUrl: '/songs/Bleu.mp3'
+            //             }
+            //         ],
+            //     },
+            //     {
+            //         type: 'Jazz Music',
+            //         title: 'Name',
+            //         imageUrl: '/albums/album3.jpg',
+            //         lists: [
+            //             {
+            //                 musicName: 'Song 1',
+            //                 musicUrl: '/songs/AuldLangSyne.mp3'
+            //             },
+            //             {
+            //                 musicName: 'Song 2',
+            //                 musicUrl: '/songs/Bleu.mp3'
+            //             }
+            //         ]
+            //     },
+            //     {
+            //         type: 'Classic Music',
+            //         title: 'Name',
+            //         imageUrl: '/albums/album4.jpg',
+            //         lists: [
+            //             {
+            //                 musicName: 'Song 1',
+            //                 musicUrl: '/songs/AuldLangSyne.mp3'
+            //             },
+            //             {
+            //                 musicName: 'Song 2',
+            //                 musicUrl: '/songs/Bleu.mp3'
+            //             }
+            //         ]
+            //     },
+            // ],
         };
 
     }
-
-    //music play
+    
     playMusic = (musicIndex, songIndex, isManual = true) => {
         const { musicItems } = this.state;
         const updatedMusicItems = [...musicItems];
@@ -137,10 +162,10 @@ class Albums extends Component {
     };
 
     // When the user is scrolling on the screen:
-    componentDidMount() {
-        this.handleScroll();
-        window.addEventListener('scroll', this.handleScroll);
-    }
+    // componentDidMount() {
+    //     this.handleScroll();
+    //     window.addEventListener('scroll', this.handleScroll);
+    // }
 
     componentWillUnmount() {
         window.removeEventListener('scroll', this.handleScroll);

@@ -72,7 +72,7 @@ function Comments() {
 
                     <textarea
                         className="comments-input"
-                        placeholder="输入你的评论..."
+                        placeholder="Enter your comments..."
                         value={comment}
                         onChange={handleCommentChange}
                         

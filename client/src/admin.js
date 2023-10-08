@@ -34,11 +34,11 @@ function Admin() {
       setSelectedMusicTag(selectedMusic.tags.filter(tag => tag !== 'All'));
       setSelectedMusicPicture(selectedMusic.picture || '');
 
-      console.log('123')
+      console.log('--------')
       console.log(selectedMusicFile)
       console.log(selectedMusicPicture)
       console.log(selectedMusicTag)
-      console.log('123')
+      console.log('--------')
     }
   };
 
@@ -131,7 +131,7 @@ function Admin() {
       Authorization: `Bearer ${token}`,
     };
 
-    // 发送 POST 请求将新音乐数据发送到后端
+    // Send POST to backend
     axios.post('http://localhost:3300/admin', newMusic, { headers })
       .then((response) => {
         console.log('Music added successfully:', response.data);
