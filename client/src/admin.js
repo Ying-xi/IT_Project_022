@@ -231,7 +231,7 @@ function Admin() {
                 </div>
                 <div className={styles.topContentBottom}>
                   <h1 className={styles.musicHeader}>
-                    Admin page
+                    Admin Management
                   </h1>
                 </div>
               </div>
@@ -327,8 +327,8 @@ function Admin() {
                           {selectedMusicFile ? (
                             <div 
                               style={{
-                                marginLeft: '2vh',
-                                marginRight: '2vh',
+                                marginLeft: '2vw',
+                                marginRight: '2vw',
                                 marginTop: '2vh',
                                 marginBottom: '2vh',
                               }}>
@@ -368,50 +368,48 @@ function Admin() {
                             {selectedMusicTag ? (
                               <>
                                 <div className={styles.mainContentTopRightTypeRow}>
-
-
-                                <button
+                                  <button
                                   onClick={() => {
                                     toggleTag('Vocal');
                                     console.log(selectedMusicTag);
                                   }}
                                   className={`${styles.typeButton1} ${selectedMusicTag == 'Vocal' ? styles.activeType1 : ''}`}
-                                >
+                                  >
                                   Vocal
-                                </button>
-                                <button
-                                  onClick={() => {
-                                    toggleTag('Ensembles');
-                                    console.log(selectedMusicTag);
-                                  }}
-                                  className={`${styles.typeButton2} ${selectedMusicTag == 'Ensembles' ? styles.activeType2 : ''}`}
-                                >
-                                  Ensembles
-                                </button>
-                                <button
-                                  onClick={() => toggleTag('Slow Smoothing')}
-                                  className={`${styles.typeButton3} ${selectedMusicTag == 'Slow Smoothing' ? styles.activeType3 : ''}`}
-                                >
-                                  Slow Smoothing
-                                </button>
-                                <button
-                                  onClick={() => toggleTag('Classical')}
-                                  className={`${styles.typeButton4} ${selectedMusicTag == 'Classical' ? styles.activeType4 : ''}`}
-                                >
-                                  Classical
-                                </button>
-                                <button
-                                  onClick={() => toggleTag('Rhythmic')}
-                                  className={`${styles.typeButton5} ${selectedMusicTag == 'Rhythmic' ? styles.activeType5 : ''}`}
-                                >
-                                  Rhythmic
-                                </button>
-                                <button
-                                  onClick={() => toggleTag('Natural Sound')}
-                                  className={`${styles.typeButton6} ${selectedMusicTag == 'Natural Sound' ? styles.activeType6 : ''}`}
-                                >
-                                  Natural Sound
-                                </button>
+                                  </button>
+                                  <button
+                                    onClick={() => {
+                                      toggleTag('Ensembles');
+                                      console.log(selectedMusicTag);
+                                    }}
+                                    className={`${styles.typeButton2} ${selectedMusicTag == 'Ensembles' ? styles.activeType2 : ''}`}
+                                  >
+                                    Ensembles
+                                  </button>
+                                  <button
+                                    onClick={() => toggleTag('Slow Smoothing')}
+                                    className={`${styles.typeButton3} ${selectedMusicTag == 'Slow Smoothing' ? styles.activeType3 : ''}`}
+                                  >
+                                    Slow Smoothing
+                                  </button>
+                                  <button
+                                    onClick={() => toggleTag('Classical')}
+                                    className={`${styles.typeButton4} ${selectedMusicTag == 'Classical' ? styles.activeType4 : ''}`}
+                                  >
+                                    Classical
+                                  </button>
+                                  <button
+                                    onClick={() => toggleTag('Rhythmic')}
+                                    className={`${styles.typeButton5} ${selectedMusicTag == 'Rhythmic' ? styles.activeType5 : ''}`}
+                                  >
+                                    Rhythmic
+                                  </button>
+                                  <button
+                                    onClick={() => toggleTag('Natural Sound')}
+                                    className={`${styles.typeButton6} ${selectedMusicTag == 'Natural Sound' ? styles.activeType6 : ''}`}
+                                  >
+                                    Natural Sound
+                                  </button>
                                 </div>
                               </>
                             ) : (

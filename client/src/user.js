@@ -5,7 +5,11 @@ import MusicList from './components/MusicList';
 import axios from 'axios'
 
 
-
+/*
+    User management page, considering security issues,
+    users are temporarily not allowed to update the database,
+    suspended development.
+ */
 function User() {
     //parameters state
     const [selectedMusicId, setSelectedMusicId] = useState(null); 
