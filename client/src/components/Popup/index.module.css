@@ -1,0 +1,29 @@
+.popup-wrap {
+}
+
+.mask {
+  background-color: rgba(0, 0, 0, 0.647);
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.popup-wrap.show {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.popup-wrap.hide {
+  display: none;
+}
+
+.popup-content {
+  z-index: 999;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -88%);
+}

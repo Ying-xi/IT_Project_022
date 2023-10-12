@@ -9,6 +9,7 @@ import User from './user'
 import Admin_playlist from "./admin_playlist";
 import Albums from './albums'
 import Comments from './comments'
+import Keyboard from './keyboard'
 
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
                     <Route path='/login' element={<Login />} />
                     <Route path='/admin' element={<Admin />} />
                     <Route path='/albums' element={<Albums />} />
+                    <Route path='/keyboard' element={<Keyboard />} />
                     <Route path='/admin_playlist' element={<Admin_playlist />}/>
                     <Route path='/comments/:musicIndex' element={<Comments />} />
                 </Routes>
