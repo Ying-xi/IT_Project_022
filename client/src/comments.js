@@ -72,11 +72,9 @@ function Comments() {
 
                     <textarea
                         className="comments-input"
-<<<<<<< HEAD
-                        placeholder=" input your comments here: "
-=======
-                        placeholder="Enter your comments..."
->>>>>>> ae27999fe3e3c7b60857b7df847ecc012fdf83c1
+                        placeholder=" Enter your comments here: "
+
+
                         value={comment}
                         onChange={handleCommentChange}
                         

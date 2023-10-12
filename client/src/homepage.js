@@ -16,7 +16,7 @@ function Homepage() {
       <Link to='/keyboard' className='window'>
         <img src='/homepage/play_music1.jpg' alt='#'/>
       </Link>
-      <Link to='/albums' className='window'>
+      <Link to='/comments/0' className='window'>
         <img src='/homepage/playlist1.jpg' alt='#'/>
       </Link>
     </div>
