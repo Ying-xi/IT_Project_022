@@ -166,14 +166,14 @@ class Albums extends Component {
                         <div
                             key={musicIndex}
                             className={`item ${this.state.activeItemIndex === musicIndex ? 'item--active' : ''}`}
-                            data-text={item.type}
+                            data-text={item.description}
                         >
                             <div className="content">
 
                                 <Link to={`/comments/${musicIndex}`}>
-                                    <img className="img" src={item.imageUrl} alt={item.type} />
+                                    <img className="img" src={item.imageUrl} alt={item.description} />
                                 </Link>
-                                <h2 className="content-title">{item.title}</h2>
+                                <h2 className="content-title">{item.name}</h2>
                                 <p className="content-songs">
                                     {item.lists.map((song, songIndex) => (
                                         <span key={songIndex}>

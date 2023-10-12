@@ -174,7 +174,7 @@ li:nth-child(6) .comments-cards {
   background-position: -3vw 0;
 }
 
-/* 设置第二个圆样式 */
+/* Set the second circle style */
 .second-circle {
   position: absolute;
   width: 22vw;
@@ -190,7 +190,7 @@ li:nth-child(6) .comments-cards {
   background-image: url('../public/comments/03.gif');
 }
 
-/* 设置最后一个圆样式 */
+/* Set last circle style */
 .last-circle {
   position: absolute;
   width: 48vw;

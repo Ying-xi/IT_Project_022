@@ -1,0 +1,38 @@
+{
+  "files": {
+    "main.css": "/static/css/main.04d5bc38.css",
+    "main.js": "/static/js/main.ab67b3db.js",
+    "static/media/03.gif": "/static/media/03.8d314e955b1e4f42cc7c.gif",
+    "static/media/login.jpg": "/static/media/login.090184a013a0d01f89af.jpg",
+    "static/media/background.jpg": "/static/media/background.7993a86d93bdcf748449.jpg",
+    "static/media/background_nologo.jpg": "/static/media/background_nologo.8ca23c499c79b7aa2d66.jpg",
+    "static/media/do.mp3": "/static/media/do.0f8e7c24715feda5b1a0.mp3",
+    "static/media/down_do.mp3": "/static/media/down_do.c8e438a5d61c6fae89e4.mp3",
+    "static/media/down_fa.mp3": "/static/media/down_fa.332ca59f03926c527089.mp3",
+    "static/media/down_la.mp3": "/static/media/down_la.b730f25bcc90b895e145.mp3",
+    "static/media/down_mi.mp3": "/static/media/down_mi.3a9571142848b20ba6a6.mp3",
+    "static/media/down_re.mp3": "/static/media/down_re.37edc0f78acf46c4a3c3.mp3",
+    "static/media/down_so.mp3": "/static/media/down_so.22aa9be2e873e64e565e.mp3",
+    "static/media/down_ti.mp3": "/static/media/down_ti.263a61c0424d4f522e8b.mp3",
+    "static/media/fa.mp3": "/static/media/fa.ada7c1327d41b3e4f044.mp3",
+    "static/media/la.mp3": "/static/media/la.a478a4cf16f8fb73dd87.mp3",
+    "static/media/mi.mp3": "/static/media/mi.b756eb8c320904b75fcd.mp3",
+    "static/media/re.mp3": "/static/media/re.079ffe151fb81d0f3d6e.mp3",
+    "static/media/so.mp3": "/static/media/so.23f0cf1bf81368c6a8ed.mp3",
+    "static/media/ti.mp3": "/static/media/ti.9456be8856648207a63a.mp3",
+    "static/media/up_do.mp3": "/static/media/up_do.25c96b9d23db9e36e571.mp3",
+    "static/media/up_fa.mp3": "/static/media/up_fa.e5ec599bc26e02bf36fa.mp3",
+    "static/media/up_la.mp3": "/static/media/up_la.07365c770b8d1256ab5f.mp3",
+    "static/media/up_mi.mp3": "/static/media/up_mi.dc1474600de7e0126b12.mp3",
+    "static/media/up_re.mp3": "/static/media/up_re.944ffa8eec66013e6ef7.mp3",
+    "static/media/up_so.mp3": "/static/media/up_so.0b0682a10a9f6bca2b2e.mp3",
+    "static/media/up_ti.mp3": "/static/media/up_ti.7757eb1cb55bf9a595c4.mp3",
+    "index.html": "/index.html",
+    "main.04d5bc38.css.map": "/static/css/main.04d5bc38.css.map",
+    "main.ab67b3db.js.map": "/static/js/main.ab67b3db.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.04d5bc38.css",
+    "static/js/main.ab67b3db.js"
+  ]
+}
