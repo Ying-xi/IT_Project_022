@@ -240,7 +240,10 @@ function Admin_Playlist() {
         }
     };
 
-
+    // help to switch page
+    const handleRedirect = () => {
+        window.location.href = '/admin';
+    };
 
 
     return (
@@ -266,7 +269,7 @@ function Admin_Playlist() {
                             <div className={styles.musicWrap}>
                                 <main>
                                     <div className={styles.musicMainHead}>
-                                        <div>Custom Playlist</div>
+                                        <div onClick={handleRedirect}>Custom Playlist</div>
                                         <div>Type</div>
                                         <div onClick={() => setShouldRefresh(true)}>Add+</div>
                                     </div>

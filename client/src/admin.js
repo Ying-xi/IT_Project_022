@@ -212,7 +212,9 @@ function Admin() {
   };
 
 
-
+  const handleRedirect = () => {
+    window.location.href = '/admin_playlist';
+  };
 
   return (
     <div className={styles.admin}>
@@ -237,7 +239,7 @@ function Admin() {
               <div className={styles.musicWrap}>
                 <main>
                   <div className={styles.musicMainHead}>
-                    <div>Music List</div>
+                    <div onClick={handleRedirect}>Music List</div>
                     <div>
                       Type
                       <select
