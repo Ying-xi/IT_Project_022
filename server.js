@@ -9,6 +9,7 @@ const userRouter = require('./Router/user')
 const musicRouter = require('./Router/musicPlayer')
 const homeRouter = require('./Router/homePage')
 const adminRouter = require('./Router/admin')
+const albumRouter = require('./Router/albumPlayer')
 
 web.use('/admin', expressJWT({secret: 'IT-Project-022', algorithms: ['HS256']}))
 web.use(cors({
@@ -27,6 +28,7 @@ web.use(albumRouter)
 web.use(userRouter)
 web.use(musicRouter)
 web.use(homeRouter)
+web.use(albumRouter)
 
 // running server
 web.listen(3300, ()=>{
