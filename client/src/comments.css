@@ -311,3 +311,22 @@ input:focus, textarea:focus {
   transform: scale(1.1);
   background-color: #532ee5;
 }
+.comments-button:disabled {
+  transform: scale(1.05); 
+  background-color: #ce2b02; 
+  cursor: not-allowed; 
+}
+
+
+.comment-counter {
+  position: absolute;
+  bottom: 7%; 
+  left: 11%; 
+  font-size: 3vh;
+  color: #532ee5; 
+}
+
+.comment-counter.max-exceeded {
+  font-size: 3.5vh;
+  color: red; 
+}
