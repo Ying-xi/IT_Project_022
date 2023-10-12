@@ -11,6 +11,8 @@ const homeRouter = require('./Router/homePage')
 const adminRouter = require('./Router/admin')
 const albumRouter = require('./Router/albumPlayer')
 
+app.use('/music', express.static(__dirname + '/Default_music/Musics'))
+app.use('/images', express.static(__dirname + '/Default_music/Images'))
 web.use('/admin', expressJWT({secret: 'IT-Project-022', algorithms: ['HS256']}))
 web.use(cors({
     origin: 'http://localhost:3000',
