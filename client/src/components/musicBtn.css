@@ -1,7 +1,7 @@
 /* set the layout and color for the music buttons */
 .music-btn-wrap {
   transition: all 0.2s;
-  border-radius: 0.1vw;
+  border-radius: 3%;
 }
 
 .music-btn-wrap:hover {
@@ -10,22 +10,21 @@
 
 .music-btn-wrap > .img-face {
   cursor: pointer;
-  border-radius: 10px 10px 0 0;
-  height: 13.5vw;
+  height: 30vh;
   width: 15vw;
   display: block;
 }
 
 .music-btn-wrap > .music-item-text {
-  padding: 20px 0;
+  height: 10vh;
   margin: 0;
   display: flex;
   justify-content: center;
   align-items: center;
   cursor: pointer;
   background: rgba(0, 0, 0, 0.307);
-  border-bottom-right-radius: 10px;
-  border-bottom-left-radius: 10px;
+  font-size: 1.05em;
+  white-space: nowrap;
   color: #fff;
 }
 

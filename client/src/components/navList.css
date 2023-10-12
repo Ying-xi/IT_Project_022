@@ -2,17 +2,20 @@
 .nav-list-wrap {
   display: grid;
   grid-template-columns: repeat(8, auto);
-  grid-gap: 1vh;
+  grid-gap: 2%;
+  position: absolute;
+  top: 20vh;
+  left: 10%;
 }
 
 .nav-list-wrap .nav-item {
   color: #000;
-  border-radius: 40px;
-  font-size: 1vw;
+  border-radius: 45%;
+  font-size: 0.9em;
   font-weight: bold;
   width: 8vw;
-  height: 3vw;
-  margin-top: 3vw;
+  height: 7vh;
+  margin-top: 5vh;
 }
 
 .nav-list-wrap .nav-item:hover {

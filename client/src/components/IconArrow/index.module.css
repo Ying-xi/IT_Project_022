@@ -1,0 +1,9 @@
+.up-arrow {
+  width: 50%;
+  height: auto;
+  cursor: pointer;
+}
+
+.up-arrow.up-arrow-down {
+  transform: rotate(180deg);
+}
