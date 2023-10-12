@@ -34,70 +34,7 @@ class Albums extends Component {
             activeItemIndex: 0,
             backgroundImage: '',
             currentMusicIndex: null,
-
             musicItems: [],
-            // musicItems: [
-            //     {
-            //         type: 'Realxing Music',
-            //         title: 'Name',
-            //         imageUrl: '/albums/album1.jpg',
-            //         lists: [
-            //             {
-            //                 musicName: 'AuldLangSyne',
-            //                 musicUrl: '/songs/AuldLangSyne.mp3'
-            //             },
-            //             {
-            //                 musicName: 'Song 2',
-            //                 musicUrl: '/songs/Bleu.mp3'
-            //             }
-            //         ],
-            //     },
-            //     {
-            //         type: 'White noise',
-            //         title: 'Name',
-            //         imageUrl: '/albums/album2.jpg',
-            //         lists: [
-            //             {
-            //                 musicName: 'Song 1',
-            //                 musicUrl: '/songs/AuldLangSyne.mp3'
-            //             },
-            //             {
-            //                 musicName: 'Song 2',
-            //                 musicUrl: '/songs/Bleu.mp3'
-            //             }
-            //         ],
-            //     },
-            //     {
-            //         type: 'Jazz Music',
-            //         title: 'Name',
-            //         imageUrl: '/albums/album3.jpg',
-            //         lists: [
-            //             {
-            //                 musicName: 'Song 1',
-            //                 musicUrl: '/songs/AuldLangSyne.mp3'
-            //             },
-            //             {
-            //                 musicName: 'Song 2',
-            //                 musicUrl: '/songs/Bleu.mp3'
-            //             }
-            //         ]
-            //     },
-            //     {
-            //         type: 'Classic Music',
-            //         title: 'Name',
-            //         imageUrl: '/albums/album4.jpg',
-            //         lists: [
-            //             {
-            //                 musicName: 'Song 1',
-            //                 musicUrl: '/songs/AuldLangSyne.mp3'
-            //             },
-            //             {
-            //                 musicName: 'Song 2',
-            //                 musicUrl: '/songs/Bleu.mp3'
-            //             }
-            //         ]
-            //     },
-            // ],
         };
 
     }
