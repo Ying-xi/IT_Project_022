@@ -1,5 +1,5 @@
-/* Styling for the Admin component */
-.admin {
+/* Styling for the Admin_Playlist component */
+.adminPlaylist {
     /* Background styling */
     background-image: url('../public/background_nologo.jpg');
     background-size: cover;
@@ -81,6 +81,12 @@
 .topContentBottom {
     flex: 1;
 }
+
+.linkWithHover:hover {
+    color: #ffffff;
+    text-decoration: underline;
+}
+
 
 /* Styling for the right main content */
 .rightMainContent {
@@ -174,7 +180,8 @@
     background: #F0F3F4;
     border-radius: 10px;
 }
-/* 自定义输入框样式 */
+
+/* input style design */
 .customInput {
     border: 2px solid #3498db;
     border-radius: 4px;
@@ -219,128 +226,55 @@
 /* Styling for the type header in music type section */
 .mainContentTopRightTypeHeader {
     flex: 1;
+    margin-top: 5%;
+    /* Match the padding of Tags content */
+    padding-left: 2%;
 }
 
 /* Styling for the type row in music type section */
 .mainContentTopRightTypeRow {
-    flex: 2;
-}
-
-/* Styling for the middle content section */
-.mainContentMiddle {
-    margin-top: 2vh;
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
-/* Styling for the text in the middle content section */
-.mainContentMiddle p {
-    margin: 0;
-    font-size: 16px;
-    color: #333;
-    text-align: center;
-}
-
-/* Styling for the bottom content section */
-.mainContentBottom {
-    margin-top: 2vh;
-    margin-bottom: 2vh;
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
-/* Styling for the text in the bottom content section */
-.mainContentBottom p {
-    margin: 0;
-    font-size: 16px;
-    color: #333;
-    text-align: center;
+    flex: 3;
 }
 
 
-/* Styling for the audio container wrapper */
-.audioContainerWrapper {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-    width: 95%
-}
-
-/* Styling for the audio container */
-.audioContainer {
-    border-radius: 10px;
-    text-align: center;
-    background-color: #F0F3F4;
-    height: 100%;
+/* input text */
+.customField {
+    position: relative;
+    font-size: 24px;
+    display: inline-block;
+    border: 2px solid #3498db;
     width: 100%;
-}
-
-/* Styling for the image dropzone */
-.imageDropzone {
-    padding: 20px;
-    text-align: center;
-    cursor: pointer;
-    max-width: 300px;
-    margin: 0 auto;
-}
-
-/* Styling for the text in the image dropzone */
-.imageDropzone p {
-    margin: 0;
-    font-size: 20px;
-}
-
-/* Styling for the uploaded image */
-.uploadedImage {
-    max-width: 100%;
-    height: auto;
-    margin-top: 10px;
-}
-
-/* Styling for the uploaded image on hover */
-.uploadedImage:hover {
-    cursor: pointer;
-}
-
-/* Styling for the dropzone wrapper */
-.dropzoneWrapper {
+    height: 90%;
+    padding: 10px;
+    box-sizing: border-box;
     border-radius: 10px;
-    background-color: #F0F3F4;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 75%;
-    width: 95%;
 }
 
-/* Styling for the top division */
-.topDivision {
-    flex: 1;
+.customField input {
+    background: none;
+    border: none;
+    width: 100%;
+    font-size: 16px;
+    outline: none;
 }
 
-/* Styling for the bottom division */
-.bottomDivision {
-    flex: 1;
+.customField input + .placeholder {
+    position: absolute;
+    left: 5%;
+    top: 25%;
+    transform: translateY(-50%);
+    font-size: 16px;
+    color: #aaa;
+    pointer-events: none;
+    transition: top 0.3s ease, color 0.3s ease, font-size 0.3s ease;
 }
 
-/* Styling for the bottom division at the top */
-.topDivisionBottom {
-    flex: 1;
+.customField input:focus + .placeholder {
+    top: 0;
+    font-size: 12px;
+    color: transparent;
 }
 
-/* Styling for the bottom division at the bottom */
-.bottomDivisionBottom {
-    flex: 1;
-}
 
 /* Styling for the music header */
 .musicHeader {
@@ -428,134 +362,33 @@
     color: white;
 }
 
-/* Styling for Type 1 button */
-.typeButton1 {
+
+
+
+.mainContentMiddleAndBottom {
+    flex: 2;
+    margin: 4vh 2%;
+    display: flex;
+    justify-content: center;
+    /* background: #F0F3F4; */
     border-radius: 10px;
-    margin: 0.5vh;
-    background-color: transparent;
-    padding: 5px 10px;
-    cursor: pointer;
-    transition: background-color 0.3s ease, color 0.3s ease;
-    border: none;
 }
 
-/* Styling for Type 1 button on hover */
-.typeButton1:hover {
-    background-color: rgb(238,130,238);
-    color: white;
+
+
+.middleBottomContainer {
+    width: 100%;
 }
 
-/* Styling for active Type 1 button */
-.activeType1 {
-    background-color: rgb(238,130,238);
+.multiSelect {
+    width: 90%;
+    height: 90%;
 }
 
-/* Styling for Type 2 button */
-.typeButton2 {
-    border-radius: 10px;
-    margin: 0.5vh;
-    background-color: transparent;
-    padding: 5px 10px;
-    cursor: pointer;
-    transition: background-color 0.3s ease, color 0.3s ease;
-    border: none;
-}
 
-/* Styling for Type 2 button on hover */
-.typeButton2:hover {
-    background-color: orange;
-    color: white;
-}
 
-/* Styling for active Type 2 button */
-.activeType2 {
-    background-color: orange;
-}
 
-/* Styling for Type 3 button */
-.typeButton3 {
-    border-radius: 10px;
-    margin: 0.5vh;
-    background-color: transparent;
-    padding: 5px 10px;
-    cursor: pointer;
-    transition: background-color 0.3s ease, color 0.3s ease;
-    border: none;
-}
 
-/* Styling for Type 3 button on hover */
-.typeButton3:hover {
-    background-color: rgb(0,255,127);
-    color: white;
-}
 
-/* Styling for active Type 3 button */
-.activeType3 {
-    background-color: rgb(0,255,127);
-}
 
-/* Styling for Type 4 button */
-.typeButton4 {
-    border-radius: 10px;
-    margin: 0.5vh;
-    background-color: transparent;
-    padding: 5px 10px;
-    cursor: pointer;
-    transition: background-color 0.3s ease, color 0.3s ease;
-    border: none;
-}
 
-/* Styling for Type 4 button on hover */
-.typeButton4:hover {
-    background-color: rgb(253,152,152);
-    color: white;
-}
-
-/* Styling for active Type 4 button */
-.activeType4 {
-    background-color: rgb(253,152,152);
-}
-
-/* Styling for Type 5 button */
-.typeButton5 {
-    border-radius: 10px;
-    margin: 0.5vh;
-    background-color: transparent;
-    padding: 5px 10px;
-    cursor: pointer;
-    transition: background-color 0.3s ease, color 0.3s ease;
-    border: none;
-}
-
-/* Styling for Type 5 button on hover */
-.typeButton5:hover {
-    background-color: cyan;
-    color: white;
-}
-
-/* Styling for active Type 5 button */
-.activeType5 {
-    background-color: cyan;
-}
-
-/* Styling for Type 6 button */
-.typeButton6 {
-    border-radius: 10px;
-    margin: 0.5vh;
-    background-color: transparent;
-    padding: 5px 10px;
-    cursor: pointer;
-    transition: background-color 0.3s ease, color 0.3s ease;
-    border: none;
-}
-
-/* Styling for Type 6 button on hover */
-.typeButton6:hover {
-    background-color: yellow;
-    color: white;
-}
-
-/* Styling for active Type 6 button */
-.activeType6 {
-    background-color: yellow;
-}

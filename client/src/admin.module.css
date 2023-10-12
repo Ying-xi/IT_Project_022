@@ -82,6 +82,11 @@
     flex: 1;
 }
 
+.linkWithHover:hover {
+    color: #ffffff;
+}
+
+
 /* Styling for the right main content */
 .rightMainContent {
     display: flex;

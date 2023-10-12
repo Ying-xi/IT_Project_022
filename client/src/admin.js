@@ -3,7 +3,7 @@ import styles from './admin.module.css';
 import Dropzone from 'react-dropzone';
 import MusicList from './components/MusicList';
 import axios from 'axios'
-
+import { Link } from 'react-router-dom';
 
 function Admin() {
   //parameters state
@@ -115,10 +115,6 @@ function Admin() {
     console.log(selectedMusicTag)
 
     const newMusic = {
-      // 音乐名字
-      // 音乐Tags
-      // 音乐音频
-      // 音乐图片
       name: selectedMusicName,
       tags: ['All', selectedMusicTag],
       file: musicFile,
@@ -241,7 +237,7 @@ function Admin() {
               <div className={styles.musicWrap}>
                 <main>
                   <div className={styles.musicMainHead}>
-                    <div>Music Management</div>
+                    <div>Music List</div>
                     <div>
                       Type
                       <select
@@ -280,10 +276,17 @@ function Admin() {
                   {/* blank space */}
                 </div>
                 <div className={styles.topContentBottom}>
+                  <Link to="/admin_playlist" className={styles.linkWithHover}>
+                    <h1
+                      style={{
+                      marginLeft: '4vh',
+                      color: 'gray',
+                    }}>Switch to Playlist Management</h1>
+                  </Link>
                   <h1
                     style={{
                     marginLeft: '4vh',
-                    color: 'gray'
+                    color: 'white'
                   }}>Music Information</h1>
                 </div>
               </div>
@@ -334,7 +337,9 @@ function Admin() {
                               <button className={styles.deleteButton} onClick={handleMusicDelete}>Delete</button>
                             </>
                           ): (
-                            <button className={styles.addButton} onClick={handleMusicAdd}>Add</button>
+                            <div>
+                              <button className={styles.addButton} onClick={handleMusicAdd}>Add</button>
+                            </div>
                           )}
                         </div>
 

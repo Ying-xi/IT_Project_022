@@ -103,12 +103,12 @@ ac {
   color: #6844f7;
 }
 
-svg {
+/* svg {
   position: absolute;
   top: 0;
   left: 0;
   z-index: 0;
-}
+} */
 
 /* 设置不同列表项的动画延迟 */
 li:nth-child(2),

@@ -1,17 +1,43 @@
 import React, {useEffect, useState } from 'react';
-import styles from './admin.module.css';
+import styles from './admin_playlist.module.css';
 import Dropzone from 'react-dropzone';
 import MusicList from './components/MusicList';
 import axios from 'axios'
+import { Link } from 'react-router-dom';
+// The component of select is based on https://react-select.com/home#getting-started
+import Select from 'react-select';
+import makeAnimated from 'react-select/animated';
 
 
 function Admin_Playlist() {
+
+    const options = [
+        { label: "Option 1", value: "option1" },
+        { label: "Option 2", value: "option2" },
+        { label: "Option 3", value: "option3" },
+        { label: "Option 4", value: "option4" },
+        { label: "Option 5", value: "option5" },
+        { label: "Option 6", value: "option6" },
+        { label: "Option 7", value: "option7" },
+        { label: "Option 8", value: "option8" },
+    ];
+    const animatedComponents = makeAnimated();
+
+    const handleSelectChange = (selected) => {
+        if (selected.length <= 5) {
+            setMultiSelected(selected);
+        }
+    };
+
+
     //parameters state
     const [selectedMusicId, setSelectedMusicId] = useState(null);
     const [selectedMusicFile, setSelectedMusicFile] = useState(null);
     const [selectedMusicName, setSelectedMusicName] = useState('');
     const [selectedMusicTag, setSelectedMusicTag] = useState('');
     const [selectedMusicPicture, setSelectedMusicPicture] = useState('');
+    const [selectedPlaylist, setSelectedPlaylist] = useState(options);
+    const [multiSelected, setMultiSelected] = useState([]);
 
     // Handle music click event
     const handleMusicClick = (musicId) => {
@@ -194,7 +220,7 @@ function Admin_Playlist() {
         }
     };
 
-    // 主动刷新页面
+    // Refresh webpage
     const [shouldRefresh, setShouldRefresh] = useState(false);
     useEffect(() => {
         if (shouldRefresh) {
@@ -205,7 +231,7 @@ function Admin_Playlist() {
 
 
     // const [activeTag, setActiveTag] = useState(null);
-    // 绑定tag状态
+    // binding tag status
     const toggleTag = (tag) => {
         if (selectedMusicTag == tag) {
             setSelectedMusicTag(null);
@@ -218,7 +244,7 @@ function Admin_Playlist() {
 
 
     return (
-        <div className={styles.admin}>
+        <div className={styles.adminPlaylist}>
             {/* left hand side */}
             <div className={styles.container}>
                 <div className={styles.leftColumn}>
@@ -240,7 +266,7 @@ function Admin_Playlist() {
                             <div className={styles.musicWrap}>
                                 <main>
                                     <div className={styles.musicMainHead}>
-                                        <div>Music Management</div>
+                                        <div>Custom Playlist</div>
                                         <div>Type</div>
                                         <div onClick={() => setShouldRefresh(true)}>Add+</div>
                                     </div>
@@ -265,10 +291,17 @@ function Admin_Playlist() {
                                     {/* blank space */}
                                 </div>
                                 <div className={styles.topContentBottom}>
+                                    <Link to="/admin" className={styles.linkWithHover}>
+                                        <h1
+                                        style={{
+                                        marginLeft: '4vh',
+                                        color: 'gray',
+                                        }}>Switch to Music Management</h1>
+                                    </Link>
                                     <h1
                                         style={{
                                             marginLeft: '4vh',
-                                            color: 'gray'
+                                            color: 'white'
                                         }}>Playlist Information</h1>
                                 </div>
                             </div>
@@ -366,113 +399,23 @@ function Admin_Playlist() {
                                                     {/*the division of type button*/}
                                                     <div className={styles.mainContentTopRightTypeInner}>
                                                         <div className={styles.mainContentTopRightTypeHeader}>
-                                                            <p>Type:</p>
+                                                            <p style={{ color: 'blue' }}>Description:</p>
                                                         </div>
                                                         {selectedMusicTag ? (
                                                             <>
                                                                 <div className={styles.mainContentTopRightTypeRow}>
-
-
-                                                                    <button
-                                                                        onClick={() => {
-                                                                            toggleTag('Vocal');
-                                                                            console.log(selectedMusicTag);
-                                                                        }}
-                                                                        className={`${styles.typeButton1} ${selectedMusicTag == 'Vocal' ? styles.activeType1 : ''}`}
-                                                                    >
-                                                                        Vocal
-                                                                    </button>
-                                                                    <button
-                                                                        onClick={() => {
-                                                                            toggleTag('Ensembles');
-                                                                            console.log(selectedMusicTag);
-                                                                        }}
-                                                                        className={`${styles.typeButton2} ${selectedMusicTag == 'Ensembles' ? styles.activeType2 : ''}`}
-                                                                    >
-                                                                        Ensembles
-                                                                    </button>
-                                                                    <button
-                                                                        onClick={() => toggleTag('Slow Smoothing')}
-                                                                        className={`${styles.typeButton3} ${selectedMusicTag == 'Slow Smoothing' ? styles.activeType3 : ''}`}
-                                                                    >
-                                                                        Slow Smoothing
-                                                                    </button>
-                                                                    <button
-                                                                        onClick={() => toggleTag('Classical')}
-                                                                        className={`${styles.typeButton4} ${selectedMusicTag == 'Classical' ? styles.activeType4 : ''}`}
-                                                                    >
-                                                                        Classical
-                                                                    </button>
-                                                                    <button
-                                                                        onClick={() => toggleTag('Rhythmic')}
-                                                                        className={`${styles.typeButton5} ${selectedMusicTag == 'Rhythmic' ? styles.activeType5 : ''}`}
-                                                                    >
-                                                                        Rhythmic
-                                                                    </button>
-                                                                    <button
-                                                                        onClick={() => toggleTag('Natural Sound')}
-                                                                        className={`${styles.typeButton6} ${selectedMusicTag == 'Natural Sound' ? styles.activeType6 : ''}`}
-                                                                    >
-                                                                        Natural Sound
-                                                                    </button>
+                                                                    <label className={styles.customField}>
+                                                                        <input type="text" placeholder=" " />
+                                                                        <span className={styles.placeholder}>Enter Text</span>
+                                                                    </label>
                                                                 </div>
                                                             </>
                                                         ) : (
                                                             <div className={styles.mainContentTopRightTypeRow}>
-                                                                <button
-                                                                    onClick={() => {
-                                                                        toggleTag('Vocal');
-                                                                        // setSelectedMusicTag('Vocal');
-                                                                    }}
-                                                                    className={`${styles.typeButton1} ${selectedMusicTag == 'Vocal' ? styles.activeType1 : ''}`}
-                                                                >
-                                                                    Vocal
-                                                                </button>
-                                                                <button
-                                                                    onClick={() => {
-                                                                        toggleTag('Ensembles');
-                                                                        // setSelectedMusicTag('Ensembles');
-                                                                    }}
-                                                                    className={`${styles.typeButton2} ${selectedMusicTag == 'Ensembles' ? styles.activeType2 : ''}`}
-                                                                >
-                                                                    Ensembles
-                                                                </button>
-                                                                <button
-                                                                    onClick={() => {
-                                                                        toggleTag('Slow Smoothing');
-                                                                        setSelectedMusicTag('Slow Smoothing');
-                                                                    }}
-                                                                    className={`${styles.typeButton3} ${selectedMusicTag == 'Slow Smoothing' ? styles.activeType3 : ''}`}
-                                                                >
-                                                                    Slow Smoothing
-                                                                </button>
-                                                                <button
-                                                                    onClick={() => {
-                                                                        toggleTag('Classical');
-                                                                        setSelectedMusicTag('Classical');
-                                                                    }}
-                                                                    className={`${styles.typeButton4} ${selectedMusicTag == 'Classical' ? styles.activeType4 : ''}`}
-                                                                >
-                                                                    Classical
-                                                                </button>
-                                                                <button
-                                                                    onClick={() => {
-                                                                        toggleTag('Rhythmic');
-                                                                        setSelectedMusicTag('Rhythmic');
-                                                                    }}
-                                                                    className={`${styles.typeButton5} ${selectedMusicTag == 'Rhythmic' ? styles.activeType5 : ''}`}
-                                                                >
-                                                                    Rhythmic
-                                                                </button>
-                                                                <button
-                                                                    onClick={() => {
-                                                                        toggleTag('Natural Sound');
-                                                                        setSelectedMusicTag('Natural Sound');
-                                                                    }}
-                                                                    className={`${styles.typeButton6} ${selectedMusicTag == 'Natural Sound' ? styles.activeType6 : ''}`}
-                                                                >
-                                                                    Natural Sound
-                                                                </button>
+                                                                <label className={styles.customField}>
+                                                                    <input type="text" placeholder=" " />
+                                                                    <span className={styles.placeholder}>Enter Text</span>
+                                                                </label>
                                                             </div>
                                                         )}
                                                     </div>
@@ -487,77 +430,22 @@ function Admin_Playlist() {
                                 */}
                                 <div className={styles.mainContentMiddleAndBottom}>
                                     <div className={styles.middleBottomContainer}>
-                                    {/*
-                                        先做一个边框占据空间
-                                        然后再空间内部写清楚多选功能
-                                     */}
-                                    {/* 未完成：修复audio音频无法播放问题，重新修复图片储存问题和图片上传问题 */}
-
-
-
+                                        <Select
+                                            closeMenuOnSelect={false}
+                                            components={animatedComponents}
+                                            isMulti
+                                            options={options}
+                                            value={multiSelected}
+                                            onChange={handleSelectChange}
+                                            maxMenuHeight={200}
+                                            // extra
+                                            // getOptionLabel={(option) => option.label}
+                                            // getOptionValue={(option) => option.value}
+                                        />
                                     </div>
 
                                 </div>
 
-                                {/*
-                                    Music file upload
-                                */}
-                                <div className={styles.mainContentMiddle}>
-                                    {/* mid content part */}
-                                    <div className={styles.dropzoneWrapper}>
-                                        <div className={styles.topDivision}></div>
-                                        {/* Dropzone */}
-                                        <Dropzone onDrop={handleFileDrop}>
-                                            {({ getRootProps, getInputProps }) => (
-                                                <div {...getRootProps()} className={styles.dropzone}>
-                                                    <input {...getInputProps()} />
-                                                    {uploadedFile ? (
-                                                        <div className={styles.uploadedFile}>
-                                                            {uploadedFile.name}
-                                                            <button
-                                                                className={styles.deleteButton}
-                                                                onClick={handleFileDelete}
-                                                            >
-                                                                Delete
-                                                            </button>
-                                                        </div>
-                                                    ) : (
-                                                        <p>+UPLOAD MUSIC+</p>
-                                                    )}
-                                                </div>
-                                            )}
-                                        </Dropzone>
-
-                                        {/* lower division */}
-                                        <div className={styles.bottomDivision}></div>
-                                    </div>
-                                </div>
-
-                                {/*
-                                    Music Audio play
-                                */}
-                                <div className={styles.mainContentBottom}>
-                                    <div key={selectedMusicFile} className={styles.audioContainerWrapper}>
-                                        <div className={styles.audioContainer}>
-                                            <h1 style={{ marginTop: '2vh', textAlign: 'center' }}>Audio Play</h1>
-                                            {selectedMusicName ? (
-                                                <>
-                                                    <audio controls>
-                                                        <source src={selectedMusicFile} type="audio/mpeg" />
-                                                        Your browser does not support the audio element.
-                                                    </audio>
-                                                    {/* <h1>{selectedMusicFile}</h1> */}
-                                                </>
-                                            ) : (
-                                                <p>No audio selected.</p>
-                                            )}
-                                        </div>
-                                    </div>
-
-
-                                    {/* lower division */}
-                                    <div className={styles.bottomDivisionBottom}></div>
-                                </div>
                             </div>
                         </div>
                     </div>
