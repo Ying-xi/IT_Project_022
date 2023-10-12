@@ -22,3 +22,35 @@ exports.deleteMusic = async (req, res) => {
 	await Music.findByIdAndDelete(req.params.musicId)
 	res.status(200).send({ message: "Music deleted sucessfully" });
 }
+
+
+
+
+
+
+
+
+
+
+
+exports.renderAlbumPage = async (req, res) => {
+	const albums = await Album.find()
+	res.status(200).send({ data: albums })
+}
+
+exports.saveAlbum = async (req, res) => {
+	const album = await Album(req.body).save()
+	res.status(201).send({ data: album, message: "Album uploaded successfully" })
+}
+
+exports.updateAlbum = async (req, res) => {
+	const album = await Album.findByIdAndUpdate(req.params.albumId, req.body, {
+		new: true,
+	})
+	res.send({ data: album, message: "Update successfully" })
+}
+
+exports.deleteAlbum = async (req, res) => {
+	await Album.findByIdAndDelete(req.params.albumId)
+	res.status(200).send({ message: "Album deleted sucessfully" });
+}

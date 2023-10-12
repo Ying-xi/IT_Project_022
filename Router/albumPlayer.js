@@ -1,6 +1,6 @@
 const express = require('express')
 
-const albumPlayer = require('../Router_handler/ablumPlayer')
+const albumPlayer = require('../Router_handler/albumPlayer')
 
 const router = express.Router()
 
