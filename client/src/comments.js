@@ -72,13 +72,13 @@ function Comments() {
 
                     <textarea
                         className="comments-input"
-                        placeholder="输入你的评论..."
+                        placeholder=" input your comments here: "
                         value={comment}
                         onChange={handleCommentChange}
                         
                     />
                     <button className="comments-button" onClick={handleSendClick}>
-                        发送
+                        Send
                     </button>
                     
                 </div>
@@ -122,7 +122,7 @@ function Comments() {
                             <div className="comments-cards ">
                                 <ac href="">
                                     <span className="comments-username">Username4</span>
-                                    <span>Model for generating Freedom and responsibility intertwine, painting a magnificent canvas to shape life's blueprint.</span>
+                                    <span>Model for generating Freedom and responsibility intertwine, painting a magnificent canvas to shape life's blueprint.Freedom and responsibility intertwine, painting a magnificent </span>
                                 </ac>
                             </div>
                         </li>
@@ -134,59 +134,7 @@ function Comments() {
                                     <span>Model for generating Freedom and responsibility intertwine, painting a magnificent canvas to shape life's blueprint.</span>
                                 </ac>
                             </div>
-                        </li>                        <li>
-                            <div className="comments-cards ">
-                                <ac href="">
-                                    <span className="comments-username">Username4</span>
-                                    <span>Model for generating Freedom and responsibility intertwine, painting a magnificent canvas to shape life's blueprint.</span>
-                                </ac>
-                            </div>
-                        </li>                        <li>
-                            <div className="comments-cards ">
-                                <ac href="">
-                                    <span className="comments-username">Username4</span>
-                                    <span>Model for generating Freedom and responsibility intertwine, painting a magnificent canvas to shape life's blueprint.</span>
-                                </ac>
-                            </div>
-                        </li>                        <li>
-                            <div className="comments-cards ">
-                                <ac href="">
-                                    <span className="comments-username">Username4</span>
-                                    <span>Model for generating Freedom and responsibility intertwine, painting a magnificent canvas to shape life's blueprint.</span>
-                                </ac>
-                            </div>
-                        </li>                        <li>
-                            <div className="comments-cards ">
-                                <ac href="">
-                                    <span className="comments-username">Username4</span>
-                                    <span>Model for generating Freedom and responsibility intertwine, painting a magnificent canvas to shape life's blueprint.</span>
-                                </ac>
-                            </div>
-                        </li>                        <li>
-                            <div className="comments-cards ">
-                                <ac href="">
-                                    <span className="comments-username">Username4</span>
-                                    <span>Model for generating Freedom and responsibility intertwine, painting a magnificent canvas to shape life's blueprint.</span>
-                                </ac>
-                            </div>
-                        </li>
-                        <li>
-                            <div className="comments-cards ">
-                                <ac href="">
-                                    <span className="comments-username">Username4</span>
-                                    <span>Model for generating Freedom and responsibility intertwine, painting a magnificent canvas to shape life's blueprint.</span>
-                                </ac>
-                            </div>
-                        </li>                        <li>
-                            <div className="comments-cards ">
-                                <ac href="">
-                                    <span className="comments-username">Username4</span>
-                                    <span>Model for generating Freedom and responsibility intertwine, painting a magnificent canvas to shape life's blueprint.</span>
-                                </ac>
-                            </div>
-                        </li>
-
-
+                        </li>         
 
                     </ul>
                     <div className="last-circle"></div>

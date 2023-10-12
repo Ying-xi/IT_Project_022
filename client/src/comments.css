@@ -158,148 +158,156 @@ li:nth-child(6) .comments-cards {
     transform: rotate(315deg);
   }
 }
-        /* 设置中心圆样式 */
-        .center-circle {
-            position: absolute;
-            width: 7vw;
-            aspect-ratio: 1 / 1;
-            left: 50%;
-            top: 50%;
-            transform: translate(-50%, -50%);
-            background: #FFFFFF;
-            box-shadow: 0vw 3vw 6vw -3vw rgba(12, 5, 46, 0.3),
-                0vw 5vw 10vw -2vw rgba(12, 5, 46, 0.25);
-            border-radius: 50%;
-            background-size: cover;
-            background-position: -3vw 0;
-        }
+/* 设置中心圆样式 */
+.center-circle {
+  position: absolute;
+  width: 7vw;
+  aspect-ratio: 1 / 1;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background: #FFFFFF;
+  box-shadow: 0vw 3vw 6vw -3vw rgba(12, 5, 46, 0.3),
+    0vw 5vw 10vw -2vw rgba(12, 5, 46, 0.25);
+  border-radius: 50%;
+  background-size: cover;
+  background-position: -3vw 0;
+}
 
-        /* 设置第二个圆样式 */
-        .second-circle {
-            position: absolute;
-            width: 22vw;
-            aspect-ratio: 1 / 1;
-            left: 50%;
-            top: 50%;
-            transform: translate(-50%, -50%);
-            background: #F5F4FE;
-            opacity: 0.5;
-            box-shadow: 0vw 3vw 12vw -6vw rgba(12, 5, 46, 0.3),
-                0vw 5vw 10vw -2vw rgba(12, 5, 46, 0.25);
-            border-radius: 50%;
-            background-image: url('../public/03.gif');
-        }
+/* 设置第二个圆样式 */
+.second-circle {
+  position: absolute;
+  width: 22vw;
+  aspect-ratio: 1 / 1;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background: #F5F4FE;
+  opacity: 0.5;
+  box-shadow: 0vw 3vw 12vw -6vw rgba(12, 5, 46, 0.3),
+    0vw 5vw 10vw -2vw rgba(12, 5, 46, 0.25);
+  border-radius: 50%;
+  background-image: url('../public/03.gif');
+}
 
-        /* 设置最后一个圆样式 */
-        .last-circle {
-            position: absolute;
-            width: 48vw;
-            aspect-ratio: 1 / 1;
-            left: 50%;
-            top: 50%;
-            transform: translate(-50%, -50%);
-            background: #F5F4FE;
-            opacity: 0.25;
-            box-shadow: 0vw 3vw 12vw -6vw rgba(12, 5, 46, 0.3), 0vw 5vw 10vw -2vw rgba(12, 5, 46, 0.25);
-            border-radius: 50%;
-            background-image: url('../public/03.gif');
-        }
+/* 设置最后一个圆样式 */
+.last-circle {
+  position: absolute;
+  width: 48vw;
+  aspect-ratio: 1 / 1;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background: #F5F4FE;
+  opacity: 0.25;
+  box-shadow: 0vw 3vw 12vw -6vw rgba(12, 5, 46, 0.3), 0vw 5vw 10vw -2vw rgba(12, 5, 46, 0.25);
+  border-radius: 50%;
+  background-image: url('../public/03.gif');
+}
 
-        /* 设置裁剪样式 */
-        .crop {
-            
-            -webkit-mask-image: linear-gradient(90deg, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0) 50%,
-             rgba(0, 0, 0, 1) 50%, rgba(0, 0, 0, 1));
-        }
+/* 设置裁剪样式 */
+.crop {
+  -webkit-mask-image: linear-gradient(90deg, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 1) 50%, rgba(0, 0, 0, 1));
+}
 
-        /* 设置遮罩样式 */
-        .mask {
-            position: absolute;
-            
-            top: 0;
-            left: 0;
-            bottom: 0;
-            width: 50%;
-            background-position: 100% 50%;
-            background-repeat: no-repeat;
-            background-image: radial-gradient(100% 50% at 100% 50%, rgba(60, 26, 229, 0.25) 0%,
-             rgba(59, 26, 229, 0.241896) 10%,
-                    rgba(53, 26, 229, 0.1872) 15%,
-                    rgba(41, 23, 240, 0.104) 25%,
-                    rgba(34, 26, 229, 0.0184296) 30%, rgba(32, 26, 229, 0) 35%);
-        }
+/* 设置遮罩样式 */
+.mask {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 50%;
+  z-index: 1;
+  background-position: 100% 50%;
+  background-repeat: no-repeat;
+  background-image: radial-gradient(100% 50% at 100% 50%, rgba(60, 26, 229, 0.25) 0%, rgba(59, 26, 229, 0.241896) 20%, rgba(53, 26, 229, 0.1872) 40%, rgba(41, 23, 240, 0.104) 60%, rgba(34, 26, 229, 0.0184296) 90%, rgba(32, 26, 229, 0) 100%);
+}
 
-        /* 设置遮罩样式后的效果 */
-        .mask:after {
-            content: "";
-            position: absolute;
-            width: 0.075vw;
-            height: 100%;
-            right: 0;
-            display: block;
-            background-image: linear-gradient(180deg, rgba(60, 26, 229, 0) 0%,#3C1AE5 50%,
-             rgba(60, 26, 229, 0) 100%); 
-        }
+.mask:after {
+  content: "";
+  position: absolute;
+  width: 0.075vw;
+  height: 100%;
+  right: 0;
+  display: block;
+  background-image: linear-gradient(180deg, rgba(60, 26, 229, 0) 0%, #3C1AE5 50%, rgba(60, 26, 229, 0) 100%);
+}
 
+/* 区域发送评论的样式 */
+.comments-window {
+  position: absolute;
+  top: 25vh;
+  left: -2vw;
+  bottom: 41vh;
+  width: 26.5vw;
+  height: 70vh;
+  margin: 1.5vh;
+  border-radius: 3vh;
+  z-index: 2;
+  user-select: none;
+  background: linear-gradient(to bottom, #6d4bf5da 13%, #ffffffe1 13%);
+}
 
-        .comments-window {
-          position: absolute;
-          top: 25vh;
-          left: -2vw;
-          bottom: 41vh;
-          width: 26.5vw;
-          height: 5 vw;
-          margin: 1.5vh;
-          border-radius: 3vh;
-          border: black;
-          
-          background: linear-gradient(to bottom, #6d4bf5da 13%, #ffffffe1 13%); /* 使用线性渐变设置背景色 */
-          
-        }
 .comments-window h2 {
   position: absolute;
-  top: 4%; /* 调整标题在窗口上部的垂直位置 */
+  top: 4%;
   left: 50%;
   transform: translateX(-50%);
-  color: #fff; 
-  font-size: 3.5vh;
+  color: #fff;
+  font-size: 230%;
 }
 
-
-
-/* 输入框样式 */
+/* 当用户正在输入时的样式 */
 .comments-input {
   position: absolute;
-            
-  top: 13vh;
-  left: 4vh;
-  bottom: 13vh;
-  right: 4vh;
-  padding: 0.5vh;
-  border: 1px solid #ccc;
-  border-radius: 0.25rem;
-  margin-bottom: 0.5rem;
+  top: 20%;
+  left: 8%;
+  bottom: 20%;
+  right: 8%;
+  padding: 0%;
+  border: 0.2vh solid #ccc;
+  border-radius: 1vh;
+  font-size: 210%;
+  font-weight: 555;
+  caret-color: #a200ff; 
+  
 }
 
-/* 发送按钮样式 */
-.comments-button {  
+.comments-input::selection {
+  color: #fff; 
+  background-color: #6844f7; 
+}
+
+
+
+textarea {
+  resize: none;
+}
+
+input:focus, textarea:focus {
+  outline: 0.25vh solid #532ee58a;
+  border: 0.25vh solid #532ee542;
+  
+}
+
+
+.comments-button {
   position: absolute;
-            
-  top: 62.5vh;
-  left: 23vh;
-  bottom: 4vh;
-  right: 4vh;
-  padding: 0vw;
+  top: 85%;
+  left: 55%;
+  bottom: 5%;
+  right: 8%;
+  padding: 0;
   background-color: #6844f7;
   color: white;
   border: none;
   border-radius: 0.5vw;
   cursor: pointer;
+  font-size: 2.5vh;
 }
 
+/* 当用户将鼠标悬停在按钮上时的样式 */
 .comments-button:hover {
-
-    transform: scale(1.1); /* 放大按钮 */
-    background-color: #532ee5; /* 改变背景颜色 */
-  
+  transform: scale(1.1);
+  background-color: #532ee5;
 }
