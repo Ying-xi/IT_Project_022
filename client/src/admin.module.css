@@ -165,8 +165,8 @@
 /* Styling for the music name section */
 .mainContentTopRightName {
     margin-top: 2vh;
-    margin-left: 2vh;
-    margin-right: 2vh;
+    margin-left: 1vw;
+    margin-right: 10%;
     flex: 1;
     display: flex;
     align-items: center;
@@ -174,7 +174,8 @@
     background: #F0F3F4;
     border-radius: 10px;
 }
-/* 自定义输入框样式 */
+
+/* input window design */
 .customInput {
     border: 2px solid #3498db;
     border-radius: 4px;
@@ -201,8 +202,8 @@ box-shadow: 0 0 1vh rgba(55, 202, 55, 0.7);
 .mainContentTopRightType {
     flex: 3;
     margin-top: 2vh;
-    margin-left: 2vh;
-    margin-right: 2vh;
+    margin-left: 1vw;
+    margin-right: 10%;
     background: #F0F3F4;
     border-radius: 10px;
 }
@@ -219,6 +220,9 @@ box-shadow: 0 0 1vh rgba(55, 202, 55, 0.7);
 /* Styling for the type header in music type section */
 .mainContentTopRightTypeHeader {
     flex: 1;
+    margin-top: 5%;
+    /* Match the padding of Tags content */
+    padding-left: 2%;
 }
 
 /* Styling for the type row in music type section */
@@ -263,13 +267,24 @@ box-shadow: 0 0 1vh rgba(55, 202, 55, 0.7);
     text-align: center;
 }
 
+
+/* Styling for the audio container wrapper */
+.audioContainerWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 90%
+}
+
 /* Styling for the audio container */
 .audioContainer {
     border-radius: 10px;
     text-align: center;
     background-color: #F0F3F4;
-    height: 13vh;
-    width: 77vh;
+    height: 100%;
+    width: 100%;
 }
 
 /* Styling for the image dropzone */
@@ -289,7 +304,7 @@ box-shadow: 0 0 1vh rgba(55, 202, 55, 0.7);
 
 /* Styling for the uploaded image */
 .uploadedImage {
-    width: 17vw;
+    width: 15vw;
     height: auto;
     margin-top: 10px;
 }
@@ -307,8 +322,8 @@ box-shadow: 0 0 1vh rgba(55, 202, 55, 0.7);
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 13vh;
-    width: 77vh;
+    height: 75%;
+    width: 90%;
 }
 
 /* Styling for the top division */
@@ -319,15 +334,6 @@ box-shadow: 0 0 1vh rgba(55, 202, 55, 0.7);
 /* Styling for the bottom division */
 .bottomDivision {
     flex: 1;
-}
-
-/* Styling for the audio container wrapper */
-.audioContainerWrapper {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
 }
 
 /* Styling for the bottom division at the top */
@@ -431,7 +437,7 @@ box-shadow: 0 0 1vh rgba(55, 202, 55, 0.7);
     border-radius: 10px;
     margin: 0.5vh;
     background-color: transparent;
-    padding: 5px 10px;
+    padding: 1vh 2%;
     cursor: pointer;
     transition: background-color 0.3s ease, color 0.3s ease;
     border: none;
@@ -453,7 +459,7 @@ box-shadow: 0 0 1vh rgba(55, 202, 55, 0.7);
     border-radius: 10px;
     margin: 0.5vh;
     background-color: transparent;
-    padding: 5px 10px;
+    padding: 1vh 2%;
     cursor: pointer;
     transition: background-color 0.3s ease, color 0.3s ease;
     border: none;
@@ -475,7 +481,7 @@ box-shadow: 0 0 1vh rgba(55, 202, 55, 0.7);
     border-radius: 10px;
     margin: 0.5vh;
     background-color: transparent;
-    padding: 5px 10px;
+    padding: 1vh 2%;
     cursor: pointer;
     transition: background-color 0.3s ease, color 0.3s ease;
     border: none;
@@ -497,7 +503,7 @@ box-shadow: 0 0 1vh rgba(55, 202, 55, 0.7);
     border-radius: 10px;
     margin: 0.5vh;
     background-color: transparent;
-    padding: 5px 10px;
+    padding: 1vh 2%;
     cursor: pointer;
     transition: background-color 0.3s ease, color 0.3s ease;
     border: none;
@@ -519,7 +525,7 @@ box-shadow: 0 0 1vh rgba(55, 202, 55, 0.7);
     border-radius: 10px;
     margin: 0.5vh;
     background-color: transparent;
-    padding: 5px 10px;
+    padding: 1vh 2%;
     cursor: pointer;
     transition: background-color 0.3s ease, color 0.3s ease;
     border: none;
@@ -541,7 +547,7 @@ box-shadow: 0 0 1vh rgba(55, 202, 55, 0.7);
     border-radius: 10px;
     margin: 0.5vh;
     background-color: transparent;
-    padding: 5px 10px;
+    padding: 1vh 2%;
     cursor: pointer;
     transition: background-color 0.3s ease, color 0.3s ease;
     border: none;
