@@ -274,8 +274,13 @@ li:nth-child(6) .comments-cards {
 }
 
 .comments-input::selection {
-  color: #fff; 
-  background-color: #6844f7; 
+  color: #fff;
+  background-color: #6844f7;
+}
+
+.comments-input:focus {
+  outline: 0.25vh solid #532ee58a;
+  border: 0.25vh solid #532ee542;
 }
 
 
@@ -284,11 +289,6 @@ textarea {
   resize: none;
 }
 
-input:focus, textarea:focus {
-  outline: 0.25vh solid #532ee58a;
-  border: 0.25vh solid #532ee542;
-  
-}
 
 
 .comments-button {

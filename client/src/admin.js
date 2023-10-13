@@ -374,6 +374,7 @@ function Admin() {
                               }}
                               style={{
                                 border: 'none',
+                                outline: 'None',
                                 backgroundColor: '#F0F3F4',
                                 width: '25vh',
                                 height: '7vh',
