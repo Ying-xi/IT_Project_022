@@ -252,8 +252,10 @@
 
 .customField input {
     background: none;
+    padding: none;
     border: none;
     width: 100%;
+    height: 100%;
     font-size: 16px;
     outline: none;
 }
@@ -379,6 +381,7 @@
 .middleBottomContainer {
     width: 100%;
 }
+
 
 .multiSelect {
     width: 90%;

@@ -442,10 +442,12 @@ function Admin_Playlist() {
                                             value={multiSelected}
                                             onChange={handleSelectChange}
                                             maxMenuHeight={200}
+                                            menuIsOpen={true}
                                             // extra
                                             // getOptionLabel={(option) => option.label}
                                             // getOptionValue={(option) => option.value}
                                         />
+
                                     </div>
 
                                 </div>
