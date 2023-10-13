@@ -52,7 +52,7 @@ function Comments() {
             alert(`Comments Sent: ${comment}`);
             // Clear the input box content:
             setComment('');
-        }
+        } 
     };
     return (
         //background:
