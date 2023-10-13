@@ -1,0 +1,37 @@
+[
+    {
+      "name": "Auld Lang Syne",
+      "picture": "../Default_music/Images/Auld Lang Syne.jpg",
+      "file": "../Default_music/Musics/Auld Lang Syne.mp3"
+    },
+    {
+        "name": "Bleu",
+        "picture": "../Default_music/Images/Bleu.jpg",
+        "file": "../Default_music/Musics/Bleu.mp3"
+      },
+      {
+        "name": "Canon in D",
+        "picture": "../Default_music/Images/Canon in D.jpg",
+        "file": "../Default_music/Musics/Canon in D.mp3"
+      },
+      {
+        "name": "Relaxing Rain",
+        "picture": "../Default_music/Images/Relaxing Rain.jpg",
+        "file": "../Default_music/Musics/Relaxing Rain.mp3"
+      },
+      {
+        "name": "Vocalise, Op. 34 No. 14",
+        "picture": "../Default_music/Images/Vocalise, Op. 34 No. 14.jpg",
+        "file": "../Default_music/Musics/Vocalise, Op. 34 No. 14.mp3"
+      },
+      {
+        "name": "What Makes You Beautiful",
+        "picture": "../Default_music/Images/What Makes You Beautiful.jpg",
+        "file": "../Default_music/Musics/What Makes You Beautiful.mp3"
+      },
+      {
+        "name": "Winter Bokeh",
+        "picture": "../Default_music/Images/Winter Bokeh.jpg",
+        "file": "../Default_music/Musics/Winter Bokeh.mp3"
+      }
+  ]

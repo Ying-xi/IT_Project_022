@@ -1,0 +1,28 @@
+img {
+  display: block;
+}
+
+p {
+  padding: 0;
+  margin: 0;
+}
+
+input,
+textarea {
+  line-height: 1 !important;
+  outline: none;
+  display: block;
+  /* text-size-adjust: none !important; */
+  /* -webkit-appearance: none; */
+}
+input:focus {
+  border: none;
+  box-shadow: none !important;
+}
+
+button {
+  border: none;
+  outline: none;
+  display: block;
+  cursor: pointer;
+}

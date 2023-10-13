@@ -1,0 +1,62 @@
+[
+    {
+        "name": "Relaxing Music",
+        "description": "Name",
+        "imageUrl": "../Default_music/Images/album1.jpg",
+        "lists": [
+            {
+                "musicName": "AuldLangSyne",
+                "musicUrl": "../Default_music/Musics/AuldLangSyne.mp3"
+            },
+            {
+                "musicName": "Song 2",
+                "musicUrl": "../Default_music/Musics/Bleu.mp3"
+            }
+        ]
+    },
+    {
+        "name": "White noise",
+        "description": "Name",
+        "imageUrl": "../Default_music/Images/album2.jpg",
+        "lists": [
+            {
+                "musicName": "Song 1",
+                "musicUrl": "../Default_music/Musics/AuldLangSyne.mp3"
+            },
+            {
+                "musicName": "Song 2",
+                "musicUrl": "../Default_music/Musics/Bleu.mp3"
+            }
+        ]
+    },
+    {
+        "name": "Jazz Music",
+        "description": "Name",
+        "imageUrl": "../Default_music/Images/album3.jpg",
+        "lists": [
+            {
+                "musicName": "Song 1",
+                "musicUrl": "../Default_music/Musics/AuldLangSyne.mp3"
+            },
+            {
+                "musicName": "Song 2",
+                "musicUrl": "../Default_music/Musics/Bleu.mp3"
+            }
+        ]
+    },
+    {
+        "name": "Classic Music",
+        "description": "Name",
+        "imageUrl": "../Default_music/Images/album4.jpg",
+        "lists": [
+            {
+                "musicName": "Song 1",
+                "musicUrl": "../Default_music/Musics/AuldLangSyne.mp3"
+            },
+            {
+                "musicName": "Song 2",
+                "musicUrl": "../Default_music/Musics/Bleu.mp3"
+            }
+        ]
+    }
+]
