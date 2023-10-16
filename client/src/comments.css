@@ -1,7 +1,4 @@
 
-/* comments.css */
-
-/* :root 和其他样式... */
 :root {
     --rotate-speed: 40;
     --count: 8;
@@ -17,9 +14,9 @@
 }
 
 
-/* 设置容器样式 */
+/* comments-window: */
 .comments-void {
-  /* 组件特定的样式 */
+
   width: 100%;
   max-width: 66vw;
   margin: auto;
@@ -28,12 +25,9 @@
   
 }
 
-/* 鼠标悬停时暂停动画 
-.comments-void ul:hover * {
-  animation-play-state: paused;
-}
-*/
-/* 设置列表项样式 */
+
+
+/* list */
 ul {
   list-style-type: none;
   margin: 0;
@@ -44,7 +38,7 @@ ul {
   z-index: 1;
 }
 
-/* 设置列表项样式 */
+/* list title: */
 li {
   position: absolute;
   top: 50%;
@@ -54,9 +48,9 @@ li {
 }
 
 
-/* 设置卡片样式 */
+/* cards */
 .comments-cards {
-  /* 组件特定的样式 */
+
   width: 17vw;
   
   display: flex;
@@ -72,12 +66,12 @@ li {
   color: #535062;
   animation: rotateCCW calc(var(--rotate-speed) * 1s) var(--easing) infinite;
   pointer-events: none;
-    border: 0.1vw solid #3b2ed06e; /* 添加1像素黑色边框 */
+    border: 0.1vw solid #3b2ed06e;
 }
 
-/* 设置图片样式 */
+
 .comments-cards img {
-  /* 组件特定的样式 */
+
   width: 100%;
 }
 
@@ -91,26 +85,19 @@ ac {
   overflow: hidden;
 }
 
-/* 设置模型名称样式 */
+
 .comments-username{
-  /* 组件特定的样式 */
+
   font-weight: 600;
   font-size: 2.75vh;
   line-height: 150%;
-  color: #3B2ED0;
   display: block;
   letter-spacing: 0.07vw;
-  color: #6844f7;
+  color: #df9a19;
 }
 
-/* svg {
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 0;
-} */
 
-/* 设置不同列表项的动画延迟 */
+
 li:nth-child(2),
 li:nth-child(2) .comments-cards {
   animation-delay: calc((var(--rotate-speed)/var(--count)) * -1s);
@@ -137,7 +124,7 @@ li:nth-child(6) .comments-cards {
 }
 
 
-/* 定义顺时针旋转动画 */
+/* roatating */
 @keyframes rotateCW {
   from {
     transform: translate3d(0vh, -50%, -1vh) rotate(-45deg);
@@ -148,7 +135,6 @@ li:nth-child(6) .comments-cards {
   }
 }
 
-/* 定义逆时针旋转动画 */
 @keyframes rotateCCW {
   from {
     transform: rotate(45deg);
@@ -158,7 +144,7 @@ li:nth-child(6) .comments-cards {
     transform: rotate(315deg);
   }
 }
-/* 设置中心圆样式 */
+/* background circle */
 .center-circle {
   position: absolute;
   width: 7vw;
@@ -205,12 +191,12 @@ li:nth-child(6) .comments-cards {
   background-image: url('../public/comments/03.gif');
 }
 
-/* 设置裁剪样式 */
+/* the crop of left half of the window */
 .crop {
   -webkit-mask-image: linear-gradient(90deg, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 1) 50%, rgba(0, 0, 0, 1));
 }
 
-/* 设置遮罩样式 */
+/*mask */
 .mask {
   position: absolute;
   top: 0;
@@ -233,7 +219,7 @@ li:nth-child(6) .comments-cards {
   background-image: linear-gradient(180deg, rgba(60, 26, 229, 0) 0%, #3C1AE5 50%, rgba(60, 26, 229, 0) 100%);
 }
 
-/* 区域发送评论的样式 */
+/* send comments window */
 .comments-window {
   position: absolute;
   top: 25vh;
@@ -245,7 +231,7 @@ li:nth-child(6) .comments-cards {
   border-radius: 3vh;
   z-index: 2;
   user-select: none;
-  background: linear-gradient(to bottom, #6d4bf5da 13%, #ffffffe1 13%);
+  background: linear-gradient(to bottom, #eb922d 13%, #ffffffe1 13%);
 }
 
 .comments-window h2 {
@@ -257,7 +243,7 @@ li:nth-child(6) .comments-cards {
   font-size: 230%;
 }
 
-/* 当用户正在输入时的样式 */
+/* when users is inputing comments */
 .comments-input {
   position: absolute;
   top: 20%;
@@ -269,18 +255,18 @@ li:nth-child(6) .comments-cards {
   border-radius: 1vh;
   font-size: 210%;
   font-weight: 555;
-  caret-color: #a200ff; 
+  caret-color: #6c00aa; 
   
 }
 
 .comments-input::selection {
   color: #fff;
-  background-color: #6844f7;
+  background-color: #f7b933;
 }
 
 .comments-input:focus {
-  outline: 0.25vh solid #532ee58a;
-  border: 0.25vh solid #532ee542;
+  outline: 0.25vh solid #ebac24;
+  border: 0.25vh solid #e4a215;
 }
 
 
@@ -298,7 +284,7 @@ textarea {
   bottom: 5%;
   right: 8%;
   padding: 0;
-  background-color: #6844f7;
+  background-color: #f7b233;
   color: white;
   border: none;
   border-radius: 0.5vw;
@@ -306,10 +292,10 @@ textarea {
   font-size: 2.5vh;
 }
 
-/* 当用户将鼠标悬停在按钮上时的样式 */
+
 .comments-button:hover {
   transform: scale(1.1);
-  background-color: #532ee5;
+  background-color: #f79f1b;
 }
 .comments-button:disabled {
   transform: scale(1.05); 
@@ -323,7 +309,7 @@ textarea {
   bottom: 7%; 
   left: 11%; 
   font-size: 3vh;
-  color: #532ee5; 
+  color: #f7b233; 
 }
 
 .comment-counter.max-exceeded {
