@@ -58,6 +58,13 @@ class Albums extends Component {
         }
 
         // Set a new audio source and play it
+
+
+
+
+
+
+
         audio.src = musicItems[musicIndex].lists[songIndex].musicUrl;
 
         // Add an event listener for when audio can play
@@ -171,7 +178,8 @@ class Albums extends Component {
                             <div className="content">
 
                                 <Link to={`/comments/${musicIndex}`}>
-                                    <img className="img" src={item.imageUrl} alt={item.description} />
+                                    {/* rewrite the url */}
+                                    <img className="img" src={`http://localhost:3300/images/${item.imageName}.jpg`} alt={item.description} />
                                 </Link>
                                 <h2 className="content-title">{item.name}</h2>
                                 <p className="content-songs">
