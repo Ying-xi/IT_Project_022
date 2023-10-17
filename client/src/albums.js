@@ -58,14 +58,9 @@ class Albums extends Component {
         }
 
         // Set a new audio source and play it
+        const playedMusic = musicItems[musicIndex].lists[songIndex].musicName;
+        audio.src = `http://localhost:3300/music/${playedMusic}.mp3`;
 
-
-
-
-
-
-
-        audio.src = musicItems[musicIndex].lists[songIndex].musicUrl;
 
         // Add an event listener for when audio can play
         audio.addEventListener('canplay', () => {
@@ -155,10 +150,6 @@ class Albums extends Component {
         });
     };
 
-    // the list items on the page:
-    // move to backend later:
-
-    // print them on the page:
     render() {
         const { musicItems } = this.state;
 
