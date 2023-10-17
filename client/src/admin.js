@@ -542,6 +542,9 @@ function Admin() {
                             <div className={styles.uploadedFile}>
                               {uploadedFile.name}
                               <button
+                                style={{
+                                  marginLeft: '2vw',
+                                }}
                                 className={styles.deleteButton}
                                 onClick={handleFileDelete}
                               >
