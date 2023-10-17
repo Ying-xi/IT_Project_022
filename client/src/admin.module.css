@@ -133,6 +133,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    height: 100%;
 }
 
 /* Styling for the text in music picture section */
@@ -290,13 +291,6 @@ box-shadow: 0 0 1vh rgba(55, 202, 55, 0.7);
     background-color: #F0F3F4;
     height: 100%;
     width: 100%;
-}
-.myAudio {
-    height: 100%;
-    width: 100%;
-    border: #3ce74d;
-    border-radius: 10px;
-    border-width: 5cm;
 }
 
 /* Styling for the image dropzone */

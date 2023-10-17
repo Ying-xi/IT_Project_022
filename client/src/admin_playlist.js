@@ -80,7 +80,7 @@ function Admin_Playlist() {
 
     useEffect(() => {
         const token = localStorage.getItem('token');
-        console.log(token);
+        // console.log(token);
 
         if (token) {
             const headers = {
@@ -109,7 +109,7 @@ function Admin_Playlist() {
         };
 
         const token = localStorage.getItem('token');
-        console.log(token)
+        // console.log(token)
 
         const headers = {
             Authorization: `Bearer ${token}`,
@@ -151,7 +151,7 @@ function Admin_Playlist() {
         };
 
         const token = localStorage.getItem('token');
-        console.log(token);
+        // console.log(token);
 
         const headers = {
             Authorization: `Bearer ${token}`,
@@ -173,7 +173,6 @@ function Admin_Playlist() {
     // Delete music from DB
     const handleMusicDelete = () => {
         const token = localStorage.getItem('token');
-        console.log(token)
         const headers = {
             Authorization: `Bearer ${token}`,
         };

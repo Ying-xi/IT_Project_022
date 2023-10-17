@@ -64,7 +64,7 @@ function Admin() {
 
   useEffect(() => {
     const token = localStorage.getItem('token');
-    console.log(token);
+    // console.log(token);
 
     if (token) {
       const headers = {
@@ -93,7 +93,7 @@ function Admin() {
     };
 
     const token = localStorage.getItem('token');
-    console.log(token)
+    // console.log(token)
 
     const headers = {
       Authorization: `Bearer ${token}`,
@@ -101,6 +101,8 @@ function Admin() {
 
     // confirm dialogue
     const isConfirmed = window.confirm('Are you sure you want to update this music?');
+
+    // console.log('FormData:', formData);
 
     if (isConfirmed) {
       axios.put(`http://localhost:3300/admin/${selectedMusicId}`, updatedMusic, { headers })
@@ -114,32 +116,49 @@ function Admin() {
     }
   };
 
-
-  // Add music to DB
   const handleMusicAdd = () => {
 
-    // replace the music path with the music file and picture in binary
-    const musicFile = `../Default_music/Musics/${selectedMusicName}.mp3`;
-    const musicPicture = `../Default_music/Images/${selectedMusicName}.jpg`;
-
-    console.log(selectedMusicTag)
-
-    const newMusic = {
-      name: selectedMusicName,
-      tags: ['All', selectedMusicTag],
-      file: musicFile,
-      picture: musicPicture,
-    };
-
     const token = localStorage.getItem('token');
-    console.log(token);
+    if (!token) {
+      console.error('Token not found. Please log in.');
+      return;
+    }
+  
+    // Initialize FormData
+    const formData = new FormData();
+    formData.append('name', selectedMusicName);
+    formData.append('tags', ['All', selectedMusicTag]);
 
+    // Append the uploaded file to the form data if it exists
+    if (uploadedFile) {
+      formData.append('file', uploadedFile);
+    } else {
+      alert('Please select a music file.');
+      return;
+    }
+  
+    // Append the uploaded image to the form data if it exists
+    if (uploadedImage) {
+      formData.append('picture', uploadedImage);
+    } else {
+      alert('Please select a music picture.');
+      return;
+    }
+  
+    // request header
     const headers = {
       Authorization: `Bearer ${token}`,
+      'Content-Type': 'multipart/form-data',
     };
 
-    // Send POST to backend
-    axios.post('http://localhost:3300/admin', newMusic, { headers })
+    // Debugging
+    for (const entry of formData.entries()) {
+      const [name, value] = entry;
+      console.log(`${name}: ${value}`);
+    }
+    console.log('FormData:', formData);
+    // POST Request to Back-end
+    axios.post('http://localhost:3300/admin', formData, { headers })
       .then((response) => {
         console.log('Music added successfully:', response.data);
         window.location.reload();
@@ -150,11 +169,9 @@ function Admin() {
   };
 
 
-
   // Delete music from DB
   const handleMusicDelete = () => {
     const token = localStorage.getItem('token');
-    console.log(token)
     const headers = {
       Authorization: `Bearer ${token}`,
     };
@@ -195,7 +212,6 @@ function Admin() {
 
   // Handle image upload event
   const handleImageUpload = (acceptedFiles) => {
-    //upload image from local to backend
     if (acceptedFiles.length > 0) {
       setUploadedImage(acceptedFiles[0]);
     }
@@ -253,7 +269,7 @@ function Admin() {
                     <div>
                       Type:
                       <select
-                        className={styles.customSelect} /* 将自定义样式类应用于<select>元素 */
+                        className={styles.customSelect}
                         value={selectedMusicType}
                         onChange={(e) => setSelectedMusicType(e.target.value)}
                       >
@@ -311,7 +327,7 @@ function Admin() {
                 <div className={styles.mainContentTop}>
                   <div className={styles.mainContentTopInner}>
 
-
+                    {/* show the music cover or upload cover */}
                     <div className={styles.mainContentTopPic}>
                       {selectedMusicPicture ? (
                         <img
