@@ -17,7 +17,10 @@ class Albums extends Component {
             axios.get('http://localhost:3300/albumPlayer', { headers })
                 .then((response) => {
                     console.log('Data from the backend:', response.data);
-                    this.setState({ musicItems: response.data.data });
+                    this.setState({ musicItems: response.data.data }, () => {
+                        // execute handleScroll once to set the default background
+                        this.handleScroll();
+                    });
                 })
                 .catch(error => console.error('Error fetching albums:', error));
         }
@@ -36,7 +39,6 @@ class Albums extends Component {
             currentMusicIndex: null,
             musicItems: [],
         };
-
     }
     
     playMusic = (musicIndex, songIndex, isManual = true) => {
