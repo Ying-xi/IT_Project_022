@@ -1,11 +1,19 @@
 import React, {useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import styles from './admin.module.css';
 import Dropzone from 'react-dropzone';
 import MusicList from './components/MusicList';
 import axios from 'axios'
-import { Link } from 'react-router-dom';
+// An alternative way for audio control
+import AudioPlayer from 'react-audio-player';
 
 function Admin() {
+    /*
+        http://localhost:3300/music/Bleu.mp3
+        http://localhost:3300/images/album1.jpg
+        upload file to backend (binary file)
+    */
+
   //parameters state
   const [selectedMusicType, setSelectedMusicType] = useState('');
   const [selectedMusicId, setSelectedMusicId] = useState(null); 
@@ -13,6 +21,8 @@ function Admin() {
   const [selectedMusicName, setSelectedMusicName] = useState('');
   const [selectedMusicTag, setSelectedMusicTag] = useState('');
   const [selectedMusicPicture, setSelectedMusicPicture] = useState('');
+  // store the mp3 file in the state for testing
+  const [selectedMusicMP3, setSelectedMusicMP3] = useState(null);
 
   // Handle music click event
   const handleMusicClick = (musicId) => {
@@ -30,16 +40,15 @@ function Admin() {
     const selectedMusic = backendData.data.find((music) => music._id === musicId);
 
     if (selectedMusic) {
-      setSelectedMusicFile(selectedMusic.file);
       setSelectedMusicName(selectedMusic.name || '');
       setSelectedMusicTag(selectedMusic.tags.filter(tag => tag !== 'All'));
-      setSelectedMusicPicture(selectedMusic.picture || '');
+      setSelectedMusicPicture(`http://localhost:3300/images/${selectedMusic.name}.jpg`);
+      setSelectedMusicFile(`http://localhost:3300/music/${selectedMusic.name}.mp3`);
 
-      console.log('--------')
-      console.log(selectedMusicFile)
-      console.log(selectedMusicPicture)
-      console.log(selectedMusicTag)
-      console.log('--------')
+      // Debugging
+      // console.log('--------')
+      // console.log(selectedMusicTag)
+      // console.log('--------')
     }
   };
 
@@ -109,6 +118,7 @@ function Admin() {
   // Add music to DB
   const handleMusicAdd = () => {
 
+    // replace the music path with the music file and picture in binary
     const musicFile = `../Default_music/Musics/${selectedMusicName}.mp3`;
     const musicPicture = `../Default_music/Images/${selectedMusicName}.jpg`;
 
@@ -191,7 +201,7 @@ function Admin() {
     }
   };
 
-  // 主动刷新页面
+  // actively refresh the page
   const [shouldRefresh, setShouldRefresh] = useState(false);  
   useEffect(() => {  
     if (shouldRefresh) {  
@@ -202,7 +212,7 @@ function Admin() {
 
 
   // const [activeTag, setActiveTag] = useState(null);
-  // 绑定tag状态
+  // bind the tag to the music
   const toggleTag = (tag) => {
     if (selectedMusicTag == tag) {
       setSelectedMusicTag(null);
@@ -282,6 +292,7 @@ function Admin() {
                     <h1
                       style={{
                       marginLeft: '4vh',
+                      marginRight: '8vh',
                       color: 'gray',
                     }}>Switch to Playlist Management</h1>
                   </Link>
@@ -500,7 +511,7 @@ function Admin() {
                   </div>
                 </div>
 
-
+                {/* Upload music */}
                 <div className={styles.mainContentMiddle}>
                   {/* mid content part */}
                   <div className={styles.dropzoneWrapper}>
@@ -531,13 +542,11 @@ function Admin() {
                     <div className={styles.bottomDivision}></div>
                   </div>
                 </div>
-
                 <div className={styles.mainContentBottom}>
-
                   <div key={selectedMusicFile} className={styles.audioContainerWrapper}>
-                    <div className={styles.audioContainer}>
+                    <div className={styles.audioContainer} style={{ height: '100%' }}>
                       <h1 style={{ marginTop: '2vh', textAlign: 'center' }}>Audio Play</h1>
-                      {selectedMusicName ? (
+                      {selectedMusicFile ? (
                         <>
                         <audio controls>
                           <source src={selectedMusicFile} type="audio/mpeg" />

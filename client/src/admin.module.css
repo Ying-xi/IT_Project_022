@@ -291,6 +291,13 @@ box-shadow: 0 0 1vh rgba(55, 202, 55, 0.7);
     height: 100%;
     width: 100%;
 }
+.myAudio {
+    height: 100%;
+    width: 100%;
+    border: #3ce74d;
+    border-radius: 10px;
+    border-width: 5cm;
+}
 
 /* Styling for the image dropzone */
 .imageDropzone {

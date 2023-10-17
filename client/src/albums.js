@@ -5,11 +5,6 @@ import axios from 'axios'
 
 class Albums extends Component {
 
-    /*
-        http://localhost:3300/music/Bleu.mp3
-        http://localhost:3300/images/album1.jpg
-        往后端上传文件使用Binary
-    */
     componentDidMount() {
         const token = localStorage.getItem('token');
         console.log(token);
