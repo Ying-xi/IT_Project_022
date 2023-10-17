@@ -251,8 +251,9 @@ function Admin() {
                   <div className={styles.musicMainHead}>
                     <div onClick={handleRedirect}>Music List</div>
                     <div>
-                      Type
+                      Type:
                       <select
+                        className={styles.customSelect} /* 将自定义样式类应用于<select>元素 */
                         value={selectedMusicType}
                         onChange={(e) => setSelectedMusicType(e.target.value)}
                       >

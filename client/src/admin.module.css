@@ -576,4 +576,18 @@ box-shadow: 0 0 1vh rgba(55, 202, 55, 0.7);
     background-color: yellow;
 }
 
-
+.customSelect {
+    background-color: #F0F3F4;
+    border: 2px solid #F0F3F4;
+    border-radius: 4px;
+    padding: 10px;
+    font-size: 0.8vw;
+    font-weight: bold;
+    width: 8vw;
+    outline: none;
+    cursor: pointer;
+}
+  
+.customSelect:hover {
+    border-color: #2980b9;
+}
