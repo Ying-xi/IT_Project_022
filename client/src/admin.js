@@ -15,8 +15,6 @@ function Admin() {
   const [selectedMusicName, setSelectedMusicName] = useState('');
   const [selectedMusicTag, setSelectedMusicTag] = useState('');
   const [selectedMusicPicture, setSelectedMusicPicture] = useState('');
-  // store the mp3 file in the state for testing
-  const [selectedMusicMP3, setSelectedMusicMP3] = useState(null);
 
   // Handle music click event
   const handleMusicClick = (musicId) => {
@@ -38,12 +36,33 @@ function Admin() {
       setSelectedMusicTag(selectedMusic.tags.filter(tag => tag !== 'All'));
       setSelectedMusicPicture(`http://localhost:3300/images/${selectedMusic.name}.jpg`);
       setSelectedMusicFile(`http://localhost:3300/music/${selectedMusic.name}.mp3`);
-
-      // Debugging
-      // console.log('--------')
-      // console.log(selectedMusicTag)
-      // console.log('--------')
     }
+
+    // Download the music file
+    // axios.get(selectedMusicFile, { responseType: 'blob' })
+    //   .then((response) => {
+    //     // Create a URL for the downloaded file
+    //     const url = window.URL.createObjectURL(new Blob([response.data]));
+    //     setUploadedFile(url);
+    //     console.log('Music file downloaded successfully:!!!!!!!!!', url);
+    //   })
+    //   .catch((error) => {
+    //     console.error('Error downloading music file:', error);
+    //   });
+
+    // // Download the image file
+    // axios.get(selectedMusicPicture, { responseType: 'blob' })
+    //   .then((response) => {
+    //     // Create a URL for the downloaded image
+    //     const url = window.URL.createObjectURL(new Blob([response.data]));
+    //     setUploadedImage(url);
+    //     console.log('Image file downloaded successfully:!!!!!!!!!!!!', url);
+    //   })
+    //   .catch((error) => {
+    //     console.error('Error downloading image file:', error);
+    //   });
+
+
   };
 
   // State for loading data
@@ -82,24 +101,39 @@ function Admin() {
 
   // Update music from DB
   const handleMusicUpdate = () => {
-    const updatedMusic = {
-      name: selectedMusicName,
-    };
-
+    const formData = new FormData();
+    formData.append('name', selectedMusicName);
+    const tags = 'All,' + selectedMusicTag;
+    formData.append('tags', tags);
+  
+    // Append the updated file if it exists
+    if (uploadedFile) {
+      formData.append('file', uploadedFile);
+    }
+  
+    // Append the updated image if it exists
+    if (uploadedImage) {
+      formData.append('picture', uploadedImage);
+    }
+  
+    // request header
     const token = localStorage.getItem('token');
-    // console.log(token)
-
     const headers = {
       Authorization: `Bearer ${token}`,
+      'Content-Type': 'multipart/form-data',
     };
-
-    // confirm dialogue
+  
+    // Confirm dialogue
     const isConfirmed = window.confirm('Are you sure you want to update this music?');
-
-    // console.log('FormData:', formData);
-
+  
+    // Debugging
+    for (const entry of formData.entries()) {
+      const [name, value] = entry;
+      console.log(`${name}: ${value}`);
+    }
+    console.log('FormData:', formData);
     if (isConfirmed) {
-      axios.put(`http://localhost:3300/admin/${selectedMusicId}`, updatedMusic, { headers })
+      axios.put(`http://localhost:3300/admin/${selectedMusicId}`, formData, { headers })
         .then((response) => {
           console.log('Music updated successfully:', response.data);
           window.location.reload();
@@ -109,6 +143,7 @@ function Admin() {
         });
     }
   };
+  
 
   const handleMusicAdd = () => {
 
@@ -345,6 +380,7 @@ function Admin() {
                                   src={URL.createObjectURL(uploadedImage)}
                                   alt="Uploaded"
                                   className={styles.uploadedImage}
+                                  
                                 />
                               ) : (
                                 <p>+UPLOAD IMAGE+</p>
