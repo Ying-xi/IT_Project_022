@@ -8,12 +8,6 @@ import axios from 'axios'
 import AudioPlayer from 'react-audio-player';
 
 function Admin() {
-    /*
-        http://localhost:3300/music/Bleu.mp3
-        http://localhost:3300/images/album1.jpg
-        upload file to backend (binary file)
-    */
-
   //parameters state
   const [selectedMusicType, setSelectedMusicType] = useState('');
   const [selectedMusicId, setSelectedMusicId] = useState(null); 
