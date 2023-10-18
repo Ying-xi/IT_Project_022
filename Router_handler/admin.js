@@ -18,12 +18,12 @@ exports.saveMusic = (req, res) => {
 		}
 		// get the uploaded music file (MP3)
 		const musicFile = files.file[0];
-		const musicFilename = musicFile.originalFilename;
+		const musicFilename = fields.name[0] + '.mp3';
 		const musicTempPath = musicFile.path;
 
 		// get the uploaded image file (JPG)
 		const imageFile = files.picture[0];
-		const imageFilename = imageFile.originalFilename;
+		const imageFilename = fields.name[0] + '.jpg';
 		const imageTempPath = imageFile.path;
 
 		// specify the storage path and filename for the music file
