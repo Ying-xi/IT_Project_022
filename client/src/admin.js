@@ -121,7 +121,12 @@ function Admin() {
     // Initialize FormData
     const formData = new FormData();
     formData.append('name', selectedMusicName);
-    formData.append('tags', ['All', selectedMusicTag]);
+    // formData.append('tags', ['All', selectedMusicTag]);
+
+    // Combine 'All' and selectedMusicTag into a single string
+    const tags = 'All,' + selectedMusicTag;
+
+    formData.append('tags', tags);
 
     // Append the uploaded file to the form data if it exists
     if (uploadedFile) {
