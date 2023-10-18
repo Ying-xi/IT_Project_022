@@ -375,7 +375,7 @@ box-shadow: 0 0 1vh rgba(55, 202, 55, 0.7);
 
 /* Styling for the music main header div */
 .musicWrap .musicMainHead > div {
-    background-color: #fff;
+    /* background-color: #fff; */
     font-weight: bold;
     padding: 5px 21px;
     font-size: 1.5vw;
