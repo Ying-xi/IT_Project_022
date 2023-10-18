@@ -196,7 +196,7 @@ class Albums extends Component {
                         </div>
                     ))}
                 </div>
-                <audio ref={(ref) => (this.audioRef = ref)} controls></audio>
+                <audio ref={(ref) => (this.audioRef = ref)} controls style={{ display: 'none' }} />
             </div>
         );
     }
