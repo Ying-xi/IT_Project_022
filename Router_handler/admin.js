@@ -4,6 +4,7 @@ const multiparty = require('multiparty');
 const fs = require('fs');
 const path = require('path');
 
+
 exports.saveMusic = (req, res) => {
 	const form = new multiparty.Form();
 	// use form.parse method to parse form data: it will parse the form data in the request into fields and files objects.
@@ -86,17 +87,109 @@ exports.saveMusic = (req, res) => {
 	});
 };
 
-exports.renderPage = async (req, res) => {
-	const musics = await Music.find()
-	res.status(200).send({ data: musics })
-}
 
 
-exports.updateMusic = async (req, res) => {
+exports.updateMusic = (req, res) => {
+	const form = new multiparty.Form();
+	form.parse(req, async (err, fields, files) => {
+		if (err) {
+			console.error('Error parsing form data:', err);
+			res.status(500).send({
+				error: 'Error parsing form data.'
+			});
+			return;
+		}
+		// get the music data
+		const music = await Music.findById(req.params.musicId);
+		if (!music) {
+			res.status(404).send({
+				error: 'Music not found'
+			});
+			return;
+		}
+		// set the new music data path
+		if (fields.file) {
+			// get the uploaded music file (MP3)
+			const musicFile = files.file[0];
+			const musicTempPath = musicFile.path;
+			const musicFilename = fields.name[0] + '.mp3';
+			// specify the storage paths and file names
+			const musicDestination = path.join(__dirname, '../Default_music/Musics');
+			const musicTargetPath = path.join(musicDestination, musicFilename);
+
+		}
+		// set the new image data path
+		if (fields.picture) {
+			// get the uploaded image file (JPG)
+			const imageFile = files.picture[0];
+			const imageTempPath = imageFile.path;
+			const imageFilename = fields.name[0] + '.jpg';
+			// specify the storage paths and file names
+			const imageDestination = path.join(__dirname, '../Default_music/Images');
+			const imageTargetPath = path.join(imageDestination, imageFilename);
+		}
+
+
+		// move the music file to the storage path
+		fs.rename(musicTempPath, musicTargetPath, (musicError) => {
+			if (musicError) {
+				console.error('Error moving the music file:', musicError);
+				res.status(500).send({
+					error: 'Error moving the music file.'
+				});
+				return;
+			}
+			// move the image file to the storage path
+			fs.rename(imageTempPath, imageTargetPath, async (imageError) => {
+				if (imageError) {
+					console.error('Error moving the image file:', imageError);
+					res.status(500).send({
+						error: 'Error moving the image file.'
+					});
+					return;
+				}
+				// create or update the music document
+				music.name = fields.name[0];
+				music.tags = fields.tags[0].split(',');
+				// Check if the 'file' and 'picture' fields exist in the request.
+				// If not, do not update the file paths.
+				if (fields.file && fields.picture) {
+					music.file = path.relative(__dirname, musicTargetPath);
+					music.picture = path.relative(__dirname, imageTargetPath);
+				}
+				try {
+					const updatedMusic = await music.save();
+					res.status(200).send({
+						data: updatedMusic,
+						message: 'Music updated successfully',
+					});
+				} catch (updateError) {
+					console.error('Error updating music:', updateError);
+					res.status(500).send({
+						error: 'Error updating music.'
+					});
+				}
+			});
+		});
+	});
+};
+
+
+// delete after the debug of the updateMusic
+exports.updateMusic1 = async (req, res) => {
 	const music = await Music.findByIdAndUpdate(req.params.musicId, req.body, {
 		new: true,
 	})
 	res.send({ data: music, message: "Update successfully" })
+}
+
+
+
+
+
+exports.renderPage = async (req, res) => {
+	const musics = await Music.find()
+	res.status(200).send({ data: musics })
 }
 
 exports.deleteMusic = async (req, res) => {
