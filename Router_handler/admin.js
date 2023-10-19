@@ -175,26 +175,43 @@ exports.updateMusic = (req, res) => {
 };
 
 
-// delete after the debug of the updateMusic
-exports.updateMusic1 = async (req, res) => {
-	const music = await Music.findByIdAndUpdate(req.params.musicId, req.body, {
-		new: true,
-	})
-	res.send({ data: music, message: "Update successfully" })
+
+exports.deleteMusic = async (req, res) => {
+    try {
+		// Delete the music document from the MongoDB
+        const deletedMusic = await Music.findByIdAndDelete(req.params.musicId);
+        // console out deletedMusic info for debugging
+		// console.log('deletedMusic:', deletedMusic);
+
+        if (deletedMusic) {
+            deleteLocalFiles(deletedMusic.file, deletedMusic.picture);
+            res.status(200).send({ message: "Music and relevant files deleted successfully" });
+        } else {
+            res.status(404).send({ error: "Music is not found" });
+        }
+    } catch (error) {
+        console.error('Error deleting music:', error);
+        res.status(500).send({ error: 'Error deleting music.' });
+    }
+};
+
+function deleteLocalFiles(...filePaths) {
+    for (const filePath of filePaths) {
+        try {
+            const absPath = path.join(__dirname, filePath);
+            fs.unlinkSync(absPath);
+            // console.log(`Deleted file: ${absPath}`);
+        } catch (error) {
+            console.error(`Error deleting file: ${filePath}`, error);
+        }
+    }
 }
-
-
 
 
 
 exports.renderPage = async (req, res) => {
 	const musics = await Music.find()
 	res.status(200).send({ data: musics })
-}
-
-exports.deleteMusic = async (req, res) => {
-	await Music.findByIdAndDelete(req.params.musicId)
-	res.status(200).send({ message: "Music deleted sucessfully" });
 }
 
 
