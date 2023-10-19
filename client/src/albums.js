@@ -159,7 +159,7 @@ class Albums extends Component {
             <div className="shell" id="shell" style={{ backgroundImage: this.state.backgroundImage }}>
                 <div className="header">
                     <h2 className="title">Playlist</h2>
-                    <h3 className="subtitle">click image cover to<br />leave comments</h3>
+                    <h3 className="subtitle">click cover of playlist<br />to comments page</h3>
                 </div>
                 <div className="musiclist">
                     {musicItems.map((item, musicIndex) => (
