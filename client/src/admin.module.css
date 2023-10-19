@@ -572,13 +572,13 @@ box-shadow: 0 0 1vh rgba(55, 202, 55, 0.7);
 }
 
 .customSelect {
-    background-color: #F0F3F4;
-    border: 2px solid #F0F3F4;
+    background-color: #fac554;
+    border: 2px solid #fac554;
     border-radius: 4px;
     padding: 10px;
     font-size: 0.8vw;
     font-weight: bold;
-    width: 8vw;
+    width: 8.26vw;
     outline: none;
     cursor: pointer;
 }

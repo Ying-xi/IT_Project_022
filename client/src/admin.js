@@ -9,7 +9,7 @@ import AudioPlayer from 'react-audio-player';
 
 function Admin() {
   //parameters state
-  const [selectedMusicType, setSelectedMusicType] = useState('');
+  const [selectedMusicType, setSelectedMusicType] = useState('All');
   const [selectedMusicId, setSelectedMusicId] = useState(null); 
   const [selectedMusicFile, setSelectedMusicFile] = useState(null); 
   const [selectedMusicName, setSelectedMusicName] = useState('');
@@ -276,6 +276,16 @@ function Admin() {
     window.location.href = '/admin_playlist';
   };
 
+  const [musicData, setMusicData] = useState(backendData.data);
+
+  // 使用 useEffect 来监听 selectedMusicType 变化并更新 musicData
+  useEffect(() => {
+    const updatedMusicData = backendData.data.filter((music) =>
+      music.tags.includes(selectedMusicType)
+    );
+    setMusicData(updatedMusicData);
+  }, [selectedMusicType]);
+
   return (
     <div className={styles.admin}>
       {/* left hand side */}
@@ -322,7 +332,8 @@ function Admin() {
                   {isLoading ? (
                     <h3 style={{ textAlign: 'center', color: 'white', fontWeight: 'bold', marginTop: '2vh' }}>Loading...</h3>
                   ) : (
-                    <MusicList musicData={backendData.data} onMusicClick={handleMusicClick} />
+                    <MusicList key={selectedMusicType} musicData={backendData.data.filter((music) =>
+                      music.tags.includes(selectedMusicType))} onMusicClick={handleMusicClick} />
                   )}
                 </main>
               </div>
