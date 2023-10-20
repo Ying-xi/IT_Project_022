@@ -33,22 +33,6 @@ function Admin_Playlist() {
     // Playlist details, defined by lists in backend data
     const [selectedPlaylist, setSelectedPlaylist] = useState([]);
     const [multiSelected, setMultiSelected] = useState([]);
-    // {
-    // "_id": {
-    //     "$oid": "6527d84fec4088689a0397cf"
-    // },
-    // "name": "Jazz Music",
-    // "description": "Name",
-    // "lists": [
-    //     {
-    //     "musicName": "Auld Lang Syne",
-    //     },
-    //     {
-    //     "musicName": "Winter Bokeh",
-    //     }
-    // ],
-    // "imageName": "album1"
-    // }
 
 
     // const options = [];
@@ -78,20 +62,22 @@ function Admin_Playlist() {
         const backendDataPlaylist = backendData.data.find((playlist) => playlist._id === playlistId);
 
         if (backendDataPlaylist) {
+            // https://it-project-022-backend.vercel.app/Default_music/
+            // http://localhost:3300/
             setselectedPlaylistName(backendDataPlaylist.name || '');
             // setselectedPlaylistPictureName(backendDataPlaylist.imageName || '');
             setselectedPlaylistPictureName(`http://localhost:3300/images/${backendDataPlaylist.imageName}.jpg`);
             setselectedPlaylistDescription(backendDataPlaylist.description || '');
             setSelectedPlaylist(backendDataPlaylist.lists || []);
 
-            // 等待后端合并发送musicName list，再重新给options赋值
+            // wait for backend to send musicName list, then reassign value to options
             selectedPlaylist.forEach((item) => {
                 options.push({
                     value: item.musicName,
                     label: item.musicName,
                 });
             });
-            // 遍历输出selectedPlaylist
+            // iterate selectedPlaylist
             selectedPlaylist.forEach((item) => {
                 console.log(item.musicName);
             });
