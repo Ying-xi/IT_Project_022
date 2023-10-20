@@ -24,7 +24,7 @@ web.use(express.static('Files/staticPage'))
 web.use(express.static('Files/login'))
 web.use(express.static('Files/musicPlayer'))
 
-web.use(albumRouter)
+web.use(adminRouter)
 web.use(userRouter)
 web.use(musicRouter)
 web.use(homeRouter)
