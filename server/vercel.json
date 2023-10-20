@@ -8,7 +8,7 @@
         "dest": "/server/$1"
     }],
     "builds": [{
-        "src": "/server/server.js",
+        "src": "/server.js",
         "use": "@vercel/node"
     }]
 }
