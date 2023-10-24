@@ -222,11 +222,10 @@ li:nth-child(6) .comments-cards {
 /* send comments window */
 .comments-window {
   position: absolute;
-  top: 25vh;
-  left: -2vw;
-  bottom: 41vh;
-  width: 26.5vw;
-  height: 70vh;
+  top: 17%;
+  left: -10%;
+  bottom: 28%;
+  right: 57%;
   margin: 1.5vh;
   border-radius: 3vh;
   z-index: 2;
@@ -234,19 +233,23 @@ li:nth-child(6) .comments-cards {
   background: linear-gradient(to bottom, #eb922d 13%, #ffffffe1 13%);
 }
 
+
+
+
 .comments-window h2 {
   position: absolute;
-  top: 4%;
+  top: 2%;
   left: 50%;
   transform: translateX(-50%);
   color: #fff;
-  font-size: 230%;
+  font-size: 200%;
+  
 }
 
 /* when users is inputing comments */
 .comments-input {
   position: absolute;
-  top: 20%;
+  top: 19%;
   left: 8%;
   bottom: 20%;
   right: 8%;
