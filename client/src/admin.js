@@ -1,13 +1,15 @@
 import React, {useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import styles from './admin.module.css';
 import Dropzone from 'react-dropzone';
 import MusicList from './components/MusicList';
 import axios from 'axios'
-import { Link } from 'react-router-dom';
+// An alternative way for audio control
+import AudioPlayer from 'react-audio-player';
 
 function Admin() {
   //parameters state
-  const [selectedMusicType, setSelectedMusicType] = useState('');
+  const [selectedMusicType, setSelectedMusicType] = useState('All');
   const [selectedMusicId, setSelectedMusicId] = useState(null); 
   const [selectedMusicFile, setSelectedMusicFile] = useState(null); 
   const [selectedMusicName, setSelectedMusicName] = useState('');
@@ -30,17 +32,37 @@ function Admin() {
     const selectedMusic = backendData.data.find((music) => music._id === musicId);
 
     if (selectedMusic) {
-      setSelectedMusicFile(selectedMusic.file);
       setSelectedMusicName(selectedMusic.name || '');
       setSelectedMusicTag(selectedMusic.tags.filter(tag => tag !== 'All'));
-      setSelectedMusicPicture(selectedMusic.picture || '');
-
-      console.log('--------')
-      console.log(selectedMusicFile)
-      console.log(selectedMusicPicture)
-      console.log(selectedMusicTag)
-      console.log('--------')
+      setSelectedMusicPicture(`http://localhost:3300/images/${selectedMusic.name}.jpg`);
+      setSelectedMusicFile(`http://localhost:3300/music/${selectedMusic.name}.mp3`);
     }
+
+    // Download the music file
+    // axios.get(selectedMusicFile, { responseType: 'blob' })
+    //   .then((response) => {
+    //     // Create a URL for the downloaded file
+    //     const url = window.URL.createObjectURL(new Blob([response.data]));
+    //     setUploadedFile(url);
+    //     console.log('Music file downloaded successfully:!!!!!!!!!', url);
+    //   })
+    //   .catch((error) => {
+    //     console.error('Error downloading music file:', error);
+    //   });
+
+    // // Download the image file
+    // axios.get(selectedMusicPicture, { responseType: 'blob' })
+    //   .then((response) => {
+    //     // Create a URL for the downloaded image
+    //     const url = window.URL.createObjectURL(new Blob([response.data]));
+    //     setUploadedImage(url);
+    //     console.log('Image file downloaded successfully:!!!!!!!!!!!!', url);
+    //   })
+    //   .catch((error) => {
+    //     console.error('Error downloading image file:', error);
+    //   });
+
+
   };
 
   // State for loading data
@@ -55,7 +77,7 @@ function Admin() {
 
   useEffect(() => {
     const token = localStorage.getItem('token');
-    console.log(token);
+    // console.log(token);
 
     if (token) {
       const headers = {
@@ -79,22 +101,39 @@ function Admin() {
 
   // Update music from DB
   const handleMusicUpdate = () => {
-    const updatedMusic = {
-      name: selectedMusicName,
-    };
-
+    const formData = new FormData();
+    formData.append('name', selectedMusicName);
+    const tags = 'All,' + selectedMusicTag;
+    formData.append('tags', tags);
+  
+    // Append the updated file if it exists
+    if (uploadedFile) {
+      formData.append('file', uploadedFile);
+    }
+  
+    // Append the updated image if it exists
+    if (uploadedImage) {
+      formData.append('picture', uploadedImage);
+    }
+  
+    // request header
     const token = localStorage.getItem('token');
-    console.log(token)
-
     const headers = {
       Authorization: `Bearer ${token}`,
+      'Content-Type': 'multipart/form-data',
     };
-
-    // confirm dialogue
+  
+    // Confirm dialogue
     const isConfirmed = window.confirm('Are you sure you want to update this music?');
-
+  
+    // Debugging
+    for (const entry of formData.entries()) {
+      const [name, value] = entry;
+      console.log(`${name}: ${value}`);
+    }
+    console.log('FormData:', formData);
     if (isConfirmed) {
-      axios.put(`http://localhost:3300/admin/${selectedMusicId}`, updatedMusic, { headers })
+      axios.put(`http://localhost:3300/admin/${selectedMusicId}`, formData, { headers })
         .then((response) => {
           console.log('Music updated successfully:', response.data);
           window.location.reload();
@@ -104,32 +143,56 @@ function Admin() {
         });
     }
   };
+  
 
-
-  // Add music to DB
   const handleMusicAdd = () => {
 
-    const musicFile = `../Default_music/Musics/${selectedMusicName}.mp3`;
-    const musicPicture = `../Default_music/Images/${selectedMusicName}.jpg`;
-
-    console.log(selectedMusicTag)
-
-    const newMusic = {
-      name: selectedMusicName,
-      tags: ['All', selectedMusicTag],
-      file: musicFile,
-      picture: musicPicture,
-    };
-
     const token = localStorage.getItem('token');
-    console.log(token);
+    if (!token) {
+      console.error('Token not found. Please log in.');
+      return;
+    }
+  
+    // Initialize FormData
+    const formData = new FormData();
+    formData.append('name', selectedMusicName);
+    // formData.append('tags', ['All', selectedMusicTag]);
 
+    // Combine 'All' and selectedMusicTag into a single string
+    const tags = 'All,' + selectedMusicTag;
+
+    formData.append('tags', tags);
+
+    // Append the uploaded file to the form data if it exists
+    if (uploadedFile) {
+      formData.append('file', uploadedFile);
+    } else {
+      alert('Please select a music file.');
+      return;
+    }
+  
+    // Append the uploaded image to the form data if it exists
+    if (uploadedImage) {
+      formData.append('picture', uploadedImage);
+    } else {
+      alert('Please select a music picture.');
+      return;
+    }
+  
+    // request header
     const headers = {
       Authorization: `Bearer ${token}`,
+      'Content-Type': 'multipart/form-data',
     };
 
-    // Send POST to backend
-    axios.post('http://localhost:3300/admin', newMusic, { headers })
+    // Debugging
+    for (const entry of formData.entries()) {
+      const [name, value] = entry;
+      console.log(`${name}: ${value}`);
+    }
+    console.log('FormData:', formData);
+    // POST Request to Back-end
+    axios.post('http://localhost:3300/admin', formData, { headers })
       .then((response) => {
         console.log('Music added successfully:', response.data);
         window.location.reload();
@@ -140,11 +203,9 @@ function Admin() {
   };
 
 
-
   // Delete music from DB
   const handleMusicDelete = () => {
     const token = localStorage.getItem('token');
-    console.log(token)
     const headers = {
       Authorization: `Bearer ${token}`,
     };
@@ -185,13 +246,12 @@ function Admin() {
 
   // Handle image upload event
   const handleImageUpload = (acceptedFiles) => {
-    //upload image from local to backend
     if (acceptedFiles.length > 0) {
       setUploadedImage(acceptedFiles[0]);
     }
   };
 
-  // 主动刷新页面
+  // actively refresh the page
   const [shouldRefresh, setShouldRefresh] = useState(false);  
   useEffect(() => {  
     if (shouldRefresh) {  
@@ -202,7 +262,7 @@ function Admin() {
 
 
   // const [activeTag, setActiveTag] = useState(null);
-  // 绑定tag状态
+  // bind the tag to the music
   const toggleTag = (tag) => {
     if (selectedMusicTag == tag) {
       setSelectedMusicTag(null);
@@ -215,6 +275,16 @@ function Admin() {
   const handleRedirect = () => {
     window.location.href = '/admin_playlist';
   };
+
+  const [musicData, setMusicData] = useState(backendData.data);
+
+  // 使用 useEffect 来监听 selectedMusicType 变化并更新 musicData
+  useEffect(() => {
+    const updatedMusicData = backendData.data.filter((music) =>
+      music.tags.includes(selectedMusicType)
+    );
+    setMusicData(updatedMusicData);
+  }, [selectedMusicType]);
 
   return (
     <div className={styles.admin}>
@@ -241,8 +311,9 @@ function Admin() {
                   <div className={styles.musicMainHead}>
                     <div onClick={handleRedirect}>Music List</div>
                     <div>
-                      Type
+                      Type:
                       <select
+                        className={styles.customSelect}
                         value={selectedMusicType}
                         onChange={(e) => setSelectedMusicType(e.target.value)}
                       >
@@ -261,7 +332,8 @@ function Admin() {
                   {isLoading ? (
                     <h3 style={{ textAlign: 'center', color: 'white', fontWeight: 'bold', marginTop: '2vh' }}>Loading...</h3>
                   ) : (
-                    <MusicList musicData={backendData.data} onMusicClick={handleMusicClick} />
+                    <MusicList key={selectedMusicType} musicData={backendData.data.filter((music) =>
+                      music.tags.includes(selectedMusicType))} onMusicClick={handleMusicClick} />
                   )}
                 </main>
               </div>
@@ -282,6 +354,7 @@ function Admin() {
                     <h1
                       style={{
                       marginLeft: '4vh',
+                      marginRight: '8vh',
                       color: 'gray',
                     }}>Switch to Playlist Management</h1>
                   </Link>
@@ -299,7 +372,7 @@ function Admin() {
                 <div className={styles.mainContentTop}>
                   <div className={styles.mainContentTopInner}>
 
-
+                    {/* show the music cover or upload cover */}
                     <div className={styles.mainContentTopPic}>
                       {selectedMusicPicture ? (
                         <img
@@ -318,6 +391,7 @@ function Admin() {
                                   src={URL.createObjectURL(uploadedImage)}
                                   alt="Uploaded"
                                   className={styles.uploadedImage}
+                                  
                                 />
                               ) : (
                                 <p>+UPLOAD IMAGE+</p>
@@ -500,7 +574,7 @@ function Admin() {
                   </div>
                 </div>
 
-
+                {/* Upload music */}
                 <div className={styles.mainContentMiddle}>
                   {/* mid content part */}
                   <div className={styles.dropzoneWrapper}>
@@ -514,6 +588,9 @@ function Admin() {
                             <div className={styles.uploadedFile}>
                               {uploadedFile.name}
                               <button
+                                style={{
+                                  marginLeft: '2vw',
+                                }}
                                 className={styles.deleteButton}
                                 onClick={handleFileDelete}
                               >
@@ -531,13 +608,11 @@ function Admin() {
                     <div className={styles.bottomDivision}></div>
                   </div>
                 </div>
-
                 <div className={styles.mainContentBottom}>
-
                   <div key={selectedMusicFile} className={styles.audioContainerWrapper}>
-                    <div className={styles.audioContainer}>
+                    <div className={styles.audioContainer} style={{ height: '100%' }}>
                       <h1 style={{ marginTop: '2vh', textAlign: 'center' }}>Audio Play</h1>
-                      {selectedMusicName ? (
+                      {selectedMusicFile ? (
                         <>
                         <audio controls>
                           <source src={selectedMusicFile} type="audio/mpeg" />

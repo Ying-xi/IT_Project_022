@@ -144,6 +144,11 @@
     text-align: center;
 }
 
+.uploadedImage {
+    max-width: 90%;
+    max-height: 100%;
+}
+
 /* Styling for displaying music content */
 .mainContentTopRight {
     flex: 1;
@@ -171,8 +176,8 @@
 /* Styling for the music name section */
 .mainContentTopRightName {
     margin-top: 2vh;
-    margin-left: 2vh;
-    margin-right: 2vh;
+    margin-left: 1vw;
+    margin-right: 10%;
     flex: 1;
     display: flex;
     align-items: center;
@@ -183,12 +188,21 @@
 
 /* input style design */
 .customInput {
-    border: 2px solid #3498db;
     border-radius: 4px;
-    padding: 10px;
-    font-size: 16px;
     width: 100%;
     outline: none;
+    padding: 10px;
+    font-size: 16px;
+    border: 2px solid #3498db;
+}
+
+.descriptionInput{
+    border: none;
+    border-radius: 4px;
+    width: 100%;
+    outline: none;
+    /* padding: 10px; */
+    /* font-size: 16px; */
 }
 
 /* mouse hover */
@@ -208,8 +222,8 @@
 .mainContentTopRightType {
     flex: 3;
     margin-top: 2vh;
-    margin-left: 2vh;
-    margin-right: 2vh;
+    margin-left: 1vw;
+    margin-right: 10%;
     background: #F0F3F4;
     border-radius: 10px;
 }

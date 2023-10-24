@@ -59,7 +59,7 @@ function User() {
   
     useEffect(() => {
       const token = localStorage.getItem('token');
-      console.log(token);
+      // console.log(token);
   
       if (token) {
         const headers = {
@@ -88,7 +88,7 @@ function User() {
       };
   
       const token = localStorage.getItem('token');
-      console.log(token)
+      // console.log(token)
   
       const headers = {
         Authorization: `Bearer ${token}`,
@@ -119,10 +119,6 @@ function User() {
       console.log(selectedMusicTag)
   
       const newMusic = {
-        // 音乐名字
-        // 音乐Tags
-        // 音乐音频
-        // 音乐图片
         name: selectedMusicName,
         tags: ['All', selectedMusicTag],
         file: musicFile,
@@ -130,7 +126,7 @@ function User() {
       };
   
       const token = localStorage.getItem('token');
-      console.log(token);
+      // console.log(token);
   
       const headers = {
         Authorization: `Bearer ${token}`,

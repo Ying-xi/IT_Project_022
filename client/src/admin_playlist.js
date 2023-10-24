@@ -10,17 +10,12 @@ import makeAnimated from 'react-select/animated';
 
 
 function Admin_Playlist() {
+    /*
+        http://localhost:3300/music/Bleu.mp3
+        http://localhost:3300/images/album1.jpg
+        upload file to backend (binary file)
+    */
 
-    const options = [
-        { label: "Option 1", value: "option1" },
-        { label: "Option 2", value: "option2" },
-        { label: "Option 3", value: "option3" },
-        { label: "Option 4", value: "option4" },
-        { label: "Option 5", value: "option5" },
-        { label: "Option 6", value: "option6" },
-        { label: "Option 7", value: "option7" },
-        { label: "Option 8", value: "option8" },
-    ];
     const animatedComponents = makeAnimated();
 
     const handleSelectChange = (selected) => {
@@ -29,41 +24,73 @@ function Admin_Playlist() {
         }
     };
 
-
     //parameters state
-    const [selectedMusicId, setSelectedMusicId] = useState(null);
-    const [selectedMusicFile, setSelectedMusicFile] = useState(null);
-    const [selectedMusicName, setSelectedMusicName] = useState('');
-    const [selectedMusicTag, setSelectedMusicTag] = useState('');
-    const [selectedMusicPicture, setSelectedMusicPicture] = useState('');
-    const [selectedPlaylist, setSelectedPlaylist] = useState(options);
+    const [selectedPlaylistId, setselectedPlaylistId] = useState(null);
+    const [selectedPlaylistName, setselectedPlaylistName] = useState('');
+    const [selectedPlaylistDescription, setselectedPlaylistDescription] = useState('');
+    const [selectedPlaylistPictureName, setselectedPlaylistPictureName] = useState('');
+
+    // Playlist details, defined by lists in backend data
+    const [selectedPlaylist, setSelectedPlaylist] = useState([]);
     const [multiSelected, setMultiSelected] = useState([]);
 
-    // Handle music click event
-    const handleMusicClick = (musicId) => {
+
+    // const options = [];
+    const options = [
+        { label: "Auld Lang Syne", value: "Auld Lang Syne" },
+        { label: "Bleu", value: "Bleu" },
+        { label: "Canon in D", value: "Canon in D" },
+        { label: "Relaxing Rain", value: "Relaxing Rain" },
+        { label: "Vocalise, Op. 34 No. 14", value: "Vocalise, Op. 34 No. 14" },
+        { label: "What Makes You Beautiful", value: "What Makes You Beautiful" },
+        { label: "Winter Bokeh", value: "Winter Bokeh" },
+    ];
+
+
+    // Handle music/playlist click event
+    const handlePlaylistClick = (playlistId) => {
         // Reset state when a new music item is selected
-        setSelectedMusicId(null);
-        setSelectedMusicFile(null);
-        setSelectedMusicName('');
-        setSelectedMusicTag('');
-        setSelectedMusicPicture('');
+        setselectedPlaylistId(null);
+        setselectedPlaylistName('');
+        setselectedPlaylistPictureName('');
+        setselectedPlaylistDescription('');
 
         // Set the selected music based on the clicked item
-        setSelectedMusicId(musicId);
+        setselectedPlaylistId(playlistId);
 
         // Fetch details for the selected music
-        const selectedMusic = backendData.data.find((music) => music._id === musicId);
+        const backendDataPlaylist = backendData.data.find((playlist) => playlist._id === playlistId);
 
-        if (selectedMusic) {
-            setSelectedMusicFile(selectedMusic.file);
-            setSelectedMusicName(selectedMusic.name || '');
-            setSelectedMusicTag(selectedMusic.tags.filter(tag => tag !== 'All'));
-            setSelectedMusicPicture(selectedMusic.picture || '');
+        if (backendDataPlaylist) {
+            // https://it-project-022-backend.vercel.app/Default_music/
+            // http://localhost:3300/
+            setselectedPlaylistName(backendDataPlaylist.name || '');
+            // setselectedPlaylistPictureName(backendDataPlaylist.imageName || '');
+            setselectedPlaylistPictureName(`http://localhost:3300/images/${backendDataPlaylist.imageName}.jpg`);
+            setselectedPlaylistDescription(backendDataPlaylist.description || '');
+            setSelectedPlaylist(backendDataPlaylist.lists || []);
+
+            // wait for backend to send musicName list, then reassign value to options
+            selectedPlaylist.forEach((item) => {
+                options.push({
+                    value: item.musicName,
+                    label: item.musicName,
+                });
+            });
+            // iterate selectedPlaylist
+            selectedPlaylist.forEach((item) => {
+                console.log(item.musicName);
+            });
+            console.log('-----!!---')
+            console.log(options);
+            console.log('-----!!---')
+
 
             console.log('--------')
-            console.log(selectedMusicFile)
-            console.log(selectedMusicPicture)
-            console.log(selectedMusicTag)
+            console.log(selectedPlaylistName)
+            console.log(selectedPlaylistPictureName)
+            console.log(selectedPlaylistDescription)
+            console.log(selectedPlaylist)
             console.log('--------')
         }
     };
@@ -80,7 +107,7 @@ function Admin_Playlist() {
 
     useEffect(() => {
         const token = localStorage.getItem('token');
-        console.log(token);
+        // console.log(token);
 
         if (token) {
             const headers = {
@@ -88,7 +115,7 @@ function Admin_Playlist() {
             };
 
             axios
-                .get('http://localhost:3300/admin', { headers })
+                .get('http://localhost:3300/albumAdmin', { headers })
                 .then((response) => {
                     console.log('Received data from backend:', response.data);
                     setBackendData(response.data);
@@ -105,11 +132,11 @@ function Admin_Playlist() {
     // Update music from DB
     const handleMusicUpdate = () => {
         const updatedMusic = {
-            name: selectedMusicName,
+            name: selectedPlaylistName,
         };
 
         const token = localStorage.getItem('token');
-        console.log(token)
+        // console.log(token)
 
         const headers = {
             Authorization: `Bearer ${token}`,
@@ -119,7 +146,7 @@ function Admin_Playlist() {
         const isConfirmed = window.confirm('Are you sure you want to update this music?');
 
         if (isConfirmed) {
-            axios.put(`http://localhost:3300/admin/${selectedMusicId}`, updatedMusic, { headers })
+            axios.put(`http://localhost:3300/admin/${selectedPlaylistId}`, updatedMusic, { headers })
                 .then((response) => {
                     console.log('Music updated successfully:', response.data);
                     window.location.reload();
@@ -134,24 +161,19 @@ function Admin_Playlist() {
     // Add music to DB
     const handleMusicAdd = () => {
 
-        const musicFile = `../Default_music/Musics/${selectedMusicName}.mp3`;
-        const musicPicture = `../Default_music/Images/${selectedMusicName}.jpg`;
+        const musicFile = `../Default_music/Musics/${selectedPlaylistName}.mp3`;
+        const musicPicture = `../Default_music/Images/${selectedPlaylistName}.jpg`;
 
-        console.log(selectedMusicTag)
 
         const newMusic = {
-            // 音乐名字
-            // 音乐Tags
-            // 音乐音频
-            // 音乐图片
-            name: selectedMusicName,
-            tags: ['All', selectedMusicTag],
+            // reconstruct to form-data
+            name: selectedPlaylistName,
             file: musicFile,
             picture: musicPicture,
         };
 
         const token = localStorage.getItem('token');
-        console.log(token);
+        // console.log(token);
 
         const headers = {
             Authorization: `Bearer ${token}`,
@@ -173,14 +195,13 @@ function Admin_Playlist() {
     // Delete music from DB
     const handleMusicDelete = () => {
         const token = localStorage.getItem('token');
-        console.log(token)
         const headers = {
             Authorization: `Bearer ${token}`,
         };
         const isConfirmed = window.confirm('Are you sure you want to delete this music?');
 
         if (isConfirmed) {
-            axios.delete(`http://localhost:3300/admin/${selectedMusicId}`, { headers })
+            axios.delete(`http://localhost:3300/admin/${selectedPlaylistId}`, { headers })
                 .then((response) => {
                     console.log('Music deleted successfully:', response.data);
                     window.location.reload();
@@ -230,16 +251,6 @@ function Admin_Playlist() {
     }, [shouldRefresh]);
 
 
-    // const [activeTag, setActiveTag] = useState(null);
-    // binding tag status
-    const toggleTag = (tag) => {
-        if (selectedMusicTag == tag) {
-            setSelectedMusicTag(null);
-        } else {
-            setSelectedMusicTag(tag);
-        }
-    };
-
     // help to switch page
     const handleRedirect = () => {
         window.location.href = '/admin';
@@ -270,14 +281,18 @@ function Admin_Playlist() {
                                 <main>
                                     <div className={styles.musicMainHead}>
                                         <div onClick={handleRedirect}>Custom Playlist</div>
-                                        <div>Type</div>
-                                        <div onClick={() => setShouldRefresh(true)}>Add+</div>
+                                        {/* <div>Type</div> */}
+                                        <div 
+                                            // onClick={() => setShouldRefresh(true)}
+                                        >
+                                                Add+
+                                        </div>
                                     </div>
 
                                     {isLoading ? (
                                         <h3 style={{ textAlign: 'center', color: 'white', fontWeight: 'bold', marginTop: '2vh' }}>Loading...</h3>
                                     ) : (
-                                        <MusicList musicData={backendData.data} onMusicClick={handleMusicClick} />
+                                        <MusicList musicData={backendData.data} onMusicClick={handlePlaylistClick} />
                                     )}
                                 </main>
                             </div>
@@ -317,9 +332,9 @@ function Admin_Playlist() {
 
 
                                         <div className={styles.mainContentTopPic}>
-                                            {selectedMusicPicture ? (
+                                            {selectedPlaylistPictureName ? (
                                                 <img
-                                                    src={selectedMusicPicture}
+                                                    src={selectedPlaylistPictureName}
                                                     alt="Music Picture"
                                                     className={styles.uploadedImage}
                                                 />
@@ -349,7 +364,7 @@ function Admin_Playlist() {
                                             <div className={styles.mainContentTopRightInner}>
                                                 <div className={styles.mainContentTopRightAdd}>
 
-                                                    { selectedMusicId ? (
+                                                    { selectedPlaylistId ? (
                                                         <>
                                                             <button className={styles.addButton} onClick={handleMusicUpdate}>Update</button>
                                                             <button className={styles.deleteButton} onClick={handleMusicDelete}>Delete</button>
@@ -362,7 +377,7 @@ function Admin_Playlist() {
                                                     Music Name Editor
                                                 */}
                                                 <div className={styles.mainContentTopRightName}>
-                                                    {selectedMusicFile ? (
+                                                    {selectedPlaylistName ? (
                                                         <div
                                                             style={{
                                                                 marginLeft: '2vh',
@@ -371,11 +386,10 @@ function Admin_Playlist() {
                                                                 marginBottom: '2vh',
                                                             }}>
                                                             <h3>Music Name:</h3>
-
                                                             <input
                                                                 type="text"
-                                                                value={selectedMusicName}
-                                                                onChange={(e) => setSelectedMusicName(e.target.value)}
+                                                                value={selectedPlaylistName}
+                                                                onChange={(e) => setselectedPlaylistName(e.target.value)}
                                                                 className={styles.customInput}
                                                             />
                                                         </div>
@@ -383,9 +397,9 @@ function Admin_Playlist() {
                                                         <input
                                                             type="text"
                                                             placeholder="Enter Music Name"
-                                                            value={selectedMusicName}
+                                                            value={selectedPlaylistName}
                                                             onChange={(e) => {
-                                                                setSelectedMusicName(e.target.value);
+                                                                setselectedPlaylistName(e.target.value);
                                                                 console.log('musicName:', e.target.value);
                                                             }}
                                                             style={{
@@ -405,20 +419,48 @@ function Admin_Playlist() {
                                                         <div className={styles.mainContentTopRightTypeHeader}>
                                                             <p style={{ color: 'blue' }}>Description:</p>
                                                         </div>
-                                                        {selectedMusicTag ? (
+                                                        {selectedPlaylistDescription ? (
                                                             <>
                                                                 <div className={styles.mainContentTopRightTypeRow}>
                                                                     <label className={styles.customField}>
-                                                                        <input type="text" placeholder=" " />
-                                                                        <span className={styles.placeholder}>Enter Text</span>
+                                                                        <textarea
+                                                                            type="text"
+                                                                            value={selectedPlaylistDescription}
+                                                                            // onChange={(e) => setselectedPlaylistDescription(e.target.value)}
+                                                                            className={styles.descriptionInput}
+                                                                            style={{
+                                                                                width: '100%',
+                                                                                height: '100%',
+                                                                                overflow: 'hidden',
+                                                                                fontSize: '1.5vh',
+                                                                                textAlign: 'left',
+                                                                                wordWrap: 'break-word',
+                                                                                whiteSpace: 'pre-wrap',
+                                                                                backgroundColor: '#F0F3F4',
+                                                                            }}
+                                                                        />
                                                                     </label>
                                                                 </div>
                                                             </>
                                                         ) : (
                                                             <div className={styles.mainContentTopRightTypeRow}>
                                                                 <label className={styles.customField}>
-                                                                    <input type="text" placeholder=" " />
-                                                                    <span className={styles.placeholder}>Enter Text</span>
+                                                                    <textarea
+                                                                        type="text"
+                                                                        // value={selectedPlaylistDescription}
+                                                                        // onChange={(e) => setselectedPlaylistDescription(e.target.value)}
+                                                                        className={styles.descriptionInput}
+                                                                        style={{
+                                                                            width: '100%',
+                                                                            height: '100%',
+                                                                            overflow: 'hidden',
+                                                                            fontSize: '1.5vh',
+                                                                            textAlign: 'left',
+                                                                            wordWrap: 'break-word',
+                                                                            whiteSpace: 'pre-wrap',
+                                                                            backgroundColor: '#F0F3F4',
+                                                                        }}
+                                                                    />
                                                                 </label>
                                                             </div>
                                                         )}

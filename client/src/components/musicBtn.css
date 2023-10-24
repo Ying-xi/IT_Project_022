@@ -10,13 +10,13 @@
 
 .music-btn-wrap > .img-face {
   cursor: pointer;
-  height: 30vh;
+  height: 23vh;
   width: 15vw;
   display: block;
 }
 
 .music-btn-wrap > .music-item-text {
-  height: 10vh;
+  height: 7vh;
   margin: 0;
   display: flex;
   justify-content: center;

@@ -309,9 +309,11 @@ box-shadow: 0 0 1vh rgba(55, 202, 55, 0.7);
 
 /* Styling for the uploaded image */
 .uploadedImage {
-    width: 15vw;
+    width: 16vw;
     height: auto;
-    margin-top: 10px;
+    margin-top: 6vh;
+    max-width: 90%;
+    max-height: 100%;
 }
 
 /* Styling for the uploaded image on hover */
@@ -373,7 +375,7 @@ box-shadow: 0 0 1vh rgba(55, 202, 55, 0.7);
 
 /* Styling for the music main header div */
 .musicWrap .musicMainHead > div {
-    background-color: #fff;
+    /* background-color: #fff; */
     font-weight: bold;
     padding: 5px 21px;
     font-size: 1.5vw;
@@ -569,3 +571,21 @@ box-shadow: 0 0 1vh rgba(55, 202, 55, 0.7);
     background-color: yellow;
 }
 
+<<<<<<< HEAD
+=======
+.customSelect {
+    background-color: #fac554;
+    border: 2px solid #fac554;
+    border-radius: 4px;
+    padding: 10px;
+    font-size: 0.8vw;
+    font-weight: bold;
+    width: 8.26vw;
+    outline: none;
+    cursor: pointer;
+}
+  
+.customSelect:hover {
+    border-color: #2980b9;
+}
+>>>>>>> d4f1850e068c7a90592c7bf35e73fa945dc77f1d

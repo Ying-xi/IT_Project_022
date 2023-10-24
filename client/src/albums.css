@@ -176,7 +176,7 @@
 
 .subtitle {
   color: rgba(255, 255, 255, 0.65);
-  font-size: 0.9vw;
+  font-size: 1.35vw;
   letter-spacing: 0.2vw;
   margin: 0.75vh;
   font-weight: normal;
@@ -188,6 +188,6 @@
 
 
 /* Hide the music player */
-audio {
+/* audio {
   display: none;
-}
+} */

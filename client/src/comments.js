@@ -102,8 +102,8 @@ function Comments() {
                         <li>
                             <div className="comments-cards ">
                                 <ac href="">
-                                    <span className="comments-username">Username1</span>
-                                    <span>A vibrant tapestry of youth, accompanied by friendship and personal growth.</span>
+                                    <span className="comments-username">PixelWarrior87</span>
+                                    <span>Astonishing guitar work and heartfelt lyrics make this song an instant classic. It's a rollercoaster of emotions that keeps you coming back for more.</span>
                                 </ac>
                             </div>
                         </li>
@@ -112,8 +112,8 @@ function Comments() {
                         <li>
                             <div className="comments-cards ">
                                 <ac href="">
-                                    <span className="comments-username">Username2</span>
-                                    <span>Model for generating Freedom and responsibility intertwine, painting a magnificent canvas to shape life's blueprinaaaaaaaaaaa aaaaaaaaaaa aaaaaaaat.</span>
+                                    <span className="comments-username">StarGazerKitty</span>
+                                    <span>This track is a perfect fusion of indie and electronic vibes. The catchy melody and smooth vocals make it an instant favorite.</span>
                                 </ac>
                             </div>
                         </li>
@@ -122,8 +122,8 @@ function Comments() {
                         <li>
                             <div className="comments-cards ">
                                 <ac href="">
-                                    <span className="comments-username">Username3</span>
-                                    <span>Model for generating Freedom and responsibility intertwine, painting a magnificent canvas to shape life's blueprint.</span>
+                                    <span className="comments-username">ByteBard</span>
+                                    <span>A beautiful blend of soulful vocals and intricate instrumentals. This song takes you on a journey of passion and love.</span>
                                 </ac>
                             </div>
                         </li>
@@ -132,8 +132,8 @@ function Comments() {
                         <li>
                             <div className="comments-cards ">
                                 <ac href="">
-                                    <span className="comments-username">Username4</span>
-                                    <span>Model for generating Freedom and responsibility intertwine, painting a magnificent canvas to shape life's blueprint.Freedom and responsibility intertwine, painting a magnificent </span>
+                                    <span className="comments-username">QuantumJester</span>
+                                    <span>A true banger! The beat is infectious, and the lyrics are empowering. It's impossible not to dance to this.</span>
                                 </ac>
                             </div>
                         </li>
@@ -141,8 +141,8 @@ function Comments() {
                         <li>
                             <div className="comments-cards ">
                                 <ac href="">
-                                    <span className="comments-username">Username4</span>
-                                    <span>Model for generating Freedom and responsibility intertwine, painting a magnificent canvas to shape life's blueprint.</span>
+                                    <span className="comments-username">LunarScribe</span>
+                                    <span>The hauntingly beautiful voice of the singer combined with the haunting melody creates an ethereal atmosphere that's both captivating and haunting.</span>
                                 </ac>
                             </div>
                         </li>

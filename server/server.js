@@ -14,7 +14,7 @@ web.use('/music', express.static(__dirname + '/Default_music/Musics'))
 web.use('/images', express.static(__dirname + '/Default_music/Images'))
 web.use('/admin', expressJWT({secret: 'IT-Project-022', algorithms: ['HS256']}))
 web.use(cors({
-    origin: 'http://localhost:3000',
+    origin: '*',
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true,
 }))
@@ -24,7 +24,7 @@ web.use(express.static('Files/staticPage'))
 web.use(express.static('Files/login'))
 web.use(express.static('Files/musicPlayer'))
 
-web.use(albumRouter)
+web.use(adminRouter)
 web.use(userRouter)
 web.use(musicRouter)
 web.use(homeRouter)

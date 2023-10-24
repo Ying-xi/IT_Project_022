@@ -5,14 +5,9 @@ import axios from 'axios'
 
 class Albums extends Component {
 
-    /*
-        http://localhost:3300/music/Bleu.mp3
-        http://localhost:3300/images/album1.jpg
-        往后端上传文件使用Binary
-    */
     componentDidMount() {
         const token = localStorage.getItem('token');
-        console.log(token);
+        // console.log(token);
     
         if (token) {
             const headers = {
@@ -22,7 +17,10 @@ class Albums extends Component {
             axios.get('http://localhost:3300/albumPlayer', { headers })
                 .then((response) => {
                     console.log('Data from the backend:', response.data);
-                    this.setState({ musicItems: response.data.data });
+                    this.setState({ musicItems: response.data.data }, () => {
+                        // execute handleScroll once to set the default background
+                        this.handleScroll();
+                    });
                 })
                 .catch(error => console.error('Error fetching albums:', error));
         }
@@ -41,7 +39,6 @@ class Albums extends Component {
             currentMusicIndex: null,
             musicItems: [],
         };
-
     }
     
     playMusic = (musicIndex, songIndex, isManual = true) => {
@@ -63,7 +60,9 @@ class Albums extends Component {
         }
 
         // Set a new audio source and play it
-        audio.src = musicItems[musicIndex].lists[songIndex].musicUrl;
+        const playedMusic = musicItems[musicIndex].lists[songIndex].musicName;
+        audio.src = `http://localhost:3300/music/${playedMusic}.mp3`;
+
 
         // Add an event listener for when audio can play
         audio.addEventListener('canplay', () => {
@@ -153,10 +152,6 @@ class Albums extends Component {
         });
     };
 
-    // the list items on the page:
-    // move to backend later:
-
-    // print them on the page:
     render() {
         const { musicItems } = this.state;
 
@@ -164,7 +159,7 @@ class Albums extends Component {
             <div className="shell" id="shell" style={{ backgroundImage: this.state.backgroundImage }}>
                 <div className="header">
                     <h2 className="title">Playlist</h2>
-                    <h3 className="subtitle">click image cover to<br />leave comments</h3>
+                    <h3 className="subtitle">click cover of playlist<br />to comments page</h3>
                 </div>
                 <div className="musiclist">
                     {musicItems.map((item, musicIndex) => (
@@ -176,7 +171,8 @@ class Albums extends Component {
                             <div className="content">
 
                                 <Link to={`/comments/${musicIndex}`}>
-                                    <img className="img" src={item.imageUrl} alt={item.description} />
+                                    {/* rewrite the url */}
+                                    <img className="img" src={`http://localhost:3300/images/${item.imageName}.jpg`} alt={item.description} />
                                 </Link>
                                 <h2 className="content-title">{item.name}</h2>
                                 <p className="content-songs">
@@ -200,7 +196,7 @@ class Albums extends Component {
                         </div>
                     ))}
                 </div>
-                <audio ref={(ref) => (this.audioRef = ref)} controls></audio>
+                <audio ref={(ref) => (this.audioRef = ref)} controls style={{ display: 'none' }} />
             </div>
         );
     }
