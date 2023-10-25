@@ -61,7 +61,7 @@ class Albums extends Component {
 
         // Set a new audio source and play it
         const playedMusic = musicItems[musicIndex].lists[songIndex].musicName;
-        audio.src = `http://localhost:3300/music/${playedMusic}.mp3`;
+        audio.src = `https://skoog-music.onrender.com/music/${playedMusic}.mp3`;
 
 
         // Add an event listener for when audio can play
@@ -172,7 +172,7 @@ class Albums extends Component {
 
                                 <Link to={`/comments/${musicIndex}`}>
                                     {/* rewrite the url */}
-                                    <img className="img" src={`http://localhost:3300/images/${item.imageName}.jpg`} alt={item.description} />
+                                    <img className="img" src={`https://skoog-music.onrender.com/images/${item.imageName}.jpg`} alt={item.description} />
                                 </Link>
                                 <h2 className="content-title">{item.name}</h2>
                                 <p className="content-songs">

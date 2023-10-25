@@ -34,8 +34,8 @@ function Admin() {
     if (selectedMusic) {
       setSelectedMusicName(selectedMusic.name || '');
       setSelectedMusicTag(selectedMusic.tags.filter(tag => tag !== 'All'));
-      setSelectedMusicPicture(`http://localhost:3300/images/${selectedMusic.name}.jpg`);
-      setSelectedMusicFile(`http://localhost:3300/music/${selectedMusic.name}.mp3`);
+      setSelectedMusicPicture(`https://skoog-music.onrender.com/images/${selectedMusic.name}.jpg`);
+      setSelectedMusicFile(`https://skoog-music.onrender.com/music/${selectedMusic.name}.mp3`);
     }
 
     // Download the music file
@@ -85,7 +85,7 @@ function Admin() {
       };
 
       axios
-        .get('http://localhost:3300/admin', { headers })
+        .get('https://skoog-music.onrender.com/admin', { headers })
         .then((response) => {
           console.log('Received data from backend:', response.data);
           setBackendData(response.data);
@@ -133,7 +133,7 @@ function Admin() {
     }
     console.log('FormData:', formData);
     if (isConfirmed) {
-      axios.put(`http://localhost:3300/admin/${selectedMusicId}`, formData, { headers })
+      axios.put(`https://skoog-music.onrender.com/admin/${selectedMusicId}`, formData, { headers })
         .then((response) => {
           console.log('Music updated successfully:', response.data);
           window.location.reload();
@@ -192,7 +192,7 @@ function Admin() {
     }
     console.log('FormData:', formData);
     // POST Request to Back-end
-    axios.post('http://localhost:3300/admin', formData, { headers })
+    axios.post('https://skoog-music.onrender.com/admin', formData, { headers })
       .then((response) => {
         console.log('Music added successfully:', response.data);
         window.location.reload();
@@ -212,7 +212,7 @@ function Admin() {
     const isConfirmed = window.confirm('Are you sure you want to delete this music?');
 
     if (isConfirmed) {
-      axios.delete(`http://localhost:3300/admin/${selectedMusicId}`, { headers })
+      axios.delete(`https://skoog-music.onrender.com/admin/${selectedMusicId}`, { headers })
         .then((response) => {
           console.log('Music deleted successfully:', response.data);
           window.location.reload();

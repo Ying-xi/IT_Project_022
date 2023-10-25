@@ -66,7 +66,7 @@ function Admin_Playlist() {
             // http://localhost:3300/
             setselectedPlaylistName(backendDataPlaylist.name || '');
             // setselectedPlaylistPictureName(backendDataPlaylist.imageName || '');
-            setselectedPlaylistPictureName(`http://localhost:3300/images/${backendDataPlaylist.imageName}.jpg`);
+            setselectedPlaylistPictureName(`https://skoog-music.onrender.com/images/${backendDataPlaylist.imageName}.jpg`);
             setselectedPlaylistDescription(backendDataPlaylist.description || '');
             setSelectedPlaylist(backendDataPlaylist.lists || []);
 
@@ -115,7 +115,7 @@ function Admin_Playlist() {
             };
 
             axios
-                .get('http://localhost:3300/albumAdmin', { headers })
+                .get('https://skoog-music.onrender.com/albumAdmin', { headers })
                 .then((response) => {
                     console.log('Received data from backend:', response.data);
                     setBackendData(response.data);
@@ -146,7 +146,7 @@ function Admin_Playlist() {
         const isConfirmed = window.confirm('Are you sure you want to update this music?');
 
         if (isConfirmed) {
-            axios.put(`http://localhost:3300/admin/${selectedPlaylistId}`, updatedMusic, { headers })
+            axios.put(`https://skoog-music.onrender.com/admin/${selectedPlaylistId}`, updatedMusic, { headers })
                 .then((response) => {
                     console.log('Music updated successfully:', response.data);
                     window.location.reload();
@@ -180,7 +180,7 @@ function Admin_Playlist() {
         };
 
         // Send POST to backend
-        axios.post('http://localhost:3300/admin', newMusic, { headers })
+        axios.post('https://skoog-music.onrender.com/admin', newMusic, { headers })
             .then((response) => {
                 console.log('Music added successfully:', response.data);
                 window.location.reload();
@@ -201,7 +201,7 @@ function Admin_Playlist() {
         const isConfirmed = window.confirm('Are you sure you want to delete this music?');
 
         if (isConfirmed) {
-            axios.delete(`http://localhost:3300/admin/${selectedPlaylistId}`, { headers })
+            axios.delete(`https://skoog-music.onrender.com/admin/${selectedPlaylistId}`, { headers })
                 .then((response) => {
                     console.log('Music deleted successfully:', response.data);
                     window.location.reload();
