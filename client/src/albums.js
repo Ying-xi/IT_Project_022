@@ -14,7 +14,7 @@ class Albums extends Component {
                 Authorization: `Bearer ${token}`,
             };
 
-            axios.get('http://localhost:3300/albumPlayer', { headers })
+            axios.get('https://skoog-music.onrender.com/albumPlayer', { headers })
                 .then((response) => {
                     console.log('Data from the backend:', response.data);
                     this.setState({ musicItems: response.data.data }, () => {

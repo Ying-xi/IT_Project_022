@@ -20,7 +20,7 @@ function MusicPlayer() {
   // Connect FE & BE Server
   const loadData = async () => {
     try {
-      const response = await axios.get('http://localhost:3300/musicPlayer');
+      const response = await axios.get('https://skoog-music.onrender.com/musicPlayer');
       console.log('Received from backend:', response.data);
       const tempData = response.data?.data?.map((item) => {
         return {
