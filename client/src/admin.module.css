@@ -177,7 +177,7 @@
     align-items: center;
     justify-content: center;
     background: #F0F3F4;
-    border-radius: 10px;
+    border-radius: 20px;
 }
 
 /* input window design */
@@ -188,6 +188,7 @@
     font-size: 16px;
     width: 100%;
     outline: none;
+    width: 8%;
 }
 
 /* mouse hover */
@@ -379,7 +380,9 @@ box-shadow: 0 0 1vh rgba(55, 202, 55, 0.7);
     font-weight: bold;
     padding: 5px 21px;
     font-size: 1.5vw;
-    background-color: #fac554
+    background-color: #fac554;
+    margin-left: 10px;
+    border-radius: 10px;
 }
 
 /* Styling for the music item wrap container */
@@ -571,3 +574,18 @@ box-shadow: 0 0 1vh rgba(55, 202, 55, 0.7);
     background-color: yellow;
 }
 
+.customSelect {
+    background-color: #fac554;
+    border: 2px solid #fac554;
+    border-radius: 4px;
+    padding: 10px;
+    font-size: 0.8vw;
+    font-weight: bold;
+    width: 8.26vw;
+    outline: none;
+    cursor: pointer;
+}
+  
+.customSelect:hover {
+    border-color: #2980b9;
+}
