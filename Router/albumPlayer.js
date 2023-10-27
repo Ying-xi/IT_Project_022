@@ -6,4 +6,6 @@ const router = express.Router()
 
 router.get('/albumPlayer', albumPlayer.renderPage)
 
+router.get('/albumPlayer/:albumId', albumPlayer.album)
+
 module.exports = router
