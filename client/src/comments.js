@@ -2,10 +2,26 @@
 import React, { useState, useEffect } from 'react';
 import './comments.css';
 import { useParams } from 'react-router-dom';
+import axios from 'axios';
+
 function Comments() {
-
     const { musicIndex } = useParams();
+    const [musicAlbum, setMusicAlbum] = useState(null);
+    console.log('musicIndex:', musicIndex);
+    useEffect(() => {
+        axios.get(`http://localhost:3300/albumPlayer/${musicIndex}`)
+            .then((response) => {
+                console.log('Data from the backend:', response.data);
+                setMusicAlbum(response.data.data);
+            })
+            .catch((error) => {
+                console.error('Error fetching music album data:', error);
+            });
+    }, [musicIndex]);
 
+    // Delete after testing
+    console.log('musicAlbum:', musicAlbum);
+    
     let backgroundImage;
 
 
@@ -16,20 +32,20 @@ function Comments() {
     }, []);
 
     //change the background as the index:
-    switch (musicIndex) {
-        case '0':
-            backgroundImage = '/albums/album1.jpg';
-            break;
-        case '1':
-            backgroundImage = '/albums/album2.jpg';
-            break;
-        case '2':
-            backgroundImage = '/albums/album3.jpg';
-            break;
-        default:
-            backgroundImage = '/albums/album4.jpg';
-            break;
-    }
+    // switch (musicIndex) {
+    //     case '0':
+    //         backgroundImage = '/albums/album1.jpg';
+    //         break;
+    //     case '1':
+    //         backgroundImage = '/albums/album2.jpg';
+    //         break;
+    //     case '2':
+    //         backgroundImage = '/albums/album3.jpg';
+    //         break;
+    //     default:
+    //         backgroundImage = '/albums/album4.jpg';
+    //         break;
+    // }
 
     //send comments:
     //the comments by user:

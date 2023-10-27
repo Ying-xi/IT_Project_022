@@ -170,7 +170,7 @@ class Albums extends Component {
                         >
                             <div className="content">
 
-                                <Link to={`/comments/${musicIndex}`}>
+                                <Link to={`/albums/${item._id}`}>
                                     {/* rewrite the url */}
                                     <img className="img" src={`https://skoog-music.onrender.com/images/${item.imageName}.jpg`} alt={item.description} />
                                 </Link>

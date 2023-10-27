@@ -25,7 +25,7 @@ function App() {
                     <Route path='/albums' element={<Albums />} />
                     <Route path='/keyboard' element={<Keyboard />} />
                     <Route path='/admin_playlist' element={<Admin_playlist />}/>
-                    <Route path='/comments/:musicIndex' element={<Comments />} />
+                    <Route path='/albums/:musicIndex' element={<Comments />} />
                 </Routes>
                 {/* <Dock /> */}
             </div>
