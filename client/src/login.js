@@ -45,7 +45,7 @@ function Login() {
       };
       console.log('Sending Register request with data:', userData);
       // change to register
-      const response = await axios.post('https://skoog-music.onrender.com/login', userData);
+      const response = await axios.post('https://skoog-music.onrender.com/register', userData);
       console.log('Received response:', response);
       // switch to admin webpage
       navigate('/login');
