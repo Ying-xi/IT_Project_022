@@ -47,8 +47,12 @@ function Login() {
       // change to register
       const response = await axios.post('https://skoog-music.onrender.com/register', userData);
       console.log('Received response:', response);
-      // switch to admin webpage
-      navigate('/login');
+      const jwtToken = response.data.data;
+      console.log('JWT token received:', jwtToken);
+      // save in browser local storage
+      localStorage.setItem('token', jwtToken);
+      console.log('Login successful. Navigating to admin page...');
+      navigate('/');
     } catch (error) {
       console.error('Login failed:', error);
     }
