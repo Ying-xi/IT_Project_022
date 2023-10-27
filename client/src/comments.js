@@ -70,6 +70,34 @@ function Comments() {
             setComment('');
         } 
     };
+
+    const [userComment, setUserComment] = useState('');
+
+    const sendCommentToServer = () => {
+        if (userComment.length <= maxCharacters) {
+            // 使用 axios 或其他适当的方式将评论发送到后端服务器
+            axios.post('http://localhost:3300/submitComment', {
+                comment: userComment,
+            })
+            .then((response) => {
+                // 处理成功发送评论后的逻辑
+                alert('Comment sent successfully!');
+            })
+            .catch((error) => {
+                // 处理发送评论失败的逻辑
+                console.error('Error sending comment:', error);
+            });
+
+            // 清空评论输入框内容
+            setUserComment('');
+        }
+    };
+
+    const handleSendComment = () => {
+        sendCommentToServer(); // 调用新的评论发送函数
+        handleSendClick();     // 调用原来的点击处理函数
+    };
+
     return (
         //background:
         <div
@@ -94,17 +122,18 @@ function Comments() {
                     <textarea
                         className="comments-input"
                         placeholder=" Enter your comments here: "
-
-
-                        value={comment}
-                        onChange={handleCommentChange}
+                        value={userComment}
+                        onChange={(e) => {
+                            handleCommentChange(e); // 调用原来的处理函数
+                            setUserComment(e.target.value); // 更新用户评论状态
+                        }}
 
                     />
                     <div className={`comment-counter ${comment.length > maxCharacters ? 'max-exceeded' : ''}`}>
 
                         {comment.length}/{maxCharacters}
                     </div>
-                    <button className="comments-button" onClick={handleSendClick} disabled={comment.length > maxCharacters}>
+                    <button className="comments-button" onClick={handleSendComment} disabled={comment.length > maxCharacters}>
                         Send
                     </button>
 
@@ -114,54 +143,16 @@ function Comments() {
 
                     <ul id="card-list" style={{ '--count': 6 }}>
 
-
-                        <li>
-                            <div className="comments-cards ">
-                                <ac href="">
-                                    <span className="comments-username">PixelWarrior87</span>
-                                    <span>Astonishing guitar work and heartfelt lyrics make this song an instant classic. It's a rollercoaster of emotions that keeps you coming back for more.</span>
-                                </ac>
-                            </div>
-                        </li>
-
-
-                        <li>
-                            <div className="comments-cards ">
-                                <ac href="">
-                                    <span className="comments-username">StarGazerKitty</span>
-                                    <span>This track is a perfect fusion of indie and electronic vibes. The catchy melody and smooth vocals make it an instant favorite.</span>
-                                </ac>
-                            </div>
-                        </li>
-
-
-                        <li>
-                            <div className="comments-cards ">
-                                <ac href="">
-                                    <span className="comments-username">ByteBard</span>
-                                    <span>A beautiful blend of soulful vocals and intricate instrumentals. This song takes you on a journey of passion and love.</span>
-                                </ac>
-                            </div>
-                        </li>
-
-
-                        <li>
-                            <div className="comments-cards ">
-                                <ac href="">
-                                    <span className="comments-username">QuantumJester</span>
-                                    <span>A true banger! The beat is infectious, and the lyrics are empowering. It's impossible not to dance to this.</span>
-                                </ac>
-                            </div>
-                        </li>
-
-                        <li>
-                            <div className="comments-cards ">
-                                <ac href="">
-                                    <span className="comments-username">LunarScribe</span>
-                                    <span>The hauntingly beautiful voice of the singer combined with the haunting melody creates an ethereal atmosphere that's both captivating and haunting.</span>
-                                </ac>
-                            </div>
-                        </li>
+                        {musicAlbum && musicAlbum.comments && musicAlbum.comments.map((comment, index) => (
+                            <li key={index}>
+                                <div className="comments-cards">
+                                        <a href="">
+                                            <span className="comments-username">{comment.username}</span>
+                                            <span>{comment.content}</span>
+                                        </a>
+                                </div>
+                            </li>
+                        ))}
 
                     </ul>
                     <div className="last-circle"></div>
