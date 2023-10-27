@@ -18,12 +18,6 @@ function Admin_Playlist() {
 
     const animatedComponents = makeAnimated();
 
-    const handleSelectChange = (selected) => {
-        if (selected.length <= 5) {
-            setMultiSelected(selected);
-        }
-    };
-
     //parameters state
     const [selectedPlaylistId, setselectedPlaylistId] = useState(null);
     const [selectedPlaylistName, setselectedPlaylistName] = useState('');
@@ -32,150 +26,85 @@ function Admin_Playlist() {
 
     // Playlist details, defined by lists in backend data
     const [multiSelected, setMultiSelected] = useState([]);
-
-
-    // const options = [
-    //     { label: "Auld Lang Syne", value: "Auld Lang Syne" },
-    //     { label: "Bleu", value: "Bleu" },
-    //     { label: "Canon in D", value: "Canon in D" },
-    //     { label: "Relaxing Rain", value: "Relaxing Rain" },
-    //     { label: "Vocalise, Op. 34 No. 14", value: "Vocalise, Op. 34 No. 14" },
-    //     { label: "What Makes You Beautiful", value: "What Makes You Beautiful" },
-    //     { label: "Winter Bokeh", value: "Winter Bokeh" },
-    // ];
-
-    // 接受所有音乐https://skoog-music.onrender.com/musicPlayer，存入到musicOptions里面
+    const [optionsTmp, setOptionsTmp] = useState([]);
     const [musicOptions, setMusicOptions] = useState([]);
+    const [musicOptionsTmp, setMusicOptionsTmp] = useState([]);
 
+
+
+    const handleSelectChange = (selected) => {
+        if (selected.length <= 5) {
+            setOptionsTmp(selected);
+        }
+    };
+
+    // Receive all music, store it in musicOptions
     useEffect(() => {
         axios.get('https://skoog-music.onrender.com/musicPlayer')
             .then((response) => 
             {
-                response.data.data.forEach((item) => {
-                    musicOptions.push({
-                        value: item.name,
-                        label: item.name,
-                    });
-                });
+                const musicOptionsData = response.data.data.map((item) => ({
+                    value: item.name,
+                    label: item.name,
+                }));
+                setMusicOptionsTmp(musicOptionsData);
             })
             .catch((error) => {
                 console.error('Error fetching data from backend:', error);
             });
     }, []);
-    
-
-
 
 
 
     // Handle music/playlist click event
     const handlePlaylistClick = (playlistId) => {
+        setMusicOptions(musicOptionsTmp);
         // Reset state when a new music item is selected
         setselectedPlaylistId(null);
         setselectedPlaylistName('');
         setselectedPlaylistPictureName('');
         setselectedPlaylistDescription('');
-
+        setOptionsTmp([]);
         // Set the selected music based on the clicked item
         setselectedPlaylistId(playlistId);
-
         // Fetch details for the selected music
         const backendDataPlaylist = backendData.data.find((playlist) => playlist._id === playlistId);
 
-
-
-
-        // {
-        //     "_id": {
-        //       "$oid": "6527d84fec4088689a0397cd"
-        //     },
-        //     "name": "Relaxing Music",
-        //     "description": "This playlist is for people who want to release pressure.",
-        //     "lists": [
-        //       {
-        //         "musicName": "Winter Bokeh",
-        //         "musicUrl": "../Default_music/Musics/Winter Bokeh.mp3"
-        //       },
-        //       {
-        //         "musicName": "Bleu",
-        //         "musicUrl": "../Default_music/Musics/Bleu.mp3"
-        //       }
-        //     ],
-        //     "imageName": "album2"
-        //   }
-
-
-
         if (backendDataPlaylist) {
-            // https://it-project-022-backend.vercel.app/Default_music/
-            // http://localhost:3300/
             setselectedPlaylistName(backendDataPlaylist.name || '');
-            // setselectedPlaylistPictureName(backendDataPlaylist.imageName || '');
             setselectedPlaylistPictureName(`https://skoog-music.onrender.com/images/${backendDataPlaylist.imageName}.jpg`);
             setselectedPlaylistDescription(backendDataPlaylist.description || '');
+            setMultiSelected([]);
 
-
-            // 把后台读取到的backendData.lists里面的musicName放到multiSelected里面，对应label和value都是musicName
             backendDataPlaylist.lists.forEach((item) => {
                 multiSelected.push({
                     value: item.musicName,
                     label: item.musicName,
                 });
             });
-            // iterate multiSelected
-            multiSelected.forEach((item) => {
-                console.log(item.musicName);
-            });
-            
 
-
-            // 接受所有音乐https://skoog-music.onrender.com/musicPlayer，存入到musicOptions里面
-            // axios.get('https://skoog-music.onrender.com/musicPlayer').then((response) => 
-            // {
-            //     response.data.data.forEach((item) => {
-            //         musicOptions.push({
-            //             value: item.name,
-            //             label: item.name,
-            //         });
-            //     });
-            // })
-            // .catch((error) => {
-            //     console.error('Error fetching data from backend:', error);
-            // });
-
-            // 输出当前的musicOptions和multiSelected
+            // Delete after testing
             console.log('-----!!---')
             console.log(musicOptions);
             console.log('-----!!---')
             console.log(multiSelected);
             console.log('-----!!---')
 
-            // musicOptions.forEach((item) => {
-            //     if (multiSelected.length > 0) {
-            //         multiSelected.forEach((item2) => {
-            //             // remove the selected music from musicOptions
-            //             if (item.name === item2.musicName) {
-            //                 console.log('remove', item.name);
-            //                 musicOptions.splice(musicOptions.indexOf(item), 1);
-            //             }
-            //         });
-            //     }
-            // });
+            // Remove the selected music from musicOptions
+            if (multiSelected.length > 0 && musicOptions.length > 0) {
+                setOptionsTmp(multiSelected);
 
-
-            // iterate musicOptions
-            // musicOptions.forEach((item) => {
-            //     console.log(item.name);
-            // });
-            // console.log('-----!!---')
-            // console.log(musicOptions);
-            // console.log('-----!!---')
-
-            console.log('--------')
-            console.log(selectedPlaylistName)
-            console.log(selectedPlaylistPictureName)
-            console.log(selectedPlaylistDescription)
-            console.log('--------')
+                // no need to remove the selected music from musicOptions
+                // musicOptions.forEach((item) => {
+                //     multiSelected.forEach((item2) => {
+                //         // remove the selected music from musicOptions
+                //         if (item.label === item2.label) {
+                //             console.log('Remove', item.label);
+                //             musicOptions.splice(musicOptions.indexOf(item), 1);
+                //         }
+                //     });
+                // });
+            }
         }
     };
 
@@ -187,7 +116,6 @@ function Admin_Playlist() {
         data: [],
         activeId: null,
     });
-
 
     useEffect(() => {
         const token = localStorage.getItem('token');
@@ -244,11 +172,8 @@ function Admin_Playlist() {
 
     // Add music to DB
     const handleMusicAdd = () => {
-
         const musicFile = `../Default_music/Musics/${selectedPlaylistName}.mp3`;
         const musicPicture = `../Default_music/Images/${selectedPlaylistName}.jpg`;
-
-
         const newMusic = {
             // reconstruct to form-data
             name: selectedPlaylistName,
@@ -515,7 +440,7 @@ function Admin_Playlist() {
                                                                             style={{
                                                                                 width: '100%',
                                                                                 height: '100%',
-                                                                                overflow: 'hidden',
+                                                                                overflow: 'auto',
                                                                                 fontSize: '1.5vh',
                                                                                 textAlign: 'left',
                                                                                 wordWrap: 'break-word',
@@ -537,7 +462,7 @@ function Admin_Playlist() {
                                                                         style={{
                                                                             width: '100%',
                                                                             height: '100%',
-                                                                            overflow: 'hidden',
+                                                                            overflow: 'auto',
                                                                             fontSize: '1.5vh',
                                                                             textAlign: 'left',
                                                                             wordWrap: 'break-word',
@@ -565,7 +490,7 @@ function Admin_Playlist() {
                                             components={animatedComponents}
                                             isMulti
                                             options={musicOptions}
-                                            value={multiSelected}
+                                            value={optionsTmp}
                                             onChange={handleSelectChange}
                                             maxMenuHeight={200}
                                             menuIsOpen={true}
