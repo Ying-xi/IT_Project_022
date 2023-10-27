@@ -36,6 +36,7 @@ function Admin_Playlist() {
         if (selected.length <= 5) {
             setOptionsTmp(selected);
         }
+        console.log('selected:', selected);
     };
 
     // Receive all music, store it in musicOptions
@@ -93,17 +94,6 @@ function Admin_Playlist() {
             // Remove the selected music from musicOptions
             if (multiSelected.length > 0 && musicOptions.length > 0) {
                 setOptionsTmp(multiSelected);
-
-                // no need to remove the selected music from musicOptions
-                // musicOptions.forEach((item) => {
-                //     multiSelected.forEach((item2) => {
-                //         // remove the selected music from musicOptions
-                //         if (item.label === item2.label) {
-                //             console.log('Remove', item.label);
-                //             musicOptions.splice(musicOptions.indexOf(item), 1);
-                //         }
-                //     });
-                // });
             }
         }
     };
