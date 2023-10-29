@@ -104,7 +104,7 @@ function MusicPlayer() {
   const [activeCategory, setActiveCategory] = useState('All');
   const handleCategoryChange = (category) => {
     const newData = backendData.data.map((item) => {
-      item.show = item.tags[1] === category; // 标记为：显示筛选的音乐按钮
+      item.show = item.tags[1] === category;
       return item;
     });
 
