@@ -86,7 +86,8 @@ function Admin_Playlist() {
 
         if (backendDataPlaylist) {
             setselectedPlaylistName(backendDataPlaylist.name || '');
-            setselectedPlaylistPictureName(`https://skoog-music.onrender.com/album/${backendDataPlaylist.imageName}`);
+            // setselectedPlaylistPictureName(`https://skoog-music.onrender.com/album/${backendDataPlaylist.imageName}`);
+            setselectedPlaylistPictureName(`https://skoog-music.onrender.com/album/${backendDataPlaylist.imageName}.jpg`);
             setselectedPlaylistDescription(backendDataPlaylist.description || '');
             setMultiSelected([]);
 
