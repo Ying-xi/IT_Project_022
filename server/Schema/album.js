@@ -10,6 +10,7 @@ const albumSchema = new mongoose.Schema({
     imageUrl: { type: String, required: true },
 	comments: {type: Array, default: []},
 	lists: { type: Array, default: [] },
+	imageName: { type: String, required: true },
 }, { collection: collectionName })
 
 const Album = mongoose.model('Album', albumSchema)

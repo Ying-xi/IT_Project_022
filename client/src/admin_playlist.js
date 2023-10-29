@@ -29,6 +29,8 @@ function Admin_Playlist() {
     const [optionsTmp, setOptionsTmp] = useState([]);
     const [musicOptions, setMusicOptions] = useState([]);
     const [musicOptionsTmp, setMusicOptionsTmp] = useState([]);
+    // Add new music options
+    const [newMusicOptions, setNewMusicOptions] = useState([]);
 
 
 
@@ -38,6 +40,17 @@ function Admin_Playlist() {
         }
         console.log('selected:', selected);
     };
+    const handleSelectAdd = (selected) => {
+        if (selected.length <= 5) {
+            setNewMusicOptions(selected);
+        }
+        console.log('selected:', selected);
+    };
+    // 监听 newMusicOptions 的变化
+    useEffect(() => {
+        console.log('newMusicOptions updated:', newMusicOptions);
+    }, [newMusicOptions]);
+
 
     // Receive all music, store it in musicOptions
     useEffect(() => {
@@ -73,7 +86,7 @@ function Admin_Playlist() {
 
         if (backendDataPlaylist) {
             setselectedPlaylistName(backendDataPlaylist.name || '');
-            setselectedPlaylistPictureName(`https://skoog-music.onrender.com/images/${backendDataPlaylist.imageName}.jpg`);
+            setselectedPlaylistPictureName(`https://skoog-music.onrender.com/album/${backendDataPlaylist.imageName}`);
             setselectedPlaylistDescription(backendDataPlaylist.description || '');
             setMultiSelected([]);
 
@@ -162,26 +175,48 @@ function Admin_Playlist() {
 
     // Add music to DB
     const handleMusicAdd = () => {
-        const musicFile = `../Default_music/Musics/${selectedPlaylistName}.mp3`;
-        const musicPicture = `../Default_music/Images/${selectedPlaylistName}.jpg`;
-        const newMusic = {
-            // reconstruct to form-data
-            name: selectedPlaylistName,
-            file: musicFile,
-            picture: musicPicture,
-        };
-
+        // const musicFile = `../Default_music/Musics/${selectedPlaylistName}.mp3`;
+        // const musicPicture = `../Default_music/Images/${selectedPlaylistName}.jpg`;
         const token = localStorage.getItem('token');
-        // console.log(token);
-
+        if (!token) {
+            console.error('Token not found. Please log in.');
+            return;
+        }
+        // request header
         const headers = {
             Authorization: `Bearer ${token}`,
+            'Content-Type': 'multipart/form-data',
         };
 
+            
+        // Initialize FormData
+        const formData = new FormData();
+        formData.append('name', selectedPlaylistName);
+        formData.append('description', selectedPlaylistDescription);
+        // formData.append('picture', selectedPlaylistPictureName);
+        formData.append('lists', newMusicOptions);
+
+        // Append the uploaded image to the form data if it exists
+        if (uploadedImage) {
+            formData.append('picture', uploadedImage);
+        } else {
+            alert('Please select a music picture.');
+        return;
+        }
+
+
+        // Debugging
+        for (const entry of formData.entries()) {
+            const [name, value] = entry;
+            console.log(`${name}: ${value}`);
+        }
+
+
         // Send POST to backend
-        axios.post('https://skoog-music.onrender.com/admin', newMusic, { headers })
+        axios.post('https://skoog-music.onrender.com/albumAdmin', formData, { headers })
+        // axios.post('http://localhost:3300/albumAdmin', formData, { headers })
             .then((response) => {
-                console.log('Music added successfully:', response.data);
+                console.log('Playlist added successfully:', response.data);
                 window.location.reload();
             })
             .catch((error) => {
@@ -201,6 +236,7 @@ function Admin_Playlist() {
 
         if (isConfirmed) {
             axios.delete(`https://skoog-music.onrender.com/admin/${selectedPlaylistId}`, { headers })
+            // axios.delete(`http://localhost:3300/albumAdmin/${selectedPlaylistId}`, { headers })
                 .then((response) => {
                     console.log('Music deleted successfully:', response.data);
                     window.location.reload();
@@ -213,25 +249,8 @@ function Admin_Playlist() {
 
 
 
-    // State for the uploaded file
-    const [uploadedFile, setUploadedFile] = useState(null);
     // State for the uploaded image
     const [uploadedImage, setUploadedImage] = useState(null);
-
-    // Handle file drop event
-    const handleFileDrop = (acceptedFiles) => {
-        if (acceptedFiles.length > 0) {
-            // Set the uploaded file to the first accepted file.
-            setUploadedFile(acceptedFiles[0]);
-        }
-    };
-
-    // Handle file delete event
-    const handleFileDelete = () => {
-        // Clear the uploaded file when the delete button is clicked.
-        setUploadedFile(null);
-    };
-
     // Handle image upload event
     const handleImageUpload = (acceptedFiles) => {
         //upload image from local to backend
@@ -281,11 +300,7 @@ function Admin_Playlist() {
                                     <div className={styles.musicMainHead}>
                                         <div onClick={handleRedirect}>Custom Playlist</div>
                                         {/* <div>Type</div> */}
-                                        <div 
-                                            // onClick={() => setShouldRefresh(true)}
-                                        >
-                                                Add+
-                                        </div>
+                                        <div onClick={() => setShouldRefresh(true)}>Add+</div>
                                     </div>
 
                                     {isLoading ? (
@@ -376,7 +391,7 @@ function Admin_Playlist() {
                                                     Music Name Editor
                                                 */}
                                                 <div className={styles.mainContentTopRightName}>
-                                                    {selectedPlaylistName ? (
+                                                    {selectedPlaylistId ? (
                                                         <div
                                                             style={{
                                                                 marginLeft: '2vh',
@@ -418,14 +433,13 @@ function Admin_Playlist() {
                                                         <div className={styles.mainContentTopRightTypeHeader}>
                                                             <p style={{ color: 'blue' }}>Description:</p>
                                                         </div>
-                                                        {selectedPlaylistDescription ? (
+                                                        {selectedPlaylistId ? (
                                                             <>
                                                                 <div className={styles.mainContentTopRightTypeRow}>
                                                                     <label className={styles.customField}>
                                                                         <textarea
                                                                             type="text"
                                                                             value={selectedPlaylistDescription}
-                                                                            // onChange={(e) => setselectedPlaylistDescription(e.target.value)}
                                                                             className={styles.descriptionInput}
                                                                             style={{
                                                                                 width: '100%',
@@ -446,8 +460,12 @@ function Admin_Playlist() {
                                                                 <label className={styles.customField}>
                                                                     <textarea
                                                                         type="text"
-                                                                        // value={selectedPlaylistDescription}
-                                                                        // onChange={(e) => setselectedPlaylistDescription(e.target.value)}
+                                                                        value={selectedPlaylistDescription}
+                                                                        onChange={(e) => 
+                                                                            {
+                                                                                setselectedPlaylistDescription(e.target.value);
+                                                                                console.log('musicDescription:', e.target.value);
+                                                                            }}
                                                                         className={styles.descriptionInput}
                                                                         style={{
                                                                             width: '100%',
@@ -473,6 +491,40 @@ function Admin_Playlist() {
                                 {/*
                                     occupy the area middle and bottom
                                 */}
+                                {musicOptions.length > 0 ? (
+                                    <div className={styles.mainContentMiddleAndBottom}>
+                                        <div className={styles.middleBottomContainer}>
+                                            <Select
+                                                closeMenuOnSelect={false}
+                                                components={animatedComponents}
+                                                isMulti
+                                                options={musicOptions}
+                                                value={optionsTmp}
+                                                onChange={handleSelectChange}
+                                                maxMenuHeight={200}
+                                                menuIsOpen={true}
+                                            />
+                                        </div>
+                                    </div>
+                                ) : (
+                                    // 如果musicOptions没有内容，就用新的变量uploadMusicOptions
+                                    <div className={styles.mainContentMiddleAndBottom}>
+                                        <div className={styles.middleBottomContainer}>
+                                            <Select
+                                                closeMenuOnSelect={false}
+                                                components={animatedComponents}
+                                                isMulti
+                                                options={musicOptionsTmp}
+                                                value={newMusicOptions}
+                                                onChange={handleSelectAdd}
+                                                maxMenuHeight={200}
+                                                menuIsOpen={true}
+                                            />
+                                        </div>
+                                    </div>
+                                )}
+
+                                {/* 
                                 <div className={styles.mainContentMiddleAndBottom}>
                                     <div className={styles.middleBottomContainer}>
                                         <Select
@@ -487,6 +539,7 @@ function Admin_Playlist() {
                                         />
                                     </div>
                                 </div>
+                                 */}
                             </div>
                         </div>
                     </div>

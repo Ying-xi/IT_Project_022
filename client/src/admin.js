@@ -326,7 +326,7 @@ function Admin() {
                         <option value="Natural Sound">Natural Sound</option>
                       </select>
                     </div>
-                    <div onClick={() => setShouldRefresh(true)}>Add+</div> 
+                    <div onClick={() => setShouldRefresh(true)}>Add+</div>
                   </div>
 
                   {isLoading ? (
@@ -409,7 +409,7 @@ function Admin() {
 
                           { selectedMusicId ? (
                             <>
-                              <button className={styles.addButton} onClick={handleMusicUpdate}>Update</button>
+                              {/* <button className={styles.addButton} onClick={handleMusicUpdate}>Update</button> */}
                               <button className={styles.deleteButton} onClick={handleMusicDelete}>Delete</button>
                             </>
                           ): (
