@@ -224,15 +224,82 @@ exports.renderPage = async (req, res) => {
 
 
 
+
 exports.renderAlbumPage = async (req, res) => {
 	const albums = await Album.find()
 	res.status(200).send({ data: albums })
 }
 
-exports.saveAlbum = async (req, res) => {
-	const album = await Album(req.body).save()
-	res.status(201).send({ data: album, message: "Album uploaded successfully" })
-}
+
+
+exports.saveAlbum = (req, res) => {
+    const form = new multiparty.Form();
+
+    // Use form.parse method to parse form data: it will parse the form data in the request into fields and files objects.
+    // fields contains key-value pairs of form fields, files contains uploaded files.
+    form.parse(req, async (err, fields, files) => {
+        if (err) {
+            console.error('Error parsing form data:', err);
+            res.status(500).send({
+                error: 'Error parsing form data.'
+            });
+            return;
+        }
+
+        // Get the uploaded album cover image
+        const imageFile = files.picture[0];
+        const imageFilename = fields.name[0] + '.jpg';
+        const imageTempPath = imageFile.path;
+
+        // Specify the storage path and filename for the image file
+        const imageDestination = path.join(__dirname, '../Default_music/Albums');
+        const imageTargetPath = path.join(imageDestination, imageFilename);
+
+        // Move the image file to the storage path
+        fs.rename(imageTempPath, imageTargetPath, async (imageError) => {
+            if (imageError) {
+                console.error('Error moving the image file:', imageError);
+                res.status(500).send({
+                    error: 'Error moving the image file.'
+                });
+                return;
+            }
+
+            // Create an album document and save it to the database
+            try {
+                const album = new Album({
+                    name: fields.name[0],
+                    description: fields.description[0],
+					imageUrl: path.relative(__dirname, imageTargetPath),
+					imageName: imageFilename,
+					// lists: fields.lists[0].split(','),
+                });
+				// Asynchronous save album document
+                try {
+                    const savedAlbum = await album.save();
+                    res.status(201).send({
+                        data: savedAlbum,
+                        message: 'Album uploaded successfully',
+                    });
+                } catch (saveError) {
+                    console.error('Error saving album:', saveError);
+                    res.status(500).send({
+                        error: 'Error saving album.'
+                    });
+                }
+            } catch (error) {
+                console.error('Error uploading album:', error);
+                res.status(500).send({
+                    error: 'An error occurred while uploading album'
+                });
+            }
+        });
+    });
+};
+
+
+
+
 
 exports.updateAlbum = async (req, res) => {
 	const album = await Album.findByIdAndUpdate(req.params.albumId, req.body, {
@@ -241,7 +308,24 @@ exports.updateAlbum = async (req, res) => {
 	res.send({ data: album, message: "Update successfully" })
 }
 
+
+
 exports.deleteAlbum = async (req, res) => {
-	await Album.findByIdAndDelete(req.params.albumId)
-	res.status(200).send({ message: "Album deleted sucessfully" });
-}
+    try {
+        // Delete the album document from MongoDB
+        const deletedAlbum = await Album.findByIdAndDelete(req.params.albumId);
+
+        if (deletedAlbum) {
+            // Delete relevant files associated with the album
+            deleteLocalFiles(deletedAlbum.imageUrl);
+            res.status(200).send({ message: "Album and relevant files deleted successfully" });
+        } else {
+            res.status(404).send({ error: "Album is not found" });
+        }
+    } catch (error) {
+        console.error('Error deleting album:', error);
+        res.status(500).send({ error: 'Error deleting album.' });
+    }
+};
+
+
