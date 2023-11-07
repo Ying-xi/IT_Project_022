@@ -46,7 +46,7 @@ function Admin_Playlist() {
         }
         console.log('selected:', selected);
     };
-    // 监听 newMusicOptions 的变化
+    // listen the change of newMusicOptions
     useEffect(() => {
         console.log('newMusicOptions updated:', newMusicOptions);
     }, [newMusicOptions]);
