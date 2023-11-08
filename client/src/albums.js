@@ -17,12 +17,16 @@ class Albums extends Component {
             axios.get('https://skoog-music.onrender.com/albumPlayer', { headers })
                 .then((response) => {
                     console.log('Data from the backend:', response.data);
-                    this.setState({ musicItems: response.data.data }, () => {
+                    this.setState({ musicItems: response.data.data, loading: false }, () => {
                         // execute handleScroll once to set the default background
                         this.handleScroll();
                     });
                 })
-                .catch(error => console.error('Error fetching albums:', error));
+                .catch((err) => {
+                    console.log('Error:', err);
+                    this.setState({ loading: false });
+                }
+            );
         }
 
         // Add a rolling event listener
@@ -38,6 +42,7 @@ class Albums extends Component {
             backgroundImage: '',
             currentMusicIndex: null,
             musicItems: [],
+            loading: true,
         };
     }
     
@@ -153,52 +158,69 @@ class Albums extends Component {
     };
 
     render() {
-        const { musicItems } = this.state;
+        const { musicItems, loading } = this.state;
 
-        return (
-            <div className="shell" id="shell" style={{ backgroundImage: this.state.backgroundImage }}>
-                <div className="header">
-                    <h2 className="title">Playlist</h2>
-                    <h3 className="subtitle">click cover of playlist<br />to comments page</h3>
-                </div>
-                <div className="musiclist">
-                    {musicItems.map((item, musicIndex) => (
-                        <div
-                            key={musicIndex}
-                            className={`item ${this.state.activeItemIndex === musicIndex ? 'item--active' : ''}`}
-                            data-text={item.description}
-                        >
-                            <div className="content">
+        // if (loading) {
+        //     return <div>Loading...</div>;
+        // } else {
+            return (
+                <div className="shell" id="shell" style={{ backgroundImage: this.state.backgroundImage }}>
+                    <div className="header">
+                        <h2 className="title">Playlist</h2>
+                        <h3 className="subtitle">click cover of playlist<br />to comments page</h3>
+                    </div>
 
-                                <Link to={`/albums/${item._id}`}>
-                                    {/* rewrite the url */}
-                                    <img className="img" src={`https://skoog-music.onrender.com/album/${item.imageName}.jpg`} alt={item.description} />
-                                </Link>
-                                <h2 className="content-title">{item.name}</h2>
-                                <p className="content-songs">
-                                    {item.lists.map((song, songIndex) => (
-                                        <span key={songIndex}>
-                                            <span
-                                                className={`song-icon ${song.isPlaying ? 'song-icon--active' : ''}`}
-                                                onClick={() => this.playMusic(musicIndex, songIndex)}
-                                                style={{ cursor: 'pointer' }}
-                                            >
-                                                {song.isPlaying ? '🔄' : '▶️'}
-                                            </span>
-                                            <span className={`song-name ${song.isPlaying ? 'playing-song' : ''}`}>
-                                                {song.musicName}
-                                            </span>
-                                            <br />
-                                        </span>
-                                    ))}
-                                </p>
-                            </div>
+                    {loading ? (
+                        <div className='musiclist' 
+                            style={{ textAlign: 'center' }}>
+                            Loading... The first load may take a few seconds.
                         </div>
-                    ))}
+                    ) : (
+
+                    <div className="musiclist">
+                        {musicItems.map((item, musicIndex) => (
+                            <div
+                                key={musicIndex}
+                                className={`item ${this.state.activeItemIndex === musicIndex ? 'item--active' : ''}`}
+                                data-text={item.description}
+                            >
+                                <div className="content">
+
+                                    <Link to={`/albums/${item._id}`}>
+                                        {/* rewrite the url */}
+                                        <img className="img" src={`https://skoog-music.onrender.com/album/${item.imageName}.jpg`} alt={item.description} />
+                                    </Link>
+                                    <h2 className="content-title">{item.name}</h2>
+                                    <p className="content-songs">
+                                        {item.lists.map((song, songIndex) => (
+                                            <span key={songIndex}>
+                                                <span
+                                                    className={`song-icon ${song.isPlaying ? 'song-icon--active' : ''}`}
+                                                    onClick={() => this.playMusic(musicIndex, songIndex)}
+                                                    style={{ cursor: 'pointer' }}
+                                                >
+                                                    {song.isPlaying ? '🔄' : '▶️'}
+                                                </span>
+                                                <span className={`song-name ${song.isPlaying ? 'playing-song' : ''}`}>
+                                                    {song.musicName}
+                                                </span>
+                                                <br />
+                                            </span>
+                                        ))}
+                                    </p>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                    
+                    
+                    )}
+
+
+                    <audio ref={(ref) => (this.audioRef = ref)} controls style={{ display: 'none' }} />
                 </div>
-                <audio ref={(ref) => (this.audioRef = ref)} controls style={{ display: 'none' }} />
-            </div>
-        );
+            );
+        // }
     }
 }
 
