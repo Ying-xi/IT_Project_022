@@ -10,20 +10,12 @@ import makeAnimated from 'react-select/animated';
 
 
 function Admin_Playlist() {
-    /*
-        http://localhost:3300/music/Bleu.mp3
-        http://localhost:3300/images/album1.jpg
-        upload file to backend (binary file)
-    */
-
     const animatedComponents = makeAnimated();
-
     //parameters state
     const [selectedPlaylistId, setselectedPlaylistId] = useState(null);
     const [selectedPlaylistName, setselectedPlaylistName] = useState('');
     const [selectedPlaylistDescription, setselectedPlaylistDescription] = useState('');
     const [selectedPlaylistPictureName, setselectedPlaylistPictureName] = useState('');
-
     // Playlist details, defined by lists in backend data
     const [multiSelected, setMultiSelected] = useState([]);
     const [optionsTmp, setOptionsTmp] = useState([]);
@@ -31,8 +23,6 @@ function Admin_Playlist() {
     const [musicOptionsTmp, setMusicOptionsTmp] = useState([]);
     // Add new music options
     const [newMusicOptions, setNewMusicOptions] = useState([]);
-
-
 
     const handleSelectChange = (selected) => {
         if (selected.length <= 5) {
@@ -86,7 +76,6 @@ function Admin_Playlist() {
 
         if (backendDataPlaylist) {
             setselectedPlaylistName(backendDataPlaylist.name || '');
-            // setselectedPlaylistPictureName(`https://skoog-music.onrender.com/album/${backendDataPlaylist.imageName}`);
             setselectedPlaylistPictureName(`https://skoog-music.onrender.com/album/${backendDataPlaylist.imageName}.jpg`);
             setselectedPlaylistDescription(backendDataPlaylist.description || '');
             setMultiSelected([]);
@@ -215,7 +204,6 @@ function Admin_Playlist() {
 
         // Send POST to backend
         axios.post('https://skoog-music.onrender.com/albumAdmin', formData, { headers })
-        // axios.post('http://localhost:3300/albumAdmin', formData, { headers })
             .then((response) => {
                 console.log('Playlist added successfully:', response.data);
                 window.location.reload();
@@ -228,18 +216,17 @@ function Admin_Playlist() {
 
 
     // Delete music from DB
-    const handleMusicDelete = () => {
+    const handleAlbumDelete = () => {
         const token = localStorage.getItem('token');
         const headers = {
             Authorization: `Bearer ${token}`,
         };
-        const isConfirmed = window.confirm('Are you sure you want to delete this music?');
+        const isConfirmed = window.confirm('Are you sure you want to delete this album?');
 
         if (isConfirmed) {
-            axios.delete(`https://skoog-music.onrender.com/admin/${selectedPlaylistId}`, { headers })
-            // axios.delete(`http://localhost:3300/albumAdmin/${selectedPlaylistId}`, { headers })
+            axios.delete(`https://skoog-music.onrender.com/albumAdmin/${selectedPlaylistId}`, { headers })
                 .then((response) => {
-                    console.log('Music deleted successfully:', response.data);
+                    console.log('Album deleted successfully:', response.data);
                     window.location.reload();
                 })
                 .catch((error) => {
@@ -247,8 +234,6 @@ function Admin_Playlist() {
                 });
         }
     };
-
-
 
     // State for the uploaded image
     const [uploadedImage, setUploadedImage] = useState(null);
@@ -382,7 +367,7 @@ function Admin_Playlist() {
                                                     { selectedPlaylistId ? (
                                                         <>
                                                             {/* <button className={styles.addButton} onClick={handleMusicUpdate}>Update</button> */}
-                                                            <button className={styles.deleteButton} onClick={handleMusicDelete}>Delete</button>
+                                                            <button className={styles.deleteButton} onClick={handleAlbumDelete}>Delete</button>
                                                         </>
                                                     ): (
                                                         <button className={styles.addButton} onClick={handleMusicAdd}>Add</button>
