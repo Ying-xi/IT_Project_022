@@ -195,30 +195,12 @@ exports.deleteMusic = async (req, res) => {
     }
 };
 
-function deleteLocalFiles(...filePaths) {
-    for (const filePath of filePaths) {
-        try {
-            const absPath = path.join(__dirname, filePath);
-            fs.unlinkSync(absPath);
-            // console.log(`Deleted file: ${absPath}`);
-        } catch (error) {
-            console.error(`Error deleting file: ${filePath}`, error);
-        }
-    }
-}
-
 
 
 exports.renderPage = async (req, res) => {
 	const musics = await Music.find()
 	res.status(200).send({ data: musics })
 }
-
-
-
-
-
-
 
 
 
@@ -298,9 +280,6 @@ exports.saveAlbum = (req, res) => {
 };
 
 
-
-
-
 exports.updateAlbum = async (req, res) => {
 	const album = await Album.findByIdAndUpdate(req.params.albumId, req.body, {
 		new: true,
@@ -312,12 +291,13 @@ exports.updateAlbum = async (req, res) => {
 
 exports.deleteAlbum = async (req, res) => {
     try {
-        // Delete the album document from MongoDB
+		// Delete the album document from the MongoDB
         const deletedAlbum = await Album.findByIdAndDelete(req.params.albumId);
+        // console out deletedAlbum info for debugging
+		// console.log('deletedAlbum:', deletedAlbum);
 
         if (deletedAlbum) {
-            // Delete relevant files associated with the album
-            deleteLocalFiles(deletedAlbum.imageUrl);
+            deleteLocalFiles(deletedAlbum.file, deletedAlbum.picture);
             res.status(200).send({ message: "Album and relevant files deleted successfully" });
         } else {
             res.status(404).send({ error: "Album is not found" });
@@ -327,5 +307,20 @@ exports.deleteAlbum = async (req, res) => {
         res.status(500).send({ error: 'Error deleting album.' });
     }
 };
+
+
+
+
+function deleteLocalFiles(...filePaths) {
+    for (const filePath of filePaths) {
+        try {
+            const absPath = path.join(__dirname, filePath);
+            fs.unlinkSync(absPath);
+            // console.log(`Deleted file: ${absPath}`);
+        } catch (error) {
+            console.error(`Error deleting file: ${filePath}`, error);
+        }
+    }
+}
 
 
