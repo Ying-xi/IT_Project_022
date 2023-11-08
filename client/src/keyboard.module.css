@@ -23,9 +23,6 @@
   /* background: red; */
 }
 
-.con .key-item-wrap:hover {
-  transform: scale(1.05);
-}
 
 .key-item {
   width: 100%;
