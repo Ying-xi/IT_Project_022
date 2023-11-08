@@ -13,16 +13,13 @@
 }
 
 .con .key-item-wrap {
-  /* margin-top: 6vw; */
   width: 12%;
   height: 50%;
   text-align: center;
   vertical-align: bottom;
   position: relative;
   margin-right: 2%;
-  /* background: red; */
 }
-
 
 .key-item {
   width: 100%;

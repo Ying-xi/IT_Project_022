@@ -128,7 +128,6 @@ function MusicPlayer() {
           musicList={backendData}
           onChange={(keyword) => {
             const newData = backendData.data.map((item) => {
-              // item.show = keyword === item.name; // 标记为：显示筛选的音乐按钮
               item.show = item.name.includes(keyword);
               return item;
             });
