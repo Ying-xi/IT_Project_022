@@ -11,6 +11,9 @@ function MusicPlayer() {
   const myAudio = useRef(null);
   const audioSource = useRef(null);
   const [isPlaying, setIsPlaying] = useState(false);
+  
+  // Add loading state
+  const [loading, setLoading] = useState(true);
 
   const [backendData, setBackendData] = useState({
     data: [], // backend data
@@ -32,8 +35,10 @@ function MusicPlayer() {
         ...backendData,
         data: tempData,
       });
+      setLoading(false);
     } catch (error) {
       console.error('Error fetching data from backend:', error);
+      setLoading(false);
     }
   };
 
@@ -153,7 +158,7 @@ function MusicPlayer() {
           </div>
           {/* Music Card */}
           <div className="button-container music-btns-list">
-            {backendData && backendData.data ? (
+            {!loading ? (
               backendData.data
                 .filter((item) => activeCategory === 'All' || item.show)
                 .map((item) => (
