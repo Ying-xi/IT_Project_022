@@ -22,6 +22,7 @@
   margin-top: 6vh;
   padding-top: 5vh;
   overflow: auto;
+  user-select: none;
 }
 
 .text-container {
