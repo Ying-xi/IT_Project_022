@@ -12,6 +12,7 @@
   top: 5px;
   right: 5px;
   z-index: 999;
+  
 }
 
 .search-inp {
@@ -25,6 +26,7 @@
   color: #fff;
   font-size: 1.3vw;
   width: 15vw;
+  user-select: none;
 }
 
 .search-btn {
@@ -37,9 +39,11 @@
   font-weight: bold;
   cursor: pointer;
   transition: background-color 0.3s ease, transform 0.3s ease;
+  user-select: none;
 }
 
 .search-btn:hover {
   background-color: rgb(221, 145, 46);
   transform: scale(1.05);
+  user-select: none;
 }
