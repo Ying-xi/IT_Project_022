@@ -1,16 +1,16 @@
 /* set the background */
 .homepage {
     background-image: url('../public/background.jpg');
-    background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: 100% 100%;
-    margin: 0vh;
+    margin: 0;
     display: flex;
     justify-content: center;
     align-items: center;
     width: 100vw;
     height: 100vh;
+    overflow: hidden; 
 
 }
 
