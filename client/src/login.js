@@ -18,45 +18,53 @@ function Login() {
 
   const handleLogin = async () => {
     try {
-      const userData = {
-        username: username,
-        password: password,
-      };
-      console.log('Sending login request with data:', userData);
-      const response = await axios.post('https://skoog-music.onrender.com/login', userData);
-      console.log('Received response:', response);
-      const jwtToken = response.data.data;
-      console.log('JWT token received:', jwtToken);
-      // save in browser local storage
-      localStorage.setItem('token', jwtToken);
-      console.log('Login successful. Navigating to admin page...');
-      // switch to admin webpage
-      navigate('/admin');
+        const userData = {
+            username: username,
+            password: password,
+        };
+        console.log('Sending login request with data:', userData);
+        const response = await axios.post('https://skoog-music.onrender.com/login', userData);
+        console.log('Received response:', response);
+        const jwtToken = response.data.data;
+        console.log('JWT token received:', jwtToken);
+        
+        // Save token and username in localStorage
+        localStorage.setItem('token', jwtToken);
+        localStorage.setItem('username', username);
+
+        console.log('Login successful. Navigating to admin page...');
+        navigate('/admin');
     } catch (error) {
-      console.error('Login failed:', error);
+        console.error('Login failed:', error);
     }
   };
 
   const handleRegister = async () => {
-    try {
-      const userData = {
-        username: username,
-        password: password,
-      };
-      console.log('Sending Register request with data:', userData);
-      // change to register
-      const response = await axios.post('https://skoog-music.onrender.com/register', userData);
-      console.log('Received response:', response);
-      const jwtToken = response.data.data;
-      console.log('JWT token received:', jwtToken);
-      // save in browser local storage
-      localStorage.setItem('token', jwtToken);
-      console.log('Login successful. Navigating to admin page...');
-      navigate('/');
-    } catch (error) {
-      console.error('Login failed:', error);
-    }
-  }
+      try {
+          const userData = {
+              username: username,
+              password: password,
+          };
+          console.log('Sending Register request with data:', userData);
+          // change to register
+          const response = await axios.post('https://skoog-music.onrender.com/register', userData);
+          console.log('Received response:', response);
+          const jwtToken = response.data.data;
+          console.log('JWT token received:', jwtToken);
+          
+          // Save token and username in localStorage
+          localStorage.setItem('token', jwtToken);
+          localStorage.setItem('username', username);
+
+          console.log('Register successful. Navigating to home page...');
+          navigate('/');
+      } catch (error) {
+          console.error('Register failed:', error);
+      }
+  };
+
+
+
 
 
 

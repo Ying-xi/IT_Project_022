@@ -21,50 +21,26 @@ function Comments() {
 
     // Delete after testing
     console.log('musicAlbum:', musicAlbum);
-    
     let backgroundImage;
 
 
     //when jump to this page, start from the top of page:
     useEffect(() => {
-
         window.scrollTo(0, 0);
     }, []);
 
-    //change the background as the index:
-    // switch (musicIndex) {
-    //     case '0':
-    //         backgroundImage = '/albums/album1.jpg';
-    //         break;
-    //     case '1':
-    //         backgroundImage = '/albums/album2.jpg';
-    //         break;
-    //     case '2':
-    //         backgroundImage = '/albums/album3.jpg';
-    //         break;
-    //     default:
-    //         backgroundImage = '/albums/album4.jpg';
-    //         break;
-    // }
 
-    //send comments:
     //the comments by user:
     const [comment, setComment] = useState('');
     const maxCharacters = 200;
 
-    //to deal the comments from users
-
-
     const handleCommentChange = (e) => {
         const text = e.target.value;
-
         setComment(text);
-
     };
 
     const handleSendClick = () => {
         if (comment.length <= maxCharacters) {
-
             alert(`Comments Sent: ${comment}`);
             // Clear the input box content:
             setComment('');
@@ -76,14 +52,14 @@ function Comments() {
     const sendCommentToServer = () => {
         if (userComment.length <= maxCharacters) {
             const token = localStorage.getItem('token');
+            const username = localStorage.getItem('username');
             let headers = {};
             if (token) {
                 headers = {
                     Authorization: `Bearer ${token}`,
+                    'X-Username': username,
                 };
             }
-            // console.log('musicIndex:', musicIndex);
-            // console.log('userComment:', userComment);
             axios.post(
                 `https://skoog-music.onrender.com/albumPlayer/${musicIndex}`,
                 { comment: userComment },
@@ -95,9 +71,11 @@ function Comments() {
             .catch((error) => {
                 console.error('Error sending comment:', error);
             });
+            // Clear the input box content:
             setUserComment('');
         }
     };
+
 
     const handleSendComment = () => {
         sendCommentToServer();
