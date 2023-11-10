@@ -32,8 +32,12 @@ function Login() {
         localStorage.setItem('token', jwtToken);
         localStorage.setItem('username', username);
 
-        console.log('Login successful. Navigating to admin page...');
-        navigate('/admin');
+        console.log('Login successful.');
+        if (username === 'admin') {
+            navigate('/admin');
+        } else {
+            navigate('/');
+        }
     } catch (error) {
         console.error('Login failed:', error);
     }

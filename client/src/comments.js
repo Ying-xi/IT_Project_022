@@ -67,6 +67,8 @@ function Comments() {
             )
             .then((response) => {
                 alert('Comment sent successfully!');
+                // Reload the page after sending the comment
+                window.location.reload();
             })
             .catch((error) => {
                 console.error('Error sending comment:', error);
