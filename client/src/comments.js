@@ -9,7 +9,7 @@ function Comments() {
     const [musicAlbum, setMusicAlbum] = useState(null);
     console.log('musicIndex:', musicIndex);
     useEffect(() => {
-        axios.get(`http://localhost:3300/albumPlayer/${musicIndex}`)
+        axios.get(`https://skoog-music.onrender.com/albumPlayer/${musicIndex}`)
             .then((response) => {
                 console.log('Data from the backend:', response.data);
                 setMusicAlbum(response.data.data);
@@ -75,67 +75,68 @@ function Comments() {
 
     const sendCommentToServer = () => {
         if (userComment.length <= maxCharacters) {
-            // 使用 axios 或其他适当的方式将评论发送到后端服务器
-            axios.post('http://localhost:3300/submitComment', {
-                comment: userComment,
-            })
+            const token = localStorage.getItem('token');
+            let headers = {};
+            if (token) {
+                headers = {
+                    Authorization: `Bearer ${token}`,
+                };
+            }
+            // console.log('musicIndex:', musicIndex);
+            // console.log('userComment:', userComment);
+            axios.post(
+                `https://skoog-music.onrender.com/albumPlayer/${musicIndex}`,
+                { comment: userComment },
+                { headers: headers }
+            )
             .then((response) => {
-                // 处理成功发送评论后的逻辑
                 alert('Comment sent successfully!');
             })
             .catch((error) => {
-                // 处理发送评论失败的逻辑
                 console.error('Error sending comment:', error);
             });
-
-            // 清空评论输入框内容
             setUserComment('');
         }
     };
 
     const handleSendComment = () => {
-        sendCommentToServer(); // 调用新的评论发送函数
-        handleSendClick();     // 调用原来的点击处理函数
+        sendCommentToServer();
+        handleSendClick();
     };
 
     return (
-        //background:
         <div
             className="comments-page"
             style={{
-                backgroundImage: `url(${backgroundImage})`,
+                backgroundImage: `url(https://skoog-music.onrender.com/album/${musicAlbum && musicAlbum.imageName}.jpg)`,
                 backgroundSize: '100% 100%',
                 backgroundAttachment: 'fixed',
                 backgroundPosition: 'center',
                 overflow: 'hidden'
             }}
         >
-
-
             <div className="comments-void" id="comments-void">
                 <div className='comments-window'>
 
-                    <h2>
-                        Comments
-                    </h2>
+                <h2>
+                    Comments
+                </h2>
 
-                    <textarea
-                        className="comments-input"
-                        placeholder=" Enter your comments here: "
-                        value={userComment}
-                        onChange={(e) => {
-                            handleCommentChange(e); // 调用原来的处理函数
-                            setUserComment(e.target.value); // 更新用户评论状态
-                        }}
-
-                    />
-                    <div className={`comment-counter ${comment.length > maxCharacters ? 'max-exceeded' : ''}`}>
-
-                        {comment.length}/{maxCharacters}
-                    </div>
-                    <button className="comments-button" onClick={handleSendComment} disabled={comment.length > maxCharacters}>
-                        Send
-                    </button>
+                <textarea
+                    className="comments-input"
+                    placeholder=" Enter your comments here: "
+                    value={userComment}
+                    onChange={(e) => {
+                        handleCommentChange(e);
+                        setUserComment(e.target.value);
+                    }}
+                />
+                <div className={`comment-counter ${comment.length > maxCharacters ? 'max-exceeded' : ''}`}>
+                {comment.length}/{maxCharacters}
+                </div>
+                <button className="comments-button" onClick={handleSendComment} disabled={comment.length > maxCharacters}>
+                    Send
+                </button>
 
                 </div>
                 <div className="crop">
