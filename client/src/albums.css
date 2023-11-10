@@ -154,7 +154,7 @@
 }
 
 .item--active:before {
-  top: 50%;
+  top: 40%;
   transition: 0.3s all 0.2s;
   opacity: 1;
 }
