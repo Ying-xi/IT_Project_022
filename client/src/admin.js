@@ -38,31 +38,8 @@ function Admin() {
       setSelectedMusicFile(`https://skoog-music.onrender.com/music/${selectedMusic.name}.mp3`);
     }
 
-    // Download the music file
-    // axios.get(selectedMusicFile, { responseType: 'blob' })
-    //   .then((response) => {
-    //     // Create a URL for the downloaded file
-    //     const url = window.URL.createObjectURL(new Blob([response.data]));
-    //     setUploadedFile(url);
-    //     console.log('Music file downloaded successfully:!!!!!!!!!', url);
-    //   })
-    //   .catch((error) => {
-    //     console.error('Error downloading music file:', error);
-    //   });
-
-    // // Download the image file
-    // axios.get(selectedMusicPicture, { responseType: 'blob' })
-    //   .then((response) => {
-    //     // Create a URL for the downloaded image
-    //     const url = window.URL.createObjectURL(new Blob([response.data]));
-    //     setUploadedImage(url);
-    //     console.log('Image file downloaded successfully:!!!!!!!!!!!!', url);
-    //   })
-    //   .catch((error) => {
-    //     console.error('Error downloading image file:', error);
-    //   });
-
-
+    // console.log {selectedMusicFile}
+    console.log('selectedMusicFile:', selectedMusicFile);
   };
 
   // State for loading data
@@ -278,7 +255,7 @@ function Admin() {
 
   const [musicData, setMusicData] = useState(backendData.data);
 
-  // 使用 useEffect 来监听 selectedMusicType 变化并更新 musicData
+  // useEffect listens to the change of selectedMusicType and updates musicData
   useEffect(() => {
     const updatedMusicData = backendData.data.filter((music) =>
       music.tags.includes(selectedMusicType)
