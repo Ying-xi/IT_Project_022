@@ -129,7 +129,7 @@
   padding-left: 0.7vw;
   opacity: 0;
   right: calc(-30.8vw);
-  font: 900 3vh '';
+  font: 900 2vh '';
   letter-spacing: 0.1vw;
 }
 
@@ -160,7 +160,7 @@
 }
 
 .item--active .content-title {
-  margin: -5vh 0 2vh 0;
+  margin: -6.5vh 0 2vh 0;
 }
 
 /* the size of the items: */
