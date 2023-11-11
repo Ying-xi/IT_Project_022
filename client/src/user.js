@@ -172,7 +172,7 @@ function User() {
       }
     };
   
-    // 主动刷新页面
+    // Refresh the page
     const [shouldRefresh, setShouldRefresh] = useState(false);  
     useEffect(() => {
       if (shouldRefresh) {
@@ -183,7 +183,6 @@ function User() {
   
   
     // const [activeTag, setActiveTag] = useState(null);
-    // 绑定tag状态
     const toggleTag = (tag) => {
       if (selectedMusicTag == tag) {
         setSelectedMusicTag(null);

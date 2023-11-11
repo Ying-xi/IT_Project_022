@@ -37,9 +37,6 @@ function Admin() {
       setSelectedMusicPicture(`https://skoog-music.onrender.com/images/${selectedMusic.name}.jpg`);
       setSelectedMusicFile(`https://skoog-music.onrender.com/music/${selectedMusic.name}.mp3`);
     }
-
-    // console.log {selectedMusicFile}
-    console.log('selectedMusicFile:', selectedMusicFile);
   };
 
   // State for loading data
@@ -255,7 +252,7 @@ function Admin() {
 
   const [musicData, setMusicData] = useState(backendData.data);
 
-  // useEffect listens to the change of selectedMusicType and updates musicData
+  // Use useEffect to listen to the change of selectedMusicType to update musicData
   useEffect(() => {
     const updatedMusicData = backendData.data.filter((music) =>
       music.tags.includes(selectedMusicType)
@@ -396,11 +393,11 @@ function Admin() {
                           )}
                         </div>
 
-                        <div className={styles.mainContentTopRightName}>
+                        {/* <div className={styles.mainContentTopRightName}> */}
                           {selectedMusicFile ? (
                             <div 
                               style={{
-                                marginLeft: '2vw',
+                                marginLeft: '1vw',
                                 marginRight: '2vw',
                                 marginTop: '2vh',
                                 marginBottom: '2vh',
@@ -429,10 +426,15 @@ function Admin() {
                                 backgroundColor: '#F0F3F4',
                                 width: '25vh',
                                 height: '7vh',
+                                borderRadius: '6px',
+                                padding: '0 10px',
+                                display: 'block',
+                                boxSizing: 'border-box',
+                                marginLeft: '1vw'
                               }}
                             />
                           )}
-                        </div>
+                        {/* </div> */}
                         <div className={styles.mainContentTopRightType}>
                           {/*the division of type button*/}
                           <div className={styles.mainContentTopRightTypeInner}>

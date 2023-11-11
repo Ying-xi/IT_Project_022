@@ -4,8 +4,8 @@
     background-image: url('../public/background_nologo.jpg');
     background-size: cover;
     background-repeat: no-repeat;
-    background-position: center;
     background-attachment: fixed;
+    background-position: center;
     margin: 0;
     display: flex;
     justify-content: center;
@@ -188,7 +188,8 @@
     font-size: 16px;
     width: 100%;
     outline: none;
-    width: 8%;
+    /* width: 8%; */
+    box-sizing: border-box;
 }
 
 /* mouse hover */
@@ -372,17 +373,30 @@ box-shadow: 0 0 1vh rgba(55, 202, 55, 0.7);
 .musicWrap .musicMainHead {
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    height: 100%;
+    height: 40px;
+
 }
 
 /* Styling for the music main header div */
 .musicWrap .musicMainHead > div {
     /* background-color: #fff; */
     font-weight: bold;
-    padding: 5px 21px;
-    font-size: 1.5vw;
+    padding: 5px;
+    font-size: 1.4vw;
     background-color: #fac554;
-    margin-left: 10px;
+    /* margin-left: 10px; */
     border-radius: 10px;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+}
+
+.musicWrap .musicMainHead > div:not(:first-child) {
+    margin-left: 10px;
 }
 
 /* Styling for the music item wrap container */
