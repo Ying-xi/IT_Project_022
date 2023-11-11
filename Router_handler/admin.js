@@ -343,6 +343,14 @@ exports.saveAlbum = (req, res) => {
                         data: savedAlbum,
                         message: 'Album uploaded successfully',
                     });
+
+					// Output the file save path
+					console.log('File saved at:', imageTargetPath);
+					console.log('suceessfully saved album!!!!!!!!!!:', savedAlbum);
+
+
+
+
                 } catch (saveError) {
                     console.error('Error saving album:', saveError);
                     res.status(500).send({
