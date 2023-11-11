@@ -147,14 +147,10 @@ exports.renderPage = async (req, res) => {
 
 
 
-
-
-
 exports.renderAlbumPage = async (req, res) => {
 	const albums = await Album.find()
 	res.status(200).send({ data: albums })
 }
-
 
 
 
@@ -175,7 +171,7 @@ exports.saveAlbum = (req, res) => {
 
         // Get the uploaded album cover image
         const imageFile = files.picture[0];
-        const imageFilename = fields.name[0] + '.jpg';
+        const imageFilename = fields.name[0];
         const imageTempPath = imageFile.path;
 
         // Specify the storage path and filename for the image file
@@ -221,11 +217,6 @@ exports.saveAlbum = (req, res) => {
 
 					// Output the file save path
 					console.log('File saved at:', imageTargetPath);
-					console.log('suceessfully saved album!!!!!!!!!!:', savedAlbum);
-
-
-
-
                 } catch (saveError) {
                     console.error('Error saving album:', saveError);
                     res.status(500).send({
