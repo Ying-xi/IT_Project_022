@@ -12,24 +12,26 @@ exports.album = async (req, res) => {
     res.status(200).send({ data: album })
 }
 
+
 exports.comment = async (req, res) => {
     try {
-        const albumId = req.params.albumId
-        const comments = req.body.comments
-        const user = req.body.userId
-        const album = await Album.findById(albumId)
+        const albumId = req.params.albumId;
+        const comments = req.body.comments;
+        const user = req.body.userId;
+        const album = await Album.findById(albumId);
 
         if (!album) {
-            return res.status(404).json({ message: 'Album not found' })
+            return res.status(404).json({ message: 'Album not found' });
         }
 
-        album.comments = [content,user]
+        album.comments.push({ username: user, content: comments });
 
-        await album.save()
+        await album.save();
 
-        res.status(200).json({ message: 'Comments uploaded successfully' })
+        res.status(200).json({ message: 'Comments uploaded successfully' });
     } catch (error) {
-        console.error(error)
-        res.status(500).json({ message: 'Internal server error' })
+        console.error(error);
+        res.status(500).json({ message: 'Internal server error' });
     }
-}
+};
+
