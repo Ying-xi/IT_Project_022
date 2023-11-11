@@ -16,8 +16,8 @@ exports.album = async (req, res) => {
 exports.comment = async (req, res) => {
     try {
         const albumId = req.params.albumId;
-        const comments = req.body.comments;
-        const user = req.body.userId;
+        const comments = req.body.comment;
+        const user = req.headers['x-username'];
         const album = await Album.findById(albumId);
 
         if (!album) {
