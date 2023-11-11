@@ -9,7 +9,7 @@ function Comments() {
     const [musicAlbum, setMusicAlbum] = useState(null);
     console.log('musicIndex:', musicIndex);
     useEffect(() => {
-        axios.get(`https://skoog-music.onrender.com/albumPlayer/${musicIndex}`)
+        axios.get(`https://skoog-music-backend.onrender.com/albumPlayer/${musicIndex}`)
             .then((response) => {
                 console.log('Data from the backend:', response.data);
                 setMusicAlbum(response.data.data);
@@ -61,7 +61,7 @@ function Comments() {
                 };
             }
             axios.post(
-                `https://skoog-music.onrender.com/albumPlayer/${musicIndex}`,
+                `https://skoog-music-backend.onrender.com/albumPlayer/${musicIndex}`,
                 { comment: userComment },
                 { headers: headers }
             )
@@ -88,7 +88,7 @@ function Comments() {
         <div
             className="comments-page"
             style={{
-                backgroundImage: `url(https://skoog-music.onrender.com/album/${musicAlbum && musicAlbum.imageName}.jpg)`,
+                backgroundImage: `url(https://skoog-music-backend.onrender.com/album/${musicAlbum && musicAlbum.imageName}.jpg)`,
                 backgroundSize: '100% 100%',
                 backgroundAttachment: 'fixed',
                 backgroundPosition: 'center',

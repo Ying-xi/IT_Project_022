@@ -40,21 +40,23 @@ function Admin_Playlist() {
     console.log('newMusicOptions updated:', newMusicOptions);
   }, [newMusicOptions]);
 
-  // Receive all music, store it in musicOptions
-  useEffect(() => {
-    axios
-      .get('https://skoog-music.onrender.com/musicPlayer')
-      .then((response) => {
-        const musicOptionsData = response.data.data.map((item) => ({
-          value: item.name,
-          label: item.name,
-        }));
-        setMusicOptionsTmp(musicOptionsData);
-      })
-      .catch((error) => {
-        console.error('Error fetching data from backend:', error);
-      });
-  }, []);
+    // Receive all music, store it in musicOptions
+    useEffect(() => {
+        axios.get('https://skoog-music-backend.onrender.com/musicPlayer')
+            .then((response) => 
+            {
+                const musicOptionsData = response.data.data.map((item) => ({
+                    value: item.name,
+                    label: item.name,
+                }));
+                setMusicOptionsTmp(musicOptionsData);
+            })
+            .catch((error) => {
+                console.error('Error fetching data from backend:', error);
+            });
+    }, []);
+
+
 
   // Handle music/playlist click event
   const handlePlaylistClick = (playlistId) => {
@@ -70,34 +72,32 @@ function Admin_Playlist() {
     // Fetch details for the selected music
     const backendDataPlaylist = backendData.data.find((playlist) => playlist._id === playlistId);
 
-    if (backendDataPlaylist) {
-      setselectedPlaylistName(backendDataPlaylist.name || '');
-      setselectedPlaylistPictureName(
-        `https://skoog-music.onrender.com/album/${backendDataPlaylist.imageName}.jpg`
-      );
-      setselectedPlaylistDescription(backendDataPlaylist.description || '');
-      setMultiSelected([]);
+        if (backendDataPlaylist) {
+            setselectedPlaylistName(backendDataPlaylist.name || '');
+            setselectedPlaylistPictureName(`https://skoog-music-backend.onrender.com/album/${backendDataPlaylist.imageName}.jpg`);
+            setselectedPlaylistDescription(backendDataPlaylist.description || '');
+            setMultiSelected([]);
 
-      backendDataPlaylist.lists.forEach((item) => {
-        multiSelected.push({
-          value: item.musicName,
-          label: item.musicName,
+        backendDataPlaylist.lists.forEach((item) => {
+            multiSelected.push({
+            value: item.musicName,
+            label: item.musicName,
+            });
         });
-      });
 
-      // Delete after testing
-      console.log('-----!!---');
-      console.log(musicOptions);
-      console.log('-----!!---');
-      console.log(multiSelected);
-      console.log('-----!!---');
+        // Delete after testing
+        console.log('-----!!---');
+        console.log(musicOptions);
+        console.log('-----!!---');
+        console.log(multiSelected);
+        console.log('-----!!---');
 
-      // Remove the selected music from musicOptions
-      if (multiSelected.length > 0 && musicOptions.length > 0) {
-        setOptionsTmp(multiSelected);
-      }
-    }
-  };
+        // Remove the selected music from musicOptions
+        if (multiSelected.length > 0 && musicOptions.length > 0) {
+            setOptionsTmp(multiSelected);
+        }
+        }
+    };
 
   // State for loading data
   const [isLoading, setIsLoading] = useState(true);
@@ -117,19 +117,20 @@ function Admin_Playlist() {
         Authorization: `Bearer ${token}`,
       };
 
-      axios
-        .get('https://skoog-music.onrender.com/albumAdmin', { headers })
-        .then((response) => {
-          console.log('Received data from backend:', response.data);
-          setBackendData(response.data);
-          setIsLoading(false);
-        })
-        .catch((error) => {
-          console.error('Error fetching data from backend:', error);
-          setIsLoading(false);
-        });
-    }
-  }, []);
+            axios
+                .get('https://skoog-music-backend.onrender.com/albumAdmin', { headers })
+                .then((response) => {
+                    console.log('Received data from backend:', response.data);
+                    setBackendData(response.data);
+                    setIsLoading(false);
+                })
+                .catch((error) => {
+                    console.error('Error fetching data from backend:', error);
+                    setIsLoading(false);
+                });
+        }
+    }, []);
+
 
   // Update music from DB
   const handleMusicUpdate = () => {
@@ -147,20 +148,18 @@ function Admin_Playlist() {
     // confirm dialogue
     const isConfirmed = window.confirm('Are you sure you want to update this music?');
 
-    if (isConfirmed) {
-      axios
-        .put(`https://skoog-music.onrender.com/admin/${selectedPlaylistId}`, updatedMusic, {
-          headers,
-        })
-        .then((response) => {
-          console.log('Music updated successfully:', response.data);
-          window.location.reload();
-        })
-        .catch((error) => {
-          console.error('Error updating music:', error);
-        });
-    }
-  };
+        if (isConfirmed) {
+            axios.put(`https://skoog-music-backend.onrender.com/admin/${selectedPlaylistId}`, updatedMusic, { headers })
+                .then((response) => {
+                    console.log('Music updated successfully:', response.data);
+                    window.location.reload();
+                })
+                .catch((error) => {
+                    console.error('Error updating music:', error);
+                });
+        }
+    };
+
 
   // Add music to DB
   const handleMusicAdd = () => {
@@ -198,17 +197,18 @@ function Admin_Playlist() {
       console.log(`${name}: ${value}`);
     }
 
-    // Send POST to backend
-    axios
-      .post('https://skoog-music.onrender.com/albumAdmin', formData, { headers })
-      .then((response) => {
-        console.log('Playlist added successfully:', response.data);
-        window.location.reload();
-      })
-      .catch((error) => {
-        console.error('Error adding music:', error);
-      });
-  };
+        // Send POST to backend
+        axios.post('https://skoog-music-backend.onrender.com/albumAdmin', formData, { headers })
+            .then((response) => {
+                console.log('Playlist added successfully:', response.data);
+                window.location.reload();
+            })
+            .catch((error) => {
+                console.error('Error adding music:', error);
+            });
+    };
+
+
 
   // Delete music from DB
   const handleAlbumDelete = () => {
@@ -218,18 +218,17 @@ function Admin_Playlist() {
     };
     const isConfirmed = window.confirm('Are you sure you want to delete this album?');
 
-    if (isConfirmed) {
-      axios
-        .delete(`https://skoog-music.onrender.com/albumAdmin/${selectedPlaylistId}`, { headers })
-        .then((response) => {
-          console.log('Album deleted successfully:', response.data);
-          window.location.reload();
-        })
-        .catch((error) => {
-          console.error('Error deleting music:', error);
-        });
-    }
-  };
+        if (isConfirmed) {
+            axios.delete(`https://skoog-music-backend.onrender.com/albumAdmin/${selectedPlaylistId}`, { headers })
+                .then((response) => {
+                    console.log('Album deleted successfully:', response.data);
+                    window.location.reload();
+                })
+                .catch((error) => {
+                    console.error('Error deleting music:', error);
+                });
+        }
+    };
 
   // State for the uploaded image
   const [uploadedImage, setUploadedImage] = useState(null);
@@ -487,9 +486,9 @@ function Admin_Playlist() {
                                     occupy the area middle and bottom
                                 */}
                 {musicOptions.length > 0 ? (
-                  <div className={styles.mainContentMiddleAndBottom}>
+                    <div className={styles.mainContentMiddleAndBottom}>
                     <div className={styles.middleBottomContainer}>
-                      <Select
+                        <Select
                         closeMenuOnSelect={false}
                         components={animatedComponents}
                         isMulti
@@ -498,13 +497,13 @@ function Admin_Playlist() {
                         onChange={handleSelectChange}
                         maxMenuHeight={200}
                         menuIsOpen={true}
-                      />
+                        />
                     </div>
-                  </div>
+                    </div>
                 ) : (
-                  <div className={styles.mainContentMiddleAndBottom}>
+                    <div className={styles.mainContentMiddleAndBottom}>
                     <div className={styles.middleBottomContainer}>
-                      <Select
+                        <Select
                         closeMenuOnSelect={false}
                         components={animatedComponents}
                         isMulti
@@ -513,9 +512,9 @@ function Admin_Playlist() {
                         onChange={handleSelectAdd}
                         maxMenuHeight={200}
                         menuIsOpen={true}
-                      />
+                        />
                     </div>
-                  </div>
+                    </div>
                 )}
 
                 {/* 
