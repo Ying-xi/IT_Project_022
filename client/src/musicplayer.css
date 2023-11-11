@@ -37,7 +37,7 @@
   padding: 1%;
   display: grid;
   grid-template-columns: repeat(5, auto);
-  grid-gap: 2.5vw;
+  grid-gap: 2.4vw;
   place-items: center;
   place-content: center;
   overflow-x: visible;
@@ -54,7 +54,7 @@
 }
 
 .size-container {
-  margin-top: 32vh;
+  margin-top: 14vh;
   margin-bottom: 4vh;
   margin-left: 10%;
   display: flex;
