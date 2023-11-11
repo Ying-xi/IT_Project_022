@@ -176,7 +176,7 @@ exports.saveAlbum = (req, res) => {
 
         // Specify the storage path and filename for the image file
         const imageDestination = path.join(__dirname, '../Default_music/Albums');
-        const imageTargetPath = path.join(imageDestination, imageFilename);
+        const imageTargetPath = path.join(imageDestination, imageFilename + '.jpg');
 
         // Create read and write streams for image file
         const imageReadStream = fs.createReadStream(imageTempPath);
