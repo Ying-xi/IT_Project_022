@@ -29,12 +29,14 @@ function Admin_Playlist() {
     }
     console.log('selected:', selected);
   };
+
   const handleSelectAdd = (selected) => {
     if (selected.length <= 5) {
       setNewMusicOptions(selected);
     }
     console.log('selected:', selected);
   };
+
   // listen the change of newMusicOptions
   useEffect(() => {
     console.log('newMusicOptions updated:', newMusicOptions);
@@ -178,8 +180,16 @@ function Admin_Playlist() {
     const formData = new FormData();
     formData.append('name', selectedPlaylistName);
     formData.append('description', selectedPlaylistDescription);
-    // formData.append('picture', selectedPlaylistPictureName);
-    formData.append('lists', newMusicOptions);
+
+    // combination lists into a single array
+    const combinationLists = [];
+    for (let i = 0; i < newMusicOptions.length; i++) {
+      combinationLists.push(newMusicOptions[i].value);
+    }
+
+    // Append the consolidated lists to the form data
+    formData.append('lists', JSON.stringify(combinationLists));
+
 
     // Append the uploaded image to the form data if it exists
     if (uploadedImage) {
@@ -195,15 +205,15 @@ function Admin_Playlist() {
       console.log(`${name}: ${value}`);
     }
 
-        // Send POST to backend
-        axios.post(`https://skoog-music-backend.onrender.com/albumAdmin`, formData, { headers })
-            .then((response) => {
-                console.log('Playlist added successfully:', response.data);
-                window.location.reload();
-            })
-            .catch((error) => {
-                console.error('Error adding music:', error);
-            });
+    // Send POST to backend
+    axios.post(`https://skoog-music-backend.onrender.com/albumAdmin`, formData, { headers })
+        .then((response) => {
+            console.log('Playlist added successfully:', response.data);
+            window.location.reload();
+        })
+        .catch((error) => {
+            console.error('Error adding music:', error);
+        });
     };
 
 
@@ -514,23 +524,6 @@ function Admin_Playlist() {
                     </div>
                     </div>
                 )}
-
-                {/* 
-                                <div className={styles.mainContentMiddleAndBottom}>
-                                    <div className={styles.middleBottomContainer}>
-                                        <Select
-                                            closeMenuOnSelect={false}
-                                            components={animatedComponents}
-                                            isMulti
-                                            options={musicOptions}
-                                            value={optionsTmp}
-                                            onChange={handleSelectChange}
-                                            maxMenuHeight={200}
-                                            menuIsOpen={true}
-                                        />
-                                    </div>
-                                </div>
-                                 */}
               </div>
             </div>
           </div>
