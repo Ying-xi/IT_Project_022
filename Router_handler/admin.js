@@ -4,8 +4,8 @@ const multiparty = require('multiparty');
 const fs = require('fs');
 const path = require('path');
 
-// original version
-exports.saveMusic1 = (req, res) => {
+
+exports.saveMusic = (req, res) => {
 	const form = new multiparty.Form();
 	// use form.parse method to parse form data: it will parse the form data in the request into fields and files objects.
 	// fields contains key-value pairs of form fields, files contains uploaded files.
@@ -86,238 +86,6 @@ exports.saveMusic1 = (req, res) => {
 		});
 	});
 };
-
-
-
-
-exports.saveMusic = (req, res) => {
-	const form = new multiparty.Form();
-
-	// use form.parse method to parse form data: it will parse the form data in the request into fields and files objects.
-	// fields contains key-value pairs of form fields, files contains uploaded files.
-	form.parse(req, async (err, fields, files) => {
-		if (err) {
-			console.error('Error parsing form data:', err);
-			res.status(500).send({
-				error: 'Error parsing form data.'
-			});
-			return;
-		}
-
-		// get the uploaded music file (MP3)
-		const musicFile = files.file[0];
-		const musicFilename = fields.name[0] + '.mp3';
-
-		// get the uploaded image file (JPG)
-		const imageFile = files.picture[0];
-		const imageFilename = fields.name[0] + '.jpg';
-
-		// specify the storage path and filename for the music file
-		const musicDestination = path.join(__dirname, '../Default_music/Musics');
-		const musicTargetPath = path.join(musicDestination, musicFilename);
-
-		// specify the storage path and filename for the image file
-		const imageDestination = path.join(__dirname, '../Default_music/Images');
-		const imageTargetPath = path.join(imageDestination, imageFilename);
-
-		// create read and write streams for music file
-		const musicReadStream = fs.createReadStream(musicFile.path);
-		const musicWriteStream = fs.createWriteStream(musicTargetPath);
-
-		// create read and write streams for image file
-		const imageReadStream = fs.createReadStream(imageFile.path);
-		const imageWriteStream = fs.createWriteStream(imageTargetPath);
-
-		// handle errors during file streams
-		musicReadStream.on('error', (error) => {
-			console.error('Error reading music file:', error);
-			cleanupAndRespond(res, musicFile.path, imageFile.path, 'Error reading music file.');
-		});
-
-		musicWriteStream.on('error', (error) => {
-			console.error('Error writing music file:', error);
-			cleanupAndRespond(res, musicFile.path, imageFile.path, 'Error writing music file.');
-		});
-
-		imageReadStream.on('error', (error) => {
-			console.error('Error reading image file:', error);
-			cleanupAndRespond(res, musicFile.path, imageFile.path, 'Error reading image file.');
-		});
-
-		imageWriteStream.on('error', (error) => {
-			console.error('Error writing image file:', error);
-			cleanupAndRespond(res, musicFile.path, imageFile.path, 'Error writing image file.');
-		});
-
-		// pipe the read and write streams for music file
-		musicReadStream.pipe(musicWriteStream);
-
-		// handle finish event for music write stream
-		musicWriteStream.on('finish', async () => {
-			// pipe the read and write streams for image file
-			imageReadStream.pipe(imageWriteStream);
-
-			// handle finish event for image write stream
-			imageWriteStream.on('finish', async () => {
-				// After the files are saved, create a music document and save it to the database
-				try {
-					const music = new Music({
-						name: fields.name[0],
-						tags: fields.tags[0].split(','),
-						file: path.relative(__dirname, musicTargetPath),
-						picture: path.relative(__dirname, imageTargetPath),
-					});
-
-					// asynchronous save music document
-					try {
-						const savedMusic = await music.save();
-						res.status(201).send({
-							data: savedMusic,
-							message: 'Music uploaded successfully',
-						});
-					} catch (saveError) {
-						console.error('Error saving music:', saveError);
-						res.status(500).send({
-							error: 'Error saving music.'
-						});
-					}
-				} catch (error) {
-					console.error('Error uploading music:', error);
-					res.status(500).send({
-						error: 'An error occurred while uploading music'
-					});
-				}
-
-				// clean up temporary files
-				cleanupTempFiles(musicFile.path, imageFile.path);
-			});
-		});
-	});
-};
-
-
-
-
-exports.saveAlbum = (req, res) => {
-    const form = new multiparty.Form();
-
-    // Use form.parse method to parse form data: it will parse the form data in the request into fields and files objects.
-    // fields contains key-value pairs of form fields, files contains uploaded files.
-    form.parse(req, async (err, fields, files) => {
-        if (err) {
-            console.error('Error parsing form data:', err);
-            res.status(500).send({
-                error: 'Error parsing form data.'
-            });
-            return;
-        }
-
-        // Get the uploaded album cover image
-        const imageFile = files.picture[0];
-        const imageFilename = fields.name[0] + '.jpg';
-
-        // Specify the storage path and filename for the image file
-        const imageDestination = path.join(__dirname, '../Default_music/Albums');
-        const imageTargetPath = path.join(imageDestination, imageFilename);
-
-        // Create read and write streams for image file
-        const imageReadStream = fs.createReadStream(imageFile.path);
-        const imageWriteStream = fs.createWriteStream(imageTargetPath);
-
-        // Handle errors during file streams
-        imageReadStream.on('error', (error) => {
-            console.error('Error reading image file:', error);
-            cleanupAndRespond(res, imageFile.path, 'Error reading image file.');
-        });
-
-        imageWriteStream.on('error', (error) => {
-            console.error('Error writing image file:', error);
-            cleanupAndRespond(res, imageFile.path, 'Error writing image file.');
-        });
-
-        // Pipe the read and write streams for image file
-        imageReadStream.pipe(imageWriteStream);
-
-        // Handle finish event for image write stream
-        imageWriteStream.on('finish', async () => {
-            // After the file is saved, create an album document and save it to the database
-            try {
-                const album = new Album({
-                    name: fields.name[0],
-                    description: fields.description[0],
-                    imageUrl: path.relative(__dirname, imageTargetPath),
-                    imageName: imageFilename,
-                    // lists: fields.lists[0].split(','),
-                });
-
-                // Asynchronous save album document
-                try {
-                    const savedAlbum = await album.save();
-                    res.status(201).send({
-                        data: savedAlbum,
-                        message: 'Album uploaded successfully',
-                    });
-                } catch (saveError) {
-                    console.error('Error saving album:', saveError);
-                    res.status(500).send({
-                        error: 'Error saving album.'
-                    });
-                }
-            } catch (error) {
-                console.error('Error uploading album:', error);
-                res.status(500).send({
-                    error: 'An error occurred while uploading album'
-                });
-            }
-
-            // Clean up temporary file
-            cleanupTempFiles(imageFile.path);
-        });
-    });
-};
-
-
-
-
-
-
-
-
-function cleanupTempFiles(...tempPaths) {
-	for (const tempPath of tempPaths) {
-		fs.unlink(tempPath, (error) => {
-			if (error) {
-				console.error(`Error deleting temp file: ${tempPath}`, error);
-			}
-		});
-	}
-}
-
-function cleanupAndRespond(res, musicTempPath, imageTempPath, errorMessage) {
-	cleanupTempFiles(musicTempPath, imageTempPath);
-	res.status(500).send({
-		error: errorMessage
-	});
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -439,11 +207,82 @@ exports.renderPage = async (req, res) => {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 exports.renderAlbumPage = async (req, res) => {
 	const albums = await Album.find()
 	res.status(200).send({ data: albums })
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function cleanupTempFiles(...tempPaths) {
+    for (const tempPath of tempPaths) {
+        fs.unlink(tempPath, (error) => {
+            if (error) {
+                console.error(`Error deleting temp file: ${tempPath}`, error);
+            }
+        });
+    }
+}
+
+function cleanupAndRespond(res, musicTempPath, imageTempPath, errorMessage) {
+    cleanupTempFiles(musicTempPath, imageTempPath);
+    res.status(500).send({
+        error: errorMessage
+    });
+}
 
 exports.saveAlbum = (req, res) => {
     const form = new multiparty.Form();
@@ -524,6 +363,10 @@ exports.saveAlbum = (req, res) => {
 };
 
 
+
+
+
+
 exports.updateAlbum = async (req, res) => {
 	const album = await Album.findByIdAndUpdate(req.params.albumId, req.body, {
 		new: true,
@@ -559,8 +402,12 @@ function deleteLocalFiles(...filePaths) {
     for (const filePath of filePaths) {
         try {
             const absPath = path.join(__dirname, filePath);
-            fs.unlinkSync(absPath);
-            // console.log(`Deleted file: ${absPath}`);
+            if (fs.existsSync(absPath)) {
+                fs.unlinkSync(absPath);
+                // console.log(`Deleted file: ${absPath}`);
+            } else {
+                console.warn(`File not found: ${absPath}`);
+            }
         } catch (error) {
             console.error(`Error deleting file: ${filePath}`, error);
         }
