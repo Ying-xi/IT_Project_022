@@ -116,9 +116,7 @@ function Admin_Playlist() {
       const headers = {
         Authorization: `Bearer ${token}`,
       };
-
-            axios
-                .get('https://skoog-music-backend.onrender.com/albumAdmin', { headers })
+            axios.get('https://skoog-music-backend.onrender.com/albumAdmin', { headers })
                 .then((response) => {
                     console.log('Received data from backend:', response.data);
                     setBackendData(response.data);
@@ -198,7 +196,7 @@ function Admin_Playlist() {
     }
 
         // Send POST to backend
-        axios.post(`https://skoog-music-backend.onrender.com/albumAdmin/${selectedPlaylistId}`, formData, { headers })
+        axios.post(`https://skoog-music-backend.onrender.com/albumAdmin`, formData, { headers })
             .then((response) => {
                 console.log('Playlist added successfully:', response.data);
                 window.location.reload();

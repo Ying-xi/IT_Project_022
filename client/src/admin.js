@@ -166,7 +166,7 @@ function Admin() {
     }
     console.log('FormData:', formData);
     // POST Request to Back-end
-    axios.post(`https://skoog-music-backend.onrender.com/admin/${selectedMusicId}`, formData, { headers })
+    axios.post(`https://skoog-music-backend.onrender.com/admin`, formData, { headers })
       .then((response) => {
         console.log('Music added successfully:', response.data);
         window.location.reload();
