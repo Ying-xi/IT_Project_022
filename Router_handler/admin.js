@@ -200,14 +200,19 @@ exports.saveAlbum = (req, res) => {
         imageWriteStream.on('finish', async () => {
             // After the file is saved, create an album document and save it to the database
             try {
-				console.log('Fields lists:', fields.lists);
+				// console.log('Fields lists:', fields);
+                const listsString = fields.lists[0];
+                const listsArray = JSON.parse(listsString);
+                const transformedLists = listsArray.map((musicName) => ({
+                    musicName,
+                    musicUrl: `../Default_music/Musics/${musicName}.mp3`,
+                }));
                 const album = new Album({
                     name: fields.name[0],
                     description: fields.description[0],
                     imageUrl: path.relative(__dirname, imageTargetPath) + '.jpg',
                     imageName: imageFilename,
-                    // lists: fields.lists[0].split(','),
-					lists: fields.lists ? fields.lists[0].split(',') : [],
+                    lists: transformedLists,
                 });
                 // Asynchronous save album document
                 try {
