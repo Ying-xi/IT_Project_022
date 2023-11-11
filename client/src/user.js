@@ -67,7 +67,7 @@ function User() {
         };
   
         axios
-          .get('https://skoog-music.onrender.com/admin', { headers })
+          .get('https://skoog-music-backend.onrender.com/admin', { headers })
           .then((response) => {
             console.log('Received data from backend:', response.data);
             setBackendData(response.data);
@@ -98,7 +98,7 @@ function User() {
       const isConfirmed = window.confirm('Are you sure you want to update this music?');
   
       if (isConfirmed) {
-        axios.put(`https://skoog-music.onrender.com/admin/${selectedMusicId}`, updatedMusic, { headers })
+        axios.put(`https://skoog-music-backend.onrender.com/admin/${selectedMusicId}`, updatedMusic, { headers })
           .then((response) => {
             console.log('Music updated successfully:', response.data);
             window.location.reload();
@@ -133,7 +133,7 @@ function User() {
       };
   
       // Send POST to backend
-      axios.post('https://skoog-music.onrender.com/admin', newMusic, { headers })
+      axios.post('https://skoog-music-backend.onrender.com/admin', newMusic, { headers })
         .then((response) => {
           console.log('Music added successfully:', response.data);
           window.location.reload();
@@ -172,7 +172,7 @@ function User() {
       }
     };
   
-    // 主动刷新页面
+    // Refresh the page
     const [shouldRefresh, setShouldRefresh] = useState(false);  
     useEffect(() => {
       if (shouldRefresh) {
@@ -183,7 +183,6 @@ function User() {
   
   
     // const [activeTag, setActiveTag] = useState(null);
-    // 绑定tag状态
     const toggleTag = (tag) => {
       if (selectedMusicTag == tag) {
         setSelectedMusicTag(null);

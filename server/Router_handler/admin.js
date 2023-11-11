@@ -195,29 +195,12 @@ exports.deleteMusic = async (req, res) => {
     }
 };
 
-function deleteLocalFiles(...filePaths) {
-    for (const filePath of filePaths) {
-        try {
-            const absPath = path.join(__dirname, filePath);
-            fs.unlinkSync(absPath);
-            // console.log(`Deleted file: ${absPath}`);
-        } catch (error) {
-            console.error(`Error deleting file: ${filePath}`, error);
-        }
-    }
-}
-
 
 
 exports.renderPage = async (req, res) => {
 	const musics = await Music.find()
 	res.status(200).send({ data: musics })
 }
-
-
-
-
-
 
 
 
@@ -253,15 +236,6 @@ exports.saveAlbum = (req, res) => {
         // Specify the storage path and filename for the image file
         const imageDestination = path.join(__dirname, '../Default_music/Albums');
         const imageTargetPath = path.join(imageDestination, imageFilename);
-
-		// 输出读取到的fields
-		console.log("!!", fields);
-		// 输出读取到的lists
-		// 提取选中的对象的"value"属性并组成一个新数组
-		const selectedValues = fields.lists[0].map(item => item.value);
-
-		// 输出提取的值
-		console.log("Selected Values!!我需要的:", selectedValues);
 
         // Move the image file to the storage path
         fs.rename(imageTempPath, imageTargetPath, async (imageError) => {
@@ -306,15 +280,6 @@ exports.saveAlbum = (req, res) => {
 };
 
 
-
-
-
-
-// exports.saveAlbum = async (req, res) => {
-// 	const album = await Album(req.body).save()
-// 	res.status(201).send({ data: album, message: "Album uploaded successfully" })
-// }
-
 exports.updateAlbum = async (req, res) => {
 	const album = await Album.findByIdAndUpdate(req.params.albumId, req.body, {
 		new: true,
@@ -322,20 +287,17 @@ exports.updateAlbum = async (req, res) => {
 	res.send({ data: album, message: "Update successfully" })
 }
 
-// exports.deleteAlbum = async (req, res) => {
-// 	await Album.findByIdAndDelete(req.params.albumId)
-// 	res.status(200).send({ message: "Album deleted sucessfully" });
-// }
 
 
 exports.deleteAlbum = async (req, res) => {
     try {
-        // Delete the album document from MongoDB
+		// Delete the album document from the MongoDB
         const deletedAlbum = await Album.findByIdAndDelete(req.params.albumId);
+        // console out deletedAlbum info for debugging
+		// console.log('deletedAlbum:', deletedAlbum);
 
         if (deletedAlbum) {
-            // Delete relevant files associated with the album
-            deleteLocalFiles(deletedAlbum.imageUrl);
+            deleteLocalFiles(deletedAlbum.file, deletedAlbum.picture);
             res.status(200).send({ message: "Album and relevant files deleted successfully" });
         } else {
             res.status(404).send({ error: "Album is not found" });
@@ -345,4 +307,20 @@ exports.deleteAlbum = async (req, res) => {
         res.status(500).send({ error: 'Error deleting album.' });
     }
 };
+
+
+
+
+function deleteLocalFiles(...filePaths) {
+    for (const filePath of filePaths) {
+        try {
+            const absPath = path.join(__dirname, filePath);
+            fs.unlinkSync(absPath);
+            // console.log(`Deleted file: ${absPath}`);
+        } catch (error) {
+            console.error(`Error deleting file: ${filePath}`, error);
+        }
+    }
+}
+
 

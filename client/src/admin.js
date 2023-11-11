@@ -34,12 +34,9 @@ function Admin() {
     if (selectedMusic) {
       setSelectedMusicName(selectedMusic.name || '');
       setSelectedMusicTag(selectedMusic.tags.filter(tag => tag !== 'All'));
-      setSelectedMusicPicture(`https://skoog-music.onrender.com/images/${selectedMusic.name}.jpg`);
-      setSelectedMusicFile(`https://skoog-music.onrender.com/music/${selectedMusic.name}.mp3`);
+      setSelectedMusicPicture(`https://skoog-music-backend.onrender.com/images/${selectedMusic.name}.jpg`);
+      setSelectedMusicFile(`https://skoog-music-backend.onrender.com/music/${selectedMusic.name}.mp3`);
     }
-
-    // console.log {selectedMusicFile}
-    console.log('selectedMusicFile:', selectedMusicFile);
   };
 
   // State for loading data
@@ -62,7 +59,7 @@ function Admin() {
       };
 
       axios
-        .get('https://skoog-music.onrender.com/admin', { headers })
+        .get('https://skoog-music-backend.onrender.com/admin', { headers })
         .then((response) => {
           console.log('Received data from backend:', response.data);
           setBackendData(response.data);
@@ -110,7 +107,7 @@ function Admin() {
     }
     console.log('FormData:', formData);
     if (isConfirmed) {
-      axios.put(`https://skoog-music.onrender.com/admin/${selectedMusicId}`, formData, { headers })
+      axios.put(`https://skoog-music-backend.onrender.com/admin/${selectedMusicId}`, formData, { headers })
         .then((response) => {
           console.log('Music updated successfully:', response.data);
           window.location.reload();
@@ -169,7 +166,7 @@ function Admin() {
     }
     console.log('FormData:', formData);
     // POST Request to Back-end
-    axios.post('https://skoog-music.onrender.com/admin', formData, { headers })
+    axios.post('https://skoog-music-backend.onrender.com/admin', formData, { headers })
       .then((response) => {
         console.log('Music added successfully:', response.data);
         window.location.reload();
@@ -189,7 +186,7 @@ function Admin() {
     const isConfirmed = window.confirm('Are you sure you want to delete this music?');
 
     if (isConfirmed) {
-      axios.delete(`https://skoog-music.onrender.com/admin/${selectedMusicId}`, { headers })
+      axios.delete(`https://skoog-music-backend.onrender.com/admin/${selectedMusicId}`, { headers })
         .then((response) => {
           console.log('Music deleted successfully:', response.data);
           window.location.reload();
@@ -255,7 +252,7 @@ function Admin() {
 
   const [musicData, setMusicData] = useState(backendData.data);
 
-  // useEffect listens to the change of selectedMusicType and updates musicData
+  // Use useEffect to listen to the change of selectedMusicType to update musicData
   useEffect(() => {
     const updatedMusicData = backendData.data.filter((music) =>
       music.tags.includes(selectedMusicType)
@@ -396,11 +393,11 @@ function Admin() {
                           )}
                         </div>
 
-                        <div className={styles.mainContentTopRightName}>
+                        {/* <div className={styles.mainContentTopRightName}> */}
                           {selectedMusicFile ? (
                             <div 
                               style={{
-                                marginLeft: '2vw',
+                                marginLeft: '1vw',
                                 marginRight: '2vw',
                                 marginTop: '2vh',
                                 marginBottom: '2vh',
@@ -429,10 +426,15 @@ function Admin() {
                                 backgroundColor: '#F0F3F4',
                                 width: '25vh',
                                 height: '7vh',
+                                borderRadius: '6px',
+                                padding: '0 10px',
+                                display: 'block',
+                                boxSizing: 'border-box',
+                                marginLeft: '1vw'
                               }}
                             />
                           )}
-                        </div>
+                        {/* </div> */}
                         <div className={styles.mainContentTopRightType}>
                           {/*the division of type button*/}
                           <div className={styles.mainContentTopRightTypeInner}>

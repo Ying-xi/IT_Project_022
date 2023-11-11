@@ -23,7 +23,7 @@ function Login() {
             password: password,
         };
         console.log('Sending login request with data:', userData);
-        const response = await axios.post('https://skoog-music.onrender.com/login', userData);
+        const response = await axios.post('https://skoog-music-backend.onrender.com/login', userData);
         console.log('Received response:', response);
         const jwtToken = response.data.data;
         console.log('JWT token received:', jwtToken);
@@ -51,7 +51,7 @@ function Login() {
           };
           console.log('Sending Register request with data:', userData);
           // change to register
-          const response = await axios.post('https://skoog-music.onrender.com/register', userData);
+          const response = await axios.post('https://skoog-music-backend.onrender.com/register', userData);
           console.log('Received response:', response);
           const jwtToken = response.data.data;
           console.log('JWT token received:', jwtToken);
