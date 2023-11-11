@@ -198,7 +198,7 @@ function Admin_Playlist() {
     }
 
         // Send POST to backend
-        axios.post('https://skoog-music-backend.onrender.com/albumAdmin', formData, { headers })
+        axios.post(`https://skoog-music-backend.onrender.com/albumAdmin/${selectedPlaylistId}`, formData, { headers })
             .then((response) => {
                 console.log('Playlist added successfully:', response.data);
                 window.location.reload();
