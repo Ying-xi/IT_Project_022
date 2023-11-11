@@ -173,7 +173,7 @@ class Albums extends Component {
                     {loading ? (
                         <div className='musiclist' 
                             style={{ textAlign: 'center' }}>
-                            Loading... The first load may take a few seconds.
+                            Loading... The first load spend minutes because free server.
                         </div>
                     ) : (
 

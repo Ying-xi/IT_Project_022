@@ -122,15 +122,16 @@
   width: 27.9vw;
   position: absolute;
   color: rgba(255, 255, 255, 0.6);
-  font-size: 2vw;
+  
   border-left: 0.18vw solid rgba(255, 255, 255, 0.5);
   top: 22vh;
   margin-top: -8vh;
   padding-left: 0.7vw;
   opacity: 0;
   right: calc(-30.8vw);
-  font: 600 0.8vh '';
+  font-size: 2.2vh;
   letter-spacing: 0.1vw;
+  
 }
 
 .item:nth-child(even) {
