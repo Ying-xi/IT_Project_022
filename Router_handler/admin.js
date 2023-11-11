@@ -200,11 +200,12 @@ exports.saveAlbum = (req, res) => {
         imageWriteStream.on('finish', async () => {
             // After the file is saved, create an album document and save it to the database
             try {
+				console.log('Fields lists:', fields.lists);
                 const album = new Album({
                     name: fields.name[0],
                     description: fields.description[0],
                     imageUrl: path.relative(__dirname, imageTargetPath),
-                    imageName: imageFilename,
+                    imageName: imageFilename + '.jpg',
                     // lists: fields.lists[0].split(','),
 					lists: fields.lists ? fields.lists[0].split(',') : [],
                 });
