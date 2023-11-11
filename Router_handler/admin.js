@@ -204,8 +204,8 @@ exports.saveAlbum = (req, res) => {
                 const album = new Album({
                     name: fields.name[0],
                     description: fields.description[0],
-                    imageUrl: path.relative(__dirname, imageTargetPath),
-                    imageName: imageFilename + '.jpg',
+                    imageUrl: path.relative(__dirname, imageTargetPath) + '.jpg',
+                    imageName: imageFilename,
                     // lists: fields.lists[0].split(','),
 					lists: fields.lists ? fields.lists[0].split(',') : [],
                 });
