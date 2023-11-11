@@ -42,40 +42,36 @@ function MusicPlayer() {
     }
   };
 
-  useEffect(() => {
-    loadData();
-  }, []);
-
   /**
    * play song
    * @param songPath
    */
 
-  const playSong = (id) => {
+  const playSong = async (id) => {
     const activeMusic = backendData?.data.find((item) => item._id === id);
-
+  
     if (activeMusic) {
       // Update musicList state
       const newList = backendData?.data.map((item) => {
         item.active = item._id === id;
         return item;
       });
-
+  
       // Update backendData
       setBackendData({
         ...backendData,
         data: newList,
         activeId: id,
       });
-
-      // pause the current music
-      myAudio.current.pause();
-
-      const audioSourcePath = `${process.env.PUBLIC_URL}/${activeMusic.file}`;
-
+  
+      // Pause the current music
+      await myAudio.current.pause();
+      const audioSourcePath = activeMusic ? `https://skoog-music-backend.onrender.com/music/${activeMusic.name}.mp3` : '';
       audioSource.current.src = audioSourcePath;
-      myAudio.current.load();
-      myAudio.current.play();
+      await myAudio.current.load();
+  
+      // Play the music
+      await myAudio.current.play();
       setIsPlaying(true);
     }
   };
@@ -92,6 +88,18 @@ function MusicPlayer() {
     myAudio.current.pause();
     setIsPlaying(false);
   };
+
+  /**
+   * Start/Pause song
+   */
+  const togglePlayPause = () => {
+    if (isPlaying) {
+      stopSong();
+    } else {
+      startSong();
+    }
+  };
+
 
   /**
    * Start song
@@ -120,6 +128,38 @@ function MusicPlayer() {
 
     setActiveCategory(category);
   };
+
+
+  useEffect(() => {
+    loadData();
+  }, []);
+
+  useEffect(() => {
+    const playMusic = async () => {
+      try {
+        if (activeMusic) {
+          const audioSourcePath = `https://skoog-music-backend.onrender.com/music/${activeMusic.name}.mp3`;
+          
+          // Pause the current music
+          myAudio.current.pause();
+  
+          // Load the new music source
+          audioSource.current.src = audioSourcePath;
+          await myAudio.current.load();
+  
+          // Play the music if isPlaying is true
+          if (isPlaying) {
+            await myAudio.current.play();
+          }
+        }
+      } catch (error) {
+        console.error('Error playing or loading audio:', error);
+      }
+    };
+  
+    playMusic();
+  }, [activeMusic, isPlaying]);
+
 
   return (
     <>
@@ -177,19 +217,10 @@ function MusicPlayer() {
           {/* dock component */}
           <div className="dock-background">
             <div className="dock-buttons">
-              <div className="dock-text">🎵 {activeMusic?.name ?? 'music'}</div>
-              {isPlaying ? (
-                <div className="dock-button toggle-play" onClick={stopSong}>
-                  ⏸️
-                </div>
-              ) : (
-                <div
-                  className="dock-button toggle-play"
-                  onClick={() => startSong(activeMusic.song)}
-                >
-                  ▶️
-                </div>
-              )}
+              <div className="dock-text">🎵 {activeMusic ? activeMusic.name : 'music'}</div>
+              <div className="dock-button toggle-play" onClick={togglePlayPause}>
+                {isPlaying ? '⏸️' : '▶️'}
+              </div>
             </div>
           </div>
         </div>

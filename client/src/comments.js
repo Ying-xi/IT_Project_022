@@ -53,30 +53,37 @@ function Comments() {
         if (userComment.length <= maxCharacters) {
             const token = localStorage.getItem('token');
             const username = localStorage.getItem('username');
-            let headers = {};
-            if (token) {
-                headers = {
+    
+            // Check if both username and token exist
+            if (token && username) {
+                let headers = {
                     Authorization: `Bearer ${token}`,
                     'X-Username': username,
                 };
+    
+                axios.post(
+                    `https://skoog-music-backend.onrender.com/albumPlayer/${musicIndex}`,
+                    { comment: userComment },
+                    { headers: headers }
+                )
+                .then((response) => {
+                    alert('Comment sent successfully!');
+                    // Reload the page after sending the comment
+                    window.location.reload();
+                })
+                .catch((error) => {
+                    console.error('Error sending comment:', error);
+                });
+                
+                // Clear the input box content:
+                setUserComment('');
+            } else {
+                console.error('Username or token is missing. Unable to send comment.');
+                // Handle the case where username or token is missing, e.g., show an error message.
             }
-            axios.post(
-                `https://skoog-music-backend.onrender.com/albumPlayer/${musicIndex}`,
-                { comment: userComment },
-                { headers: headers }
-            )
-            .then((response) => {
-                alert('Comment sent successfully!');
-                // Reload the page after sending the comment
-                window.location.reload();
-            })
-            .catch((error) => {
-                console.error('Error sending comment:', error);
-            });
-            // Clear the input box content:
-            setUserComment('');
         }
     };
+    
 
 
     const handleSendComment = () => {
