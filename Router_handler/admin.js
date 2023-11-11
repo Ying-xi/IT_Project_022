@@ -445,7 +445,6 @@ exports.renderAlbumPage = async (req, res) => {
 }
 
 
-
 exports.saveAlbum = (req, res) => {
     const form = new multiparty.Form();
 
@@ -469,26 +468,36 @@ exports.saveAlbum = (req, res) => {
         const imageDestination = path.join(__dirname, '../Default_music/Albums');
         const imageTargetPath = path.join(imageDestination, imageFilename);
 
-        // Move the image file to the storage path
-        fs.rename(imageTempPath, imageTargetPath, async (imageError) => {
-            if (imageError) {
-                console.error('Error moving the image file:', imageError);
-                res.status(500).send({
-                    error: 'Error moving the image file.'
-                });
-                return;
-            }
+        // Create read and write streams for image file
+        const imageReadStream = fs.createReadStream(imageTempPath);
+        const imageWriteStream = fs.createWriteStream(imageTargetPath);
 
-            // Create an album document and save it to the database
+        // Handle errors during file streams
+        imageReadStream.on('error', (error) => {
+            console.error('Error reading image file:', error);
+            cleanupAndRespond(res, imageTempPath, 'Error reading image file.');
+        });
+
+        imageWriteStream.on('error', (error) => {
+            console.error('Error writing image file:', error);
+            cleanupAndRespond(res, imageTempPath, 'Error writing image file.');
+        });
+
+        // Pipe the read and write streams for image file
+        imageReadStream.pipe(imageWriteStream);
+
+        // Handle finish event for image write stream
+        imageWriteStream.on('finish', async () => {
+            // After the file is saved, create an album document and save it to the database
             try {
                 const album = new Album({
                     name: fields.name[0],
                     description: fields.description[0],
-					imageUrl: path.relative(__dirname, imageTargetPath),
-					imageName: imageFilename,
-					// lists: fields.lists[0].split(','),
+                    imageUrl: path.relative(__dirname, imageTargetPath),
+                    imageName: imageFilename,
+                    // lists: fields.lists[0].split(','),
                 });
-				// Asynchronous save album document
+                // Asynchronous save album document
                 try {
                     const savedAlbum = await album.save();
                     res.status(201).send({
@@ -507,6 +516,9 @@ exports.saveAlbum = (req, res) => {
                     error: 'An error occurred while uploading album'
                 });
             }
+
+            // Clean up temporary file
+            cleanupTempFiles(imageTempPath);
         });
     });
 };
