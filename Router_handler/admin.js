@@ -206,6 +206,7 @@ exports.saveAlbum = (req, res) => {
                     imageUrl: path.relative(__dirname, imageTargetPath),
                     imageName: imageFilename,
                     // lists: fields.lists[0].split(','),
+					lists: fields.lists ? fields.lists[0].split(',') : [],
                 });
                 // Asynchronous save album document
                 try {
