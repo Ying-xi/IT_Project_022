@@ -41,7 +41,7 @@ function Comments() {
 
     const handleSendClick = () => {
         if (comment.length <= maxCharacters) {
-            alert(`Comments Sent: ${comment}`);
+            // alert(`Comments Sent: ${comment}`);
             // Clear the input box content:
             setComment('');
         } 
@@ -67,7 +67,7 @@ function Comments() {
                     { headers: headers }
                 )
                 .then((response) => {
-                    alert('Comment sent successfully!');
+                    // alert('Comment sent successfully!');
                     // Reload the page after sending the comment
                     window.location.reload();
                 })
