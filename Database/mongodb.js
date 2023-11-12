@@ -1,18 +1,25 @@
-const mongoose = require('mongoose')
-const Upload = require('./upload')
-// const mongodb = process.env.MONGODB_PWD
-const mongodb = 'mongodb+srv://admin:sVAV1RGC6xqrBEL2@cluster0.kkodvpg.mongodb.net/music_therapy?retryWrites=true&w=majority'
-mongoose.connect(mongodb, { useNewUrlParser: true, useUnifiedTopology: true })
+const mongoose = require('mongoose');
+const Upload = require('./upload');
 
-const db = mongoose.connection
+// const mongodb = process.env.MONGODB_PWD;
+const mongodb = 'mongodb+srv://admin:sVAV1RGC6xqrBEL2@cluster0.kkodvpg.mongodb.net/music_therapy?retryWrites=true&w=majority';
 
+const poolSize = 10;
 
-db.on('open', ()=>{
-    console.log('successful')
-})
+mongoose.connect(mongodb, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  poolSize: poolSize,
+});
 
-db.on('error', ()=>{
-    console.log('error')
-})
+const db = mongoose.connection;
 
-module.exports = db
+db.on('open', () => {
+  console.log('Connection successful');
+});
+
+db.on('error', (err) => {
+  console.error('Connection error:', err);
+});
+
+module.exports = db;
