@@ -204,7 +204,7 @@ function MusicPlayer() {
                   <MusicBtn
                     onClick={() => playSong(item._id)}
                     key={item._id}
-                    face={item.picture}
+                    face={`https://skoog-music-backend.onrender.com/images/${item.name}.jpg`}
                     name={item.name}
                     color={item?.tags?.[1]}
                   />
