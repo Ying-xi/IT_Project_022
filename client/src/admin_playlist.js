@@ -104,7 +104,7 @@ function Admin_Playlist() {
       }
     }
 
-    setDescriptionLength(e.target.value);
+    
   };
 
   // State for loading data
