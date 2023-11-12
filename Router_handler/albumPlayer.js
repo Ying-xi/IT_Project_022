@@ -16,30 +16,16 @@ exports.album = async (req, res) => {
 
 exports.comment = async (req, res) => {
     try {
-<<<<<<< HEAD
         const albumId = req.params.albumId
         const content = req.body.content
         const user = req.user.name
         const album = await Album.findById(albumId)
         console.log(user)
         console.log(content)
-=======
-        const albumId = req.params.albumId;
-        const comments = req.body.comment;
-        const user = req.headers['x-username'];
-        const album = await Album.findById(albumId);
-
->>>>>>> b41bd62ce23ac1eef26ade3951ffe784764f5b59
         if (!album) {
             return res.status(404).json({ message: 'Album not found' });
         }
-
-<<<<<<< HEAD
         album.comments.push({ user: user, content: content })
-=======
-        album.comments.push({ username: user, content: comments });
->>>>>>> b41bd62ce23ac1eef26ade3951ffe784764f5b59
-
         await album.save();
 
         res.status(200).json({ message: 'Comments uploaded successfully' });
