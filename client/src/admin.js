@@ -431,7 +431,7 @@ function Admin() {
                                 display: 'block',
                                 boxSizing: 'border-box',
                                 marginLeft: '1vw',
-                                fontSize: '5vh',
+                                fontSize: '2.5vh',
                               }}
                             />
                           )}
