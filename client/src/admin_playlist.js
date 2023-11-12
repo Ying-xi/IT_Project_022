@@ -429,7 +429,7 @@ function Admin_Playlist() {
                               border: 'none',
                               outline: 'None',
                               backgroundColor: '#F0F3F4',
-                              width: '25vh',
+                              width: '84.5%',
                               height: '7vh',
                               borderRadius: '6px',
                               padding: '0 10px',
