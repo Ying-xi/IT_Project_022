@@ -21,7 +21,7 @@ exports.comment = async (req, res) => {
         const user = req.user.name
         const album = await Album.findById(albumId)
         console.log(user)
-        console.log(content)
+        console.log(req.body)
         if (!album) {
             return res.status(404).json({ message: 'Album not found' });
         }
