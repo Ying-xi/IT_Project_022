@@ -436,6 +436,7 @@ function Admin_Playlist() {
                               display: 'block',
                               boxSizing: 'border-box',
                               marginLeft: '1vw',
+                              fontSize: '5vh',
                             }}
                           />
                         )}

@@ -430,7 +430,8 @@ function Admin() {
                                 padding: '0 10px',
                                 display: 'block',
                                 boxSizing: 'border-box',
-                                marginLeft: '1vw'
+                                marginLeft: '1vw',
+                                fontSize: '5vh',
                               }}
                             />
                           )}
