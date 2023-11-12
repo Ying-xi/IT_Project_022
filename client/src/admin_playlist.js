@@ -90,6 +90,7 @@ function Admin_Playlist() {
         });
       });
 
+      
       // Delete after testing
       console.log('-----!!---');
       console.log(musicOptions);
@@ -102,6 +103,8 @@ function Admin_Playlist() {
         setOptionsTmp(multiSelected);
       }
     }
+
+    setDescriptionLength(e.target.value);
   };
 
   // State for loading data
