@@ -17,7 +17,7 @@ exports.album = async (req, res) => {
 exports.comment = async (req, res) => {
     try {
         const albumId = req.params.albumId
-        const content = req.body.comments
+        const content = req.body.content
         const user = req.user.name
         const album = await Album.findById(albumId)
         console.log(user)
