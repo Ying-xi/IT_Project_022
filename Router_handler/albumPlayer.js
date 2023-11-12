@@ -25,7 +25,7 @@ exports.comment = async (req, res) => {
         if (!album) {
             return res.status(404).json({ message: 'Album not found' });
         }
-        album.comments.push({ user: user, content: content })
+        album.comments.push({ username: user, content: content })
         await album.save();
 
         res.status(200).json({ message: 'Comments uploaded successfully' });
